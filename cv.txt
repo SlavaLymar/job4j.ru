@@ -1,0 +1,34 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] junior
+[INFO] chapter_001
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building junior 2.0
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ junior ---
+[INFO] Deleting C:\Java\junior\target
+[INFO] 
+[INFO] --- maven-checkstyle-plugin:2.17:check (validate) @ junior ---
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary:
+[INFO] 
+[INFO] junior ............................................. FAILURE [  1.398 s]
+[INFO] chapter_001 ........................................ SKIPPED
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 1.513 s
+[INFO] Finished at: 2016-12-28T14:51:54+03:00
+[INFO] Final Memory: 7M/18M
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-checkstyle-plugin:2.17:check (validate) on project junior: Failed during checkstyle execution: Failed during checkstyle configuration: unable to parse configuration stream - The document type declaration for root element type "module" must end with '>'.:3:80 -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
