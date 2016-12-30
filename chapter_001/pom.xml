@@ -3,13 +3,6 @@
     <artifactId>chapter_001</artifactId>
     <packaging>jar</packaging>
     <version>2.0</version>
-    <dependencies>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>RELEASE</version>
-        </dependency>
-    </dependencies>
 
     <parent>
 	<groupId>ru.job4j</groupId>
