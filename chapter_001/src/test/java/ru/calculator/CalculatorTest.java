@@ -13,7 +13,7 @@ import static org.hamcrest.core.Is.is;
 public class CalculatorTest {
 
     @Test
-    void addTest() {
+    public void addTest() {
         final Calculator c = new Calculator();
         c.add(2,2);
         final double r = c.getResult();
@@ -21,23 +21,23 @@ public class CalculatorTest {
     }
 
     @Test
-    void substructTest() {
+    public void substructTest() {
         final Calculator c = new Calculator();
         c.substruct(2,2);
         final double r = c.getResult();
-        assertThat(r, is(4d));
+        assertThat(r, is(0d));
     }
 
     @Test
-    void divTest() {
+    public void divTest() {
         final Calculator c = new Calculator();
         c.div(2,2);
         final double r = c.getResult();
-        assertThat(r, is(4d));
+        assertThat(r, is(1d));
     }
 
     @Test
-    void multipleTest() {
+    public void multipleTest() {
         final Calculator c = new Calculator();
         c.multiple(2,2);
         final double r = c.getResult();
@@ -45,14 +45,14 @@ public class CalculatorTest {
     }
 
     @Test
-    void getResultTest() {
+    public void getResultTest() {
         final Calculator c = new Calculator();
         c.setResult(2);
         assertThat(c.getResult(), is(2d));
     }
 
     @Test
-    void setResultTest() {
+    public void setResultTest() {
         final Calculator c = new Calculator();
         c.setResult(2);
         assertThat(c.getResult(), is(2d));
