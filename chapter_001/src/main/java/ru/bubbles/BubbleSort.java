@@ -1,7 +1,5 @@
 package ru.bubbles;
 
-import java.util.Arrays;
-
 /**
  * @author slavalymar
  * @since 02.01.2017
