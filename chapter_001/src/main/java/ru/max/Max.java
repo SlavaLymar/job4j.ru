@@ -10,10 +10,10 @@ public class Max {
     /**
      * @param first
      * @param second
-     * @return maxValue
+     * @return max of two
      */
     public int max(int first, int second){
-        int maxValue;
-        return  maxValue = first > second ? first : second;
+
+        return  first > second ? first : second;
     }
 }
