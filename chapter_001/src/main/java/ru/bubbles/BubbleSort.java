@@ -7,12 +7,13 @@ package ru.bubbles;
  */
 public class BubbleSort {
 
+
     /**
-     * @param oldarr
+     * @param result
      * @return result
      */
-    int[] bubbleSort(int[] oldarr){
-        int[] result = oldarr;
+    int[] bubbleSort(int[] result){
+        //int[] result = oldarr;
         for(int i = result.length-1; i>0; i--){
             for (int j = 0; j<i; j++){
                 if(result[j] > result[j+1]){
