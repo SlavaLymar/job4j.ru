@@ -12,11 +12,10 @@ public class MaxFromThird {
      * @param first
      * @param second
      * @param third
-     * @return maxFST
+     * @return max of three
      */
     int maxThird(int first, int second, int third){
         Max m = new Max();
-        int maxFST = m.max(m.max(first, second), third);
-        return maxFST;
+        return m.max(m.max(first, second), third);
     }
 }
