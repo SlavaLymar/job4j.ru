@@ -15,7 +15,10 @@ public class TriangleTest {
 
     @Test
     public void areaTest() {
-        Triangle triangle = new Triangle(new Point(1,2), new Point(3,4),new Point(5,6));
+        Point a = new Point(1, 2);
+        Point b = new Point(3, 4);
+        Point c = new Point(5, 6);
+        Triangle triangle = new Triangle(a, b, c);
         double result = triangle.area();
         assertThat(result, closeTo(Math.sqrt(4608),0.01d ));
     }

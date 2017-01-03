@@ -26,7 +26,7 @@ public class Triangle {
      * @return area
      */
     public double area() {
-        double perimeter = Point.distanceTo(a,b) + Point.distanceTo(a,c) + Point.distanceTo(b,c);
-        return Math.sqrt(perimeter*(perimeter-Point.distanceTo(a,b))*(perimeter-Point.distanceTo(a,c))*(perimeter-Point.distanceTo(b,c)));
+        double perimeter = a.distanceTo(b) + a.distanceTo(c) + b.distanceTo(c);
+        return Math.sqrt(perimeter*(perimeter-a.distanceTo(b))*(perimeter-a.distanceTo(c))*(perimeter-b.distanceTo(c)));
     }
 }

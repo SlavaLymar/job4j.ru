@@ -20,11 +20,10 @@ public class Point {
     }
 
     /**
-     * @param pointFirst
-     * @param pointSecond
-     * @return
+     * @param point
+     * @return distanceTo
      */
-    public static double distanceTo(Point pointFirst, Point pointSecond ) {
-        return Math.sqrt(Math.pow(pointSecond.x - pointFirst.x,2)+Math.pow(pointSecond.y - pointFirst.y,2));
+    public double distanceTo(Point point) {
+        return Math.sqrt(Math.pow(point.x - this.x,2)+Math.pow(point.y - this.y,2));
     }
 }
