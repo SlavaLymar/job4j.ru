@@ -13,6 +13,7 @@ public class Testtask {
      * @return result
      */
     boolean contains(String origin, String sub){
+
         boolean result = false;
         char[] charOrigin = origin.toCharArray();
         String[] arr = new String[origin.length()-sub.length()+1];
