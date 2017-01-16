@@ -15,15 +15,11 @@ public class Testtask {
     boolean contains(String origin, String sub){
 
         boolean result = false;
-        char[] charOrigin = origin.toCharArray();
-        String[] arr = new String[origin.length()-sub.length()+1];
-
-        for(int i = 0; i<arr.length; i++){
-            arr[i] = new String(charOrigin, i, sub.length());
-        }
-
-        for (String str : arr){
-            if(str.equals(sub)) result = true;
+        for(int i = 0; i<=origin.length()-sub.length();i++){
+            if(origin.substring(i, i+sub.length()).equals(sub)){
+                result = true;
+                break;
+            }
         }
 
         return result;
