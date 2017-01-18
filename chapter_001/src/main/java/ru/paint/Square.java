@@ -1,6 +1,5 @@
 package ru.paint;
 
-
 /**
  * @author slavalymar
  * @since 18.01.2017
