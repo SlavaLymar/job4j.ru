@@ -1,7 +1,5 @@
 package ru.yalymar.Chess.figure;
 
-
-import ru.yalymar.Chess.board.Board;
 import ru.yalymar.Chess.cell.Cell;
 import ru.yalymar.Chess.chessexceptions.ImposibleMoveException;
 
@@ -11,12 +9,13 @@ public class Bishop extends Figure {
 
     public Bishop(Cell position, boolean flag) {
         super(position, flag);
+        id = 1;
     }
 
     @Override
     public Cell[] way(Cell dist) throws ImposibleMoveException {
 
-        Cell startCell = Board.getInstance().getPositionOfFigure();
+        Cell startCell = this.getPosition();
         if(!startCell.getColor().equals(dist.getColor())) throw new ImposibleMoveException("Imposible move!");
 
         Cell[] result;
@@ -39,8 +38,9 @@ public class Bishop extends Figure {
         return result;
     }
 
-    private boolean move(Cell source, Cell dist){
-
-        return false;
+    @Override
+    public Bishop clone(Cell dist) {
+        Bishop result = new Bishop(new Cell(dist.getX(), dist.getY(), dist.getColor()), this.isFlag());
+        return result;
     }
 }

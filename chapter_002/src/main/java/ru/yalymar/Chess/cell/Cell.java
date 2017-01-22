@@ -23,4 +23,31 @@ public class Cell {
     public int getY() {
         return y;
     }
+
+    @Override
+    public boolean equals(Object obj){
+        if(this == obj){
+            return true;
+        }
+        if(!(obj instanceof Cell)){
+            return false;
+        }
+
+        Cell cell = (Cell) obj;
+        if(this.getX() == cell.getX() && this.getY() == cell.getY()){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        final int PRIME = 31;
+        int result = 1;
+        result = PRIME * result + getX();
+        result = PRIME * result + getY();
+        return result;
+    }
+
 }
