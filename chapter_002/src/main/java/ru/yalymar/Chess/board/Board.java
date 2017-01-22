@@ -1,8 +1,9 @@
-package ru.yalymar.board;
+package ru.yalymar.Chess.board;
 
-import ru.yalymar.cell.Cell;
-import ru.yalymar.figure.Bishop;
-import ru.yalymar.figure.Figure;
+
+import ru.yalymar.Chess.cell.Cell;
+import ru.yalymar.Chess.figure.Bishop;
+import ru.yalymar.Chess.figure.Figure;
 
 public class Board {
     private static Figure[] figures;

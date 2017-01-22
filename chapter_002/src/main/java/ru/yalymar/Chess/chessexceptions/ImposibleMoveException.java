@@ -1,4 +1,4 @@
-package ru.yalymar.chessexceptions;
+package ru.yalymar.Chess.chessexceptions;
 
 public class ImposibleMoveException extends Exception{
 

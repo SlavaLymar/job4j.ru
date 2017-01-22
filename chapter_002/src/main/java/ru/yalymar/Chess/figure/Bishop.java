@@ -1,11 +1,13 @@
-package ru.yalymar.figure;
+package ru.yalymar.Chess.figure;
 
-import ru.yalymar.board.Board;
-import ru.yalymar.cell.Cell;
-import ru.yalymar.chessexceptions.ImposibleMoveException;
+
+import ru.yalymar.Chess.board.Board;
+import ru.yalymar.Chess.cell.Cell;
+import ru.yalymar.Chess.chessexceptions.ImposibleMoveException;
+
 import static java.lang.Math.abs;
 
-public class Bishop extends Figure{
+public class Bishop extends Figure {
 
     public Bishop(Cell position, boolean flag) {
         super(position, flag);
@@ -25,7 +27,7 @@ public class Bishop extends Figure{
                 && startCell.getX()>=0 && startCell.getX()<=7 && startCell.getY()>=0 && startCell.getY()<=7
                 && dist.getX()>=0 && dist.getX()<=7 && dist.getY()>=0 && dist.getY()<=7) {
 
-            result = new Cell[distanceX];
+            result = new Cell[abs(distanceX)];
 
             for (int i = 0; i < abs(distanceY); i++) {
                 result[i] = new Cell(startCell.getX() + (i + 1) * distanceX / abs(distanceX),

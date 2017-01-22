@@ -1,7 +1,7 @@
-package ru.yalymar.figure;
+package ru.yalymar.Chess.figure;
 
-import ru.yalymar.cell.Cell;
-import ru.yalymar.chessexceptions.ImposibleMoveException;
+import ru.yalymar.Chess.cell.Cell;
+import ru.yalymar.Chess.chessexceptions.ImposibleMoveException;
 
 public abstract class Figure {
 

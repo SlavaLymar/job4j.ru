@@ -1,4 +1,4 @@
-package ru.yalymar.cell;
+package ru.yalymar.Chess.cell;
 
 public class Cell {
 
