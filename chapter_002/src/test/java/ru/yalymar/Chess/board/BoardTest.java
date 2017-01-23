@@ -14,8 +14,7 @@ import static org.junit.Assert.assertArrayEquals;
 
 public class BoardTest {
 
-
-    private Board board = new Board();
+    Board board = new Board();
 
     @Test
     public void boardTest(){
@@ -33,9 +32,9 @@ public class BoardTest {
 
     @Test
     public void getFiguresTest() {
-        Figure[] result = board.getFigures();
+        Figure[] result = board.fillFigures();
         Figure[] expected = new Figure[32];
-        expected[0] = new Bishop(new Cell(0,2, "white"),true);
+        expected[0] = new Bishop(new Cell(0,2, "White"),true);
         assertArrayEquals(result, expected);
     }
 
@@ -45,27 +44,45 @@ public class BoardTest {
         Cell dist = new Cell(3,5,"Black");
         boolean result = board.move(source, dist);
         assertThat(result, is(false));
-
     }
 
     @Test
-    public void deleteFigureTest() {
+    public void occupedWayTest()  {
+        Cell dist = new Cell(3,6,"Black");
+        Cell[] path = null;
+        try {
+            path = board.getFigures()[0].way(dist);
+        }
+        catch (ImposibleMoveException e){
+            e.printStackTrace();
+        }
+        boolean result = false;
+        try {
+            result = board.occupedWay(path);
+        } catch (OccupiedWayException e) {
+            e.printStackTrace();
+        }
 
-    }
-
-    @Test
-    public void occupedWayTest() {
-
+        assertThat(result, is(true));
     }
 
     @Test
     public void getFigureTest() {
-
+        Figure figure = board.getFigure(board.getCells()[7][2]);
+        Figure expected = new Bishop(new Cell(7,2,"Black"), true);
+        assertThat(figure, is(expected));
     }
 
     @Test
     public void figureFinderTest() {
-
+        Cell source = new Cell(7,2,"Black");
+        boolean result = false;
+        try {
+            result = board.figureFinder(source);
+        } catch (FigureNotFoundException e) {
+            e.printStackTrace();
+        }
+        assertThat(result, is(true));
     }
 
 }

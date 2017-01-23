@@ -16,7 +16,7 @@ public abstract class Figure {
 
     public abstract Cell[] way(Cell dist) throws ImposibleMoveException;
 
-    public abstract Figure clone(Cell dist);
+    public abstract Figure clone(Cell dist) throws ImposibleMoveException;
 
     public int getId() {
         return id;
@@ -35,9 +35,14 @@ public abstract class Figure {
         if(this == obj){
             return true;
         }
-        if((obj instanceof Figure)){
+        if((!(obj instanceof Figure))){
+            return false;
+        }
+        Figure figure = (Figure) obj;
+        if(this.getId() == figure.getId() && this.getPosition().equals(figure.getPosition())){
             return true;
         }
+
         return false;
     }
 
@@ -47,6 +52,8 @@ public abstract class Figure {
         final int PRIME = 31;
         int result = 1;
         result = PRIME * result + getId();
+        result = PRIME * result + getPosition().getX();
+        result = PRIME * result + getPosition().getY();
         return result;
     }
 }

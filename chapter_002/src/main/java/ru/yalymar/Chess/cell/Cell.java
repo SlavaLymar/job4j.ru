@@ -6,7 +6,7 @@ public class Cell {
     private int y;
     private String color;
 
-    public Cell(int x, int y, String color) {
+    public Cell(int y, int x, String color) {
         this.x = x;
         this.y = y;
         this.color = color;

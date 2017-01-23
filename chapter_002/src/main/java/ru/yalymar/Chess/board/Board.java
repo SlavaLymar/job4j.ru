@@ -9,11 +9,16 @@ import ru.yalymar.Chess.figure.Figure;
 
 public class Board {
 
-    private Cell[][] cells = getCells();
-    private Figure[] figures = getFigures();
     private final static int LENGTH = 8;
     private final static int WIDTH = 8;
     private final static int NUMBEROFFIGURES = 32;
+    private Figure[] figures = new Figure[NUMBEROFFIGURES];
+    private Cell[][] cells = new Cell[LENGTH][WIDTH];
+
+    public Board() {
+        this.cells = getCells();
+        this.figures = fillFigures();
+    }
 
     public Cell[][] getCells(){
         Cell[][] result = new Cell[LENGTH][WIDTH];
@@ -26,7 +31,7 @@ public class Board {
         return result;
     }
 
-    public Figure[] getFigures() {
+    public Figure[] fillFigures() {
         Figure[] result = new Figure[NUMBEROFFIGURES];
         for (int i = 0; i<NUMBEROFFIGURES; i++){
             result[0] = new Bishop(cells[7][2], true); // create my Bishop
@@ -41,9 +46,8 @@ public class Board {
             Figure figure = getFigure(source);
             try {
                 Cell[] wayOfFigure = figure.way(dist);
-                if (!occupedWay(wayOfFigure)) {
+                if (occupedWay(wayOfFigure)) {
                     figure.clone(dist);
-                    this.deleteFigure(figure);
                     result = true;
                 }
             }
@@ -54,22 +58,13 @@ public class Board {
         return result;
     }
 
-    public void deleteFigure(Figure figure){
-        for(Figure f : figures){
-            if(f.equals(figure)){
-                f = null;
-                break;
-            }
-        }
-    }
-
     public boolean occupedWay(Cell[] cells) throws OccupiedWayException{
-        boolean result = false;
+        boolean result = true;
         for (Cell cell: cells){
             for(Figure figure: figures){
                 if(figure != null){
                     if(cell.equals(figure.getPosition())) {
-                    result = true;
+                    result = false;
                     throw new OccupiedWayException("Occupied way!");
                     }
                 }
@@ -80,7 +75,7 @@ public class Board {
 
     public Figure getFigure(Cell cell){
         Figure result = null;
-        for(Figure figure: figures){
+        for(Figure figure: this.figures){
             if(figure.getPosition().equals(cell)){
                 result = figure;
                 break;
@@ -111,5 +106,9 @@ public class Board {
     public static int getWIDTH() {
 
         return WIDTH;
+    }
+
+    public Figure[] getFigures() {
+        return figures;
     }
 }
