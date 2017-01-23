@@ -29,7 +29,7 @@ public class Board {
     public Figure[] getFigures() {
         Figure[] result = new Figure[NUMBEROFFIGURES];
         for (int i = 0; i<NUMBEROFFIGURES; i++){
-            result[0] = new Bishop(cells[0][2], true); // create my Bishop
+            result[0] = new Bishop(cells[7][2], true); // create my Bishop
         }
         return result;
     }
@@ -39,11 +39,16 @@ public class Board {
         boolean result = false;
         if(figureFinder(source)){
             Figure figure = getFigure(source);
-            Cell[] wayOfFigure = figure.way(dist);
-            if(!occupedWay(wayOfFigure)){
-                figure.clone(dist);
-                this.deleteFigure(figure);
-                result = true;
+            try {
+                Cell[] wayOfFigure = figure.way(dist);
+                if (!occupedWay(wayOfFigure)) {
+                    figure.clone(dist);
+                    this.deleteFigure(figure);
+                    result = true;
+                }
+            }
+            catch (ImposibleMoveException e){
+                System.out.println(e.getMessage());
             }
         }
         return result;
@@ -62,9 +67,11 @@ public class Board {
         boolean result = false;
         for (Cell cell: cells){
             for(Figure figure: figures){
-                if(cell.equals(figure.getPosition())) {
+                if(figure != null){
+                    if(cell.equals(figure.getPosition())) {
                     result = true;
                     throw new OccupiedWayException("Occupied way!");
+                    }
                 }
             }
         }
@@ -85,9 +92,11 @@ public class Board {
     public boolean figureFinder(Cell source) throws FigureNotFoundException{
         boolean result = false;
         for(Figure figure: figures) {
-            if (figure.getPosition().equals(source)) {
+            if(figure != null){
+                if (figure.getPosition().equals(source)) {
                 result = true;
                 break;
+                }
             }
         }
         if(!result) throw new FigureNotFoundException("Figure wasn`t found!");
