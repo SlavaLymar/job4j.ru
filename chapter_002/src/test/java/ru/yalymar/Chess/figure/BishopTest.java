@@ -8,9 +8,14 @@ import ru.yalymar.Chess.chessexceptions.ImposibleMoveException;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
+/**
+ * @author slavalymar
+ * @since 23.01.2017
+ * @version 1
+ */
 public class BishopTest {
 
-    Board board = new Board();
+    Board board = Board.getBoard();
 
     @Test
     public void wayTest() {

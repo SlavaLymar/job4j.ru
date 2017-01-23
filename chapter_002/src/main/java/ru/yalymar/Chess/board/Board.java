@@ -7,6 +7,11 @@ import ru.yalymar.Chess.chessexceptions.OccupiedWayException;
 import ru.yalymar.Chess.figure.Bishop;
 import ru.yalymar.Chess.figure.Figure;
 
+/**
+ * @author slavalymar
+ * @since 23.01.2017
+ * @version 1
+ */
 public class Board {
 
     private final static int LENGTH = 8;
@@ -14,12 +19,20 @@ public class Board {
     private final static int NUMBEROFFIGURES = 32;
     private Figure[] figures = new Figure[NUMBEROFFIGURES];
     private Cell[][] cells = new Cell[LENGTH][WIDTH];
+    private static Board board = new Board();
 
-    public Board() {
+    private Board() {
         this.cells = getCells();
         this.figures = fillFigures();
     }
 
+    public static Board getBoard() {
+        return board;
+    }
+
+    /**
+     * @return Cell[][]
+     */
     public Cell[][] getCells(){
         Cell[][] result = new Cell[LENGTH][WIDTH];
         int color = 0;
@@ -31,6 +44,9 @@ public class Board {
         return result;
     }
 
+    /**
+     * @return Figure[]
+     */
     public Figure[] fillFigures() {
         Figure[] result = new Figure[NUMBEROFFIGURES];
         for (int i = 0; i<NUMBEROFFIGURES; i++){
@@ -39,6 +55,14 @@ public class Board {
         return result;
     }
 
+    /**
+     * @param source
+     * @param dist
+     * @return boolean
+     * @throws FigureNotFoundException
+     * @throws ImposibleMoveException
+     * @throws OccupiedWayException
+     */
     public boolean move(Cell source, Cell dist) throws FigureNotFoundException,
             ImposibleMoveException, OccupiedWayException{
         boolean result = false;
@@ -58,6 +82,11 @@ public class Board {
         return result;
     }
 
+    /**
+     * @param cells
+     * @return boolean
+     * @throws OccupiedWayException
+     */
     public boolean occupedWay(Cell[] cells) throws OccupiedWayException{
         boolean result = true;
         for (Cell cell: cells){
@@ -73,6 +102,10 @@ public class Board {
         return result;
     }
 
+    /**
+     * @param cell
+     * @return Figure
+     */
     public Figure getFigure(Cell cell){
         Figure result = null;
         for(Figure figure: this.figures){
@@ -84,6 +117,11 @@ public class Board {
         return result;
     }
 
+    /**
+     * @param source
+     * @return boolean
+     * @throws FigureNotFoundException
+     */
     public boolean figureFinder(Cell source) throws FigureNotFoundException{
         boolean result = false;
         for(Figure figure: figures) {
@@ -98,16 +136,25 @@ public class Board {
         return result;
     }
 
+    /**
+     * @return int
+     */
     public static int getLENGTH() {
 
         return LENGTH;
     }
 
+    /**
+     * @return int
+     */
     public static int getWIDTH() {
 
         return WIDTH;
     }
 
+    /**
+     * @return Figure[]
+     */
     public Figure[] getFigures() {
         return figures;
     }

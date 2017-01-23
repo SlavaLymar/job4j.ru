@@ -12,9 +12,14 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertArrayEquals;
 
+/**
+ * @author slavalymar
+ * @since 23.01.2017
+ * @version 1
+ */
 public class BoardTest {
 
-    Board board = new Board();
+    Board board = Board.getBoard();
 
     @Test
     public void boardTest(){
@@ -31,10 +36,10 @@ public class BoardTest {
     }
 
     @Test
-    public void getFiguresTest() {
-        Figure[] result = board.fillFigures();
+    public void fillFiguresTest() {
+        Figure[] result = board.getFigures();
         Figure[] expected = new Figure[32];
-        expected[0] = new Bishop(new Cell(0,2, "White"),true);
+        expected[0] = new Bishop(new Cell(7,2, "Black"),true);
         assertArrayEquals(result, expected);
     }
 

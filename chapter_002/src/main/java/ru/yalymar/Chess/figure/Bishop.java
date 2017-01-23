@@ -5,6 +5,11 @@ import ru.yalymar.Chess.chessexceptions.ImposibleMoveException;
 
 import static java.lang.Math.abs;
 
+/**
+ * @author slavalymar
+ * @since 23.01.2017
+ * @version 1
+ */
 public class Bishop extends Figure {
 
     public Bishop(Cell position, boolean flag) {
@@ -12,6 +17,11 @@ public class Bishop extends Figure {
         id = 1;
     }
 
+    /**
+     * @param dist
+     * @return Cell[]
+     * @throws ImposibleMoveException
+     */
     @Override
     public Cell[] way(Cell dist) throws ImposibleMoveException {
 
@@ -36,6 +46,11 @@ public class Bishop extends Figure {
         return result;
     }
 
+    /**
+     * @param dist
+     * @return Bishop
+     * @throws ImposibleMoveException
+     */
     @Override
     public Bishop clone(Cell dist) throws ImposibleMoveException{
         if(dist.getY() <= 7 && dist.getY()>=0 && dist.getX() <= 7 && dist.getX()>=0){

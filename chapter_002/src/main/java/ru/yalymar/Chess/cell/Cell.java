@@ -1,5 +1,10 @@
 package ru.yalymar.Chess.cell;
 
+/**
+ * @author slavalymar
+ * @since 23.01.2017
+ * @version 1
+ */
 public class Cell {
 
     private int x;
@@ -12,18 +17,31 @@ public class Cell {
         this.color = color;
     }
 
+    /**
+     * @return String
+     */
     public String getColor() {
         return color;
     }
 
+    /**
+     * @return int
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     * @return int
+     */
     public int getY() {
         return y;
     }
 
+    /**
+     * @param obj
+     * @return boolean
+     */
     @Override
     public boolean equals(Object obj){
         if(this == obj){
@@ -40,6 +58,9 @@ public class Cell {
         return false;
     }
 
+    /**
+     * @return int
+     */
     @Override
     public int hashCode()
     {
