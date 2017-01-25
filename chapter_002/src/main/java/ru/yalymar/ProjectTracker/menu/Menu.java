@@ -1,11 +1,11 @@
-package ru.yalymar.menu;
+package ru.yalymar.projectTracker.menu;
 
-import ru.yalymar.action.BaseAction;
-import ru.yalymar.action.UserAction;
-import ru.yalymar.model.Comment;
-import ru.yalymar.model.Item;
-import ru.yalymar.start.Input;
-import ru.yalymar.tracker.Tracker;
+import ru.yalymar.projectTracker.action.BaseAction;
+import ru.yalymar.projectTracker.action.UserAction;
+import ru.yalymar.projectTracker.model.Comment;
+import ru.yalymar.projectTracker.model.Item;
+import ru.yalymar.projectTracker.start.Input;
+import ru.yalymar.projectTracker.tracker.Tracker;
 import java.util.List;
 
 /**

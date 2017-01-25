@@ -1,4 +1,4 @@
-package ru.yalymar.action;
+package ru.yalymar.projectTracker.action;
 
 /**
  * @author slavalymar

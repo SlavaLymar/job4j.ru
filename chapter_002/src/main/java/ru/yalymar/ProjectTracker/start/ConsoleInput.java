@@ -1,6 +1,6 @@
-package ru.yalymar.start;
+package ru.yalymar.projectTracker.start;
 
-import ru.yalymar.exceptions.MenuOutOfException;
+import ru.yalymar.projectTracker.exceptions.MenuOutOfException;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

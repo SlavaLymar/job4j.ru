@@ -1,7 +1,7 @@
-package ru.yalymar.model;
+package ru.yalymar.projectTracker.model;
 
 import org.junit.Test;
-import ru.yalymar.tracker.Tracker;
+import ru.yalymar.projectTracker.tracker.Tracker;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;

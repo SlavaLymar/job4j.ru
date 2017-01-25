@@ -1,4 +1,4 @@
-package ru.yalymar.exceptions;
+package ru.yalymar.projectTracker.exceptions;
 
 public class MenuOutOfException extends RuntimeException{
 

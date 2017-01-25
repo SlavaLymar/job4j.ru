@@ -1,7 +1,7 @@
-package ru.yalymar.model;
+package ru.yalymar.projectTracker.model;
 
 
-import ru.yalymar.tracker.Tracker;
+import ru.yalymar.projectTracker.tracker.Tracker;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

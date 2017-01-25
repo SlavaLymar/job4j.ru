@@ -1,9 +1,9 @@
-package ru.yalymar.menu;
+package ru.yalymar.projectTracker.menu;
 
 import org.junit.Test;
-import ru.yalymar.action.UserAction;
-import ru.yalymar.start.ConsoleInput;
-import ru.yalymar.tracker.Tracker;
+import ru.yalymar.projectTracker.action.UserAction;
+import ru.yalymar.projectTracker.start.ConsoleInput;
+import ru.yalymar.projectTracker.tracker.Tracker;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;

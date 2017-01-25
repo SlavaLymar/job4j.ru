@@ -1,4 +1,4 @@
-package ru.yalymar.start;
+package ru.yalymar.projectTracker.start;
 
 import org.junit.Test;
 
