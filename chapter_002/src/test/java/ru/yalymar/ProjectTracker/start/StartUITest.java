@@ -1,9 +1,9 @@
-package ru.yalymar.start;
+package ru.yalymar.projectTracker.start;
 
 
 import org.junit.Test;
-import ru.yalymar.menu.Menu;
-import ru.yalymar.tracker.Tracker;
+import ru.yalymar.projectTracker.menu.Menu;
+import ru.yalymar.projectTracker.tracker.Tracker;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;

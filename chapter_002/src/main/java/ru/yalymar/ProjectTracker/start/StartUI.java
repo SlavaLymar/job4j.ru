@@ -1,7 +1,7 @@
-package ru.yalymar.start;
+package ru.yalymar.projectTracker.start;
 
-import ru.yalymar.menu.Menu;
-import ru.yalymar.tracker.Tracker;
+import ru.yalymar.projectTracker.menu.Menu;
+import ru.yalymar.projectTracker.tracker.Tracker;
 
 /**
  * @author slavalymar

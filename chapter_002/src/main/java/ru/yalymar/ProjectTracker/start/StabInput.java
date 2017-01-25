@@ -1,4 +1,4 @@
-package ru.yalymar.start;
+package ru.yalymar.projectTracker.start;
 
 public class StabInput implements Input {
     private String[] answers;

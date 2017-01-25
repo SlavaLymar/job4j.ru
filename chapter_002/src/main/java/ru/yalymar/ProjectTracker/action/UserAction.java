@@ -1,7 +1,7 @@
-package ru.yalymar.action;
+package ru.yalymar.projectTracker.action;
 
-import ru.yalymar.start.Input;
-import ru.yalymar.tracker.Tracker;
+import ru.yalymar.projectTracker.start.Input;
+import ru.yalymar.projectTracker.tracker.Tracker;
 
 public interface UserAction {
 
