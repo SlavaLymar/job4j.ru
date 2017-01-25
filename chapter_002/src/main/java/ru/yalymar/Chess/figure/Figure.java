@@ -1,7 +1,7 @@
-package ru.yalymar.Chess.figure;
+package ru.yalymar.chess.figure;
 
-import ru.yalymar.Chess.cell.Cell;
-import ru.yalymar.Chess.chessexceptions.ImposibleMoveException;
+import ru.yalymar.chess.cell.Cell;
+import ru.yalymar.chess.chessexceptions.ImposibleMoveException;
 
 /**
  * @author slavalymar

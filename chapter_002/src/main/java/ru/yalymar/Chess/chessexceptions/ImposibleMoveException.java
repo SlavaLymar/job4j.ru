@@ -1,4 +1,4 @@
-package ru.yalymar.Chess.chessexceptions;
+package ru.yalymar.chess.chessexceptions;
 
 /**
  * @author slavalymar

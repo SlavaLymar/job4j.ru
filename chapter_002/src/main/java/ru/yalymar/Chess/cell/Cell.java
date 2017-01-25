@@ -1,4 +1,4 @@
-package ru.yalymar.Chess.cell;
+package ru.yalymar.chess.cell;
 
 /**
  * @author slavalymar

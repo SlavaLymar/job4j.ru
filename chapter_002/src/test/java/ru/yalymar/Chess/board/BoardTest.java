@@ -1,12 +1,12 @@
-package ru.yalymar.Chess.board;
+package ru.yalymar.chess.board;
 
 import org.junit.Test;
-import ru.yalymar.Chess.cell.Cell;
-import ru.yalymar.Chess.chessexceptions.FigureNotFoundException;
-import ru.yalymar.Chess.chessexceptions.ImposibleMoveException;
-import ru.yalymar.Chess.chessexceptions.OccupiedWayException;
-import ru.yalymar.Chess.figure.Bishop;
-import ru.yalymar.Chess.figure.Figure;
+import ru.yalymar.chess.cell.Cell;
+import ru.yalymar.chess.chessexceptions.FigureNotFoundException;
+import ru.yalymar.chess.chessexceptions.ImposibleMoveException;
+import ru.yalymar.chess.chessexceptions.OccupiedWayException;
+import ru.yalymar.chess.figure.Bishop;
+import ru.yalymar.chess.figure.Figure;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;

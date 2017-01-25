@@ -1,9 +1,9 @@
-package ru.yalymar.Chess.figure;
+package ru.yalymar.chess.figure;
 
 import org.junit.Test;
-import ru.yalymar.Chess.board.Board;
-import ru.yalymar.Chess.cell.Cell;
-import ru.yalymar.Chess.chessexceptions.ImposibleMoveException;
+import ru.yalymar.chess.board.Board;
+import ru.yalymar.chess.cell.Cell;
+import ru.yalymar.chess.chessexceptions.ImposibleMoveException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
