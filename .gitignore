@@ -14,6 +14,7 @@ hs_err_pid*
 .idea
 *.iml
 
+examples
 target
 chapter_001/target
 chapter_001/.idea
