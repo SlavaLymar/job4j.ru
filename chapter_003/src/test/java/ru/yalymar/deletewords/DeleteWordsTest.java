@@ -10,6 +10,11 @@ import static java.lang.System.setOut;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
+/**
+ * @author slavalymar
+ * @since 26.01.2017
+ * @version 1
+ */
 public class DeleteWordsTest {
 
     @Test

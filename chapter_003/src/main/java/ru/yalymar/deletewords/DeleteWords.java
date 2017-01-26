@@ -2,8 +2,18 @@ package ru.yalymar.deletewords;
 
 import java.io.*;
 
+/**
+ * @author slavalymar
+ * @since 26.01.2017
+ * @version 1
+ */
 public class DeleteWords {
 
+    /**
+     * @param in
+     * @param out
+     * @param abuse
+     */
     public void dropAbuses(InputStream in, OutputStream out, String[] abuse) {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(in, "UTF-8"));
              BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(out, "UTF-8"))) {
