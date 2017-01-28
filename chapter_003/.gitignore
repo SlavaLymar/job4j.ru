@@ -14,6 +14,5 @@ hs_err_pid*
 .idea
 *.iml
 
-resources
 target
 chapter_003/target

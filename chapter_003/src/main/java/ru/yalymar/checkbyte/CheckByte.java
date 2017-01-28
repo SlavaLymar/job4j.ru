@@ -21,19 +21,19 @@ public class CheckByte{
         boolean result = false;
 
         try(BufferedReader br = new BufferedReader(new InputStreamReader(in))){
-            int c;
-            do {
-                c = br.read();
-                if (c % 2 == 0) {
+            String str;
+            int i;
+            while(br.ready()) {
+                str = br.readLine();
+                if (Integer.valueOf(str) % 2 == 0) {
                     result = true;
-                    System.out.println(c + " - четное");
-                } else System.out.println(c + " - нечетное");
-                System.out.println();
+                    System.out.println(str+" is a even");
+                }
+                else System.out.println(str+" is a odd");
             }
-            while (c != 10);
         }
         catch (IOException e){
-            System.out.println("Incorrect enter!");
+            e.printStackTrace();
         }
 
         return result;
