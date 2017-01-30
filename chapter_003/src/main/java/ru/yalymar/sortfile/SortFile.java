@@ -41,7 +41,7 @@ public class SortFile{
      * @throws IOException
      */
     private void sortAndCreateDistanceFile(int countOfLines, RandomAccessFile tmp,
-                                          RandomAccessFile rafDist) throws IOException {
+                                           RandomAccessFile rafDist) throws IOException {
 
         String minLine = "    "; // line of min length
         String maxLine = " ";    // line of max length
