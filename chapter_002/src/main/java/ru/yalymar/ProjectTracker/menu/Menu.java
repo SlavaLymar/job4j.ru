@@ -152,18 +152,22 @@ public class Menu {
          */
         @Override
         public void execute(Input input, Tracker tracker){
-            tracker.showAllItems();
-            String id = input.ask("Enter the id: ");
-            tracker.showOneItems(tracker.findById(id));
             int newin = 0;
             boolean exist = false;
+            String id = " ";
 
-            try {
+            do {
+                tracker.showAllItems();
+                id = input.ask("Enter the id: ");
+                tracker.showOneItems(tracker.findById(id));
+                if(tracker.findById(id) == null) {
+                    System.out.println("Wrong id!");
+                    continue;
+                }
                 exist = tracker.findById(id).getId().equals(id);
             }
-            catch (NullPointerException e){
-                System.out.println("Item`s not found");
-            }
+            while (!exist);
+
                 if (exist) {
                     do {
                         System.out.println("1. Edit name;\n2. Edit Description;\n3. Back.");

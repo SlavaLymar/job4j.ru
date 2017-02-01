@@ -1,8 +1,8 @@
-package ru.yalymar.tracker;
+package ru.yalymar.projectTracker.tracker;
 
 import org.junit.Test;
-import ru.yalymar.model.Comment;
-import ru.yalymar.model.Item;
+import ru.yalymar.projectTracker.model.Comment;
+import ru.yalymar.projectTracker.model.Item;
 
 import java.util.ArrayList;
 import java.util.List;
