@@ -4,18 +4,28 @@ import java.io.*;
 import java.net.*;
 import java.util.Scanner;
 
+
+/**
+ * @author slavalymar
+ * @since 02.02.2017
+ * @version 1
+ */
 public class Server {
 
     private final int port = 6666;
     private boolean exit = true;
     private int count = 0;
 
+    /**
+     * start server
+     */
     public void startServer(){
 
         try(Socket socket =  new ServerSocket(port).accept();
             DataInputStream in = new DataInputStream(socket.getInputStream());
             DataOutputStream out = new DataOutputStream(socket.getOutputStream())){
 
+            System.out.println("Server started");
             count++;
             String ask;
             do {
@@ -36,6 +46,10 @@ public class Server {
         }
     }
 
+    /** return answer
+     * @param ask
+     * @return String
+     */
     private String answer(String ask){
         String tmp = "I can`t answer, `cause my English is very bad. Try ask something else";
         if (ask.toLowerCase().contains("hello")) {
@@ -53,6 +67,9 @@ public class Server {
         return String.format("%s%s%s", "Oracle: ", tmp, System.getProperty("line.separator"));
     }
 
+    /** ask exit if numbers of clients equals 0
+     * @return boolean
+     */
     private boolean exit(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Do you want to stop server? Y/N");

@@ -3,11 +3,19 @@ package ru.yalymar.botTheOralce;
 import java.net.*;
 import java.io.*;
 
+/**
+ * @author slavalymar
+ * @since 02.02.2017
+ * @version 1
+ */
 public class Client {
 
     private final String localhost = "127.0.0.1";
     private final int serverPort = 6666;
 
+    /**
+     * start Client
+     */
     public void startClient(){
 
         try(Socket socket = new Socket(InetAddress.getByName(localhost), serverPort);
@@ -35,7 +43,12 @@ public class Client {
         }
     }
 
+    /** create ask
+     * @param str
+     * @return String
+     */
     private String answer(String str){
+
         return String.format("%s%s", "Vasya: ", str);
     }
 }
