@@ -12,16 +12,23 @@ public class Client {
 
     private final String localhost = "127.0.0.1";
     private final int serverPort = 6666;
+    private Socket socket;
+
+    public Socket getSocket() {
+        return socket;
+    }
 
     /**
      * start Client
      */
     public void startClient(){
 
-        try(Socket socket = new Socket(InetAddress.getByName(localhost), serverPort);
+        try{
+            socket = new Socket(InetAddress.getByName(localhost), serverPort);
+
             BufferedReader inConsole = new BufferedReader(new InputStreamReader(System.in));
             DataOutputStream out = new DataOutputStream(socket.getOutputStream());
-            DataInputStream in = new DataInputStream(socket.getInputStream())){
+            DataInputStream in = new DataInputStream(socket.getInputStream());
 
             String str;
             String string;
@@ -41,6 +48,9 @@ public class Client {
         catch (IOException e){
             e.printStackTrace();
         }
+        finally {
+            close();
+        }
     }
 
     /** create ask
@@ -51,4 +61,18 @@ public class Client {
 
         return String.format("%s%s", "Vasya: ", str);
     }
+
+    /**
+     * close socket
+     */
+    private void close() {
+        if(socket != null && !socket.isClosed()){
+            try {
+                socket.close();
+            } catch (IOException ignore) {
+
+            }
+        }
+    }
+
 }

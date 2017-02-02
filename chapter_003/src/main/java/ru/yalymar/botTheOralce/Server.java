@@ -4,7 +4,6 @@ import java.io.*;
 import java.net.*;
 import java.util.Scanner;
 
-
 /**
  * @author slavalymar
  * @since 02.02.2017
@@ -14,16 +13,23 @@ public class Server {
 
     private final int port = 6666;
     private boolean exit = true;
-    private int count = 0;
+    private int count = 0;  // users counter
+    private Socket socket;
+
+    public Socket getSocket() {
+        return socket;
+    }
 
     /**
      * start server
      */
     public void startServer(){
 
-        try(Socket socket =  new ServerSocket(port).accept();
+        try{
+            socket = new ServerSocket(port).accept();
+
             DataInputStream in = new DataInputStream(socket.getInputStream());
-            DataOutputStream out = new DataOutputStream(socket.getOutputStream())){
+            DataOutputStream out = new DataOutputStream(socket.getOutputStream());
 
             System.out.println("Server started");
             count++;
@@ -43,6 +49,9 @@ public class Server {
         }
         catch (IOException e){
             e.printStackTrace();
+        }
+        finally {
+            close();
         }
     }
 
@@ -74,6 +83,24 @@ public class Server {
         Scanner sc = new Scanner(System.in);
         System.out.println("Do you want to stop server? Y/N");
         String str = sc.nextLine();
-        return str.toLowerCase().equals("y") ? (exit = false) : (exit = true);
+        if("y".equals(str.toLowerCase())){
+            this.exit = false;
+            return false;
+        }
+        else return true;
     }
+
+    /**
+     * close socket
+     */
+    private void close() {
+        if(socket != null && !socket.isClosed()){
+            try {
+                socket.close();
+            } catch (IOException ignore) {
+
+            }
+        }
+    }
+
 }
