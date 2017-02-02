@@ -23,7 +23,6 @@ public class Server {
                 ask = in.readUTF();
                 System.out.println(ask);
                 out.writeUTF(answer(ask));
-                out.writeUTF("\n");
                 out.flush();
                 if(answer(ask).equals("Bye bye. See you later.")) {
                     count--;
@@ -48,7 +47,7 @@ public class Server {
         if(ask.toLowerCase().contains("!")){
             tmp = "You are so angry. Please, be quieter.";
         }
-        if (ask.toLowerCase().equals("Vasya: "+"exit"+System.getProperty("line.separator"))) {
+        if (ask.toLowerCase().contains("Vasya: exit")) {
             tmp = "Bye bye. See you later.";
         }
         return String.format("%s%s%s", "Oracle: ", tmp, System.getProperty("line.separator"));

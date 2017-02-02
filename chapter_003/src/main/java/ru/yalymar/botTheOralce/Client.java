@@ -1,9 +1,7 @@
 package ru.yalymar.botTheOralce;
 
-import javax.xml.crypto.Data;
 import java.net.*;
 import java.io.*;
-import java.util.Scanner;
 
 public class Client {
 
@@ -13,22 +11,24 @@ public class Client {
     public void startClient(){
 
         try(Socket socket = new Socket(InetAddress.getByName(localhost), serverPort);
+            BufferedReader inConsole = new BufferedReader(new InputStreamReader(System.in));
             DataOutputStream out = new DataOutputStream(socket.getOutputStream());
-            DataInputStream in = new DataInputStream(socket.getInputStream());
-            BufferedReader inConsole = new BufferedReader(new InputStreamReader(System.in))){
+            DataInputStream in = new DataInputStream(socket.getInputStream())){
 
             String str;
+            String string;
 
-            out.writeUTF("Hello Oracle!");
+            out.writeUTF("Hello Oracle");
+            System.out.println(in.readLine());
             do {
-                String string = inConsole.readLine();
+                string = inConsole.readLine();
                 out.writeUTF(answer(string));
-                out.flush();
                 System.out.println(answer(string));
-                while (!(str = in.readUTF()).isEmpty()) {
+                out.flush();
+                if (!(str = in.readUTF()).isEmpty()) {
                     System.out.println(str);
                 }
-            } while(!str.toLowerCase().equals("exit"));
+            } while(!string.toLowerCase().equals("exit"));
         }
         catch (IOException e){
             e.printStackTrace();
@@ -36,6 +36,6 @@ public class Client {
     }
 
     private String answer(String str){
-        return String.format("%s%s%s", "Vasya: ", str, System.getProperty("line.separator"));
+        return String.format("%s%s", "Vasya: ", str);
     }
 }
