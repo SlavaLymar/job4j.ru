@@ -73,6 +73,9 @@ public class Server {
         if (ask.toLowerCase().contains("Vasya: exit")) {
             tmp = "Bye bye. See you later.";
         }
+        if(ask.toLowerCase().contains("fuck")){
+            tmp = "Fuck you too.";
+        }
         return String.format("%s%s%s", "Oracle: ", tmp, System.getProperty("line.separator"));
     }
 
