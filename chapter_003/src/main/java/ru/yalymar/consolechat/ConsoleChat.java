@@ -11,6 +11,9 @@ import java.util.List;
  */
 public class ConsoleChat {
 
+    private final String STOP = "стоп";
+    private final String COMPLETE = "закончить";
+    private final String CONTINUE = "продолжить";
     /**
      * list of answers. Answers in txt file
      */
@@ -103,8 +106,8 @@ public class ConsoleChat {
      * @return boolean
      */
     public boolean isStop(String str){
-        if(str.toLowerCase().equals("стоп")) setStop(false);
-        if(str.toLowerCase().equals("продолжить")) setStop(true);
+        if(STOP.equals(str.toLowerCase())) setStop(false);
+        if(CONTINUE.equals(str.toLowerCase())) setStop(true);
         return stop;
     }
 
@@ -124,7 +127,7 @@ public class ConsoleChat {
      */
     public boolean isExit(String str){
 
-        return str.toLowerCase().equals("закончить") ? true : false;
+        return COMPLETE.equals(str.toLowerCase());
     }
 
 
