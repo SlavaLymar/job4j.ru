@@ -11,7 +11,6 @@ public abstract class BaseAction implements ClientAction{
 
     @Override
     public String print(){
-
         return String.format("%s. %s", this.key()+1, this.name);
     }
 }

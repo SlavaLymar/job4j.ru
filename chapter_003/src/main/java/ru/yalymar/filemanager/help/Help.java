@@ -2,6 +2,7 @@ package ru.yalymar.filemanager.help;
 
 import ru.yalymar.filemanager.action.BaseAction;
 import ru.yalymar.filemanager.action.ClientAction;
+import ru.yalymar.filemanager.exceptions.DontExistException;
 import ru.yalymar.filemanager.filemanager.FileManager;
 import ru.yalymar.filemanager.output.Output;
 import ru.yalymar.filemanager.input.Input;
@@ -18,7 +19,7 @@ public class Help {
     private Output output;
     private FileManager fileManager;
     private final int arrLength = 6;
-    private ClientAction[] userActions = new ClientAction[arrLength];
+    private ClientAction[] clientActions = new ClientAction[arrLength];
     private int position = 0;
     private boolean b = true;
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY HH:mm");
@@ -29,8 +30,8 @@ public class Help {
         this.fileManager = fileManager;
     }
 
-    public String  greetings(){
-        return "Welcome to File Manager!";
+    public void greetings(){
+        this.output.writeToClient("Welcome to File Manager!");
     }
 
     public void setB(boolean b) {
@@ -42,47 +43,47 @@ public class Help {
     }
 
     public void fillHelp(){
-        this.userActions[position++] = new GetList("Get list;");
-        this.userActions[position++] = new ChangeDirectory("Change directory;");
-        this.userActions[position++] = new Back("Back;");
-        this.userActions[position++] = new Download("Download from server;");
-        this.userActions[position++] = new Upload("Upload to server;");
-        this.userActions[position++] = new Exit("Exit");
+        this.clientActions[position++] = new GetList("Get list. Write 'dir';");
+        this.clientActions[position++] = new ChangeDirectory("Change directory. Write 'cd <DIR>';");
+        this.clientActions[position++] = new Back("Back. Write 'cd..';");
+        this.clientActions[position++] = new Download("Download from server. Write 'download <FILE>';");
+        this.clientActions[position++] = new Upload("Upload to server. Write 'upload <FILE>';");
+        this.clientActions[position++] = new Exit("Exit.");
     }
 
-    public void select(Path path) throws IOException{
+    public void select(Path path) throws IOException, DontExistException {
         if(path.endsWith("/dir")){
-            this.userActions[0].execute(path, this.fileManager);
+            this.clientActions[0].execute(path, this.fileManager);
         }
         if(path.toString().contains("/cd ")){
-            this.userActions[1].execute(path, this.fileManager);
+            this.clientActions[1].execute(path, this.fileManager);
         }
         if(path.endsWith("/cd..")){
-            this.userActions[2].execute(path, this.fileManager);
+            this.clientActions[2].execute(path, this.fileManager);
         }
         if(path.toString().contains("/download ")){
-            this.userActions[3].execute(path, this.fileManager);
+            this.clientActions[3].execute(path, this.fileManager);
         }
         if(path.toString().contains("/upload ")){
-            this.userActions[4].execute(path, this.fileManager);
+            this.clientActions[4].execute(path, this.fileManager);
         }
         if(path.endsWith("/exit")){
-            this.userActions[5].execute(path, this.fileManager);
+            this.clientActions[5].execute(path, this.fileManager);
         }
     }
 
     public int[] getIntArr(){
         int[] arr = new int[this.arrLength];
         for(int i = 0; i<arr.length;i++){
-            arr[i] = userActions[i].key();
+            arr[i] = clientActions[i].key();
         }
         return arr;
     }
 
     public void showHelp(){
-        for(UserAction userAction: userActions){
-            if(userAction!=null) {
-                System.out.println(userAction.print());
+        for(ClientAction clientAction: clientActions){
+            if(clientAction!=null) {
+                this.output.writeToClient(clientAction.print());
             }
         }
     }
@@ -115,273 +116,103 @@ public class Help {
         }
     }
 
-    /**
-     * @author slavalymar
-     * @since 13.01.2017
-     * @version 1
-     */
-    private class EditItem extends BaseAction {
 
-        public EditItem(String name) {
+    private class ChangeDirectory extends BaseAction {
+
+        public ChangeDirectory(String name) {
             super(name);
         }
 
-        /**
-         * @return k
-         */
         @Override
         public int key() {
             final int k = 1;
             return k;
         }
 
-        /**
-         * @param input
-         * @param tracker
-         */
         @Override
-        public void execute(Input input, Tracker tracker){
-            int newin = 0;
-            boolean exist = false;
-            String id = " ";
-
-            do {
-                tracker.showAllItems();
-                id = input.ask("Enter the id: ");
-                tracker.showOneItems(tracker.findById(id));
-                if(tracker.findById(id) == null) {
-                    System.out.println("Wrong id!");
-                    continue;
-                }
-                exist = tracker.findById(id).getId().equals(id);
-            }
-            while (!exist);
-
-                if (exist) {
-                    do {
-                        System.out.println("1. Edit name;\n2. Edit Description;\n3. Back.");
-                        newin = input.getNumber("Enter the number: ");
-                        if (newin == 1) {
-                            Item newItem = new Item(input.ask("Enter new name: "), tracker.findById(id).getDescription(), tracker.findById(id).getId());
-                            tracker.update(newItem);
-                        }
-                        if (newin == 2) {
-                            Item newItem = new Item(tracker.findById(id).getName(), input.ask("Enter new description: "), tracker.findById(id).getId());
-                            tracker.update(newItem);
-                        }
-                    }
-                    while (newin != 3);
-                }
-
-
-
+        public void execute(Path path, FileManager fileManager) throws IOException, DontExistException {
+            Path newPath = fileManager.changeDirectory(path);
+            output.writeToClient(newPath.toString());
         }
+
     }
 
-    /**
-     * @author slavalymar
-     * @since 13.01.2017
-     * @version 1
-     */
-    private class DeteleItem extends BaseAction {
 
-        public DeteleItem(String name) {
+    private class Back extends BaseAction {
+
+        public Back(String name) {
             super(name);
         }
 
-        /**
-         * @return k
-         */
         @Override
         public int key() {
             final int k = 2;
             return 2;
         }
 
-        /**
-         * @param input
-         * @param tracker
-         */
         @Override
-        public void execute(Input input, Tracker tracker) {
-            tracker.showAllItems();
-            int newin = 0;
-
-            do {
-                System.out.println("What you will want to do?\n1. Delete Item;\n2. Back.\n");
-                newin = input.getNumber("Enter the number: ");
-                tracker.showAllItems();
-                if (newin == 1) {
-                    String name = input.ask("Enter Item`s name what you will want to delete: ");
-                    for (Item i : tracker.findByName(name)) {
-                        if (i != null) tracker.delete(i);
-                    }
-                    tracker.showAllItems();
-                }
-            }
-            while (newin != 2);
+        public void execute(Path path, FileManager fileManager) throws IOException, DontExistException {
+            Path newPath = fileManager.back(path);
+            output.writeToClient(newPath.toString());
         }
+
     }
 
-    /**
-     * @author slavalymar
-     * @since 13.01.2017
-     * @version 1
-     */
-    private class ShowAllItem extends BaseAction {
 
-        public ShowAllItem(String name) {
+    private class Download extends BaseAction {
+
+        public Download(String name) {
             super(name);
         }
 
-        /**
-         * @return k
-         */
         @Override
         public int key() {
             final int k = 3;
             return k;
         }
 
-        /**
-         * @param input
-         * @param tracker
-         */
         @Override
-        public void execute(Input input, Tracker tracker) {
-            tracker.showAllItems();
+        public void execute(Path path, FileManager fileManager) throws IOException, DontExistException {
+            Path newPath = fileManager.download(path);
+            output.sendFile(newPath);
         }
     }
 
-    /**
-     * @author slavalymar
-     * @since 13.01.2017
-     * @version 1
-     */
-    private class ShowItemsByFilter extends BaseAction {
 
-        public ShowItemsByFilter(String name) {
+    private class Upload extends BaseAction {
+
+        public Upload(String name) {
             super(name);
         }
 
-        /**
-         * @return k
-         */
         @Override
         public int key() {
             final int k = 4;
             return k;
         }
 
-        /**
-         * @param input
-         * @param tracker
-         */
         @Override
-        public void execute(Input input, Tracker tracker) {
-            tracker.showAllItems();
-            int newin = 0;
-
-            do {
-                System.out.println("1. Items by id;\n2. Items by name;\n3. Items by description;\n4. Back.");
-                newin = input.getNumber("Enter the number: ");
-                if (newin == 1) {
-                    String str = input.ask("Enter the id: ");
-                    Item i = tracker.findById(str);
-                    tracker.showOneItems(i);
-                }
-                if (newin == 2) {
-                    String str = input.ask("Enter the name: ");
-                    List<Item> itemsByName = tracker.findByName(str);
-                    tracker.showAllItems(itemsByName);
-                }
-                if (newin == 3) {
-                    String str = input.ask("Enter the description: ");
-                    List<Item> itemsByDesc = tracker.findByDescription(str);
-                    tracker.showAllItems(itemsByDesc);
-                }
-            }
-            while (newin != 4);
+        public void execute(Path path, FileManager fileManager) throws IOException, DontExistException {
 
         }
     }
 
-    /**
-     * @author slavalymar
-     * @since 13.01.2017
-     * @version 1
-     */
-    private class CommentClass extends BaseAction {
 
-        public CommentClass(String name) {
-            super(name);
-        }
-
-        /**
-         * @return k
-         */
-        @Override
-        public int key() {
-            final int k = 5;
-            return k;
-        }
-
-        /**
-         * @param input
-         * @param tracker
-         */
-        @Override
-        public void execute(Input input, Tracker tracker) {
-            tracker.showAllItems();
-            int newin = 0;
-
-            do {
-                System.out.println("What you will want to do? Enter the number:\n1. Add comment by name;\n" +
-                        "2. Show comment by id;\n3. Back.");
-                newin = input.getNumber("Enter the number: ");
-                if (newin == 1) {
-                    tracker.showAllItems();
-                    String name = input.ask("Enter the Item`s name you will want to add comment: ");
-                    String comment = input.ask("Enter a comment");
-                    tracker.addCommentByName(name, new Comment(comment));
-                }
-                if(newin == 2){
-                    tracker.showAllItems();
-                    String id = input.ask("Enter the Item`s id you will want to show comments: ");
-                    tracker.showComments(id);
-                }
-            }
-            while(newin != 3);
-        }
-    }
-
-    /**
-     * @author slavalymar
-     * @since 13.01.2017
-     * @version 1
-     */
     private class Exit extends BaseAction{
 
         public Exit(String name) {
             super(name);
         }
 
-        /**
-         * @return k
-         */
         @Override
         public int key() {
             int k = 6;
             return k;
         }
 
-        /**
-         * @param input
-         * @param tracker
-         */
         @Override
-        public void execute(Input input, Tracker tracker) {
-            setB(false);
+        public void execute(Path path, FileManager fileManager) throws IOException, DontExistException {
+
         }
     }
 

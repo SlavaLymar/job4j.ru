@@ -52,8 +52,8 @@ public class Server {
 
             FileManager fileManager = new FileManager();
             Help help = new Help(this.input, this.output, fileManager);
-            this.output.writeToClient(help.greetings());
-
+            help.greetings();
+            help.showHelp();
 
 
 
