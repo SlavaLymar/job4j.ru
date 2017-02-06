@@ -2,13 +2,13 @@ package ru.yalymar.filemanager.filemanager;
 
 import org.junit.Test;
 import ru.yalymar.filemanager.exceptions.DontExistException;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertArrayEquals;
 
 public class FileManagerTest {
 
@@ -52,8 +52,8 @@ public class FileManagerTest {
     @Test
     public void downloadTest() {
         try {
-            File file = this.fileManager.download("C:/Java/junior/examples/download ");
-
+            File file = this.fileManager.download("C:/Java/junior/examples/download pom.xml");
+            assertThat(file, is(new File("C:/Java/junior/examples/pom.xml")));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -61,7 +61,12 @@ public class FileManagerTest {
 
     @Test
     public void uploadTest() {
-
+        File[] files = this.fileManager.upload
+                ("C:/Java/junior/examples/upload C:/Java/junior/examples/pom.xml");
+        File[] expected = new File[2];
+        expected[0] = new File("C:/Java/junior/examples/");
+        expected[1] = new File("C:/Java/junior/examples/pom.xml");
+        assertArrayEquals(files, expected);
     }
 
 }

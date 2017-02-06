@@ -48,24 +48,16 @@ public class FileManager {
     }
 
     public File[] upload(String s){
-        File[] paths = new File[2];
+        File[] files = new File[2];
         int index = s.indexOf("upload ");
 
-        char[] pathServerChar = new char[s.length()];
-        for(int i = 0; i<index; i++){
-            s.toCharArray()[i] = pathServerChar[i];
-        }
-        String pathServerStr = new String(pathServerChar).trim();
-        paths[0] = new File(pathServerStr);
+        String pathServerStr = s.substring(0, s.length()-(s.length()-index));
+        files[0] = new File(pathServerStr);
 
-        char[] pathClientChar = new char[s.length()];
-        for(int i = index+7; i<s.length(); i++){
-            s.toCharArray()[i] = pathClientChar[i];
-        }
-        String pathClientStr = new String(pathClientChar).trim();
-        paths[1] = new File(pathClientStr);
+        String pathClientStr = s.substring(index+7, s.length());
+        files[1] = new File(pathClientStr);
 
-        return paths;
+        return files;
     }
 
 
