@@ -6,7 +6,6 @@ import ru.yalymar.filemanager.input.ClientInput;
 import ru.yalymar.filemanager.input.Input;
 import ru.yalymar.filemanager.output.ClientOutput;
 import ru.yalymar.filemanager.output.Output;
-
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -19,6 +18,7 @@ public class Server {
     private String host;
     private String port;
     private Socket serverSocket;
+    private boolean stopSocket = true;
     private static Server ourInstance = new Server();
 
     private Server(){
@@ -55,12 +55,11 @@ public class Server {
             help.greetings();
             help.showHelp();
 
-
-
-
-
-
-
+            do{
+                
+            }
+            while(this.stopSocket);
+            this.serverSocket.close();
         }
         catch(IOException e){
             e.printStackTrace();
@@ -68,6 +67,11 @@ public class Server {
     }
 
     public Socket getServerSocket() {
+
         return serverSocket;
+    }
+
+    public void setStopSocket(boolean stopSocket) {
+        this.stopSocket = stopSocket;
     }
 }

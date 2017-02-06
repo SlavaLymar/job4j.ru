@@ -20,24 +20,22 @@ public class ClientOutput implements Output {
 
     @Override
     public void sendFile(Path path) {
-        try {
+        try(FileInputStream fis = new FileInputStream(path.toFile());
+            BufferedOutputStream bos =
+                    new BufferedOutputStream(Server.getInstance().getServerSocket().getOutputStream())){
+
             byte[] byteArray = new byte[1024];
-            FileInputStream fis = new FileInputStream(path.toFile());
             long s = path.toFile().length();
-            BufferedOutputStream bos = new BufferedOutputStream(Server.getInstance().getServerSocket().getOutputStream());
             while (s > 0) {
                 int i = fis.read(byteArray);
                 bos.write(byteArray, 0, i);
                 s-= i;
             }
             bos.flush();
-            fis.close();
         } catch (FileNotFoundException e) {
-            System.err.println("File not found!");
+            e.printStackTrace();
         } catch (IOException e) {
-            System.err.println("IOException");
-        } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 

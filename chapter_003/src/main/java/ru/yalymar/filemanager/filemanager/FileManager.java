@@ -2,6 +2,7 @@ package ru.yalymar.filemanager.filemanager;
 
 import ru.yalymar.filemanager.exceptions.DontExistException;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.nio.file.Path;
 
 public class FileManager {
@@ -23,17 +24,6 @@ public class FileManager {
     public Path changeDirectory(Path path) throws DontExistException {
         if(path.toFile().exists()) {
             String str = path.toString().replaceAll("cd ", " ").trim();
-            /*int index = str.indexOf("cd ");
-            char[] resultChar = new char[str.length() - 3];
-            char[] strChar = str.toCharArray();
-            for (int i = 0; i < index; i++) {
-                resultChar[i] = strChar[i];
-            }
-            for (int i = index + 3; i < str.length(); i++) {
-                resultChar[i] = strChar[i];
-            }
-            */
-
             return new File(str).toPath();
         }
         else throw new DontExistException("Directory is not exist!");
@@ -53,11 +43,34 @@ public class FileManager {
         else throw new DontExistException("Directory is not exist!");
     }
 
-    public Path download(Path path) throws DontExistException{
+    public Path download(Path path) throws FileNotFoundException{
         String str = path.toString().replaceAll("download ", " ").trim();
         if(new File(str).exists()){
             return new File(str).toPath();
         }
-        else throw new DontExistException("File is not exits!");
+        else throw new FileNotFoundException("File is not found!");
     }
+
+    public Path[] upload(Path path){
+        Path[] paths = new Path[2];
+        int index = path.toString().indexOf("upload ");
+
+        char[] pathServerChar = new char[path.toString().length()];
+        for(int i = 0; i<index; i++){
+            path.toString().toCharArray()[i] = pathServerChar[i];
+        }
+        String pathServerStr = new String(pathServerChar).trim();
+        paths[0] = new File(pathServerStr).toPath();
+
+        char[] pathClientChar = new char[path.toString().length()];
+        for(int i = index+7; i<path.toString().length(); i++){
+            path.toString().toCharArray()[i] = pathClientChar[i];
+        }
+        String pathClientStr = new String(pathClientChar).trim();
+        paths[1] = new File(pathClientStr).toPath();
+
+        return paths;
+    }
+
+
 }

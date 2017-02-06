@@ -6,6 +6,8 @@ import ru.yalymar.filemanager.exceptions.DontExistException;
 import ru.yalymar.filemanager.filemanager.FileManager;
 import ru.yalymar.filemanager.output.Output;
 import ru.yalymar.filemanager.input.Input;
+import ru.yalymar.filemanager.start.Server;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -47,27 +49,27 @@ public class Help {
         this.clientActions[position++] = new ChangeDirectory("Change directory. Write 'cd <DIR>';");
         this.clientActions[position++] = new Back("Back. Write 'cd..';");
         this.clientActions[position++] = new Download("Download from server. Write 'download <FILE>';");
-        this.clientActions[position++] = new Upload("Upload to server. Write 'upload <FILE>';");
+        this.clientActions[position++] = new Upload("Upload to server. Write 'upload <ABSOLUTEDIR>/<FILE>';");
         this.clientActions[position++] = new Exit("Exit.");
     }
 
     public void select(Path path) throws IOException, DontExistException {
-        if(path.endsWith("/dir")){
+        if(path.toString().toLowerCase().endsWith("/dir")){
             this.clientActions[0].execute(path, this.fileManager);
         }
-        if(path.toString().contains("/cd ")){
+        if(path.toString().toLowerCase().contains("/cd ")){
             this.clientActions[1].execute(path, this.fileManager);
         }
-        if(path.endsWith("/cd..")){
+        if(path.toString().toLowerCase().endsWith("/cd..")){
             this.clientActions[2].execute(path, this.fileManager);
         }
-        if(path.toString().contains("/download ")){
+        if(path.toString().toLowerCase().contains("/download ")){
             this.clientActions[3].execute(path, this.fileManager);
         }
-        if(path.toString().contains("/upload ")){
+        if(path.toString().toLowerCase().contains("/upload ")){
             this.clientActions[4].execute(path, this.fileManager);
         }
-        if(path.endsWith("/exit")){
+        if(path.toString().toLowerCase().endsWith("/exit")){
             this.clientActions[5].execute(path, this.fileManager);
         }
     }
@@ -172,7 +174,7 @@ public class Help {
         }
 
         @Override
-        public void execute(Path path, FileManager fileManager) throws IOException, DontExistException {
+        public void execute(Path path, FileManager fileManager) throws IOException{
             Path newPath = fileManager.download(path);
             output.sendFile(newPath);
         }
@@ -193,7 +195,9 @@ public class Help {
 
         @Override
         public void execute(Path path, FileManager fileManager) throws IOException, DontExistException {
-
+            Path[] paths = fileManager.upload(path);
+            output.writeToClient(paths[1].toString());
+            input.getFile(paths[0]);
         }
     }
 
@@ -212,7 +216,7 @@ public class Help {
 
         @Override
         public void execute(Path path, FileManager fileManager) throws IOException, DontExistException {
-
+            Server.getInstance().setStopSocket(false);
         }
     }
 
