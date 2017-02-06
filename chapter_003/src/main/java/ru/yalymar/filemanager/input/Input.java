@@ -1,10 +1,10 @@
 package ru.yalymar.filemanager.input;
 
-import java.nio.file.Path;
+import java.io.File;
 
 public interface Input {
 
     String readFromClient();
 
-    void getFile(Path path);
+    void getFile(File file);
 }

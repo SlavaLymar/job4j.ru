@@ -1,5 +1,6 @@
 package ru.yalymar.filemanager.start;
 
+import ru.yalymar.filemanager.exceptions.DontExistException;
 import ru.yalymar.filemanager.filemanager.FileManager;
 import ru.yalymar.filemanager.help.Help;
 import ru.yalymar.filemanager.input.ClientInput;
@@ -19,6 +20,7 @@ public class Server {
     private String port;
     private Socket serverSocket;
     private boolean stopSocket = true;
+    private File currentPath = new File("C:/Java/junior/examples/resources");
     private static Server ourInstance = new Server();
 
     private Server(){
@@ -53,15 +55,19 @@ public class Server {
             FileManager fileManager = new FileManager();
             Help help = new Help(this.input, this.output, fileManager);
             help.greetings();
+            help.fillHelp();
             help.showHelp();
 
             do{
-                
+                this.showDirectory();
+                help.select(this.input.readFromClient());
             }
             while(this.stopSocket);
             this.serverSocket.close();
         }
         catch(IOException e){
+            e.printStackTrace();
+        } catch (DontExistException e) {
             e.printStackTrace();
         }
     }
@@ -69,6 +75,10 @@ public class Server {
     public Socket getServerSocket() {
 
         return serverSocket;
+    }
+
+    public void showDirectory(){
+        this.output.writeToClient(this.currentPath.toString());
     }
 
     public void setStopSocket(boolean stopSocket) {

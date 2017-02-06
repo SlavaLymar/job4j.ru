@@ -5,7 +5,6 @@ public abstract class BaseAction implements ClientAction{
     private String name;
 
     public BaseAction(String name) {
-
         this.name = name;
     }
 

@@ -21,11 +21,11 @@ public class ClientInput implements Input {
     }
 
     @Override
-    public void getFile(Path path) {
+    public void getFile(File file) {
         try(DataInputStream bis =
                     new DataInputStream
                             (new BufferedInputStream(Server.getInstance().getServerSocket().getInputStream()));
-            FileOutputStream fos = new FileOutputStream(path.toFile())){
+            FileOutputStream fos = new FileOutputStream(file)){
 
             byte[] buffer = new byte[1024*1024];
             long fileLength = Long.valueOf(bis.readUTF());

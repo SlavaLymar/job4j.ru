@@ -7,10 +7,8 @@ import ru.yalymar.filemanager.filemanager.FileManager;
 import ru.yalymar.filemanager.output.Output;
 import ru.yalymar.filemanager.input.Input;
 import ru.yalymar.filemanager.start.Server;
-
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -23,7 +21,6 @@ public class Help {
     private final int arrLength = 6;
     private ClientAction[] clientActions = new ClientAction[arrLength];
     private int position = 0;
-    private boolean b = true;
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY HH:mm");
 
     public Help(Input input, Output output, FileManager fileManager) {
@@ -36,14 +33,6 @@ public class Help {
         this.output.writeToClient("Welcome to File Manager!");
     }
 
-    public void setB(boolean b) {
-        this.b = b;
-    }
-
-    public boolean isB() {
-        return b;
-    }
-
     public void fillHelp(){
         this.clientActions[position++] = new GetList("Get list. Write 'dir';");
         this.clientActions[position++] = new ChangeDirectory("Change directory. Write 'cd <DIR>';");
@@ -53,34 +42,28 @@ public class Help {
         this.clientActions[position++] = new Exit("Exit.");
     }
 
-    public void select(Path path) throws IOException, DontExistException {
-        if(path.toString().toLowerCase().endsWith("/dir")){
-            this.clientActions[0].execute(path, this.fileManager);
+    public void select(String s) throws IOException, DontExistException {
+        if(s.toLowerCase().endsWith("/dir")){
+            this.clientActions[0].execute(s, this.fileManager);
         }
-        if(path.toString().toLowerCase().contains("/cd ")){
-            this.clientActions[1].execute(path, this.fileManager);
+        if(s.toLowerCase().contains("/cd ")){
+            this.clientActions[1].execute(s, this.fileManager);
         }
-        if(path.toString().toLowerCase().endsWith("/cd..")){
-            this.clientActions[2].execute(path, this.fileManager);
+        if(s.toLowerCase().endsWith("/cd..")){
+            this.clientActions[2].execute(s, this.fileManager);
         }
-        if(path.toString().toLowerCase().contains("/download ")){
-            this.clientActions[3].execute(path, this.fileManager);
+        if(s.toLowerCase().contains("/download ")){
+            this.clientActions[3].execute(s, this.fileManager);
         }
-        if(path.toString().toLowerCase().contains("/upload ")){
-            this.clientActions[4].execute(path, this.fileManager);
+        if(s.toLowerCase().contains("/upload ")){
+            this.clientActions[4].execute(s, this.fileManager);
         }
-        if(path.toString().toLowerCase().endsWith("/exit")){
-            this.clientActions[5].execute(path, this.fileManager);
+        if(s.toLowerCase().endsWith("/exit")){
+            this.clientActions[5].execute(s, this.fileManager);
         }
     }
 
-    public int[] getIntArr(){
-        int[] arr = new int[this.arrLength];
-        for(int i = 0; i<arr.length;i++){
-            arr[i] = clientActions[i].key();
-        }
-        return arr;
-    }
+
 
     public void showHelp(){
         for(ClientAction clientAction: clientActions){
@@ -104,17 +87,17 @@ public class Help {
         }
 
         @Override
-        public void execute(Path path, FileManager fileManager) throws IOException{
-            File[] list = fileManager.getList(path);
-            for(File file : list){
-                String time = sdf.format(new Date(file.lastModified()));
+        public void execute(String s, FileManager fileManager) throws IOException {
+            File[] dir = fileManager.getList(s);
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY HH:mm");
+            for (File f : dir) {
+                String time = sdf.format(new Date(f.lastModified()));
 
                 String str =
-                        String.format("%s%s%s%s", time, (file.isDirectory()? "<DIR>" : "  "),
-                                file.length(), file.getName());
+                        String.format("%s%7s%10s%20s", time, (f.isDirectory() ? "<DIR>" : "  "),
+                                f.length(), f.getName());
                 output.writeToClient(str);
             }
-
         }
     }
 
@@ -132,8 +115,8 @@ public class Help {
         }
 
         @Override
-        public void execute(Path path, FileManager fileManager) throws IOException, DontExistException {
-            Path newPath = fileManager.changeDirectory(path);
+        public void execute(String s, FileManager fileManager) throws IOException, DontExistException {
+            File newPath = fileManager.changeDirectory(s);
             output.writeToClient(newPath.toString());
         }
 
@@ -153,8 +136,8 @@ public class Help {
         }
 
         @Override
-        public void execute(Path path, FileManager fileManager) throws IOException, DontExistException {
-            Path newPath = fileManager.back(path);
+        public void execute(String s, FileManager fileManager) throws IOException, DontExistException {
+            File newPath = fileManager.back(s);
             output.writeToClient(newPath.toString());
         }
 
@@ -174,8 +157,8 @@ public class Help {
         }
 
         @Override
-        public void execute(Path path, FileManager fileManager) throws IOException{
-            Path newPath = fileManager.download(path);
+        public void execute(String s, FileManager fileManager) throws IOException{
+            File newPath = fileManager.download(s);
             output.sendFile(newPath);
         }
     }
@@ -194,8 +177,8 @@ public class Help {
         }
 
         @Override
-        public void execute(Path path, FileManager fileManager) throws IOException, DontExistException {
-            Path[] paths = fileManager.upload(path);
+        public void execute(String s, FileManager fileManager) throws IOException, DontExistException {
+            File[] paths = fileManager.upload(s);
             output.writeToClient(paths[1].toString());
             input.getFile(paths[0]);
         }
@@ -215,7 +198,7 @@ public class Help {
         }
 
         @Override
-        public void execute(Path path, FileManager fileManager) throws IOException, DontExistException {
+        public void execute(String s, FileManager fileManager) throws IOException, DontExistException {
             Server.getInstance().setStopSocket(false);
         }
     }

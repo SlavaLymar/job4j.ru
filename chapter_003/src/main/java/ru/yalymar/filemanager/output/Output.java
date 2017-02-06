@@ -1,10 +1,10 @@
 package ru.yalymar.filemanager.output;
 
-import java.nio.file.Path;
+import java.io.File;
 
 public interface Output {
 
     void writeToClient(String str);
 
-    void sendFile(Path path);
+    void sendFile(File file);
 }

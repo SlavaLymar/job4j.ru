@@ -1,9 +1,7 @@
 package ru.yalymar.filemanager.output;
 
 import ru.yalymar.filemanager.start.Server;
-
 import java.io.*;
-import java.nio.file.Path;
 
 public class ClientOutput implements Output {
 
@@ -19,13 +17,13 @@ public class ClientOutput implements Output {
     }
 
     @Override
-    public void sendFile(Path path) {
-        try(FileInputStream fis = new FileInputStream(path.toFile());
+    public void sendFile(File file) {
+        try(FileInputStream fis = new FileInputStream(file);
             BufferedOutputStream bos =
                     new BufferedOutputStream(Server.getInstance().getServerSocket().getOutputStream())){
 
             byte[] byteArray = new byte[1024];
-            long s = path.toFile().length();
+            long s = file.length();
             while (s > 0) {
                 int i = fis.read(byteArray);
                 bos.write(byteArray, 0, i);
