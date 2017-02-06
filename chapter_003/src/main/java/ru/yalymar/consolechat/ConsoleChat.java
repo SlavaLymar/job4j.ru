@@ -86,7 +86,7 @@ public class ConsoleChat {
         int listOfAnswersSize = listOfAnswers.size();
         int i = (int) (Math.random() * listOfAnswersSize);
         str = listOfAnswers.get(i);
-        String result = "AI: "+str;
+        String result = String.format("AI: %s", str);
         System.out.println(result);
         return result;
     }
@@ -96,7 +96,7 @@ public class ConsoleChat {
      * @return String
      */
     public String toWriteInConsole(String str) {
-        String result = "User: "+str;
+        String result = String.format("User: %s", str);
         System.out.println(result);
         return result;
     }
