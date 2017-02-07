@@ -16,42 +16,33 @@ public class Server {
 
     private Input input;
     private Output output;
-    private String host;
-    private String port;
-    private Socket serverSocket;
-    private boolean stopSocket = true;
+    private static String host;
+    private static String port;
+    private static Socket serverSocket;
     private String currentPath = "C:/Java/junior/examples/resources/";
-    private static Server ourInstance = new Server();
 
-    private Server(){
-        this.input = new ClientInput();
-        this.output = new ClientOutput();
-        this.getProperties();
+    public Server(Socket socket){
+        this.serverSocket = socket;
+        this.input = new ClientInput(socket);
+        this.output = new ClientOutput(socket);
     }
 
-    private void getProperties() {
+    private static void getProperties() {
         Properties properties = new Properties();
         try(FileInputStream fileInputStream = new FileInputStream
                 ("C:/Java/junior/chapter_003/src/main/java/ru/yalymar/filemanager/resources/app.property")){
 
             properties.load(fileInputStream);
-            this.host = properties.getProperty("ip");
-            this.port = properties.getProperty("port");
+            host = properties.getProperty("ip");
+            port = properties.getProperty("port");
         }
         catch(IOException e){
             e.printStackTrace();
         }
     }
 
-    public static Server getInstance(){
-        return ourInstance;
-    }
-
     public void startServer(){
         try{
-            System.out.println("Server started");
-            this.serverSocket = new ServerSocket(Integer.valueOf(this.port)).accept();
-            System.out.println("I got a client");
 
             FileManager fileManager = new FileManager();
             Help help = new Help(this.input, this.output, fileManager);
@@ -63,30 +54,29 @@ public class Server {
                 this.showDirectory();
                 help.select(this.input.readFromClient());
             }
-            while(this.stopSocket);
+            while(fileManager.isStopSocket());
             this.serverSocket.close();
         }
         catch(IOException e){
             e.printStackTrace();
-        } catch (DontExistException e) {
+        } catch (DontExistException e) { 
             e.printStackTrace();
         }
-    }
-
-    public Socket getServerSocket() {
-
-        return serverSocket;
     }
 
     public void showDirectory(){
         this.output.sendConsole(this.currentPath);
     }
 
-    public void setStopSocket(boolean stopSocket) {
-        this.stopSocket = stopSocket;
-    }
-
     public static void main(String[] args) {
-        Server.getInstance().startServer();
+        getProperties();
+        try(Socket serverSocket = new ServerSocket(Integer.valueOf(port)).accept()){
+
+            Server server = new Server(serverSocket);
+            server.startServer();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
     }
 }

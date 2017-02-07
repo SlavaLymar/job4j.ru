@@ -1,18 +1,22 @@
 package ru.yalymar.filemanager.input;
 
-import ru.yalymar.filemanager.start.Server;
-
 import java.io.*;
-import java.nio.file.Path;
+import java.net.Socket;
 
 public class ClientInput implements Input {
+
+    private Socket socket;
+
+    public ClientInput(Socket socket) {
+        this.socket = socket;
+    }
 
     @Override
     public String readFromClient() {
         String str = null;
         try{
             DataInputStream in = new DataInputStream
-                    (Server.getInstance().getServerSocket().getInputStream());
+                    (this.socket.getInputStream());
             str = in.readUTF();
         }
         catch(IOException e){
@@ -25,7 +29,7 @@ public class ClientInput implements Input {
     public void getFile(File file) {
         try(DataInputStream bis =
                     new DataInputStream
-                            (new BufferedInputStream(Server.getInstance().getServerSocket().getInputStream()));
+                            (new BufferedInputStream(this.socket.getInputStream()));
             FileOutputStream fos = new FileOutputStream(file)){
 
             byte[] buffer = new byte[1024*1024];

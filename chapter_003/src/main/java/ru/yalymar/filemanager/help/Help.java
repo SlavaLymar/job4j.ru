@@ -198,7 +198,7 @@ public class Help {
 
         @Override
         public void execute(String s, FileManager fileManager) throws IOException, DontExistException {
-            Server.getInstance().setStopSocket(false);
+            fileManager.setStopSocket(false);
         }
     }
 

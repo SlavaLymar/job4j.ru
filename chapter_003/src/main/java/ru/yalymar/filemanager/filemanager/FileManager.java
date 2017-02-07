@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 
 public class FileManager {
 
+    private boolean stopSocket = true;
+
     public File[] getList(String s){
         String str = new File(s).toString().replaceAll("dir", "");
         String[] listOfFiles = new File(str).list();
@@ -60,5 +62,11 @@ public class FileManager {
         return files;
     }
 
+    public void setStopSocket(boolean stopSocket) {
+        this.stopSocket = stopSocket;
+    }
 
+    public boolean isStopSocket() {
+        return this.stopSocket;
+    }
 }

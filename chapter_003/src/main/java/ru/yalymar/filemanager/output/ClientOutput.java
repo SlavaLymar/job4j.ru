@@ -1,15 +1,21 @@
 package ru.yalymar.filemanager.output;
 
-import ru.yalymar.filemanager.start.Server;
 import java.io.*;
+import java.net.Socket;
 
 public class ClientOutput implements Output {
+
+    private Socket socket;
+
+    public ClientOutput(Socket socket) {
+        this.socket = socket;
+    }
 
     @Override
     public void writeToClient(String str) {
         try{
             DataOutputStream out = new DataOutputStream
-                    (Server.getInstance().getServerSocket().getOutputStream());
+                    (this.socket.getOutputStream());
             out.writeUTF(str);
             out.flush();
         } catch (IOException e) {
@@ -21,7 +27,7 @@ public class ClientOutput implements Output {
     public void sendFile(File file) {
         try(FileInputStream fis = new FileInputStream(file);
             BufferedOutputStream bos =
-                    new BufferedOutputStream(Server.getInstance().getServerSocket().getOutputStream())){
+                    new BufferedOutputStream(this.socket.getOutputStream())){
 
             byte[] byteArray = new byte[1024];
             long s = file.length();
@@ -41,7 +47,7 @@ public class ClientOutput implements Output {
     @Override
     public void sendConsole(String str) {
         try(DataOutputStream out = new DataOutputStream
-                (Server.getInstance().getServerSocket().getOutputStream())) {
+                (this.socket.getOutputStream())) {
             out.writeUTF(str);
             out.flush();
         } catch (IOException e) {
