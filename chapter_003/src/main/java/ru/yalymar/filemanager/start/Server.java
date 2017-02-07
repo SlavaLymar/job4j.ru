@@ -42,7 +42,7 @@ public class Server {
     }
 
     public void startServer(){
-        try{
+        try {
 
             FileManager fileManager = new FileManager();
             Help help = new Help(this.input, this.output, fileManager);

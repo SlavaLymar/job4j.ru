@@ -16,8 +16,8 @@ public class Server {
     private int count = 0;  // users counter
     private Socket socket;
 
-    public Socket getSocket() {
-        return socket;
+    public Server(Socket socket) {
+        this.socket = socket;
     }
 
     /**
@@ -26,17 +26,16 @@ public class Server {
     public void startServer(){
 
         try{
-            socket = new ServerSocket(port).accept();
 
             DataInputStream in = new DataInputStream(socket.getInputStream());
             DataOutputStream out = new DataOutputStream(socket.getOutputStream());
 
             System.out.println("Server started");
             count++;
-            String ask;
+
             do {
                 System.out.println("wait command ...");
-                ask = in.readUTF();
+                String ask = in.readUTF();
                 System.out.println(ask);
                 out.writeUTF(answer(ask));
                 out.flush();
@@ -106,4 +105,13 @@ public class Server {
         }
     }
 
+    public static void main(String[] args) {
+        try (Socket socket = new ServerSocket(6666).accept()){
+            Server server = new Server(socket);
+            server.startServer();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+    }
 }
