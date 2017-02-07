@@ -9,7 +9,7 @@ public class FileManager {
     private boolean stopSocket = true;
 
     public File[] getList(String s){
-        String str = new File(s).toString().replaceAll("dir", "");
+        String str = s.replace("dir", "");
         String[] listOfFiles = new File(str).list();
         File[] files = new File[listOfFiles.length];
         for(int i = 0; i<files.length; i++){
@@ -18,25 +18,25 @@ public class FileManager {
         return files;
     }
 
-    public File changeDirectory(String s) throws DontExistException {
-        String str = s.replaceAll("cd ", "");
-        File file;
-        if((file = new File(str)).exists()) {
-            return file;
+    public String changeDirectory(String s) throws DontExistException {
+        String str = s.replace("cd ", "");
+        if(new File(str).exists()) {
+            return str;
         }
         else throw new DontExistException("Directory is not exist!");
     }
 
-    public File back(String s) throws DontExistException {
-        String str = s.replaceAll("/cd..", "");
+    public String back(String s) throws DontExistException {
+        System.out.println("s"+s);
+        String str = s.replace("/cd..", "");
         String[] directories = str.split("/");
         String newString = "";
         for(int i = 0; i<directories.length-1; i++){
             newString = newString.concat(directories[i]).concat("/");
         }
-        File file = new File(newString);
-        if(file.exists()) {
-            return file;
+        System.out.println("newString "+newString);
+        if(new File(newString).exists()) {
+            return newString;
         }
         else throw new DontExistException("Directory is not exist!");
     }

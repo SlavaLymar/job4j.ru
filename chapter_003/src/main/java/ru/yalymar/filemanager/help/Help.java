@@ -20,12 +20,14 @@ public class Help {
     private final int arrLength = 6;
     private ClientAction[] clientActions = new ClientAction[arrLength];
     private int position = 0;
+    private String currentPath;
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY HH:mm");
 
-    public Help(Input input, Output output, FileManager fileManager) {
+    public Help(Input input, Output output, FileManager fileManager, String currentPath) {
         this.input = input;
         this.output = output;
         this.fileManager = fileManager;
+        this.currentPath = currentPath;
     }
 
     public void greetings(){
@@ -42,26 +44,27 @@ public class Help {
     }
 
     public void select(String s) throws IOException, DontExistException {
-        if(s.toLowerCase().endsWith("/dir")){
-            this.clientActions[0].execute(s, this.fileManager);
+        String str = String.format("%s%s",this.currentPath, s);
+        System.out.println("str"+str);
+        if(str.toLowerCase().endsWith("/dir")){
+            this.clientActions[0].execute(str, this.fileManager);
         }
-        if(s.toLowerCase().contains("/cd ")){
-            this.clientActions[1].execute(s, this.fileManager);
+        if(str.toLowerCase().contains("/cd ")){
+            this.clientActions[1].execute(str, this.fileManager);
         }
-        if(s.toLowerCase().endsWith("/cd..")){
-            this.clientActions[2].execute(s, this.fileManager);
+        if(str.toLowerCase().endsWith("/cd..")){
+            this.clientActions[2].execute(str, this.fileManager);
         }
-        if(s.toLowerCase().contains("/download ")){
-            this.clientActions[3].execute(s, this.fileManager);
+        if(str.toLowerCase().contains("/download ")){
+            this.clientActions[3].execute(str, this.fileManager);
         }
-        if(s.toLowerCase().contains("/upload ")){
-            this.clientActions[4].execute(s, this.fileManager);
+        if(str.toLowerCase().contains("/upload ")){
+            this.clientActions[4].execute(str, this.fileManager);
         }
-        if(s.toLowerCase().endsWith("/exit")){
-            this.clientActions[5].execute(s, this.fileManager);
+        if(str.toLowerCase().endsWith("/exit")){
+            this.clientActions[5].execute(str, this.fileManager);
         }
     }
-
 
 
     public void showHelp(){
@@ -89,14 +92,14 @@ public class Help {
         public void execute(String s, FileManager fileManager) throws IOException {
             File[] dir = fileManager.getList(s);
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY HH:mm");
+            String str = "";
             for (File f : dir) {
                 String time = sdf.format(new Date(f.lastModified()));
 
-                String str =
-                        String.format("%s%7s%10s%20s", time, (f.isDirectory() ? "<DIR>" : "  "),
-                                f.length(), f.getName());
-                output.writeToClient(str);
+                str = String.format("%s%s%7s%10s%20s%s", str, time, (f.isDirectory() ? "<DIR>" : "  "),
+                                f.length(), f.getName(), System.getProperty("line.separator"));
             }
+            output.writeToClient(String.format("%s%s", str, currentPath));
         }
     }
 
@@ -115,8 +118,9 @@ public class Help {
 
         @Override
         public void execute(String s, FileManager fileManager) throws IOException, DontExistException {
-            File newPath = fileManager.changeDirectory(s);
-            output.writeToClient(newPath.toString());
+            String newPath = fileManager.changeDirectory(s);
+            currentPath = newPath;
+            output.writeToClient(currentPath);
         }
 
     }
@@ -136,8 +140,10 @@ public class Help {
 
         @Override
         public void execute(String s, FileManager fileManager) throws IOException, DontExistException {
-            File newPath = fileManager.back(s);
-            output.writeToClient(newPath.toString());
+            String newPath = fileManager.back(s);
+            currentPath = newPath;
+            System.out.println("current "+currentPath);
+            output.writeToClient(currentPath);
         }
 
     }

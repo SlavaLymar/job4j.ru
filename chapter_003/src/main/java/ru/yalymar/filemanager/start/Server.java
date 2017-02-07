@@ -19,7 +19,7 @@ public class Server {
     private static String host;
     private static String port;
     private static Socket serverSocket;
-    private String currentPath = "C:/Java/junior/examples/resources/";
+    private String currentPath = "C:/Java/junior/examples/";
 
     public Server(Socket socket){
         this.serverSocket = socket;
@@ -45,7 +45,7 @@ public class Server {
         try {
 
             FileManager fileManager = new FileManager();
-            Help help = new Help(this.input, this.output, fileManager);
+            Help help = new Help(this.input, this.output, fileManager, this.currentPath);
             help.greetings();
             help.fillHelp();
             help.showHelp();

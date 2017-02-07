@@ -32,8 +32,8 @@ public class FileManagerTest {
     @Test
     public void changeDirectoryTest() {
         try {
-            File file = this.fileManager.changeDirectory("C:/Java/junior/examples/cd target");
-            assertThat(file, is(new File("C:/Java/junior/examples/target")));
+            String file = this.fileManager.changeDirectory("C:/Java/junior/examples/cd target");
+            assertThat(file, is("C:/Java/junior/examples/target"));
         } catch (DontExistException e) {
             e.printStackTrace();
         }
@@ -42,8 +42,8 @@ public class FileManagerTest {
     @Test
     public void backTest() {
         try {
-            File file = this.fileManager.back("C:/Java/junior/examples/target/cd..");
-            assertThat(file, is(new File("C:/Java/junior/examples/")));
+            String file = this.fileManager.back("C:/Java/junior/examples/target/cd..");
+            assertThat(file, is("C:/Java/junior/examples/"));
         } catch (DontExistException e) {
             e.printStackTrace();
         }

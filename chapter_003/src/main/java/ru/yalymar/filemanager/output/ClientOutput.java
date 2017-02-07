@@ -46,8 +46,9 @@ public class ClientOutput implements Output {
 
     @Override
     public void sendConsole(String str) {
-        try(DataOutputStream out = new DataOutputStream
-                (this.socket.getOutputStream())) {
+        try {
+            DataOutputStream out = new DataOutputStream
+                    (this.socket.getOutputStream());
             out.writeUTF(str);
             out.flush();
         } catch (IOException e) {

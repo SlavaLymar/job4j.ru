@@ -1,10 +1,37 @@
 package yalymar;
 
 import java.io.*;
+import java.net.Socket;
 import java.net.URL;
 import java.util.Arrays;
 
 public class Examples {
+
+    Socket socket;
+
+    public Examples(Socket socket) {
+        this.socket = socket;
+    }
+
+    public void socketTestOut(String str){
+        try(DataOutputStream ds = new DataOutputStream(this.socket.getOutputStream())){
+
+              ds.writeUTF(str);
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public String socketTestIn() {
+        try(DataInputStream ds = new DataInputStream(this.socket.getInputStream())){
+            return ds.readUTF();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+        return "nothing";
+    }
 
     public static void main(String[] args) throws FileNotFoundException{
         try(InputStream in = new FileInputStream("C:/Java/junior/chapter_003/resources/Example.txt");
@@ -35,5 +62,6 @@ public class Examples {
                         + new String(buffer, 0, count, "UTF-8"));
         }
     }
+
 
 }

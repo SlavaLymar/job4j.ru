@@ -13,8 +13,8 @@ public class ClientInput implements Input {
 
     @Override
     public String readFromClient() {
-        String str = null;
-        try{
+        String str = "тут";
+        try {
             DataInputStream in = new DataInputStream
                     (this.socket.getInputStream());
             str = in.readUTF();
