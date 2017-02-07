@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
 public class Help {
 
     private Input input;

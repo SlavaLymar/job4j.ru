@@ -20,7 +20,7 @@ public class Server {
     private String port;
     private Socket serverSocket;
     private boolean stopSocket = true;
-    private File currentPath = new File("C:/Java/junior/examples/resources");
+    private String currentPath = "C:/Java/junior/examples/resources/";
     private static Server ourInstance = new Server();
 
     private Server(){
@@ -49,8 +49,9 @@ public class Server {
 
     public void startServer(){
         try{
-            this.serverSocket = new ServerSocket(Integer.valueOf(this.port)).accept();
             System.out.println("Server started");
+            this.serverSocket = new ServerSocket(Integer.valueOf(this.port)).accept();
+            System.out.println("I got a client");
 
             FileManager fileManager = new FileManager();
             Help help = new Help(this.input, this.output, fileManager);
@@ -78,10 +79,14 @@ public class Server {
     }
 
     public void showDirectory(){
-        this.output.writeToClient(this.currentPath.toString());
+        this.output.sendConsole(this.currentPath);
     }
 
     public void setStopSocket(boolean stopSocket) {
         this.stopSocket = stopSocket;
+    }
+
+    public static void main(String[] args) {
+        Server.getInstance().startServer();
     }
 }

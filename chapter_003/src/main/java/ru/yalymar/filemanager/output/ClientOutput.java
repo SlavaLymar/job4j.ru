@@ -7,9 +7,10 @@ public class ClientOutput implements Output {
 
     @Override
     public void writeToClient(String str) {
-        try(DataOutputStream out = new DataOutputStream
-                (Server.getInstance().getServerSocket().getOutputStream())) {
-            out.writeUTF(String.format("%s%s", str, System.getProperty("line.separator")));
+        try{
+            DataOutputStream out = new DataOutputStream
+                    (Server.getInstance().getServerSocket().getOutputStream());
+            out.writeUTF(str);
             out.flush();
         } catch (IOException e) {
             e.printStackTrace();
@@ -32,6 +33,17 @@ public class ClientOutput implements Output {
             bos.flush();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void sendConsole(String str) {
+        try(DataOutputStream out = new DataOutputStream
+                (Server.getInstance().getServerSocket().getOutputStream())) {
+            out.writeUTF(str);
+            out.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }

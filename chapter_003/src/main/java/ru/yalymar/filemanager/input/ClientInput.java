@@ -10,8 +10,9 @@ public class ClientInput implements Input {
     @Override
     public String readFromClient() {
         String str = null;
-        try(DataInputStream in = new DataInputStream
-                (Server.getInstance().getServerSocket().getInputStream())){
+        try{
+            DataInputStream in = new DataInputStream
+                    (Server.getInstance().getServerSocket().getInputStream());
             str = in.readUTF();
         }
         catch(IOException e){
