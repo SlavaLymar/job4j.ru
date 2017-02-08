@@ -27,19 +27,18 @@ public class Server {
 
         try{
 
-            DataInputStream in = new DataInputStream(socket.getInputStream());
-            DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 
             System.out.println("Server started");
             count++;
 
             do {
                 System.out.println("wait command ...");
-                String ask = in.readUTF();
+                String ask = in.readLine();
                 System.out.println(ask);
-                out.writeUTF(answer(ask));
-                out.flush();
-                if(answer(ask).equals("Bye bye. See you later.")) {
+                out.println(answer(ask));
+                if(answer(ask).contains("Bye bye. See you later.")) {
                     count--;
                     if(count == 0) exit();
                 }
@@ -69,27 +68,27 @@ public class Server {
         if(ask.toLowerCase().contains("!")){
             tmp = "You are so angry. Please, be quieter.";
         }
-        if (ask.toLowerCase().contains("Vasya: exit")) {
+        if (ask.toLowerCase().contains("exit")) {
             tmp = "Bye bye. See you later.";
         }
         if(ask.toLowerCase().contains("fuck")){
             tmp = "Fuck you too.";
         }
-        return String.format("%s%s%s", "Oracle: ", tmp, System.getProperty("line.separator"));
+        return String.format("%s%s", "Oracle: ", tmp);
     }
 
     /** ask exit if numbers of clients equals 0
      * @return boolean
      */
     private boolean exit(){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Do you want to stop server? Y/N");
-        String str = sc.nextLine();
-        if("y".equals(str.toLowerCase())){
+        //Scanner sc = new Scanner(System.in);
+        //System.out.println("Do you want to stop server? Y/N");
+        //String str = sc.nextLine();
+        //if("y".equals(str.toLowerCase())){
             this.exit = false;
             return false;
-        }
-        else return true;
+        //}
+        //else return true;
     }
 
     /**

@@ -2,6 +2,7 @@ package ru.yalymar.botTheOralce;
 
 import java.net.*;
 import java.io.*;
+import java.util.Scanner;
 
 /**
  * @author slavalymar
@@ -10,12 +11,16 @@ import java.io.*;
  */
 public class Client {
 
-    private final String localhost = "127.0.0.1";
-    private final int serverPort = 6666;
+    private static final String localhost = "127.0.0.1";
+    private static final int serverPort = 6666;
     private Socket socket;
 
     public Socket getSocket() {
         return socket;
+    }
+
+    public Client(Socket socket) {
+        this.socket = socket;
     }
 
     /**
@@ -24,23 +29,20 @@ public class Client {
     public void startClient(){
 
         try{
-            socket = new Socket(InetAddress.getByName(localhost), serverPort);
-
-            BufferedReader inConsole = new BufferedReader(new InputStreamReader(System.in));
-            DataOutputStream out = new DataOutputStream(socket.getOutputStream());
-            DataInputStream in = new DataInputStream(socket.getInputStream());
+            Scanner inConsole = new Scanner(System.in);
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 
             String str;
             String string;
 
-            out.writeUTF("Hello Oracle");
+            out.println("Hello Oracle");
             System.out.println(in.readLine());
             do {
-                string = inConsole.readLine();
-                out.writeUTF(answer(string));
+                string = inConsole.next();
+                out.println(answer(string));
                 System.out.println(answer(string));
-                out.flush();
-                if (!(str = in.readUTF()).isEmpty()) {
+                if (!(str = in.readLine()).isEmpty()) {
                     System.out.println(str);
                 }
             } while(!string.toLowerCase().equals("exit"));
@@ -76,6 +78,13 @@ public class Client {
     }
 
     public static void main(String[] args) {
-        new Client().startClient();
+
+        try(Socket socket = new Socket(InetAddress.getByName(localhost), serverPort)){
+            Client client = new Client(socket);
+            client.startClient();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
     }
 }

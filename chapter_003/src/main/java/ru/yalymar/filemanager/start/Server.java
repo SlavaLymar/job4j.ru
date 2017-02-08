@@ -19,7 +19,7 @@ public class Server {
     private static String host;
     private static String port;
     private static Socket serverSocket;
-    private String currentPath = "C:/Java/junior/examples/";
+    private static String currentPath;
 
     public Server(Socket socket){
         this.serverSocket = socket;
@@ -35,6 +35,7 @@ public class Server {
             properties.load(fileInputStream);
             host = properties.getProperty("ip");
             port = properties.getProperty("port");
+            currentPath = properties.getProperty("path");
         }
         catch(IOException e){
             e.printStackTrace();

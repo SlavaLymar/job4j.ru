@@ -141,7 +141,6 @@ public class Help {
         public void execute(String s, FileManager fileManager) throws IOException, DontExistException {
             String newPath = fileManager.back(s);
             currentPath = newPath;
-            System.out.println(currentPath);
             output.writeToClient(currentPath);
         }
 
