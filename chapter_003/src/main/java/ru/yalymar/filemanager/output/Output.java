@@ -6,7 +6,7 @@ public interface Output {
 
     void writeToClient(String str);
 
-    void sendFile(File file);
+    void sendFile(String str);
 
     void sendConsole(String str);
 }

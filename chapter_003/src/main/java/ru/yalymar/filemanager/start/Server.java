@@ -49,9 +49,9 @@ public class Server {
             help.greetings();
             help.fillHelp();
             help.showHelp();
+            this.showDirectory();
 
             do{
-                this.showDirectory();
                 help.select(this.input.readFromClient());
             }
             while(fileManager.isStopSocket());

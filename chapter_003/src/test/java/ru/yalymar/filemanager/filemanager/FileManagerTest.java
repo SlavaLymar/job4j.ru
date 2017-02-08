@@ -16,17 +16,16 @@ public class FileManagerTest {
 
     @Test
     public void getListTest() {
-        File[] dir = this.fileManager.getList("C:/Java/junior/examples/dir");
+        String [] dir = this.fileManager.getList("C:/Java/junior/examples/dir");
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY HH:mm");
-        for(File f : dir){
-            String time = sdf.format(new Date(f.lastModified()));
+        String str = "";
+        for (String f : dir) {
+            String time = sdf.format(new Date(new File(f).lastModified()));
 
-            String str =
-                    String.format("%s%7s%10s%20s", time, (f.isDirectory()? "<DIR>" : "  "),
-                            f.length(), f.getName());
-            System.out.println(str);
+            str = String.format("%s%s%7s%10s%20s%s", str, time, (new File(f).isDirectory() ? "<DIR>" : "  "),
+                    new File(f).length(), new File(f).getName(), System.getProperty("line.separator"));
         }
-        assertThat(dir[0].getName(), is("examples.iml"));
+        assertThat(dir[0], is("examples.iml"));
     }
 
     @Test
@@ -52,8 +51,8 @@ public class FileManagerTest {
     @Test
     public void downloadTest() {
         try {
-            File file = this.fileManager.download("C:/Java/junior/examples/download pom.xml");
-            assertThat(file, is(new File("C:/Java/junior/examples/pom.xml")));
+            String file = this.fileManager.download("C:/Java/junior/examples/download pom.xml");
+            assertThat(file, is("C:/Java/junior/examples/pom.xml"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -61,11 +60,11 @@ public class FileManagerTest {
 
     @Test
     public void uploadTest() {
-        File[] files = this.fileManager.upload
+        String[] files = this.fileManager.upload
                 ("C:/Java/junior/examples/upload C:/Java/junior/examples/pom.xml");
-        File[] expected = new File[2];
-        expected[0] = new File("C:/Java/junior/examples/");
-        expected[1] = new File("C:/Java/junior/examples/pom.xml");
+        String[] expected = new String[2];
+        expected[0] = new String("C:/Java/junior/examples/");
+        expected[1] = new String("C:/Java/junior/examples/pom.xml");
         assertArrayEquals(files, expected);
     }
 

@@ -45,7 +45,6 @@ public class Help {
 
     public void select(String s) throws IOException, DontExistException {
         String str = String.format("%s%s",this.currentPath, s);
-        System.out.println("str"+str);
         if(str.toLowerCase().endsWith("/dir")){
             this.clientActions[0].execute(str, this.fileManager);
         }
@@ -90,14 +89,14 @@ public class Help {
 
         @Override
         public void execute(String s, FileManager fileManager) throws IOException {
-            File[] dir = fileManager.getList(s);
+            String[] dir = fileManager.getList(s);
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY HH:mm");
             String str = "";
-            for (File f : dir) {
-                String time = sdf.format(new Date(f.lastModified()));
+            for (String f : dir) {
+                String time = sdf.format(new Date(new File(f).lastModified()));
 
-                str = String.format("%s%s%7s%10s%20s%s", str, time, (f.isDirectory() ? "<DIR>" : "  "),
-                                f.length(), f.getName(), System.getProperty("line.separator"));
+                str = String.format("%s%s%7s%10s%20s%s", str, time, (new File(f).isFile() ? "   " : "<DIR>"),
+                                new File(f).length(), new File(f).getName(), System.getProperty("line.separator"));
             }
             output.writeToClient(String.format("%s%s", str, currentPath));
         }
@@ -142,7 +141,7 @@ public class Help {
         public void execute(String s, FileManager fileManager) throws IOException, DontExistException {
             String newPath = fileManager.back(s);
             currentPath = newPath;
-            System.out.println("current "+currentPath);
+            System.out.println(currentPath);
             output.writeToClient(currentPath);
         }
 
@@ -163,7 +162,7 @@ public class Help {
 
         @Override
         public void execute(String s, FileManager fileManager) throws IOException{
-            File newPath = fileManager.download(s);
+            String newPath = fileManager.download(s);
             output.sendFile(newPath);
         }
     }
@@ -183,8 +182,8 @@ public class Help {
 
         @Override
         public void execute(String s, FileManager fileManager) throws IOException, DontExistException {
-            File[] paths = fileManager.upload(s);
-            output.writeToClient(paths[1].toString());
+            String[] paths = fileManager.upload(s);
+            output.writeToClient(paths[1]);
             input.getFile(paths[0]);
         }
     }

@@ -9,10 +9,8 @@ public class Client {
 
     private static final String HOST = "127.0.0.1";
     private static final int PORT = 5000;
-    private boolean exit = true;
     private Socket socket;
     private static Scanner sc;
-    private String currentPath;
 
     public Client(Socket socket) {
         this.socket = socket;
@@ -25,39 +23,78 @@ public class Client {
             DataInputStream in = new DataInputStream(socket.getInputStream());
 
             writeHelp(in);
-            this.currentPath = in.readUTF();
-            System.out.println(this.currentPath);
+            String str;
             do{
-                this.enter(out);
-                this.get(in);
+                str = this.enter(out);
+                if(str.toLowerCase().equals("dir") ||
+                        str.toLowerCase().contains("cd") ||
+                        str.toLowerCase().equals("cd..")){
+                    dircdcdback(in);
+                    continue;
+                }
+                if(str.toLowerCase().contains("download")){
+                    download(in, out);
+                    continue;
+                }
+                if(str.toLowerCase().contains("upload")){
+                    upload(in, out);
+                    continue;
+                }
             }
-            while(this.exit);
+            while(!str.equals("exit"));
         }
         catch(IOException e){
             e.printStackTrace();
         }
     }
 
+    private void upload(DataInputStream in, DataOutputStream out) throws IOException {
+        String str = in.readUTF();
+        out.writeUTF(str);
+        FileInputStream fis = new FileInputStream(str);
+        byte[] buffer = new byte[1024*1024];
+        long fileLength = str.length();
+        int count;
+        while (fileLength > 0) {
+            count = fis.read(buffer);
+            out.write(buffer, 0, count);
+            fileLength -= count;
+        }
+       out.flush();
+    }
+
+    public void download(DataInputStream in, DataOutputStream out) throws IOException {
+        String s = in.readUTF();
+        String [] strings = s.split("/");
+        String fileName = strings[strings.length-1];
+        int fileLength = in.read();
+        File file = new File("C:/Java/junior/examples/resources", fileName);
+        try(FileOutputStream fos = new FileOutputStream(file)){
+            byte[] buffer = new byte[1024*1024];
+            int count;
+            while(fileLength>0){
+                count = in.read(buffer);
+                fos.write(buffer, 0, count);
+                fileLength -= count;
+            }
+        }
+    }
+
     public void writeHelp(DataInputStream in) throws IOException{
-        for(int i = 1; i<8; i++) {
+        for(int i = 1; i<9; i++) {
             System.out.println(in.readUTF());
         }
     }
 
-    public void get(DataInputStream in) throws IOException {
+    public void dircdcdback(DataInputStream in) throws IOException {
         String str = in.readUTF();
         System.out.println(str);
-        while(in.readByte() != -1){
-            if(in.readByte() == -1) break;
-        }
-
     }
 
-    public void enter(DataOutputStream out) throws IOException {
-        System.out.println("Enter: ");
+    public String enter(DataOutputStream out) throws IOException {
         String enter = sc.nextLine();
         out.writeUTF(enter);
-        System.out.println("ender"+enter);
+        return enter;
     }
 
     public static void main(String[] args) {

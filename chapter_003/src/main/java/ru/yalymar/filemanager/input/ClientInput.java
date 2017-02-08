@@ -26,14 +26,18 @@ public class ClientInput implements Input {
     }
 
     @Override
-    public void getFile(File file) {
-        try(DataInputStream bis =
-                    new DataInputStream
-                            (new BufferedInputStream(this.socket.getInputStream()));
-            FileOutputStream fos = new FileOutputStream(file)){
+    public void getFile(String str) throws IOException{
+        DataInputStream bis =
+                new DataInputStream
+                        (this.socket.getInputStream());
+        String[] strings = bis.readUTF().split("/");
+        String fileName = strings[strings.length-1];
+
+        try(FileOutputStream fos = new FileOutputStream
+                (str.concat(fileName))){
 
             byte[] buffer = new byte[1024*1024];
-            long fileLength = Long.valueOf(bis.readUTF());
+            int fileLength = bis.read();
             int count;
             while (fileLength > 0) {
                 count = bis.read(buffer);
