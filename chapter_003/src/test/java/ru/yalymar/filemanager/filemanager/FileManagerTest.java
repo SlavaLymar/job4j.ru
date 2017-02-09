@@ -32,7 +32,7 @@ public class FileManagerTest {
     public void changeDirectoryTest() {
         try {
             String file = this.fileManager.changeDirectory("C:/Java/junior/examples/cd target");
-            assertThat(file, is("C:/Java/junior/examples/target"));
+            assertThat(file, is("C:/Java/junior/examples/target/"));
         } catch (DontExistException e) {
             e.printStackTrace();
         }

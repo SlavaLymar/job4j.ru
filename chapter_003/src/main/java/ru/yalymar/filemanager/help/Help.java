@@ -48,23 +48,23 @@ public class Help {
         if(str.toLowerCase().endsWith("/dir")){
             this.clientActions[0].execute(str, this.fileManager);
         }
-        if(str.toLowerCase().contains("/cd ")){
+        else if(str.toLowerCase().contains("/cd ")){
             this.clientActions[1].execute(str, this.fileManager);
         }
-        if(str.toLowerCase().endsWith("/cd..")){
+        else if(str.toLowerCase().endsWith("/cd..")){
             this.clientActions[2].execute(str, this.fileManager);
         }
-        if(str.toLowerCase().contains("/download ")){
+        else if(str.toLowerCase().contains("/download ")){
             this.clientActions[3].execute(str, this.fileManager);
         }
-        if(str.toLowerCase().contains("/upload ")){
+        else if(str.toLowerCase().contains("/upload ")){
             this.clientActions[4].execute(str, this.fileManager);
         }
-        if(str.toLowerCase().endsWith("/exit")){
+        else if(str.toLowerCase().endsWith("/exit")){
             this.clientActions[5].execute(str, this.fileManager);
         }
+        else output.writeToClient("Wrong input!");
     }
-
 
     public void showHelp(){
         for(ClientAction clientAction: clientActions){
@@ -95,11 +95,15 @@ public class Help {
             for (String f : dir) {
                 String time = sdf.format(new Date(new File(f).lastModified()));
 
-                str = String.format("%s%s%7s%10s%20s%s", str, time, (new File(f).isFile() ? "   " : "<DIR>"),
-                                new File(f).length(), new File(f).getName(), System.getProperty("line.separator"));
+                str = String.format
+                        ("%s%s%7s%10s%20s%s", str, time,
+                               (new File(f).isFile() ? "   " : "<DIR>"),
+                                new File(f).length(), new File(f).getName(),
+                                System.getProperty("line.separator"));
             }
             output.writeToClient(String.format("%s%s", str, currentPath));
         }
+
     }
 
 

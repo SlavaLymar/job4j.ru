@@ -17,7 +17,7 @@ public class FileManager {
     public String changeDirectory(String s) throws DontExistException {
         String str = s.replace("cd ", "");
         if(new File(str).exists()) {
-            return str;
+            return str.concat("/");
         }
         else throw new DontExistException("Directory is not exist!");
     }
@@ -48,7 +48,6 @@ public class FileManager {
         int index = s.indexOf("upload ");
 
         files[0] = s.substring(0, s.length()-(s.length()-index));
-
         files[1] = s.substring(index+7, s.length());
         return files;
     }
