@@ -2,6 +2,9 @@ package ru.yalymar.filemanager.output;
 
 import java.io.*;
 import java.net.Socket;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.charset.Charset;
 
 public class ClientOutput implements Output {
 
@@ -14,9 +17,8 @@ public class ClientOutput implements Output {
     @Override
     public void writeToClient(String str) {
         try{
-            DataOutputStream out = new DataOutputStream
-                    (this.socket.getOutputStream());
-            out.writeUTF(str);
+            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+            out.println(str);
             out.flush();
         } catch (IOException e) {
             e.printStackTrace();
@@ -28,18 +30,20 @@ public class ClientOutput implements Output {
         try{
             File file = new File(str);
             FileInputStream fis = new FileInputStream(file);
-            DataOutputStream dos =
-                    new DataOutputStream(this.socket.getOutputStream());
+            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 
-            byte[] byteArray = new byte[1024*1024];
             long s = file.length();
-            dos.writeUTF(str);
+            out.println(str);
             while (s > 0) {
-                int i = fis.read(byteArray);
-                dos.write(byteArray, 0, i);
+                byte[] buffer = new byte[1024*1024];
+                int i = fis.read(buffer);
+
+                ByteBuffer buf = ByteBuffer.wrap(buffer);
+                CharBuffer charbuf = Charset.forName("Cp866").decode(buf);
+                char[] ch_array = charbuf.array();
+                out.println(ch_array);
                 s-= i;
             }
-            dos.flush();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -50,10 +54,8 @@ public class ClientOutput implements Output {
     @Override
     public void sendConsole(String str) {
         try {
-            DataOutputStream out = new DataOutputStream
-                    (this.socket.getOutputStream());
-            out.writeUTF(str);
-            out.flush();
+            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+            out.println(str);
         } catch (IOException e) {
             e.printStackTrace();
         }

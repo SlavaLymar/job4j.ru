@@ -3,6 +3,9 @@ package ru.yalymar.filemanager.start;
 import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.charset.Charset;
 import java.util.Scanner;
 
 public class Client {
@@ -19,17 +22,20 @@ public class Client {
 
     public void startClient(){
         try{
-            DataOutputStream out = new DataOutputStream(socket.getOutputStream());
-            DataInputStream in = new DataInputStream(socket.getInputStream());
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 
             writeHelp(in);
             String str;
             do{
                 str = this.enter(out);
-                if(str.toLowerCase().equals("dir") ||
-                        str.toLowerCase().contains("cd") ||
+                if(str.toLowerCase().equals("dir")){
+                    dir(in);
+                    continue;
+                }
+                if(str.toLowerCase().contains("cd") ||
                         str.toLowerCase().equals("cd..")){
-                    dircdcdback(in);
+                    cdcdback(in);
                     continue;
                 }
                 if(str.toLowerCase().contains("download")){
@@ -48,52 +54,76 @@ public class Client {
         }
     }
 
-    private void upload(DataInputStream in, DataOutputStream out) throws IOException {
-        String str = in.readUTF();
-        out.writeUTF(str);
+    private void upload(BufferedReader in, PrintWriter out) throws IOException {
+        String str = in.readLine();
+        out.println(str);
         FileInputStream fis = new FileInputStream(str);
-        byte[] buffer = new byte[1024*1024];
+
         long fileLength = str.length();
         int count;
         while (fileLength > 0) {
+            byte[] buffer = new byte[1024*1024];
             count = fis.read(buffer);
-            out.write(buffer, 0, count);
+
+            ByteBuffer buf = ByteBuffer.wrap(buffer);
+            CharBuffer charbuf = Charset.forName("Cp866").decode(buf);
+            char[] ch_array = charbuf.array();
+            out.println(ch_array);
             fileLength -= count;
         }
        out.flush();
     }
 
-    public void download(DataInputStream in, DataOutputStream out) throws IOException {
-        String s = in.readUTF();
+    public void download(BufferedReader in, PrintWriter out) throws IOException {
+        String s = in.readLine();
         String [] strings = s.split("/");
         String fileName = strings[strings.length-1];
         int fileLength = in.read();
         File file = new File("C:/Java/junior/examples/resources", fileName);
         try(FileOutputStream fos = new FileOutputStream(file)){
-            byte[] buffer = new byte[1024*1024];
+
             int count;
             while(fileLength>0){
-                count = in.read(buffer);
+                char[] ch_array = new char[1024*1024];
+                count = in.read(ch_array);
+
+                CharBuffer charBuffer = CharBuffer.wrap(ch_array);
+                ByteBuffer byteBuffer = Charset.forName("Cp866").encode(charBuffer);
+                byte[] buffer = byteBuffer.array();
+
                 fos.write(buffer, 0, count);
                 fileLength -= count;
             }
         }
     }
 
-    public void writeHelp(DataInputStream in) throws IOException{
+    public void writeHelp(BufferedReader in) throws IOException{
         for(int i = 1; i<9; i++) {
-            System.out.println(in.readUTF());
+            System.out.println(in.readLine());
         }
     }
 
-    public void dircdcdback(DataInputStream in) throws IOException {
-        String str = in.readUTF();
-        System.out.println(str);
+    public void dir(BufferedReader in) throws IOException {
+        String str;
+        do{
+            str = in.readLine();
+            System.out.println(str);
+        }
+        while (in.ready());
     }
 
-    public String enter(DataOutputStream out) throws IOException {
+    public void cdcdback(BufferedReader in) throws IOException {
+        String str;
+        do{
+            str = in.readLine();
+            System.out.println(str);
+        }
+        while (in.ready());
+    }
+
+    public String enter(PrintWriter out) throws IOException {
         String enter = sc.nextLine();
-        out.writeUTF(enter);
+        out.println(enter);
         return enter;
     }
 

@@ -2,6 +2,9 @@ package ru.yalymar.filemanager.input;
 
 import java.io.*;
 import java.net.Socket;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.charset.Charset;
 
 public class ClientInput implements Input {
 
@@ -13,11 +16,11 @@ public class ClientInput implements Input {
 
     @Override
     public String readFromClient() {
-        String str = "тут";
+        String str = "";
         try {
-            DataInputStream in = new DataInputStream
-                    (this.socket.getInputStream());
-            str = in.readUTF();
+            BufferedReader in = new BufferedReader
+                    (new InputStreamReader(socket.getInputStream()));
+            str = in.readLine();
         }
         catch(IOException e){
             e.printStackTrace();
@@ -27,20 +30,22 @@ public class ClientInput implements Input {
 
     @Override
     public void getFile(String str) throws IOException{
-        DataInputStream bis =
-                new DataInputStream
-                        (this.socket.getInputStream());
-        String[] strings = bis.readUTF().split("/");
+        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        String[] strings = in.readLine().split("/");
         String fileName = strings[strings.length-1];
 
         try(FileOutputStream fos = new FileOutputStream
                 (str.concat(fileName))){
 
-            byte[] buffer = new byte[1024*1024];
-            int fileLength = bis.read();
+            int fileLength = in.read();
             int count;
             while (fileLength > 0) {
-                count = bis.read(buffer);
+                char[] ch_array = new char[1024*1024];
+                count = in.read(ch_array);
+
+                CharBuffer charBuffer = CharBuffer.wrap(ch_array);
+                ByteBuffer byteBuffer = Charset.forName("Cp866").encode(charBuffer);
+                byte[] buffer = byteBuffer.array();
                 fos.write(buffer, 0, count);
                 fileLength -= count;
             }
