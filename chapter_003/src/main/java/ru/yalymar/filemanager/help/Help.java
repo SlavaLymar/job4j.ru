@@ -12,6 +12,11 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * @author slavalymar
+ * @since 05.02.2017
+ * @version 1
+ */
 public class Help {
 
     private Input input;
@@ -30,6 +35,9 @@ public class Help {
         this.currentPath = currentPath;
     }
 
+    /**
+     * create help
+     */
     public void greetings(){
         this.output.writeToClient("Welcome to File Manager!");
     }
@@ -43,6 +51,11 @@ public class Help {
         this.clientActions[position++] = new Exit("Exit.");
     }
 
+    /** select action
+     * @param s
+     * @throws IOException
+     * @throws DontExistException
+     */
     public void select(String s) throws IOException, DontExistException {
         String str = String.format("%s%s",this.currentPath, s);
         if(str.toLowerCase().endsWith("/dir")){
@@ -87,6 +100,11 @@ public class Help {
             return k;
         }
 
+        /** create list of directory
+         * @param s
+         * @param fileManager
+         * @throws IOException
+         */
         @Override
         public void execute(String s, FileManager fileManager) throws IOException {
             String[] dir = fileManager.getList(s);
@@ -119,6 +137,12 @@ public class Help {
             return k;
         }
 
+        /** send directory to client
+         * @param s
+         * @param fileManager
+         * @throws IOException
+         * @throws DontExistException
+         */
         @Override
         public void execute(String s, FileManager fileManager) throws IOException, DontExistException {
             String newPath = fileManager.changeDirectory(s);
@@ -141,6 +165,12 @@ public class Help {
             return 2;
         }
 
+        /** send directory to client
+         * @param s
+         * @param fileManager
+         * @throws IOException
+         * @throws DontExistException
+         */
         @Override
         public void execute(String s, FileManager fileManager) throws IOException, DontExistException {
             String newPath = fileManager.back(s);
@@ -163,6 +193,11 @@ public class Help {
             return k;
         }
 
+        /** send file to client
+         * @param s
+         * @param fileManager
+         * @throws IOException
+         */
         @Override
         public void execute(String s, FileManager fileManager) throws IOException{
             String newPath = fileManager.download(s);
@@ -183,6 +218,12 @@ public class Help {
             return k;
         }
 
+        /** get file from client
+         * @param s
+         * @param fileManager
+         * @throws IOException
+         * @throws DontExistException
+         */
         @Override
         public void execute(String s, FileManager fileManager) throws IOException, DontExistException {
             String[] paths = fileManager.upload(s);
@@ -204,6 +245,12 @@ public class Help {
             return k;
         }
 
+        /** change param exit
+         * @param s
+         * @param fileManager
+         * @throws IOException
+         * @throws DontExistException
+         */
         @Override
         public void execute(String s, FileManager fileManager) throws IOException, DontExistException {
             fileManager.setStopSocket(false);

@@ -12,6 +12,11 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Properties;
 
+/**
+ * @author slavalymar
+ * @since 05.02.2017
+ * @version 1
+ */
 public class Server {
 
     private Input input;
@@ -27,6 +32,9 @@ public class Server {
         this.output = new ClientOutput(socket);
     }
 
+    /**
+     * get property from app.property
+     */
     private static void getProperties() {
         Properties properties = new Properties();
         try(FileInputStream fileInputStream = new FileInputStream
@@ -42,20 +50,23 @@ public class Server {
         }
     }
 
+    /**
+     * start server
+     */
     public void startServer(){
         try {
 
             FileManager fileManager = new FileManager();
             Help help = new Help(this.input, this.output, fileManager, this.currentPath);
-            help.greetings();
-            help.fillHelp();
-            help.showHelp();
-            this.showDirectory();
+            help.greetings(); // send greetings to client
+            help.fillHelp(); // fill actions
+            help.showHelp(); // send available actions to client
+            this.showDirectory(); // send start directory to client
 
             do{
-                help.select(this.input.readFromClient());
+                help.select(this.input.readFromClient()); // select action
             }
-            while(fileManager.isStopSocket());
+            while(fileManager.isStopSocket()); // stop server
             this.serverSocket.close();
         }
         catch(IOException e){
@@ -65,10 +76,16 @@ public class Server {
         }
     }
 
+    /**
+     * show start directory to client
+     */
     public void showDirectory(){
         this.output.sendConsole(this.currentPath);
     }
 
+    /** point of entry
+     * @param args
+     */
     public static void main(String[] args) {
         getProperties();
         try(Socket serverSocket = new ServerSocket(Integer.valueOf(port)).accept()){

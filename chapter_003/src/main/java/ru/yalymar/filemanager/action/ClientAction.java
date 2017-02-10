@@ -5,6 +5,11 @@ import ru.yalymar.filemanager.filemanager.FileManager;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * @author slavalymar
+ * @since 05.02.2017
+ * @version 1
+ */
 public interface ClientAction {
 
     int key();
