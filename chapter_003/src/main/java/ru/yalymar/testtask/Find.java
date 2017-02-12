@@ -7,6 +7,11 @@ import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * @author slavalymar
+ * @since 12.02.2017
+ * @version 1
+ */
 public class Find {
 
     /** check keys
@@ -15,7 +20,7 @@ public class Find {
     public boolean validate(String[] args){
 
         boolean result = false;
-        // [-d, C:/Java, -n, 1.txt, -regex,f,mask, -o, log.txt]
+        // [-d, C:/Java, -n, 1.txt, -r,f,m, -o, log.txt]
         String regex = ".-d,\\s.+,\\s-n,.+,\\s-.+,\\s-o,\\s.+.";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(Arrays.deepToString(args));
@@ -25,6 +30,9 @@ public class Find {
         return result;
     }
 
+    /** start program
+     * @param args
+     */
     public void init(String[] args) {
 
         Search search = new Search();
@@ -37,13 +45,15 @@ public class Find {
             try (FileWriter fw = new FileWriter(absolutePathLogTXT)) {
 
                 search.search(new File(search.getDirectory()), fw);
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
+    /** point of entry
+     * @param args
+     */
     public static void main(String[] args) {
 
         new Find().init(args);

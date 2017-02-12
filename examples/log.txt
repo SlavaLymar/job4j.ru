@@ -1,10 +1,10 @@
-C:\Java\junior\examples\examples.iml isn`t suitable for *.txt mask
-C:\Java\junior\examples\log.txt was found with *.txt mask
-C:\Java\junior\examples\pom.xml isn`t suitable for *.txt mask
-C:\Java\junior\examples\resources\1.txt was found with *.txt mask
-C:\Java\junior\examples\src\yalymar\C.java isn`t suitable for *.txt mask
-C:\Java\junior\examples\src\yalymar\Examples.java isn`t suitable for *.txt mask
-C:\Java\junior\examples\src\yalymar\S.java isn`t suitable for *.txt mask
-C:\Java\junior\examples\target\classes\yalymar\C.class isn`t suitable for *.txt mask
-C:\Java\junior\examples\target\classes\yalymar\Examples.class isn`t suitable for *.txt mask
-C:\Java\junior\examples\target\classes\yalymar\S.class isn`t suitable for *.txt mask
+C:\Java\junior\examples\examples.iml isn`t suitable for [0-9] regular expression
+C:\Java\junior\examples\log.txt isn`t suitable for [0-9] regular expression
+C:\Java\junior\examples\pom.xml isn`t suitable for [0-9] regular expression
+C:\Java\junior\examples\resources\1.txt was found with [0-9] regular expression
+C:\Java\junior\examples\src\yalymar\C.java isn`t suitable for [0-9] regular expression
+C:\Java\junior\examples\src\yalymar\Examples.java isn`t suitable for [0-9] regular expression
+C:\Java\junior\examples\src\yalymar\S.java isn`t suitable for [0-9] regular expression
+C:\Java\junior\examples\target\classes\yalymar\C.class isn`t suitable for [0-9] regular expression
+C:\Java\junior\examples\target\classes\yalymar\Examples.class isn`t suitable for [0-9] regular expression
+C:\Java\junior\examples\target\classes\yalymar\S.class isn`t suitable for [0-9] regular expression

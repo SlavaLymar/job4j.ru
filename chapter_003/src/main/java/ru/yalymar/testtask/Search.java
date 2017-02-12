@@ -9,6 +9,11 @@ import java.nio.file.PathMatcher;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * @author slavalymar
+ * @since 12.02.2017
+ * @version 1
+ */
 public class Search {
 
     private String directory;
@@ -25,7 +30,6 @@ public class Search {
      * 6. log.txt
      */
     private String[] keys;
-
 
     /**
      * fill this.directory, this.fileName, this.logTXT
@@ -48,6 +52,11 @@ public class Search {
         }
     }
 
+    /** select type of search
+     * @param file
+     * @param fw
+     * @throws IOException
+     */
     public void select(File file, FileWriter fw) throws IOException {
 
             // -f
@@ -71,7 +80,9 @@ public class Search {
         }
 
 
-
+    /**
+     * write message for wrong key
+     */
     private void wrongKeyToSearch() {
         System.out.println((String.format("%s%s%s%s%s%s%s",
                 "Invalid keys for choose type of search!", System.getProperty("line.separator"),
@@ -80,6 +91,11 @@ public class Search {
                 "-r - search for regex")));
     }
 
+    /** search in current and sub directories
+     * @param file
+     * @param fw
+     * @throws IOException
+     */
     public void search(File file, FileWriter fw) throws IOException {
 
         File[] list = file.listFiles();
@@ -116,6 +132,11 @@ public class Search {
 
     private class SearchByFullName{
 
+        /** search by full name
+         * @param fw
+         * @param file
+         * @throws IOException
+         */
         public void searchByFullName(FileWriter fw, File file) throws IOException {
 
             if(keys[3].equals(file.getName())){
@@ -135,6 +156,11 @@ public class Search {
 
     private class SearchByMask{
 
+        /** search by mask
+         * @param fw
+         * @param file
+         * @throws IOException
+         */
         public void searchByMask(FileWriter fw, File file) throws IOException{
 
             PathMatcher matcher =
@@ -160,13 +186,17 @@ public class Search {
 
     private class SearchByRegex{
 
+        /** search by regex
+         * @param fw
+         * @param file
+         * @throws IOException
+         */
         public void searchByRegex(FileWriter fw, File file) throws IOException{
 
-            PathMatcher matcher =
-                    FileSystems.getDefault().getPathMatcher("glob:*"+keys[3]);
-            Path filename = file.getAbsoluteFile().toPath();
+            Pattern pattern = Pattern.compile(keys[3]);
+            Matcher matcher = pattern.matcher(file.getAbsolutePath());
 
-            if(){
+            if(matcher.find()){
                 String result = String.format
                         ("%s%s%s%s", file.getAbsoluteFile(), " was found with ",
                                 keys[3], " regular expression");
