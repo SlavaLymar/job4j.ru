@@ -64,7 +64,7 @@
             <configuration>
                 <archive>
                     <manifest>
-                        <mainClass>ru.yalymar.testtask.find</mainClass>
+                        <mainClass>ru.yalymar.testtask.Find</mainClass>
                         <addClasspath>true</addClasspath>
                     </manifest>
                 </archive>

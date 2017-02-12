@@ -1,7 +1,6 @@
 package ru.yalymar.testtask;
 
 import org.junit.Test;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +19,7 @@ public class SearchTest {
         expected[1] = "C:/Java";
         expected[2] = "-n";
         expected[3] = "1.txt";
-        expected[4] = "-m";
+        expected[4] = "-f";
         expected[5] = "-o";
         expected[6] = "log.txt";
         assertArrayEquals(search.getKeys(), expected);
