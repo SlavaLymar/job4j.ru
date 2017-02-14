@@ -11,14 +11,20 @@ import java.io.PipedOutputStream;
  */
 public class Piped {
 
+    private int countRead;
+
+    public int getCountRead() {
+        return countRead;
+    }
+
     public void init(){
 
         try(PipedInputStream pin = new PipedInputStream();
             PipedOutputStream pout = new PipedOutputStream(pin)){
 
-            int countRead = 0;
+            this.countRead = 0;
             byte[] toRead = new byte[100];
-            while(countRead<toRead.length){
+            while(this.countRead<toRead.length){
                 for(int i = 0; i<Math.random()*10; i++){
 
                     //write
@@ -29,14 +35,14 @@ public class Piped {
                 int willRead = pin.available();
 
                 System.out.println("available "+willRead);
-                if(willRead+countRead > toRead.length){
+                if(willRead+this.countRead > toRead.length){
 
                     System.out.println("buffer is overflow!");
-                    willRead = toRead.length-countRead;
-                    countRead += pin.read(toRead, countRead, willRead);
+                    willRead = toRead.length-this.countRead;
+                    this.countRead += pin.read(toRead, countRead, willRead);
 
                     // read 100 bytes
-                    System.out.println("has been read "+countRead+ " bytes");
+                    System.out.println("has been read "+this.countRead+ " bytes");
                 }
             }
         }
