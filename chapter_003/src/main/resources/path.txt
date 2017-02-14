@@ -1,0 +1,1 @@
+C:\Java\junior\chapter_003\src\main\java\ru\yalymar\filemanager\resources

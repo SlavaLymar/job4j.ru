@@ -26,6 +26,12 @@ public class Help {
     private ClientAction[] clientActions = new ClientAction[arrLength];
     private int position = 0;
     private String currentPath;
+    private final String DIR = "/dir";
+    private final String CD = "/cd ";
+    private final String CDBACK = "/cd..";
+    private final String DOWNLOAD = "/download ";
+    private final String UPLOAD = "/upload ";
+    private final String EXIT = "/exit";
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY HH:mm");
 
     public Help(Input input, Output output, FileManager fileManager, String currentPath) {
@@ -58,22 +64,22 @@ public class Help {
      */
     public void select(String s) throws IOException, DontExistException {
         String str = String.format("%s%s",this.currentPath, s);
-        if(str.toLowerCase().endsWith("/dir")){
+        if(str.toLowerCase().endsWith(DIR)){
             this.clientActions[0].execute(str, this.fileManager);
         }
-        else if(str.toLowerCase().contains("/cd ")){
+        else if(str.toLowerCase().contains(CD)){
             this.clientActions[1].execute(str, this.fileManager);
         }
-        else if(str.toLowerCase().endsWith("/cd..")){
+        else if(str.toLowerCase().endsWith(CDBACK)){
             this.clientActions[2].execute(str, this.fileManager);
         }
-        else if(str.toLowerCase().contains("/download ")){
+        else if(str.toLowerCase().contains(DOWNLOAD)){
             this.clientActions[3].execute(str, this.fileManager);
         }
-        else if(str.toLowerCase().contains("/upload ")){
+        else if(str.toLowerCase().contains(UPLOAD)){
             this.clientActions[4].execute(str, this.fileManager);
         }
-        else if(str.toLowerCase().endsWith("/exit")){
+        else if(str.toLowerCase().endsWith(EXIT)){
             this.clientActions[5].execute(str, this.fileManager);
         }
         else output.writeToClient("Wrong input!");

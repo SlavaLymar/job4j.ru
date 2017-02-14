@@ -19,6 +19,12 @@ public class Client {
     private static final int PORT = 5000;
     private Socket socket;
     private static Scanner sc;
+    private final String DIR = "dir";
+    private final String CD = "cd";
+    private final String CDBACK = "cd..";
+    private final String DOWNLOAD = "download";
+    private final String UPLOAD = "upload";
+    private final String EXIT = "exit";
 
     public Client(Socket socket) {
         this.socket = socket;
@@ -37,25 +43,25 @@ public class Client {
             String str;
             do{
                 str = this.enter(out);
-                if(str.toLowerCase().equals("dir")){
+                if(DIR.equals(str.toLowerCase())){
                     dir(in);
                     continue;
                 }
-                if(str.toLowerCase().contains("cd") ||
-                        str.toLowerCase().equals("cd..")){
+                if(CD.contains(str.toLowerCase()) ||
+                        CDBACK.equals(str.toLowerCase())){
                     cdcdback(in);
                     continue;
                 }
-                if(str.toLowerCase().contains("download")){
+                if(DOWNLOAD.contains(str.toLowerCase())){
                     download(in, out);
                     continue;
                 }
-                if(str.toLowerCase().contains("upload")){
+                if(UPLOAD.contains(str.toLowerCase())){
                     upload(in, out);
                     continue;
                 }
             }
-            while(!str.equals("exit"));
+            while(!EXIT.equals(str.toLowerCase()));
         }
         catch(IOException e){
             e.printStackTrace();
@@ -115,6 +121,27 @@ public class Client {
                 fileLength -= count;
             }
         }
+    }
+
+    public String getPath(){
+        StringBuilder sb = new StringBuilder("");
+
+        //Get file from resources
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = new File(classLoader.getResource
+                ("path.txt").getFile());
+
+        try(Scanner scanner = new Scanner(file)){
+
+            while(scanner.hasNext()){
+                String line = scanner.nextLine();
+                sb.append(line);
+            }
+        }
+        catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
+        return sb.toString();
     }
 
     /**

@@ -38,7 +38,7 @@ public class Server {
     private static void getProperties() {
         Properties properties = new Properties();
         try(FileInputStream fileInputStream = new FileInputStream
-                ("C:/Java/junior/chapter_003/src/main/java/ru/yalymar/filemanager/resources/app.property")){
+                ("C:/Java/junior/chapter_003/src/main/resources/app.property")){
 
             properties.load(fileInputStream);
             host = properties.getProperty("ip");
