@@ -19,6 +19,7 @@ public class Search {
     private String directory;
     private String fileName;
     private String logTXT;
+    private String flag;
 
     /** keys
      * 0. -d
@@ -38,6 +39,7 @@ public class Search {
 
         this.directory = this.keys[1];
         this.fileName = this.keys[3];
+        this.flag = this.keys[4];
         this.logTXT = this.keys[6];
     }
 
@@ -60,15 +62,15 @@ public class Search {
     public void select(File file, FileWriter fw) throws IOException {
 
             // -f
-            if(this.keys[4].equals("-f")){
+            if(this.flag.equals("-f")){
                 new SearchByFullName().searchByFullName(fw, file);
             }
             // 'mask'
-            else if(this.keys[4].equals("-m")){
+            else if(this.flag.equals("-m")){
                 new SearchByMask().searchByMask(fw, file);
             }
             // "regex"
-            else if(this.keys[4].equals("-r")){
+            else if(this.flag.equals("-r")){
                 new SearchByRegex().searchByRegex(fw, file);
             }
             else {
@@ -139,14 +141,14 @@ public class Search {
          */
         public void searchByFullName(FileWriter fw, File file) throws IOException {
 
-            if(keys[3].equals(file.getName())){
+            if(fileName.equals(file.getName())){
                 String result = String.format("%s%s", file.getAbsoluteFile(), " was found!");
                 System.out.println(result);
                 fw.write(String.format("%s%s", result, System.getProperty("line.separator")));
                 fw.flush();
                 }
              else {
-                String result = String.format("%s%s%s", file.getAbsoluteFile(), " isn`t equals ", keys[3]);
+                String result = String.format("%s%s%s", file.getAbsoluteFile(), " isn`t equals ", fileName);
                 System.out.println(result);
                 fw.write(String.format("%s%s", result, System.getProperty("line.separator")));
                 fw.flush();
@@ -164,18 +166,18 @@ public class Search {
         public void searchByMask(FileWriter fw, File file) throws IOException{
 
             PathMatcher matcher =
-                    FileSystems.getDefault().getPathMatcher("glob:*"+keys[3]);
+                    FileSystems.getDefault().getPathMatcher("glob:*"+fileName);
             Path filename = file.getAbsoluteFile().toPath();
             if(matcher.matches(filename)){
                 String result = String.format
-                        ("%s%s%s%s", file.getAbsoluteFile(), " was found with ", keys[3], " mask");
+                        ("%s%s%s%s", file.getAbsoluteFile(), " was found with ", fileName, " mask");
                 System.out.println(result);
                 fw.write(String.format("%s%s", result, System.getProperty("line.separator")));
                 fw.flush();
             }
             else {
                 String result = String.format
-                        ("%s%s%s%s", file.getAbsoluteFile(), " isn`t suitable for ", keys[3], " mask");
+                        ("%s%s%s%s", file.getAbsoluteFile(), " isn`t suitable for ", fileName, " mask");
                 System.out.println(result);
                 fw.write(String.format("%s%s", result, System.getProperty("line.separator")));
                 fw.flush();
@@ -193,13 +195,13 @@ public class Search {
          */
         public void searchByRegex(FileWriter fw, File file) throws IOException{
 
-            Pattern pattern = Pattern.compile(keys[3]);
+            Pattern pattern = Pattern.compile(fileName);
             Matcher matcher = pattern.matcher(file.getAbsolutePath());
 
             if(matcher.find()){
                 String result = String.format
                         ("%s%s%s%s", file.getAbsoluteFile(), " was found with ",
-                                keys[3], " regular expression");
+                                fileName, " regular expression");
                 System.out.println(result);
                 fw.write(String.format("%s%s", result, System.getProperty("line.separator")));
                 fw.flush();
@@ -207,7 +209,7 @@ public class Search {
             else {
                 String result = String.format
                         ("%s%s%s%s", file.getAbsoluteFile(), " isn`t suitable for ",
-                                keys[3], " regular expression");
+                                fileName, " regular expression");
                 System.out.println(result);
                 fw.write(String.format("%s%s", result, System.getProperty("line.separator")));
                 fw.flush();
