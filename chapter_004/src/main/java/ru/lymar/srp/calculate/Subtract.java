@@ -5,15 +5,16 @@ package ru.lymar.srp.calculate;
  * @since 15.02.2017
  * @version 1
  */
-public class Divide implements Calculate{
+public class Subtract implements Calculate{
 
-    /** divide operation
+    /** substract operation
      * @param a
      * @param b
      * @return float
      */
     @Override
     public float execute(float a, float b) {
-        return a/b;
+        return a-b;
     }
+
 }

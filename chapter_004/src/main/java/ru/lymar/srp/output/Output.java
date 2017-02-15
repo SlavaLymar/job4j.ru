@@ -1,17 +1,34 @@
 package ru.lymar.srp.output;
 
+/**
+ * @author slavalymar
+ * @since 15.02.2017
+ * @version 1
+ */
 public class Output {
 
+    /**
+     * result value
+     */
     private float result = 0;
 
+    /** getter
+     * @return float
+     */
     public float getResult() {
         return this.result;
     }
 
+    /** setter
+     * @param result
+     */
     public void setResult(float result) {
         this.result = result;
     }
 
+    /**
+     * write greetings
+     */
     public void writeGreetings() {
 
         String str = String.format("%s%s%s%s%s%s%s%s", "Welcome!", System.getProperty("line.separator"),
@@ -21,7 +38,19 @@ public class Output {
         System.out.println(str);
     }
 
+    /**
+     * write enter
+     */
     public void writeEnter() {
-        System.out.print("Enter expression: ");
+
+        System.out.println("Enter expression: ");
+    }
+
+    /**
+     * write result
+     */
+    public void writeResult() {
+        String str = String.format("%s%s", "Result: ", this.result);
+        System.out.println(str);
     }
 }
