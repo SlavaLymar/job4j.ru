@@ -31,10 +31,11 @@ public class Output {
      */
     public void writeGreetings() {
 
-        String str = String.format("%s%s%s%s%s%s%s%s", "Welcome!", System.getProperty("line.separator"),
+        String str = String.format("%s%s%s%s%s%s%s%s%s%s", "Welcome!", System.getProperty("line.separator"),
                 "Enter eg. 2+2", System.getProperty("line.separator"),
                 "For use result enter eg. +2", System.getProperty("line.separator"),
-                "For exit write 'exit'", System.getProperty("line.separator"));
+                "For exit write 'exit'", System.getProperty("line.separator"),
+                "For trigonometry use keys: sin, cos, tg, ctg (eg. sin90)", System.getProperty("line.separator"));
         System.out.println(str);
     }
 

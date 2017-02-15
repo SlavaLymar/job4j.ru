@@ -28,6 +28,13 @@ public class AppTest {
     }
 
     @Test
+    public void calculateTrigonometryTest(){
+        this.init();
+        app.calculateTrigonometry("sin90");
+        assertThat(app.getOutput().getResult(), is(1.0F));
+    }
+
+    @Test
     public void calculateOfTwoTest() {
         this.init();
         app.calculateOfTwo("11/11");

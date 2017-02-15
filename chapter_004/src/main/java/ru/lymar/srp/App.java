@@ -1,9 +1,6 @@
 package ru.lymar.srp;
 
-import ru.lymar.srp.calculate.Addiction;
-import ru.lymar.srp.calculate.Divide;
-import ru.lymar.srp.calculate.Multiply;
-import ru.lymar.srp.calculate.Subtract;
+import ru.lymar.srp.calculate.*;
 import ru.lymar.srp.input.Input;
 import ru.lymar.srp.output.Output;
 import java.util.Scanner;
@@ -60,14 +57,17 @@ public class App {
      */
     public void getParts(String str){
         String s = str.replace(" ", "");
-        Pattern twoNumbers = Pattern.compile("\\d+[\\D]\\d+");
+        Pattern twoNumbers = Pattern.compile("^\\d+[\\D]\\d+$");
         Matcher matcherOfTwoNumbers = twoNumbers.matcher(s);
 
-        Pattern oneNumber = Pattern.compile("[\\D]\\d+");
+        Pattern oneNumber = Pattern.compile("^[\\D]\\d+$");
         Matcher matcherOfOneNumber = oneNumber.matcher(s);
 
-        Pattern justNumber = Pattern.compile("\\d+");
+        Pattern justNumber = Pattern.compile("^\\d+$");
         Matcher matcherOfJustNumber = justNumber.matcher(s);
+
+        Pattern trigonometry = Pattern.compile("^.{2,4}\\d+$");
+        Matcher matcherOfTrigonometry = trigonometry.matcher(s);
 
         if(matcherOfTwoNumbers.find()){
             this.calculateOfTwo(s);
@@ -77,6 +77,36 @@ public class App {
         }
         else if(matcherOfJustNumber.find()){
             this.calculateOne(s);
+        }
+        else if(matcherOfTrigonometry.find()){
+            this.calculateTrigonometry(s);
+        }
+    }
+
+    /**calculation of the two values trigonometry
+     * @param s
+     */
+    public void calculateTrigonometry(String s) {
+        String[] s1 = s.split("\\D+");
+        if(s.contains("sin")){
+            Calculator calc = new Calculator(new Sinus());
+            this.output.setResult(calc.action(Float.valueOf(s1[1]),
+                    0));
+        }
+        if(s.contains("cos")){
+            Calculator calc = new Calculator(new Cosine());
+            this.output.setResult(calc.action(Float.valueOf(s1[1]),
+                    0));
+        }
+        if(s.contains("tg")){
+            Calculator calc = new Calculator(new Tangent());
+            this.output.setResult(calc.action(Float.valueOf(s1[1]),
+                    0));
+        }
+        if(s.contains("ctg")){
+            Calculator calc = new Calculator(new Cotangent());
+            this.output.setResult(calc.action(Float.valueOf(s1[1]),
+                    0));
         }
     }
 
