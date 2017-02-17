@@ -16,6 +16,7 @@ public class Output {
      * @return float
      */
     public float getResult() {
+
         return this.result;
     }
 

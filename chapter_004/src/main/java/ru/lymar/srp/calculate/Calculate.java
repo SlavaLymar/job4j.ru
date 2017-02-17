@@ -13,4 +13,5 @@ public interface Calculate {
      * @return float
      */
     float execute(float a, float b);
+
 }

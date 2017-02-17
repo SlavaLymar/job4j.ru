@@ -25,6 +25,7 @@ public class Calculator {
      * @return float
      */
     public float action(float a, float b){
+
         return calculate.execute(a,b);
     }
 
