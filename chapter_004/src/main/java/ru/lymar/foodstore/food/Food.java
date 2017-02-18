@@ -1,16 +1,19 @@
 package ru.lymar.foodstore.food;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public abstract class Food {
 
     private String name;
-    private Date expairyDate;
-    private Date createDate;
+    private LocalDate expairyDate;
+    private LocalDate createDate;
     private float price;
     private String discount;
+    private double freshnessPercent;
 
-    public Food(String name, Date expairyDate, Date createDate, float price, String discount) {
+    public Food(String name, LocalDate expairyDate, LocalDate createDate,
+                float price, String discount) {
         this.name = name;
         this.expairyDate = expairyDate;
         this.createDate = createDate;
@@ -18,15 +21,22 @@ public abstract class Food {
         this.discount = discount;
     }
 
+    public void freshness(){
+        LocalDate currentDate = LocalDate.now();
+        long timeFromCreateToCurrentTime = ChronoUnit.DAYS.between(this.getCreateDate(), currentDate);
+        long timeFromCreateToExpireTime = ChronoUnit.DAYS.between(this.getCreateDate(), this.getExpairyDate());
+        this.freshnessPercent =  1.0 * timeFromCreateToCurrentTime / timeFromCreateToExpireTime * 100;
+    }
+
     public String getName() {
         return name;
     }
 
-    public Date getExpairyDate() {
+    public LocalDate getExpairyDate() {
         return expairyDate;
     }
 
-    public Date getCreateDate() {
+    public LocalDate getCreateDate() {
         return createDate;
     }
 
@@ -36,5 +46,9 @@ public abstract class Food {
 
     public String getDiscount() {
         return discount;
+    }
+
+    public double getFreshnessPercent() {
+        return freshnessPercent;
     }
 }

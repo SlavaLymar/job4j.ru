@@ -2,6 +2,8 @@ package ru.lymar.foodstore.store;
 
 import ru.lymar.foodstore.food.Food;
 
-public abstract class Store {
+public interface Store {
+
+    void add(Food food);
 
 }

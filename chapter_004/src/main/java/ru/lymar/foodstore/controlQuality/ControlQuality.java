@@ -1,46 +1,29 @@
 package ru.lymar.foodstore.controlQuality;
 
 import ru.lymar.foodstore.food.Food;
-import ru.lymar.foodstore.store.Move;
-import ru.lymar.foodstore.store.WareHouse;
-import java.util.Calendar;
+import ru.lymar.foodstore.store.*;
 
 public class ControlQuality {
 
-    private Move move;
-    private int days;
-    private float freshnessPercent;
+    private double freshnessPercent;
+    private Food food;
+    private Store[] store;
 
-    public int getDays() {
-        return days;
+    public ControlQuality(Food food) {
+        this.food = food;
+        this.store = new Store[3];
+        this.fillStore();
     }
 
-    public void calculateDays(Food food){
-        Calendar calendar1 = Calendar.getInstance();
-        calendar1.setTime(food.getExpairyDate());
-        Calendar calendar2 = Calendar.getInstance();
-        calendar2.setTime(food.getCreateDate());
-        long difference = calendar1.getTimeInMillis() - calendar2.getTimeInMillis();
-        long result = difference/(24*60*60*1000);
-        this.days =(int) result;
+    public void fillStore(){
+        this.store[0] = new Shop();
+        this.store[1] = new WareHouse();
+        this.store[2] = new Trash();
     }
 
-    public int freshness(Food food){
-        Calendar calendar1 = Calendar.getInstance();
-        Calendar calendar2 = Calendar.getInstance();
-        calendar2.setTime(food.getCreateDate());
-        long difference = calendar1.getTimeInMillis() - calendar2.getTimeInMillis();
-        long result = difference/(24*60*60*1000);
-        System.out.println(result);
-        return (int) result;
-    }
-
-    public void executeMove(Food food){
-        this.calculateDays(food);
-        this.freshnessPercent = this.freshness(food);
-        if(this.freshnessPercent <= 25){
-            this.move = new WareHouse();
-            this.move.add(food);
+    public void selectStore(){
+        for(Store s : store){
+            s.add(this.food);
         }
     }
 }
