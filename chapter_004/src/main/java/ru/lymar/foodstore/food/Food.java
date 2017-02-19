@@ -3,52 +3,94 @@ package ru.lymar.foodstore.food;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * @author slavalymar
+ * @since 19.02.2017
+ * @version 1
+ */
 public abstract class Food {
 
+    /**
+     * name of food
+     */
     private String name;
-    private LocalDate expairyDate;
-    private LocalDate createDate;
-    private float price;
-    private String discount;
-    private double freshnessPercent;
 
-    public Food(String name, LocalDate expairyDate, LocalDate createDate,
-                float price, String discount) {
+    /**
+     * date of expiry
+     */
+    private LocalDate expiryDate;
+
+    /**
+     * date of create
+     */
+    private LocalDate createDate;
+
+    /**
+     * cost of a food
+     */
+    private double price;
+
+    /**
+     * percent to decrease price
+     */
+    private String discountPercent;
+
+    /**
+     * percent of corruption
+     */
+    private double corruptionPercent;
+
+    public Food(String name, LocalDate expiryDate, LocalDate createDate,
+                double price, String discountPercent) {
         this.name = name;
-        this.expairyDate = expairyDate;
+        this.expiryDate = expiryDate;
         this.createDate = createDate;
         this.price = price;
-        this.discount = discount;
+        this.discountPercent = discountPercent;
+        this.corruption();
     }
 
-    public void freshness(){
+    /**
+     * calculate percent of corruption
+     */
+    public void corruption(){
         LocalDate currentDate = LocalDate.now();
         long timeFromCreateToCurrentTime = ChronoUnit.DAYS.between(this.getCreateDate(), currentDate);
-        long timeFromCreateToExpireTime = ChronoUnit.DAYS.between(this.getCreateDate(), this.getExpairyDate());
-        this.freshnessPercent =  1.0 * timeFromCreateToCurrentTime / timeFromCreateToExpireTime * 100;
+        long timeFromCreateToExpireTime = ChronoUnit.DAYS.between(this.getCreateDate(), this.getExpiryDate());
+        this.corruptionPercent =  1.0 * timeFromCreateToCurrentTime / timeFromCreateToExpireTime * 100;
     }
 
+    /**
+     * getters
+     */
     public String getName() {
         return name;
     }
 
-    public LocalDate getExpairyDate() {
-        return expairyDate;
+    public LocalDate getExpiryDate() {
+        return expiryDate;
     }
 
     public LocalDate getCreateDate() {
         return createDate;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public String getDiscount() {
-        return discount;
+    public String getDiscountPercent() {
+        return discountPercent;
     }
 
-    public double getFreshnessPercent() {
-        return freshnessPercent;
+    public double getCorruptionPercent() {
+        return corruptionPercent;
+    }
+
+    /**
+     * setter
+     */
+    public void setPrice(double price) {
+        this.price = price;
     }
 }
