@@ -93,4 +93,20 @@ public abstract class Food {
     public void setPrice(double price) {
         this.price = price;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setExpiryDate(LocalDate expiryDate) {
+        this.expiryDate = expiryDate;
+    }
+
+    public void setCreateDate(LocalDate createDate) {
+        this.createDate = createDate;
+    }
+
+    public void setDiscountPercent(String discountPercent) {
+        this.discountPercent = discountPercent;
+    }
 }
