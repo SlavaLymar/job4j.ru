@@ -1,9 +1,7 @@
 package ru.lymar.foodstore.context;
 
-import ru.lymar.foodstore.store.ExtendedWarHouse;
-import ru.lymar.foodstore.store.Shop;
-import ru.lymar.foodstore.store.Trash;
-import ru.lymar.foodstore.store.WareHouse;
+import ru.lymar.foodstore.store.*;
+
 import java.util.ArrayList;
 
 public class ExtendedControlQuality extends ControlQuality {
@@ -16,7 +14,7 @@ public class ExtendedControlQuality extends ControlQuality {
     public void fillStore(){
         super.store = new ArrayList<>();
         super.store.add(new Shop());
-        super.store.add(new ExtendedWarHouse(new WareHouse()));
-        super.store.add(new Trash());
+        super.store.add(new Refrigerator(new ExtendedWarHouse(new WareHouse())));
+        super.store.add(new ReproductStore(new Trash()));
     }
 }
