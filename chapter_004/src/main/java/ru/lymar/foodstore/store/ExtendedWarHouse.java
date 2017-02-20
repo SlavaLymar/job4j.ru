@@ -5,6 +5,11 @@ import ru.lymar.foodstore.storedecorator.StoreDecorator;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author slavalymar
+ * @since 19.02.2017
+ * @version 1
+ */
 public class ExtendedWarHouse extends StoreDecorator {
 
     private List<Food> extendedWarehouse = new ArrayList<>();
@@ -16,6 +21,10 @@ public class ExtendedWarHouse extends StoreDecorator {
         this.store = store;
     }
 
+    /** if main warehouse is full add to extended warehouse
+     * @param food
+     * @return boolean
+     */
     @Override
     public boolean add(Food food) {
         if(food.getCorruptionPercent() < 25 && this.store.getList().size() > 0){
@@ -29,6 +38,9 @@ public class ExtendedWarHouse extends StoreDecorator {
         return false;
     }
 
+    /**
+     * getter
+     */
     @Override
     public List<Food> getList() {
         return this.extendedWarehouse;

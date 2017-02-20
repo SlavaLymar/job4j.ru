@@ -8,6 +8,8 @@ import ru.lymar.foodstore.store.WareHouse;
 import ru.lymar.foodstore.storedecorator.StoreDecorator;
 
 import java.time.LocalDate;
+import java.util.List;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -67,8 +69,7 @@ public class ControlQualityTest {
         Food apple1 = new Apple("Uralskoe", LocalDate.now().plusMonths(12),
                 LocalDate.now().minusMonths(2), 50.0, "50");
         ecq.selectStrategy(apple1);
-        
-        //assertThat(ewh., is(apple1));
+        //assertThat(ecq.getStore().get(1).getClass(), is(apple1));
     }
 
     @Test

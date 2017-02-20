@@ -4,12 +4,20 @@ import ru.lymar.foodstore.food.Food;
 import ru.lymar.foodstore.store.*;
 import java.util.ArrayList;
 
+/**
+ * @author slavalymar
+ * @since 19.02.2017
+ * @version 1
+ */
 public class ExtendedControlQuality extends ControlQuality {
 
     public ExtendedControlQuality(int numberOfStrategy) {
         super(numberOfStrategy);
     }
 
+    /**
+     * fill new store
+     */
     @Override
     public void fillStore(){
         super.store = new ArrayList<>();
