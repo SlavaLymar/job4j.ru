@@ -17,13 +17,16 @@ public class ExtendedWarHouse extends StoreDecorator {
     }
 
     @Override
-    public void add(Food food) {
+    public boolean add(Food food) {
         if(food.getCorruptionPercent() < 25 && this.store.getList().size() > 0){
             this.extendedWarehouse.add(food);
+            return true;
         }
         else if(food.getCorruptionPercent() < 25 && this.store.getList().size() < 1){
             this.store.getList().add(food);
+            return true;
         }
+        return false;
     }
 
     @Override

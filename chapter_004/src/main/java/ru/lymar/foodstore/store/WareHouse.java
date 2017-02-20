@@ -20,10 +20,13 @@ public class WareHouse implements Store {
      * @param food
      */
     @Override
-    public void add(Food food) {
+    public boolean add(Food food) {
         if(food.getCorruptionPercent() < 25){
+            System.out.println("1");
             this.warehouse.add(food);
+            return true;
         }
+        return false;
     }
 
     /**

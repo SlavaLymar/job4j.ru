@@ -13,7 +13,7 @@ public interface Store {
     /** add a food to list
      * @param food
      */
-    void add(Food food);
+    boolean add(Food food);
 
     /**
      * getter

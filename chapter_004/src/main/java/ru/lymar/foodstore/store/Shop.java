@@ -20,14 +20,17 @@ public class Shop implements Store {
      * @param food
      */
     @Override
-    public void add(Food food) {
+    public boolean add(Food food) {
         if(food.getCorruptionPercent() >= 25 && food.getCorruptionPercent() < 75){
             this.shop.add(food);
+            return true;
         }
         if(food.getCorruptionPercent() >= 75 && food.getCorruptionPercent() < 100){
             food.setPrice(food.getPrice()*(Integer.valueOf(food.getDiscountPercent())/100));
             this.shop.add(food);
+            return true;
         }
+        return false;
     }
 
     /**

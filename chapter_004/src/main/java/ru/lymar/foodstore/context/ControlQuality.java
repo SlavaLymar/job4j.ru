@@ -2,7 +2,6 @@ package ru.lymar.foodstore.context;
 
 import ru.lymar.foodstore.food.Food;
 import ru.lymar.foodstore.store.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,4 +59,5 @@ public class ControlQuality {
             strategy.add(food);
         }
     }
+
 }

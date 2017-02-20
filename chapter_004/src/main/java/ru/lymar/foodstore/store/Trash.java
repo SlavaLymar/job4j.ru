@@ -20,10 +20,12 @@ public class Trash implements Store {
      * @param food
      */
     @Override
-    public void add(Food food) {
+    public boolean add(Food food) {
         if(food.getCorruptionPercent() >= 100){
             this.trash.add(food);
+            return true;
         }
+        return false;
     }
 
     /**

@@ -9,4 +9,5 @@ public abstract class StoreDecorator implements Store {
     public StoreDecorator(Store store) {
         this.store = store;
     }
+
 }
