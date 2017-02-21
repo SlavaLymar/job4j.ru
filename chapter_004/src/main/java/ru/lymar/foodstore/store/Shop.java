@@ -1,6 +1,8 @@
 package ru.lymar.foodstore.store;
 
 import ru.lymar.foodstore.food.Food;
+import ru.lymar.foodstore.food.Vegetables;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,16 +23,28 @@ public class Shop implements Store {
      */
     @Override
     public boolean add(Food food) {
-        if(food.getCorruptionPercent() >= 25 && food.getCorruptionPercent() < 75){
+        if(food.getCorruptionPercent() >= 25 && food.getCorruptionPercent() < 75 && !isVegetables(food)){
             this.shop.add(food);
             return true;
         }
-        if(food.getCorruptionPercent() >= 75 && food.getCorruptionPercent() < 100){
+        if(food.getCorruptionPercent() >= 75 && food.getCorruptionPercent() < 100 && !isVegetables(food)){
             food.setPrice(food.getPrice()*(Integer.valueOf(food.getDiscountPercent())/100));
             this.shop.add(food);
             return true;
         }
         return false;
+    }
+
+    private boolean isVegetables(Food food){
+        boolean flag = false;
+        try{
+            Vegetables vegetables = (Vegetables) food;
+            flag = true;
+        }
+        catch (ClassCastException e){
+            System.out.println("Impossible cast");
+        }
+        return flag;
     }
 
     /**

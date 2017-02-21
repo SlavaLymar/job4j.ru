@@ -2,14 +2,7 @@ package ru.lymar.foodstore.context;
 
 import org.junit.Test;
 import ru.lymar.foodstore.food.*;
-import ru.lymar.foodstore.store.ExtendedWarHouse;
-import ru.lymar.foodstore.store.Store;
-import ru.lymar.foodstore.store.WareHouse;
-import ru.lymar.foodstore.storedecorator.StoreDecorator;
-
 import java.time.LocalDate;
-import java.util.List;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -55,43 +48,5 @@ public class ControlQualityTest {
         assertThat(cq.getStore().get(2).getList().get(0), is(bread));
     }
 
-    @Test
-    public void addFoodInExtendedWareHouse(){
 
-        //add apple to main warehouse
-        Food apple = new Apple("Sezonnoe", LocalDate.now().plusMonths(12),
-                LocalDate.now().minusMonths(2), 50.0, "50");
-        ExtendedControlQuality ecq = new ExtendedControlQuality( 3);
-        ecq.fillStore();
-        ecq.selectStrategy(apple);
-
-        //add apple1 to extended warehouse
-        Food apple1 = new Apple("Uralskoe", LocalDate.now().plusMonths(12),
-                LocalDate.now().minusMonths(2), 50.0, "50");
-        ecq.selectStrategy(apple1);
-        //assertThat(ecq.getStore().get(1).getClass(), is(apple1));
-    }
-
-    @Test
-    public void addFoodInReproduct(){
-
-        //add corrupt milk to reproduct
-        Food milk = new Milk("Milk", LocalDate.now().minusDays(2),
-                LocalDate.now().minusMonths(2), 50.0, "50");
-        ExtendedControlQuality ecq = new ExtendedControlQuality( 3);
-        ecq.fillStore();
-        ecq.selectStrategy(milk);
-        assertThat(ecq.getStore().get(2).getList().get(0), is(milk));
-    }
-
-    @Test
-    public void addVegetablesInRefrigerator(){
-
-        Food tomato = new Tomato("Red Tomato", LocalDate.now().plusMonths(1),
-                LocalDate.now().minusMonths(1), 50.0, "50");
-        ExtendedControlQuality ecq = new ExtendedControlQuality( 3);
-        ecq.fillStore();
-        ecq.selectStrategy(tomato);
-        assertThat(ecq.getStore().get(1).getList().get(0), is(tomato));
-    }
 }

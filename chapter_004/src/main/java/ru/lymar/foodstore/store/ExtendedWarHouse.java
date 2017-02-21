@@ -31,11 +31,10 @@ public class ExtendedWarHouse extends StoreDecorator {
             this.extendedWarehouse.add(food);
             return true;
         }
-        else if(food.getCorruptionPercent() < 25 && this.store.getList().size() < 1){
-            this.store.getList().add(food);
-            return true;
+        else {
+            this.store.add(food);
+            return false;
         }
-        return false;
     }
 
     /**

@@ -37,7 +37,6 @@ public class Refrigerator extends StoreDecorator{
         catch (ClassCastException e){
             System.out.println("Impossible cast");
             this.store.add(food);
-            return true;
         }
         return false;
     }
@@ -49,4 +48,5 @@ public class Refrigerator extends StoreDecorator{
     public List<Food> getList() {
         return this.refrigerator;
     }
+
 }

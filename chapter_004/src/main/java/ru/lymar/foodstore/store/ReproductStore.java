@@ -23,13 +23,12 @@ public class ReproductStore extends StoreDecorator {
             if (food.getCorruptionPercent() >= 100 && reproductFood.isCanReproduct()) {
                 this.reproductStore.add(food);
                 return true;
-            } else if(food.getCorruptionPercent() >= 100){
-                this.store.getList().add(food);
-                return true;
             }
         }
         catch (ClassCastException e){
             System.out.println("Impossible cast");
+            this.store.add(food);
+            return true;
         }
         return false;
     }

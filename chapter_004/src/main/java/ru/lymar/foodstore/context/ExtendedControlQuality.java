@@ -11,8 +11,27 @@ import java.util.ArrayList;
  */
 public class ExtendedControlQuality extends ControlQuality {
 
+    private ExtendedWarHouse extendedWarHouse;
+    private WareHouse warhause;
+    private Trash trash;
+
+    /**
+     * getters
+     */
     public ExtendedControlQuality(int numberOfStrategy) {
         super(numberOfStrategy);
+    }
+
+    public ExtendedWarHouse getExtendedWarHouse() {
+        return this.extendedWarHouse;
+    }
+
+    public WareHouse getWarhause() {
+        return this.warhause;
+    }
+
+    public Trash getTrash() {
+        return this.trash;
     }
 
     /**
@@ -20,10 +39,15 @@ public class ExtendedControlQuality extends ControlQuality {
      */
     @Override
     public void fillStore(){
+
+        this.warhause = new WareHouse();
+        this.extendedWarHouse = new ExtendedWarHouse(this.warhause);
+        this.trash = new Trash();
+
         super.store = new ArrayList<>();
         super.store.add(new Shop());
-        super.store.add(new Refrigerator(new ExtendedWarHouse(new WareHouse())));
-        super.store.add(new ReproductStore(new Trash()));
+        super.store.add(new Refrigerator(this.extendedWarHouse));
+        super.store.add(new ReproductStore(this.trash));
     }
 
     /**
@@ -31,7 +55,7 @@ public class ExtendedControlQuality extends ControlQuality {
      */
     @Override
     public void selectStrategy(Food food){
-        for(Store strategy : this.store){
+        for(Store strategy : super.store){
             if (strategy.add(food)){
                 break;
             }
