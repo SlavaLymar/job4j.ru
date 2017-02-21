@@ -15,13 +15,13 @@ public class ExtendedControlQuality extends ControlQuality {
     private WareHouse warhause;
     private Trash trash;
 
-    /**
-     * getters
-     */
     public ExtendedControlQuality(int numberOfStrategy) {
         super(numberOfStrategy);
     }
 
+    /**
+     * getters
+     */
     public ExtendedWarHouse getExtendedWarHouse() {
         return this.extendedWarHouse;
     }

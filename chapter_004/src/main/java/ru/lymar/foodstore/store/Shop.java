@@ -35,6 +35,10 @@ public class Shop implements Store {
         return false;
     }
 
+    /** check if food is vegetable
+     * @param food
+     * @return boolean
+     */
     private boolean isVegetables(Food food){
         boolean flag = false;
         try{
