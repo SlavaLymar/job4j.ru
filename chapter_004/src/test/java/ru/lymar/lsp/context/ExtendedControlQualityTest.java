@@ -1,7 +1,7 @@
-package ru.lymar.foodstore.context;
+package ru.lymar.lsp.context;
 
 import org.junit.Test;
-import ru.lymar.foodstore.food.*;
+import ru.lymar.lsp.food.*;
 import java.time.LocalDate;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;

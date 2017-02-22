@@ -1,7 +1,7 @@
-package ru.lymar.foodstore.context;
+package ru.lymar.lsp.context;
 
-import ru.lymar.foodstore.food.Food;
-import ru.lymar.foodstore.store.*;
+import ru.lymar.lsp.food.Food;
+import ru.lymar.lsp.store.*;
 import java.util.ArrayList;
 
 /**

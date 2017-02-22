@@ -1,6 +1,6 @@
-package ru.lymar.foodstore.storedecorator;
+package ru.lymar.lsp.storedecorator;
 
-import ru.lymar.foodstore.store.Store;
+import ru.lymar.lsp.store.Store;
 
 /**
  * @author slavalymar

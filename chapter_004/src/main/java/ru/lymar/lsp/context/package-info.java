@@ -1,2 +1,2 @@
 
-package ru.lymar.foodstore.context;
+package ru.lymar.lsp.context;

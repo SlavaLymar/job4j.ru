@@ -1,8 +1,8 @@
-package ru.lymar.foodstore.store;
+package ru.lymar.lsp.store;
 
-import ru.lymar.foodstore.food.Food;
-import ru.lymar.foodstore.food.ReproductFood;
-import ru.lymar.foodstore.storedecorator.StoreDecorator;
+import ru.lymar.lsp.food.Food;
+import ru.lymar.lsp.food.ReproductFood;
+import ru.lymar.lsp.storedecorator.StoreDecorator;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package ru.lymar.foodstore.food;
+package ru.lymar.lsp.food;
 
 import org.junit.Test;
 import java.text.DecimalFormat;

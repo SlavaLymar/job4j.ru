@@ -1,4 +1,4 @@
-package ru.lymar.foodstore.food;
+package ru.lymar.lsp.food;
 
 import java.time.LocalDate;
 

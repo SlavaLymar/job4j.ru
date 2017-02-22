@@ -1,6 +1,6 @@
-package ru.lymar.foodstore.store;
+package ru.lymar.lsp.store;
 
-import ru.lymar.foodstore.food.Food;
+import ru.lymar.lsp.food.Food;
 import java.util.ArrayList;
 import java.util.List;
 

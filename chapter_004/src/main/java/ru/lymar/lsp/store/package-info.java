@@ -1,2 +1,2 @@
 
-package ru.lymar.foodstore.store;
+package ru.lymar.lsp.store;
