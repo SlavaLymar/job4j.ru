@@ -18,19 +18,30 @@ public class ReproductStore extends StoreDecorator {
 
     @Override
     public boolean add(Food food) {
-        try {
-            ReproductFood reproductFood = (ReproductFood) food;
-            if (food.getCorruptionPercent() >= 100 && reproductFood.isCanReproduct()) {
-                this.reproductStore.add(food);
-                return true;
-            }
+        if (food.getCorruptionPercent() >= 100 && this.checkReproduct(food)) {
+            this.reproductStore.add(food);
+            return true;
         }
-        catch (ClassCastException e){
-            System.out.println("Impossible cast");
+        else {
             this.store.add(food);
             return true;
         }
-        return false;
+    }
+
+    /** check that food is reproduct
+     * @param food
+     * @return boolean
+     */
+    public boolean checkReproduct(Food food){
+        boolean result = false;
+        try {
+            ReproductFood reproductFood = (ReproductFood) food;
+            result = true;
+        }
+        catch (ClassCastException e){
+            System.out.println("Impossible cast");
+        }
+        return result;
     }
 
     @Override
