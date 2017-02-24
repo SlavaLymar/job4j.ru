@@ -2,6 +2,7 @@ package ru.lymar.dip.context;
 
 import ru.lymar.dip.food.Food;
 import ru.lymar.dip.store.*;
+import ru.lymar.dip.storedecorator.StoreDecorator;
 
 import java.util.ArrayList;
 
@@ -12,8 +13,8 @@ import java.util.ArrayList;
  */
 public class ExtendedControlQuality extends ControlQuality {
 
-    private ExtendedWarHouse extendedWarHouse;
-    private WareHouse warhause;
+    private ExtendedWareHouse extendedWareHouse;
+    private WareHouse warehouse;
     private Trash trash;
 
     public ExtendedControlQuality(int numberOfStrategy) {
@@ -23,12 +24,12 @@ public class ExtendedControlQuality extends ControlQuality {
     /**
      * getters
      */
-    public ExtendedWarHouse getExtendedWarHouse() {
-        return this.extendedWarHouse;
+    public ExtendedWareHouse getExtendedWareHouse() {
+        return this.extendedWareHouse;
     }
 
-    public WareHouse getWarhause() {
-        return this.warhause;
+    public WareHouse getWarehouse() {
+        return this.warehouse;
     }
 
     public Trash getTrash() {
@@ -41,13 +42,13 @@ public class ExtendedControlQuality extends ControlQuality {
     @Override
     public void fillStore(){
 
-        this.warhause = new WareHouse();
-        this.extendedWarHouse = new ExtendedWarHouse(this.warhause);
+        this.warehouse = new WareHouse();
+        this.extendedWareHouse = new ExtendedWareHouse(this.warehouse);
         this.trash = new Trash();
 
         super.store = new ArrayList<>();
         super.store.add(new Shop());
-        super.store.add(new Refrigerator(this.extendedWarHouse));
+        super.store.add(new Refrigerator(this.extendedWareHouse));
         super.store.add(new ReproductStore(this.trash));
     }
 
@@ -63,5 +64,51 @@ public class ExtendedControlQuality extends ControlQuality {
         }
     }
 
+    /**
+     * resort foods
+     */
+    @Override
+    public void resort() {
+        this.fillAllFoodsList();
+        for(Food food: this.allFoods){
+            this.selectStrategy(food);
+        }
+    }
+
+    /**
+     * fill list of all foods
+     */
+    private void fillAllFoodsList(){
+        for(Store s : super.store){
+            if(this.isStoreDecorator(s)) {
+                StoreDecorator sd = (StoreDecorator) s;
+                for (Food food : sd.combineLists()) {
+                    super.allFoods.add(food);
+                }
+            }
+            else {
+                for (Food food : s.getList()){
+                    super.allFoods.add(food);
+                }
+            }
+            super.deleteList(s);
+        }
+    }
+
+    /** Is Store StoreDecorator
+     * @param store
+     * @return boolean
+     */
+    private boolean isStoreDecorator(Store store){
+        boolean result = false;
+        try{
+            StoreDecorator sd = (StoreDecorator) store;
+            result = true;
+        }
+        catch (ClassCastException e){
+            System.out.println("Impossible cast");
+        }
+        return result;
+    }
 
 }

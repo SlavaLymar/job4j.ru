@@ -3,11 +3,10 @@ package ru.lymar.dip.store;
 import ru.lymar.dip.food.Food;
 import ru.lymar.dip.food.ReproductFood;
 import ru.lymar.dip.storedecorator.StoreDecorator;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReproductStore extends StoreDecorator {
+public class ReproductStore extends StoreDecorator{
 
     private List <Food> reproductStore = new ArrayList<>();
     private Store store;
@@ -15,6 +14,7 @@ public class ReproductStore extends StoreDecorator {
     public ReproductStore(Store store) {
         super(store);
         this.store = store;
+        super.foodStore = this.reproductStore;
     }
 
     @Override
@@ -49,4 +49,6 @@ public class ReproductStore extends StoreDecorator {
     public List<Food> getList() {
         return this.reproductStore;
     }
+
+
 }

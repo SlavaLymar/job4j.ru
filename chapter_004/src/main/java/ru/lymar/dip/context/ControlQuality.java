@@ -1,10 +1,7 @@
 package ru.lymar.dip.context;
 
 import ru.lymar.dip.food.Food;
-import ru.lymar.dip.store.Shop;
-import ru.lymar.dip.store.Store;
-import ru.lymar.dip.store.Trash;
-import ru.lymar.dip.store.WareHouse;
+import ru.lymar.dip.store.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +11,10 @@ import java.util.List;
  * @since 19.02.2017
  * @version 1
  */
-public class ControlQuality {
+public class ControlQuality implements ResortFood{
 
     /**
-     * Reproduct arrays
+     * list of stores
      */
     protected List<Store> store;
 
@@ -26,12 +23,17 @@ public class ControlQuality {
      */
     private int numberOfStrategy;
 
+    /**
+     * list of all foods in Stores
+     */
+    protected List <Food> allFoods = new ArrayList<>();
+
     public ControlQuality(int numberOfStrategy) {
         this.numberOfStrategy = numberOfStrategy;
     }
 
     /** getter
-     * @return Reproduct[]
+     * @return list
      */
     public List<Store> getStore() {
 
@@ -46,7 +48,7 @@ public class ControlQuality {
     }
 
     /**
-     * fill Reproduct array
+     * fill list of stores
      */
     public void fillStore(){
         this.store = new ArrayList<>();
@@ -62,6 +64,36 @@ public class ControlQuality {
         for(Store strategy : this.store){
             strategy.add(food);
         }
+    }
+
+    /**
+     * resort food
+     */
+    @Override
+    public void resort() {
+        this.fillAllFoodsList();
+        for(Food food: this.allFoods){
+            this.selectStrategy(food);
+        }
+    }
+
+    /**
+     * fill list of all foods
+     */
+    private void fillAllFoodsList(){
+        for(Store s : this.store){
+            for (Food food: s.getList()){
+                this.allFoods.add(food);
+            }
+            this.deleteList(s);
+        }
+    }
+
+    /** remove the list of foods
+     * @param store
+     */
+    protected void deleteList(Store store){
+        store.getList().clear();
     }
 
 }

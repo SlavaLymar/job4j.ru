@@ -2,7 +2,6 @@ package ru.lymar.dip.store;
 
 import ru.lymar.dip.food.Food;
 import ru.lymar.dip.storedecorator.StoreDecorator;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,15 +10,16 @@ import java.util.List;
  * @since 19.02.2017
  * @version 1
  */
-public class ExtendedWarHouse extends StoreDecorator {
+public class ExtendedWareHouse extends StoreDecorator{
 
     private List<Food> extendedWarehouse = new ArrayList<>();
 
     private Store store;
 
-    public ExtendedWarHouse(Store store) {
+    public ExtendedWareHouse(Store store) {
         super(store);
         this.store = store;
+        super.foodStore = this.extendedWarehouse;
     }
 
     /** if main warehouse is full add to extended warehouse

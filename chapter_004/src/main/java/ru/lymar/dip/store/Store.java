@@ -1,7 +1,6 @@
 package ru.lymar.dip.store;
 
 import ru.lymar.dip.food.Food;
-
 import java.util.List;
 
 /**
@@ -9,7 +8,7 @@ import java.util.List;
  * @since 19.02.2017
  * @version 1
  */
-public interface Store {
+public interface Store{
 
     /** add a food to list
      * @param food

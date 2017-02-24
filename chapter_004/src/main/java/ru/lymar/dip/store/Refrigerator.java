@@ -12,7 +12,7 @@ import java.util.List;
  * @since 19.02.2017
  * @version 1
  */
-public class Refrigerator extends StoreDecorator {
+public class Refrigerator extends StoreDecorator{
 
     private List <Food> refrigerator = new ArrayList<>();
     private Store store;
@@ -20,6 +20,7 @@ public class Refrigerator extends StoreDecorator {
     public Refrigerator(Store store) {
         super(store);
         this.store = store;
+        super.foodStore = this.refrigerator;
     }
 
     /** if food is vegetables add to refrigerator
