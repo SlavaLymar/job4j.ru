@@ -3,14 +3,13 @@ package ru.lymar.dip.context;
 import org.junit.Test;
 import ru.lymar.dip.food.*;
 import java.time.LocalDate;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
 public class ExtendedControlQualityTest {
 
     @Test
-    public void resortTest(){
+    public void whenAddFoodToAllStoresThenResort(){
 
         //warehouse
         Food apple = new Apple("Sezonnoe", LocalDate.now().plusMonths(12),
@@ -51,5 +50,24 @@ public class ExtendedControlQualityTest {
         assertThat(tomato, is(ecq.getStore().get(1).getList().get(0)));
         assertThat(carrot, is(ecq.getStore().get(0).getList().get(0)));
         assertThat(bread, is(ecq.getTrash().getList().get(0)));
+    }
+
+    @Test
+    public void whenAddFoodInAllStoreButSomeStoreIsNull(){
+        //warehouse
+        Food apple = new Apple("Sezonnoe", LocalDate.now().plusMonths(12),
+                LocalDate.now().minusMonths(2), 50.0, "50");
+
+        //vegetables
+        Food tomato = new Tomato("Red Tomato", LocalDate.now().plusMonths(1),
+                LocalDate.now().minusMonths(1), 50.0, "50");
+
+        ExtendedControlQuality ecq = new ExtendedControlQuality(3);
+        ecq.fillStore();
+        ecq.selectStrategy(apple);
+        ecq.selectStrategy(tomato);
+        ecq.resort();
+        assertThat(apple, is(ecq.getWarehouse().getList().get(0)));
+        assertThat(tomato, is(ecq.getStore().get(1).getList().get(0)));
     }
 }

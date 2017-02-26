@@ -23,6 +23,11 @@ public class Refrigerator extends StoreDecorator{
         super.foodStore = this.refrigerator;
     }
 
+    @Override
+    public Store getStore() {
+        return this.store;
+    }
+
     /** if food is vegetables add to refrigerator
      * @param food
      * @return boolean

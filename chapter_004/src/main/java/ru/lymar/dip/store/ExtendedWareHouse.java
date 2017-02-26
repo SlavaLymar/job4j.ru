@@ -22,6 +22,11 @@ public class ExtendedWareHouse extends StoreDecorator{
         super.foodStore = this.extendedWarehouse;
     }
 
+    @Override
+    public Store getStore() {
+        return this.store;
+    }
+
     /** if main warehouse is full add to extended warehouse
      * @param food
      * @return boolean

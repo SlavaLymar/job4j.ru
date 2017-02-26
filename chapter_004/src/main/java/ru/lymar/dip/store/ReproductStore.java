@@ -18,6 +18,11 @@ public class ReproductStore extends StoreDecorator{
     }
 
     @Override
+    public Store getStore() {
+        return this.store;
+    }
+
+    @Override
     public boolean add(Food food) {
         if (food.getCorruptionPercent() >= 100 && this.checkReproduct(food)) {
             this.reproductStore.add(food);
