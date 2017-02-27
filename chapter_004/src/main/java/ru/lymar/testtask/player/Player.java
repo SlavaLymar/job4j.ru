@@ -1,17 +1,20 @@
 package ru.lymar.testtask.player;
 
-import ru.lymar.testtask.actions.Turn;
-import ru.lymar.testtask.actions.WinChecked;
+public abstract class Player{
 
-public abstract class Player implements Turn, WinChecked{
+    private String flag;
+    private String name;
 
-    @Override
-    public void turn() {
-
+    public Player(String flag, String name) {
+        this.flag = flag;
+        this.name = name;
     }
 
-    @Override
-    public boolean winChecked() {
-        return false;
+    public String getFlag() {
+        return flag;
+    }
+
+    public String getName() {
+        return name;
     }
 }

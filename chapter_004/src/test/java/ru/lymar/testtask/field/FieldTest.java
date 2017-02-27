@@ -6,7 +6,7 @@ public class FieldTest {
 
     @Test
     public void whenPrintField(){
-        GameField gm = new GameField(4);
+        GameField gm = new GameField(3);
         gm.fillFields();
         gm.print();
     }

@@ -1,6 +1,10 @@
 package ru.lymar.testtask.actions;
 
+import ru.lymar.testtask.player.Player;
+
 public interface WinChecked {
 
-    boolean winChecked();
+    boolean winCheckedLine(Player player);
+
+    boolean winCheckedDiagonal(Player player);
 }
