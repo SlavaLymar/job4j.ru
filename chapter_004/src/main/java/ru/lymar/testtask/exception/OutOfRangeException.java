@@ -5,12 +5,12 @@ package ru.lymar.testtask.exception;
  * @since 27.02.2017
  * @version 1
  */
-public class CellIsOccupiedException extends Exception {
+public class OutOfRangeException extends Exception{
 
-    /** cell is occupied
+    /** value is out of range of field
      * @param message
      */
-    public CellIsOccupiedException(String message) {
+    public OutOfRangeException(String message) {
         super(message);
     }
 }
