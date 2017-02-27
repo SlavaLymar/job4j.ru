@@ -18,6 +18,10 @@ public abstract class Field implements Print, Turn, WinChecked{
         this.numbers = new String[this.size];
     }
 
+    public Cell[][] getCells() {
+        return this.cells;
+    }
+
     public void fillFields(){
         for (int i = 0; i<this.cells.length; i++){
             for (int j = 0; j<this.cells.length; j++){
@@ -52,7 +56,7 @@ public abstract class Field implements Print, Turn, WinChecked{
         else throw new CellIsOccupiedException("The cell is occupied!");
     }
 
-    private boolean isFreeCell(int x, int y){
+    public boolean isFreeCell(int x, int y){
         if(this.cells[x][y].getValue().equals(".")) return true;
         return false;
     }
@@ -71,7 +75,8 @@ public abstract class Field implements Print, Turn, WinChecked{
         for (int i = 0; i < this.size; i++) {
             count = 0;
             for (int j = 0; j < this.size; j++) {
-                if (this.cells[i][j] != null && this.cells[i][j].equals(player.getFlag())) {
+                if (this.cells[i][j] != null
+                        && this.cells[i][j].getValue().equals(player.getFlag())) {
                     count++;
                 }
             }
@@ -84,7 +89,8 @@ public abstract class Field implements Print, Turn, WinChecked{
     public boolean winCheckedDiagonal(Player player) {
         int count = 0;
         for (int i = 0; i < this.size; i++) {
-            if (this.cells[i][i] != null && this.cells[i][i].equals(player.getFlag())) {
+            if (this.cells[i][i] != null
+                    && this.cells[i][i].getValue().equals(player.getFlag())) {
                 count++;
             }
         }
@@ -92,7 +98,8 @@ public abstract class Field implements Print, Turn, WinChecked{
 
         count = 0;
         for (int i = 0, j = this.size-1; i < this.size; i++, j--) {
-            if (this.cells[i][j] != null && this.cells[i][j].equals(player.getFlag())) {
+            if (this.cells[i][j] != null
+                    && this.cells[i][j].getValue().equals(player.getFlag())) {
                 count++;
             }
         }

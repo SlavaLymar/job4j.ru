@@ -9,8 +9,8 @@ public class RealPlayer extends Player implements Input{
 
     private Scanner sc = new Scanner(System.in);
 
-    public RealPlayer(String flag) {
-        super(flag);
+    public RealPlayer(String flag, String name) {
+        super(flag, name);
     }
 
     @Override
