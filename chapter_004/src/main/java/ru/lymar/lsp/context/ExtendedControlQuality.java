@@ -86,9 +86,7 @@ public class ExtendedControlQuality extends ControlQuality {
         }
     }
 
-    /**
-     * select strategy for vegetables
-     */
+
     public void selectStrategy(Vegetables food){
         for(RefrigeratorStore strategy: this.refrigeratorStore){
             if(strategy.add(food)){
