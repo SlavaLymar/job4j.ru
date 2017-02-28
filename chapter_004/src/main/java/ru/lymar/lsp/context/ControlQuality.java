@@ -13,7 +13,7 @@ import java.util.List;
 public class ControlQuality {
 
     /**
-     * Reproduct arrays
+     * NewTypeOfFood arrays
      */
     protected List<Store> store;
 
@@ -27,7 +27,7 @@ public class ControlQuality {
     }
 
     /** getter
-     * @return Reproduct[]
+     * @return NewTypeOfFood[]
      */
     public List<Store> getStore() {
 
@@ -42,7 +42,7 @@ public class ControlQuality {
     }
 
     /**
-     * fill Reproduct array
+     * fill NewTypeOfFood array
      */
     public void fillStore(){
         this.store = new ArrayList<>();

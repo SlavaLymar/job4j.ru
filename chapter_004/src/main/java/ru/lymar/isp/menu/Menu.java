@@ -16,6 +16,7 @@ public class Menu {
     private Input input;
     private List<UserAction> userActions = new ArrayList<>();
     private boolean b = true;
+    private Node node;
 
     private One one;
         private OneOne oneOne;

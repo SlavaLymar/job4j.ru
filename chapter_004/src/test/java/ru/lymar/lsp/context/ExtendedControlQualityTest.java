@@ -22,7 +22,7 @@ public class ExtendedControlQualityTest {
         Food apple1 = new Apple("Uralskoe", LocalDate.now().plusMonths(12),
                 LocalDate.now().minusMonths(2), 50.0, "50");
         ecq.selectStrategy(apple1);
-        assertThat(ecq.getExtendedWarHouse().getList().get(0), is(apple1));
+        assertThat(ecq.getExtendedWareHouse().getList().get(0), is(apple1));
     }
 
     @Test
@@ -34,18 +34,18 @@ public class ExtendedControlQualityTest {
         ExtendedControlQuality ecq = new ExtendedControlQuality( 3);
         ecq.fillStore();
         ecq.selectStrategy(milk);
-        assertThat(ecq.getStore().get(2).getList().get(0), is(milk));
+        assertThat(ecq.getReproductStore().get(0).getList().get(0), is(milk));
     }
 
     @Test
     public void addVegetablesInRefrigerator(){
 
-        Food tomato = new Tomato("Red Tomato", LocalDate.now().plusMonths(1),
+        Vegetables tomato = new Tomato("Red Tomato", LocalDate.now().plusMonths(1),
                 LocalDate.now().minusMonths(1), 50.0, "50");
         ExtendedControlQuality ecq = new ExtendedControlQuality( 3);
         ecq.fillStore();
         ecq.selectStrategy(tomato);
-        assertThat(ecq.getStore().get(1).getList().get(0), is(tomato));
+        assertThat(ecq.getRefrigeratorStore().get(0).getList().get(0), is(tomato));
     }
 
     @Test
@@ -75,7 +75,7 @@ public class ExtendedControlQualityTest {
         ExtendedControlQuality ecq = new ExtendedControlQuality( 3);
         ecq.fillStore();
         ecq.selectStrategy(apple);
-        assertThat(ecq.getWarhause().getList().get(0), is(apple));
+        assertThat(ecq.getWareHouse().getList().get(0), is(apple));
     }
 
     @Test
@@ -85,6 +85,6 @@ public class ExtendedControlQualityTest {
         ExtendedControlQuality ecq = new ExtendedControlQuality( 3);
         ecq.fillStore();
         ecq.selectStrategy(bread);
-        assertThat(ecq.getTrash().getList().get(0), is(bread));
+        assertThat(ecq.getStore().get(2).getList().get(0), is(bread));
     }
 }

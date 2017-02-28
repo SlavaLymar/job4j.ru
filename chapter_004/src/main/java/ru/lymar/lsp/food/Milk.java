@@ -8,4 +8,5 @@ public class Milk extends ReproductFood{
                 LocalDate createDate, double price, String discountPercent) {
         super(name, expiryDate, createDate, price, discountPercent);
     }
+
 }

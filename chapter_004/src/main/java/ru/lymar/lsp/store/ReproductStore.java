@@ -1,51 +1,25 @@
 package ru.lymar.lsp.store;
 
-import ru.lymar.lsp.food.Food;
 import ru.lymar.lsp.food.ReproductFood;
-import ru.lymar.lsp.storedecorator.StoreDecorator;
+import ru.lymar.lsp.storedecorator.Reproduct;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReproductStore extends StoreDecorator {
+public class ReproductStore implements Reproduct {
 
-    private List <Food> reproductStore = new ArrayList<>();
-    private Store store;
-
-    public ReproductStore(Store store) {
-        super(store);
-        this.store = store;
-    }
+    private List <ReproductFood> reproductStore = new ArrayList<>();
 
     @Override
-    public boolean add(Food food) {
-        if (food.getCorruptionPercent() >= 100 && this.checkReproduct(food)) {
+    public boolean add(ReproductFood food) {
+        if (food.getCorruptionPercent() >= 100) {
             this.reproductStore.add(food);
             return true;
         }
-        else {
-            this.store.add(food);
-            return true;
-        }
-    }
-
-    /** check that food is reproduct
-     * @param food
-     * @return boolean
-     */
-    public boolean checkReproduct(ReproductFood food){
-        return true;
-    }
-
-    /** check that food is reproduct
-     * @param food
-     * @return boolean
-     */
-    public boolean checkReproduct(Food food){
         return false;
     }
 
     @Override
-    public List<Food> getList() {
+    public List<ReproductFood> getList() {
         return this.reproductStore;
     }
 }
