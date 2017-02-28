@@ -29,7 +29,7 @@ public class ExtendedControlQualityTest {
     public void addFoodInReproduct(){
 
         //add corrupt milk to reproduct
-        Food milk = new Milk("Milk", LocalDate.now().minusDays(2),
+        ReproductFood milk = new Milk("Milk", LocalDate.now().minusDays(2),
                 LocalDate.now().minusMonths(2), 50.0, "50");
         ExtendedControlQuality ecq = new ExtendedControlQuality( 3);
         ecq.fillStore();
