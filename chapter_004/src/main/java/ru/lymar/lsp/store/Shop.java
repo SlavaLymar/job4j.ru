@@ -1,9 +1,6 @@
 package ru.lymar.lsp.store;
 
 import ru.lymar.lsp.food.Food;
-import ru.lymar.lsp.food.ReproductFood;
-import ru.lymar.lsp.food.Vegetables;
-
 import java.util.ArrayList;
 import java.util.List;
 
