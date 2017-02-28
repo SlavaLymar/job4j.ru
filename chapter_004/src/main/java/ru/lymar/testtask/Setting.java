@@ -62,12 +62,14 @@ public class Setting implements Input{
      * ask size of field
      */
     public void askSize(){
-        boolean expression = this.size < 3 || this.size > 5;
+        boolean expression = (this.size == 3 || this.size == 4 || this.size == 5);
         do {
             this.size = this.getNumber("Enter size of field: ");
-            if(expression) System.out.println("Field size must be from 3 to 5.");
+            if(!expression) {
+                System.out.println("Field size must be from 3 to 5.");
+            }
         }
-        while(expression);
+        while(!expression);
     }
 
     /**
@@ -95,7 +97,7 @@ public class Setting implements Input{
             System.out.println("You must be enter 1 or 2.");
 
         }
-        while(expression);
+        while(!expression);
     }
 
     /** choose player from players[]

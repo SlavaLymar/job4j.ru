@@ -1,6 +1,5 @@
 package ru.lymar.testtask.field;
 
-import ru.lymar.testtask.actions.Print;
 import ru.lymar.testtask.actions.Move;
 import ru.lymar.testtask.actions.WinChecked;
 import ru.lymar.testtask.exception.CellIsOccupiedException;
@@ -11,7 +10,7 @@ import ru.lymar.testtask.player.Player;
  * @since 27.02.2017
  * @version 1
  */
-public abstract class Field implements Print, Move, WinChecked{
+public abstract class Field implements Move, WinChecked{
 
     /**
      * size of field
@@ -41,6 +40,13 @@ public abstract class Field implements Print, Move, WinChecked{
         return this.cells;
     }
 
+    /** get numbers array
+     * @return String[]
+     */
+    public String[] getNumbers() {
+        return this.numbers;
+    }
+
     /**
      * fill field
      */
@@ -51,26 +57,6 @@ public abstract class Field implements Print, Move, WinChecked{
                 this.numbers[i] = String.valueOf(i);
             }
         }
-    }
-
-    /**
-     * print field
-     */
-    @Override
-    public void print() {
-        for (int k = 0; k<this.cells.length; k++) {
-            System.out.print(String.format("  %s", this.numbers[k]));
-        }
-        System.out.println(String.format("  %s", "Y"));
-
-        for (int i = 0; i<this.cells.length; i++){
-            System.out.print(String.format("%s ", this.numbers[i]));
-            for (int j = 0; j<this.cells.length; j++){
-                System.out.print(String.format("%s  ", this.cells[i][j].getValue()));
-            }
-            System.out.println();
-        }
-        System.out.println(String.format("%s", "X"));
     }
 
     /** make a move

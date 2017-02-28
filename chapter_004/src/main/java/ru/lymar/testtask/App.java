@@ -1,5 +1,6 @@
 package ru.lymar.testtask;
 
+import ru.lymar.testtask.actions.PrintField;
 import ru.lymar.testtask.exception.CellIsOccupiedException;
 import ru.lymar.testtask.field.Field;
 import ru.lymar.testtask.field.GameField;
@@ -15,6 +16,7 @@ public class App {
     private Field field;
     private Player player;
     private Setting setting;
+    private PrintField printField;
 
     /**
      * fill settings
@@ -32,7 +34,8 @@ public class App {
         this.fillSettings();
         this.field = new GameField(this.setting.getSize());
         this.field.fillFields();
-        this.field.print();
+        this.printField = new PrintField();
+        this.printField.print(this.field.getCells(), this.field.getNumbers());
         this.mainLoop();
     }
 
@@ -53,7 +56,7 @@ public class App {
                     this.field.move(this.player.getNumber("Enter X: "),
                             this.player.getNumber("Enter Y: "), this.player);
                     moveDone = false;
-                    this.field.print();
+                    this.printField.print(this.field.getCells(), this.field.getNumbers());
 
                 } catch (CellIsOccupiedException e) {
                     System.out.println(e.getMessage());
