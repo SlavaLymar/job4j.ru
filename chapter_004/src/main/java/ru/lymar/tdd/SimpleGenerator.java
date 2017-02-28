@@ -13,6 +13,8 @@ import java.util.regex.Pattern;
  */
 public class SimpleGenerator implements Template{
 
+    private final String KEYPATTERN = "[$][{].+?}";
+
     /** generate phrase
      * @param text
      * @param maps
@@ -25,8 +27,7 @@ public class SimpleGenerator implements Template{
             throws NotAvailableKeysException, ExtraKeysException{
 
         //pattern-matcher block
-        String keyPattern = "[$][{].+?}";
-        Pattern pattern = Pattern.compile(keyPattern);
+        Pattern pattern = Pattern.compile(KEYPATTERN);
         Matcher matcher = pattern.matcher(text);
 
         //if keys missing throw exception
