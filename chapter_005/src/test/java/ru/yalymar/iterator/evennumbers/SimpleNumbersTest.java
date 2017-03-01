@@ -5,7 +5,7 @@ import java.util.Iterator;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
-public class NumbersTest {
+public class SimpleNumbersTest {
 
     @Test
     public void whenReturnEvenNumbers(){
