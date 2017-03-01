@@ -10,19 +10,21 @@ public class NumbersTest {
     @Test
     public void whenReturnEvenNumbers(){
 
-        Numbers numbers = new Numbers(new int[]{1,2,3,4,5,6,7,8,9,10});
-        int[] expectedNumbers = new int[]{2,4,6,8,10};
+        int[] array = new int[]{1,2,3,4,5,6,7,8,9,10};
+        Numbers numbers = new Numbers(array);
         int[] result = new int[5];
+        Iterator iterator = numbers.getIterator();
 
-        int i = 0;
-        for (Iterator iterator = numbers.getIterator(); iterator.hasNext();) {
+        int index = 0;
+        for (int i = 0; i<array.length; i++) {
             int number = (Integer) iterator.next();
 
             if(number != -1) {
-                result[i] = number;
-                i++;
+                result[index++] = number;
             }
         }
+
+        int[] expectedNumbers = new int[]{2,4,6,8,10};
         assertThat(result, is(expectedNumbers));
     }
 }

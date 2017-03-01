@@ -18,6 +18,10 @@ public class Numbers implements Container {
         this.numbers = numbers;
     }
 
+    public int[] getNumbers() {
+        return numbers;
+    }
+
     /** get Iterator
      * @return Iterator
      */
@@ -39,7 +43,7 @@ public class Numbers implements Container {
          */
         @Override
         public boolean hasNext() {
-            if(this.index < numbers.length) return true;
+            if(this.index < numbers.length && numbers[this.index]%2 == 0) return true;
             return false;
         }
 
@@ -48,7 +52,7 @@ public class Numbers implements Container {
          */
         @Override
         public Object next() {
-            if(this.hasNext() && numbers[this.index]%2 == 0) return numbers[this.index++];
+            if(this.hasNext()) return numbers[this.index++];
             else{
                 this.index++;
                 return -1;
