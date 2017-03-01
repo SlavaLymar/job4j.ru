@@ -1,27 +1,25 @@
 package ru.yalymar.iterator.convert;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
-public class ConvertIterators implements Convert, Iterator{
+public class ConvertIterators implements Convert{
 
-    private Iterator<Integer> generalizedIterator;
+    private GeneralizedIterator generalizedIterator
+            = new GeneralizedIterator(new ArrayList<>());
     private Iterator<Iterator<Integer>> it;
 
     @Override
     public Iterator<Integer> convert(Iterator<Iterator<Integer>> it) {
         this.it = it;
-
-        //TODO do convert 01/03/2017
-        return null;
-    }
-
-    @Override
-    public boolean hasNext() {
-        return false;
-    }
-
-    @Override
-    public Object next() {
-        return null;
+        if(this.it != null){
+            while(this.it.hasNext()) {
+                Iterator<Integer> tmpIterator = this.it.next();
+                while (tmpIterator.hasNext()) {
+                    this.generalizedIterator.getIntegers().add(tmpIterator.next());
+                }
+            }
+        }
+        return this.generalizedIterator;
     }
 }

@@ -4,9 +4,9 @@ import java.util.Iterator;
 
 public class SimpleIterator implements Container{
 
-    private Integer[] integers;
+    private final Integer[] integers;
 
-    public SimpleIterator(Integer[] integers) {
+    public SimpleIterator(final Integer[] integers) {
         this.integers = integers;
     }
 
