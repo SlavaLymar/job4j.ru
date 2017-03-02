@@ -4,6 +4,7 @@ import ru.lymar.dip.food.Food;
 import ru.lymar.dip.store.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * @author slavalymar
@@ -21,11 +22,6 @@ public class ControlQuality implements ResortFood{
      * Numerous of strategy
      */
     private int numberOfStrategy;
-
-    /**
-     * list of all foods in Stores
-     */
-    protected List <Food> allFoods = new ArrayList<>();
 
     public ControlQuality(int numberOfStrategy) {
         this.numberOfStrategy = numberOfStrategy;
@@ -70,29 +66,17 @@ public class ControlQuality implements ResortFood{
      */
     @Override
     public void resort() {
-        this.fillAllFoodsList();
-        for(Food food: this.allFoods){
-            this.selectStrategy(food);
-        }
-    }
-
-    /**
-     * fill list of all foods
-     */
-    private void fillAllFoodsList(){
-        for(Store s : this.store){
-            for (Food food: s.getList()){
-                this.allFoods.add(food);
+        for(Store store: this.store){
+            List <Food> f = new CopyOnWriteArrayList<>(store.getList());
+            for(Food food : f){
+                for(Store newStore : this.store){
+                    if(newStore.add(food)){
+                        store.getList().remove(food);
+                        break;
+                    }
+                }
             }
-            this.deleteList(s);
         }
-    }
-
-    /** remove the list of foods
-     * @param store
-     */
-    protected void deleteList(Store store){
-        store.getList().clear();
     }
 
 }

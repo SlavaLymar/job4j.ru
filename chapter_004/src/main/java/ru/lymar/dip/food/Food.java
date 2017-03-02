@@ -55,8 +55,8 @@ public abstract class Food {
      */
     public void corruption(){
         LocalDate currentDate = LocalDate.now();
-        long timeFromCreateToCurrentTime = ChronoUnit.DAYS.between(this.getCreateDate(), currentDate);
-        long timeFromCreateToExpireTime = ChronoUnit.DAYS.between(this.getCreateDate(), this.getExpiryDate());
+        long timeFromCreateToCurrentTime = ChronoUnit.DAYS.between(this.createDate, currentDate);
+        long timeFromCreateToExpireTime = ChronoUnit.DAYS.between(this.createDate, this.expiryDate);
         this.corruptionPercent =  1.0 * timeFromCreateToCurrentTime / timeFromCreateToExpireTime * 100;
     }
 
@@ -84,7 +84,8 @@ public abstract class Food {
     }
 
     public double getCorruptionPercent() {
-        return corruptionPercent;
+        this.corruption();
+        return this.corruptionPercent;
     }
 
     /**
@@ -109,4 +110,5 @@ public abstract class Food {
     public void setDiscountPercent(String discountPercent) {
         this.discountPercent = discountPercent;
     }
+
 }

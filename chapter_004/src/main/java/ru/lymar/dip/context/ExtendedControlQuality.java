@@ -6,10 +6,10 @@ import ru.lymar.dip.food.Vegetables;
 import ru.lymar.dip.store.*;
 import ru.lymar.dip.storedecorator.RefrigeratorStore;
 import ru.lymar.dip.storedecorator.Reproduct;
-import ru.lymar.dip.storedecorator.StoreDecorator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * @author slavalymar
@@ -101,49 +101,21 @@ public class ExtendedControlQuality extends ControlQuality {
     }
 
     /**
-     * resort foods
+     * resort food
      */
     @Override
     public void resort() {
-        this.fillAllFoodsList();
-        for(Food food: this.allFoods){
-            this.selectStrategy(food);
-        }
-    }
+        super.resort();
 
-    /**
-     * fill list of all foods
-     */
-    private void fillAllFoodsList(){
-        for(Store s : super.store){
-            if(this.isStoreDecorator(s)) {
-                StoreDecorator sd = (StoreDecorator) s;
-                for (Food food : sd.combineLists()) {
-                    super.allFoods.add(food);
+        List <Food> f = new CopyOnWriteArrayList<>(this.wareHouse.getList());
+        for(Food food : f){
+            for(Store newStore : this.store){
+                if(newStore.add(food)){
+                    this.wareHouse.getList().remove(food);
+                    break;
                 }
             }
-            else {
-                for (Food food : s.getList()){
-                    super.allFoods.add(food);
-                }
-            }
-            super.deleteList(s);
         }
-    }
 
-    /** Is Store StoreDecorator
-     * @param store
-     * @return boolean
-     */
-    private boolean isStoreDecorator(Store store){
-        boolean result = false;
-        try{
-            StoreDecorator sd = (StoreDecorator) store;
-            result = true;
-        }
-        catch (ClassCastException e){
-            System.out.println("Impossible cast");
-        }
-        return result;
     }
 }
