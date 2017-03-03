@@ -18,13 +18,13 @@ public class StartUITest {
 
     @Test
     public void AppTest(){
-        systemInMock.provideLines("2.1", "3");
+        systemInMock.provideLines("2.1", "Exit");
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
         StartUI start = new StartUI(new ValidateInput());
         start.init();
         String[] strings = out.toString().split("\r\n");
-        assertThat(strings[10], is("You entered TwoOne"));
+        assertThat(strings[7], is("You picked \"2.1 Menu\""));
     }
 
 }

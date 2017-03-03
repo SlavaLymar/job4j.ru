@@ -3,7 +3,6 @@ package ru.lymar.isp.menu;
 import org.junit.Test;
 import ru.lymar.isp.input.Input;
 import ru.lymar.isp.input.ValidateInput;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 

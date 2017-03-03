@@ -7,6 +7,9 @@ package ru.lymar.isp.action;
  */
 public abstract class BaseAction implements UserAction{
 
+    /**
+     * name of item
+     */
     private String name;
 
     /**
@@ -14,5 +17,14 @@ public abstract class BaseAction implements UserAction{
      */
     public BaseAction(String name) {
         this.name = name;
+    }
+
+    /** return number of menu
+     * @return String
+     */
+    @Override
+    public String getKey() {
+        String[] s = this.name.split(" ");
+        return s[0];
     }
 }

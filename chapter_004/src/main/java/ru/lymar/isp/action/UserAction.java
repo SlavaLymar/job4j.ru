@@ -5,6 +5,6 @@ package ru.lymar.isp.action;
  * @since 22.02.2017
  * @version 1
  */
-public interface UserAction extends Printable, Execute{
+public interface UserAction extends Printable, Execute, GetKey {
 
 }

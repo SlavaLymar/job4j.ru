@@ -10,11 +10,6 @@ import ru.lymar.isp.input.Input;
 public interface Execute {
 
     /**
-     * @return String
-     */
-    String key();
-
-    /**
      * @param input
      */
     void execute(Input input);

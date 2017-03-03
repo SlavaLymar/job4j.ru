@@ -8,7 +8,7 @@ package ru.lymar.isp.action;
 public interface Printable {
 
     /**
-     * @return String
+     * print
      */
-    String print();
+    void print();
 }
