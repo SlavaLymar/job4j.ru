@@ -1,25 +1,13 @@
 package ru.yalymar.iterator.convert;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
  * @author slavalymar
- * @since 01.03.2017
+ * @since 03.03.2017
  * @version 1
  */
 public class ConvertIterators implements Convert{
-
-    /**
-     * an iterator consist of several iterators
-     */
-    private GeneralizedIterator generalizedIterator
-            = new GeneralizedIterator(new ArrayList<>());
-
-    /**
-     * collection of iterators
-     */
-    private Iterator<Iterator<Integer>> it;
 
     /** convert several iterators to one iterator
      * @param it
@@ -27,15 +15,62 @@ public class ConvertIterators implements Convert{
      */
     @Override
     public Iterator<Integer> convert(Iterator<Iterator<Integer>> it) {
-        this.it = it;
-        if(this.it != null){
-            while(this.it.hasNext()) {
-                Iterator<Integer> tmpIterator = this.it.next();
-                while (tmpIterator.hasNext()) {
-                    this.generalizedIterator.getIntegers().add(tmpIterator.next());
-                }
+        return new SingleIterator(it);
+    }
+
+    /**
+     * @author slavalymar
+     * @since 01.03.2017
+     * @version 1
+     */
+    private class SingleIterator implements Iterator<Integer> {
+
+        /**
+         * Iterator iterators
+         */
+        private Iterator<Iterator<Integer>> it;
+
+        /**
+         * Iterator of iterator iterators
+         */
+        private Iterator <Integer> iterator;
+
+        public SingleIterator(Iterator<Iterator<Integer>> it) {
+            this.it = it;
+            if(this.it.hasNext()){
+                this.iterator = this.it.next();
             }
         }
-        return this.generalizedIterator;
+
+        /** determines if an iterator is exist into iterator iterators
+         * @return boolean
+         */
+        @Override
+        public boolean hasNext() {
+            return this.it.hasNext();
+        }
+
+        /** return next value of iterator of iterator of iterators
+         * @return Integer
+         */
+        @Override
+        public Integer next() {
+            if(this.iterator == null){
+                this.iterator = this.it.next();
+            }
+            else if(!this.iterator.hasNext()){
+                this.iterator = this.it.next();
+            }
+            if(this.iterator.hasNext()){
+                return this.iterator.next();
+            }
+            else {
+                this.iterator = this.it.next();
+                return this.iterator.next();
+            }
+        }
+
     }
+
+
 }
