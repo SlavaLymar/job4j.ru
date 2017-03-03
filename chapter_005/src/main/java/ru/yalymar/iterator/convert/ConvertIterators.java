@@ -50,7 +50,7 @@ public class ConvertIterators implements Convert{
             return this.it.hasNext();
         }
 
-        /** return next value of iterator of iterator of iterators
+        /** return next value of iterator of iterator iterators
          * @return Integer
          */
         @Override
