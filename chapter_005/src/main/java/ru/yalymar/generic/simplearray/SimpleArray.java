@@ -11,7 +11,7 @@ public class SimpleArray <T> {
     /**
      * array of objects
      */
-    T[] arr;
+    private T[] arr;
 
     /**
      * index of array
