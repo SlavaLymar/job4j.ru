@@ -2,6 +2,7 @@ package ru.lymar.isp.start;
 
 import ru.lymar.isp.input.Input;
 import ru.lymar.isp.input.ValidateInput;
+import ru.lymar.isp.menu.Exit;
 import ru.lymar.isp.menu.Menu;
 
 /**
@@ -34,8 +35,9 @@ public class StartUI {
      */
     public void mainLoop(){
         do{
-            this.menu.showMenu();
-            this.menu.select(this.input.ask("Select a number of menu: ", menu.getKeysArr()));
+            this.menu.showMenu(this.menu.getUserActions());
+            this.menu.select(this.menu.getUserActions(), this.input.ask
+                    ("Select a number of menu: ", menu.getKeysArr(this.menu.getUserActions())));
         }
         while(this.menu.isB());
     }
@@ -44,7 +46,6 @@ public class StartUI {
      * point of entry
      */
     public static void main(String[] args) {
-
         new StartUI(new ValidateInput()).init();
     }
 }

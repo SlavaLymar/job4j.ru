@@ -1,6 +1,5 @@
 package ru.lymar.isp.menu;
 
-import ru.lymar.isp.action.UserAction;
 import ru.lymar.isp.input.Input;
 
 /**
@@ -8,7 +7,7 @@ import ru.lymar.isp.input.Input;
  * @since 03.03.2017
  * @version 1
  */
-public class Item implements UserAction{
+public class Exit extends Item {
 
     /**
      * name of item
@@ -16,17 +15,14 @@ public class Item implements UserAction{
     private String name;
 
     /**
-     * array of item
+     * instance of menu
      */
-    private Item[] items;
+    private Menu menu;
 
-    public Item(String name, Item... items) {
+    public Exit(String name, Menu menu) {
+        super(name);
         this.name = name;
-        this.items = items;
-    }
-
-    public Item[] getItems() {
-        return this.items;
+        this.menu = menu;
     }
 
     /** execute something
@@ -34,7 +30,7 @@ public class Item implements UserAction{
      */
     @Override
     public void execute(Input input) {
-        System.out.println("You picked \""+ this.name +"\"");
+        System.out.println("Bye!");
     }
 
     /**
@@ -42,7 +38,7 @@ public class Item implements UserAction{
      */
     @Override
     public void print() {
-        System.out.println(this.name);
+        this.menu.setB(false);
     }
 
     /** return number of menu
@@ -50,8 +46,6 @@ public class Item implements UserAction{
      */
     @Override
     public String getKey() {
-        String[] s = this.name.split(" ");
-        return s[0];
+        return this.name;
     }
-
 }

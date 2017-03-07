@@ -1,7 +1,5 @@
 package ru.lymar.isp.menu;
 
-import ru.lymar.isp.action.BaseAction;
-import ru.lymar.isp.action.UserAction;
 import ru.lymar.isp.input.Input;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,38 +12,35 @@ import java.util.List;
 public class Menu {
 
     private Input input;
-    private List<UserAction> userActions = new ArrayList<>();
+    private Item[] userActions = new Item[3];
     private boolean b = true;
-
-    /**
-     * initialized
-     */
-    private void init(){
-
-    }
 
     /**
      * create menu
      */
     public void fillMenu(){
+        this.userActions[0] =
+                new Item("1 Item", new Item("1.1 Item"),
+                        new Item("1.2 Item", new Item("1.2.3 Item")));
+        this.userActions[1] = new Item("2 Item");
+        this.userActions[2] = new Exit("Exit", this);
+    }
 
-        this.init();
-        this.userActions.add(new Item("1 Menu", 1));
-        this.userActions.add(new Item("1.1 Menu", 2));
-        this.userActions.add(new Item("1.1.1 Menu", 3));
-        this.userActions.add(new Item("2 Menu", 1));
-        this.userActions.add(new Item("2.1 Menu", 2));
-
-        this.userActions.add(new Exit("Exit"));
+    public Item[] getUserActions() {
+        return this.userActions;
     }
 
     /**
      * @param key
      */
-    public void select(String key){
-        for(UserAction userAction : this.userActions){
-            if(key.equals(userAction.getKey())){
-                userAction.execute(this.input);
+    public void select(Item[] userActions, String key){
+        for(Item item: userActions){
+            if(item != null && key.equals(item.getKey())) {
+                item.execute(this.input);
+                break;
+            }
+            if(item.getItems().length > 0){
+                this.select(item.getItems(), key);
             }
         }
     }
@@ -53,10 +48,15 @@ public class Menu {
     /**
      * @return List <String>
      */
-    public List <String> getKeysArr(){
+    public List <String> getKeysArr(Item[] userActions){
         List <String> keyList = new ArrayList<>();
-        for(UserAction userAction : this.userActions){
-            keyList.add(userAction.getKey());
+        for(Item item: userActions){
+            if(item != null) {
+                keyList.add(item.getKey());
+                if(item.getItems() != null){
+                    this.getKeysArr(item.getItems());
+                }
+            }
         }
         return keyList;
     }
@@ -64,10 +64,13 @@ public class Menu {
     /**
      * show menu
      */
-    public void showMenu(){
-        for(UserAction userAction: this.userActions){
-            if(userAction!=null) {
-                userAction.print();
+    public void showMenu(Item[] userActions){
+        for(Item item: userActions){
+            if(item != null) {
+                item.print();
+                if(item.getItems() != null){
+                    this.showMenu(item.getItems());
+                }
             }
         }
     }
@@ -82,39 +85,6 @@ public class Menu {
 
     public boolean isB() {
         return b;
-    }
-
-
-    /**
-     * @author slavalymar
-     * @since 22.02.2017
-     * @version 1
-     */
-    private class Exit extends BaseAction {
-
-        private String name;
-
-        public Exit(String name) {
-            super(name);
-            this.name = name;
-        }
-
-        /**
-         * @param input
-         */
-        @Override
-        public void execute(Input input) {
-            setB(false);
-        }
-
-
-        /**
-         * print
-         */
-        @Override
-        public void print() {
-            System.out.println(this.name);
-        }
     }
 
 

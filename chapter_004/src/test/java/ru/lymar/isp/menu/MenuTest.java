@@ -13,7 +13,7 @@ public class MenuTest {
         Input input = new ValidateInput();
         Menu menu = new Menu(input);
         menu.fillMenu();
-        assertThat(menu.getKeysArr().get(1), is("1.1"));
+        assertThat(menu.getKeysArr(menu.getUserActions()).get(1), is("2"));
     }
 
 

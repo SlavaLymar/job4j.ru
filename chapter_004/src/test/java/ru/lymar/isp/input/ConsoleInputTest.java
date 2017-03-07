@@ -21,7 +21,7 @@ public class ConsoleInputTest {
         ConsoleInput consoleInput = new ConsoleInput();
         Menu menu = new Menu(consoleInput);
         menu.fillMenu();
-        String result = consoleInput.ask("question", menu.getKeysArr());
+        String result = consoleInput.ask("question", menu.getKeysArr(menu.getUserActions()));
         assertThat(result, is("1.1"));
 
     }
