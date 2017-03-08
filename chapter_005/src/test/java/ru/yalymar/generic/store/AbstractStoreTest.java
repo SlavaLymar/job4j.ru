@@ -10,7 +10,7 @@ public class AbstractStoreTest {
     @Test
     public void whenAddStoreShouldGetIt(){
         Role role = new Role("programmer");
-        RoleStore roleStore = new RoleStore(10);
+        RoleStore <Role> roleStore = new RoleStore(10);
 
         roleStore.add(role);
 
@@ -20,7 +20,7 @@ public class AbstractStoreTest {
     @Test
     public void whenUpdateStoreShouldGetNewValue() throws IncorrectIdException {
         User user = new User("Dyadya Vanya");
-        UserStore userStore = new UserStore(10);
+        UserStore <User> userStore = new UserStore(10);
         userStore.add(user);
 
         User newUser = new User("Tetya Lena");
@@ -32,7 +32,7 @@ public class AbstractStoreTest {
     @Test
     public void whenDeleteStoreShouldGetNull() throws IncorrectIdException {
         User user = new User("Dyadya Vanya");
-        UserStore userStore = new UserStore(10);
+        UserStore <User> userStore = new UserStore(10);
         userStore.add(user);
 
         userStore.delete(user);
@@ -43,7 +43,7 @@ public class AbstractStoreTest {
     @Test(expected = IncorrectIdException.class)
     public void whenAddStoreThenDeleteShouldGetExceprion() throws IncorrectIdException {
         User user = new User("Dyadya Vanya");
-        UserStore userStore = new UserStore(10);
+        UserStore <User> userStore = new UserStore(10);
         userStore.add(user);
 
         User user1 = new User("Dyadya");

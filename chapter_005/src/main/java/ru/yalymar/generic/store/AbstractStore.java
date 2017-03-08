@@ -6,7 +6,7 @@ package ru.yalymar.generic.store;
  * @version 1
  * @param <T>
  */
-public class AbstractStore <T extends Base> implements Store{
+public abstract class AbstractStore <T> implements Store{
 
     /**
      * class that contains stores
