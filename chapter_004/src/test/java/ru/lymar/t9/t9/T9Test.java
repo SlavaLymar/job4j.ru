@@ -1,6 +1,7 @@
 package ru.lymar.t9.t9;
 
 import org.junit.Test;
+import ru.lymar.t9.button.Button;
 import ru.lymar.t9.dictionary.Dictionary;
 import ru.lymar.t9.keyboard.Keyboard;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -28,5 +29,24 @@ public class T9Test {
         assertThat(result, is("hide"));
     }
 
+
+    @Test
+    public void whenEnter123ThenGenerateWords(){
+
+        // init
+        Keyboard keyboard = new Keyboard();
+        keyboard.fillButtons();
+        Dictionary dictionary = new Dictionary();
+        T9 t9 = new T9(dictionary, keyboard);
+
+        // create query
+        String[] result = t9.generateForTwoButtons( new Button[]{keyboard.getBUTTONS()[0],
+                keyboard.getBUTTONS()[1]});
+
+
+        assertThat(result[0], is("12"));
+        assertThat(result[1], is("1d"));
+
+    }
 
 }

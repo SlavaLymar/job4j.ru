@@ -4,12 +4,15 @@ import ru.lymar.t9.button.Button;
 import ru.lymar.t9.dictionary.Dictionary;
 import ru.lymar.t9.keyboard.Keyboard;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author slavalymar
  * @since 05.03.2017
  * @version 1
  */
-public class T9 implements It9{
+public class T9 implements It9, WordGenerator{
 
     /**
      * dictionary
@@ -54,9 +57,30 @@ public class T9 implements It9{
             }
             return word;
         }
-
-
     }
+
+    /** generate words for 2 buttons
+     * @param buttons
+     * @return String[]
+     */
+    @Override
+    public String[] generateForTwoButtons(Button[] buttons) {
+        String[] result = new String[(int) Math.pow(4, buttons.length)];
+        StringBuilder sb = new StringBuilder("");
+        int index = 0;
+        for(int i = 0; i<buttons[0].getCharacters().length; i++){
+            for(int j = 0; j<buttons[1].getCharacters().length; j++){
+                sb.append(buttons[0].getCharacters()[i]);
+                sb.append(buttons[1].getCharacters()[j]);
+                result[index++] = sb.toString();
+                sb = new StringBuilder("");
+            }
+        }
+        return result;
+    }
+
+
+
 
 
 }
