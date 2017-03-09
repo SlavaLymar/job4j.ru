@@ -1,4 +1,4 @@
-package ru.yalymar.list;
+package ru.yalymar.list.simplearraylist;
 
 import java.util.Iterator;
 

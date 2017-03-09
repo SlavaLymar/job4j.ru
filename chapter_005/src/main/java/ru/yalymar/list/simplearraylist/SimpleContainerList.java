@@ -1,11 +1,11 @@
-package ru.yalymar.list;
+package ru.yalymar.list.simplearraylist;
 
 /** @author slavalymar
  * @since 09.03.2017
  * @version 1
  * @param <E>
  */
-public interface SimpleContainer<E> extends Iterable{
+public interface SimpleContainerList<E> extends Iterable{
 
     /** add value to array. Extend array if one is full
      * @param e

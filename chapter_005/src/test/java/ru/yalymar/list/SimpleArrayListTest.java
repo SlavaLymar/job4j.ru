@@ -1,6 +1,8 @@
 package ru.yalymar.list;
 
 import org.junit.Test;
+import ru.yalymar.list.simplearraylist.SimpleArrayListList;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -8,7 +10,7 @@ public class SimpleArrayListTest {
 
     @Test
     public void whenAddValueToDynamicArray(){
-        SimpleArrayList<Integer> simpleArrayList = new SimpleArrayList<>();
+        SimpleArrayListList<Integer> simpleArrayList = new SimpleArrayListList<>();
 
         simpleArrayList.add(1);
 
@@ -17,7 +19,7 @@ public class SimpleArrayListTest {
 
     @Test
     public void whenGetValueFromDynamicArray(){
-        SimpleArrayList<Integer> simpleArrayList = new SimpleArrayList<>();
+        SimpleArrayListList<Integer> simpleArrayList = new SimpleArrayListList<>();
 
         simpleArrayList.add(1);
         int result = simpleArrayList.get(0);
@@ -27,21 +29,21 @@ public class SimpleArrayListTest {
 
     @Test(expected = NullPointerException.class)
     public void whenGetValueThenThrowNullPointerException(){
-        SimpleArrayList<Integer> simpleArrayList = new SimpleArrayList<>();
+        SimpleArrayListList<Integer> simpleArrayList = new SimpleArrayListList<>();
 
         simpleArrayList.get(0);
     }
 
     @Test(expected = ArrayIndexOutOfBoundsException.class)
     public void whenGetValueThenThrowOutOfBoundsException(){
-        SimpleArrayList<Integer> simpleArrayList = new SimpleArrayList<>();
+        SimpleArrayListList<Integer> simpleArrayList = new SimpleArrayListList<>();
 
         simpleArrayList.get(11);
     }
 
     @Test
     public void whenExtendedSizeOfArray(){
-        SimpleArrayList<Integer> simpleArrayList = new SimpleArrayList<>();
+        SimpleArrayListList<Integer> simpleArrayList = new SimpleArrayListList<>();
 
         simpleArrayList.add(1);
         simpleArrayList.add(1);

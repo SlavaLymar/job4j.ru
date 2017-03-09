@@ -1,4 +1,4 @@
-package ru.yalymar.list;
+package ru.yalymar.list.simplearraylist;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -8,7 +8,7 @@ import java.util.Iterator;
  * @version 1
  * @param <E>
  */
-public class SimpleArrayList<E> implements SimpleContainer<E> {
+public class SimpleArrayListList<E> implements SimpleContainerList<E> {
 
     /**
      * default capacity of array
@@ -25,7 +25,7 @@ public class SimpleArrayList<E> implements SimpleContainer<E> {
      */
     private SimpleIteratorList<E> iteratorList;
 
-    public SimpleArrayList() {
+    public SimpleArrayListList() {
         this.array = new Object[START_CAPACITY];
         this.iteratorList = new SimpleIteratorList<>(this.array);
     }
