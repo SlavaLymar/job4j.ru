@@ -6,7 +6,6 @@ import static org.hamcrest.core.Is.is;
 
 public class SimpleStackTest {
 
-
     @Test
     public void whenPushCoupleValueToStackThenGetLastWithPeek(){
         SimpleStack<Integer> simpleStack = new SimpleStack<>();
@@ -29,12 +28,10 @@ public class SimpleStackTest {
 
         int result = simpleStack.pop();
         assertThat(result, is(3));
-
         int result1 = simpleStack.pop();
         assertThat(result1, is(2));
-
-        //int result2 = simpleStack.pop();
-        //assertThat(result2, is(1));
+        int result2 = simpleStack.pop();
+        assertThat(result2, is(1));
     }
 
 }
