@@ -13,17 +13,22 @@ public class SimpleLinkedList<E> implements SimpleContainerLinkedList<E>{
     /**
      * size of list
      */
-    private int size = 0;
+    protected int size = 0;
 
     /**
      * first value
      */
-    private Node<E> first;
+    protected Node<E> first;
 
     /**
      * last value
      */
-    private Node<E> last;
+    protected Node<E> last;
+
+
+    public int size() {
+        return this.size;
+    }
 
     /** add value to list
      * @param e
@@ -32,7 +37,7 @@ public class SimpleLinkedList<E> implements SimpleContainerLinkedList<E>{
     @Override
     public boolean add(E e) {
         Node<E> l = this.last;
-        Node<E> newNode = new Node<E>(l, e, null);
+        Node<E> newNode = new Node<>(l, e, null);
         this.last = newNode;
         if(l == null){
             this.first = newNode;
@@ -60,7 +65,7 @@ public class SimpleLinkedList<E> implements SimpleContainerLinkedList<E>{
      * @param index
      * @return Node<E>
      */
-    Node<E> node(int index){
+    public Node<E> node(int index){
         if (index < (size >> 1)) {
             Node<E> x = first;
             for (int i = 0; i < index; i++)
@@ -68,8 +73,9 @@ public class SimpleLinkedList<E> implements SimpleContainerLinkedList<E>{
             return x;
         } else {
             Node<E> x = last;
-            for (int i = size - 1; i > index; i--)
+            for (int i = size - 1; i > index; i--) {
                 x = x.prev;
+            }
             return x;
         }
     }
@@ -85,18 +91,17 @@ public class SimpleLinkedList<E> implements SimpleContainerLinkedList<E>{
     /** class that describe specified element
      * @param <E>
      */
-    private class Node<E> {
+    public class Node<E> {
 
-        E item;
-        Node<E> next;
-        Node<E> prev;
+        public E item;
+        public Node<E> next;
+        public Node<E> prev;
 
         Node(Node<E> prev, E element, Node<E> next) {
             this.item = element;
             this.next = next;
             this.prev = prev;
         }
-
     }
 
     /**

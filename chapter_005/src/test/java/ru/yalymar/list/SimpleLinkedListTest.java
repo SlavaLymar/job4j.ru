@@ -2,9 +2,7 @@ package ru.yalymar.list;
 
 import org.junit.Test;
 import ru.yalymar.list.simplelinkedlist.SimpleLinkedList;
-
 import java.util.NoSuchElementException;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
