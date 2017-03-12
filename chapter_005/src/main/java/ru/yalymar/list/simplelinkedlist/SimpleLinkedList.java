@@ -61,9 +61,9 @@ public class SimpleLinkedList<E> implements SimpleContainerLinkedList<E>{
         return null;
     }
 
-    /** Returns the (non-null) Node at the specified element index.
+    /** Returns the (non-null) HasCycle at the specified element index.
      * @param index
-     * @return Node<E>
+     * @return HasCycle<E>
      */
     public Node<E> node(int index){
         if (index < (size >> 1)) {
@@ -91,7 +91,7 @@ public class SimpleLinkedList<E> implements SimpleContainerLinkedList<E>{
     /** class that describe specified element
      * @param <E>
      */
-    protected class Node<E> {
+    public class Node<E> {
 
         public E item;
         public Node<E> next;
