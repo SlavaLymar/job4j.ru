@@ -5,12 +5,12 @@ package ru.yalymar.generic.store;
  * @since 06.03.2017
  * @version 1
  */
-public class UserStore <T extends Base> extends AbstractStore<T>{
+public class UserStore extends AbstractStore<User>{
 
     /**
      * class that contains stores
      */
-    private SimpleArray<T> values;
+    private SimpleArray<User> values;
 
     public UserStore(int size) {
         this.values = new SimpleArray<>(size);

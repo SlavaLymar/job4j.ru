@@ -47,7 +47,6 @@ public class ConvertIteratorsTest {
         int index = 0;
         while(resultIt.hasNext()){
             result[index++] = resultIt.next();
-            System.out.print(result[(index-1)] + " ");
         }
 
         assertThat(result, is(expected));
