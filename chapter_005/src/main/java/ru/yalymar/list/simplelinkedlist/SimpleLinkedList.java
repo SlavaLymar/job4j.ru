@@ -88,6 +88,13 @@ public class SimpleLinkedList<E> implements SimpleContainerLinkedList<E>{
         return this.iterator;
     }
 
+    /** return new Iterator
+     * @return Iterator
+     */
+    public Iterator getNewIterator() {
+        return this.iterator = new SimpleIteratorLinkedList();
+    }
+
     /** class that describe specified element
      * @param <E>
      */
@@ -113,9 +120,6 @@ public class SimpleLinkedList<E> implements SimpleContainerLinkedList<E>{
         private Node<E> next;
         private int nextIndex = 0;
 
-        SimpleIteratorLinkedList() {
-        }
-
         /** return true if value is exist
          * @return boolean
          */
@@ -137,6 +141,10 @@ public class SimpleLinkedList<E> implements SimpleContainerLinkedList<E>{
             next = next.next;
             nextIndex++;
             return lastReturned.item;
+        }
+
+        public void reset(){
+            this.nextIndex = 0;
         }
     }
 
