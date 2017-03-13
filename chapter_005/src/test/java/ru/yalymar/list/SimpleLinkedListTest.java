@@ -24,10 +24,12 @@ public class SimpleLinkedListTest {
         simpleLinkedList.add(new Integer(3));
         simpleLinkedList.add(new Integer(4));
 
-        assertThat(simpleLinkedList.getIterator(1).next(), is(2));
-        assertThat(simpleLinkedList.getIterator(3).next(), is(4));
+        assertThat(simpleLinkedList.getIterator().next(), is(1));
+        assertThat(simpleLinkedList.getIterator().next(), is(2));
 
         //generate NoSuchElementException
-        assertThat(simpleLinkedList.getIterator(4).next(), is(4));
+        simpleLinkedList.getIterator().next();
+        simpleLinkedList.getIterator().next();
+        simpleLinkedList.getIterator().next();
     }
 }

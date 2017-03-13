@@ -25,6 +25,7 @@ public class SimpleLinkedList<E> implements SimpleContainerLinkedList<E>{
      */
     protected Node<E> last;
 
+    private SimpleIteratorLinkedList iterator = new SimpleIteratorLinkedList();
 
     public int size() {
         return this.size;
@@ -81,11 +82,10 @@ public class SimpleLinkedList<E> implements SimpleContainerLinkedList<E>{
     }
 
     /** return Iterator
-     * @param index
      * @return Iterator
      */
-    public Iterator getIterator(int index) {
-        return new SimpleIteratorLinkedList(index);
+    public Iterator getIterator() {
+        return this.iterator;
     }
 
     /** class that describe specified element
@@ -111,11 +111,9 @@ public class SimpleLinkedList<E> implements SimpleContainerLinkedList<E>{
 
         private Node<E> lastReturned;
         private Node<E> next;
-        private int nextIndex;
+        private int nextIndex = 0;
 
-        SimpleIteratorLinkedList(int index) {
-            next = (index == size) ? null : node(index);
-            nextIndex = index;
+        SimpleIteratorLinkedList() {
         }
 
         /** return true if value is exist
@@ -134,6 +132,7 @@ public class SimpleLinkedList<E> implements SimpleContainerLinkedList<E>{
             if (!hasNext())
                 throw new NoSuchElementException();
 
+            this.next = node(this.nextIndex);
             lastReturned = next;
             next = next.next;
             nextIndex++;
