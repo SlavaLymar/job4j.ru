@@ -1,7 +1,6 @@
-package ru.yalymar.set.arraylistsimpleset;
+package ru.yalymar.set.quickaddtoset;
 
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.Iterator;
 
 /**@author slavalymar
@@ -9,7 +8,7 @@ import java.util.Iterator;
  * @version 1
  * @param <E>
  */
-public class SimpleHashSet<E> implements Iterator<E>{
+public class QuickSimpleHashSet<E> implements Iterator<E>{
 
     /**
      * array of objects.
@@ -22,7 +21,7 @@ public class SimpleHashSet<E> implements Iterator<E>{
      */
     private int index = 0, containerCounter = 0;;
 
-    public SimpleHashSet(E[] container) {
+    public QuickSimpleHashSet(E[] container) {
         this.container = container;
     }
 
@@ -36,14 +35,26 @@ public class SimpleHashSet<E> implements Iterator<E>{
      */
     public boolean add(E e){
         boolean result = true;
-        for(E value: this.container){
-            if(value != null && value.equals(e)){
-                result = false;
-                return result;
-            }
+        if(this.binarySearch(e, this.container) == 1) {
+            result = false;
+            return result;
         }
         this.container[this.containerCounter++] = e;
         this.sortedContainer();
+        return result;
+    }
+
+    private int binarySearch(E e, E[] container) {
+        int result = 1;
+        int midpoint = (this.containerCounter/2)-1;
+        if(container[midpoint].hashCode() < e.hashCode()){
+            this.binarySearch(e, Arrays.copyOfRange(container,
+                    midpoint+1, container.length-midpoint+1));
+        }
+        else if(container[midpoint].hashCode() > e.hashCode()){
+            this.binarySearch(e, Arrays.copyOfRange(container, 0, midpoint-1));
+        }
+        else return -1;
         return result;
     }
 
