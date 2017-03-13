@@ -21,8 +21,13 @@ public class QuickSimpleHashSetTest {
         set.add("Yaroslav");
         set.add("core");
 
+        int counter = 0;
+        for(String s: set.getContainer()){
+            if(s != null) counter++;
+        }
+
         assertNull(set.getContainer()[5]);
-        assertThat();
+        assertThat(counter, is(5));
     }
 
 }
