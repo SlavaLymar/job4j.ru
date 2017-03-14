@@ -3,7 +3,7 @@ package ru.yalymar.generic.store;
 /**
  * @author slavalymar
  * @since 06.03.2017
- * @version 1
+ * @version 2
  */
 public class RoleStore extends AbstractStore <Role>{
 
