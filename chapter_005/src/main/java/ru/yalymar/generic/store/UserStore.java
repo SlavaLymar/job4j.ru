@@ -7,13 +7,7 @@ package ru.yalymar.generic.store;
  */
 public class UserStore extends AbstractStore<User>{
 
-    /**
-     * class that contains stores
-     */
-    private SimpleArray<User> values;
-
     public UserStore(int size) {
-        this.values = new SimpleArray<>(size);
-        super.values = this.values;
+        super.values = new SimpleArray<>(size);
     }
 }
