@@ -37,9 +37,6 @@ public class ConvertIterators implements Convert{
 
         public SingleIterator(Iterator<Iterator<Integer>> it) {
             this.it = it;
-            if(this.it.hasNext()){
-                this.iterator = this.it.next();
-            }
         }
 
         /** determines if an iterator is exist into iterator iterators

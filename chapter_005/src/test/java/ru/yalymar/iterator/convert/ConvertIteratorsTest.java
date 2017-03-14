@@ -52,4 +52,16 @@ public class ConvertIteratorsTest {
         assertThat(result, is(expected));
     }
 
+    @Test
+    public void whenCreateThreeIteratorsOneOfThatIteratorsHasOneValueThenGetTrueFromHasNext(){
+        List <Iterator<Integer>> list = new ArrayList<>();
+        list.add(new ArrayList<>(Arrays.asList(new Integer[]{1})).iterator());
+
+        ConvertIterators ci = new ConvertIterators();
+        Iterator <Integer> resultIt = ci.convert(list.iterator());
+
+        boolean result = resultIt.hasNext();
+
+        assertThat(result, is(true));
+    }
 }
