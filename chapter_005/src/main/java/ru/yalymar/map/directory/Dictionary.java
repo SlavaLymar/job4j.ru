@@ -1,18 +1,50 @@
 package ru.yalymar.map.directory;
 
-import java.util.Iterator;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
+/**@author slavalymar
+ * @since 15.03.2017
+ * @version 1
+ * @param <K>
+ * @param <V>
+ */
 public class Dictionary<K, V> {
 
+    /**
+     * default capacity of array (= 16)
+     */
     private static final int DEFAULT_INITIAL_CAPACITY = 1 << 4;
+
+    /**
+     * maximum capacity
+     */
     private static final int MAXIMUM_CAPACITY = 1 << 30;
+
+    /**
+     * default load factor
+     */
     private static final float DEFAULT_LOAD_FACTOR = 0.75f;
+
+    /**
+     * buckets(array) of map
+     */
     private DictionaryNode<K,V>[] table;
+
+    /**
+     * size of array
+     */
     private int size;
+
+    /**
+     * custom load factor
+     */
     private final float loadFactor;
+
+    /**
+     * next size of array when would be resize
+     */
     private int threshold;
 
     public Dictionary() {
@@ -23,10 +55,20 @@ public class Dictionary<K, V> {
         return this.table;
     }
 
+    /** return true if insert success
+     * @param key
+     * @param value
+     * @return boolean
+     */
     public boolean insert(K key, V value){
         return put(key, value) != null;
     }
 
+    /** add map to array
+     * @param key
+     * @param value
+     * @return V
+     */
     private V put(K key, V value){
         DictionaryNode<K,V>[] tab; DictionaryNode<K,V> p; int n, i;
         if ((tab = table) == null || (n = tab.length) == 0)
@@ -65,10 +107,13 @@ public class Dictionary<K, V> {
         return null;
     }
 
+    // Callbacks to allow LinkedHashMap post-actions
     void afterNodeInsertion(boolean evict) { }
-
     void afterNodeAccess(DictionaryNode<K,V> p) { }
 
+    /** resize array
+     * @return DictionaryNode
+     */
     final DictionaryNode<K,V>[] resize() {
         DictionaryNode<K,V>[] oldTab = table;
         int oldCap = (oldTab == null) ? 0 : oldTab.length;
@@ -141,15 +186,30 @@ public class Dictionary<K, V> {
         return newTab;
     }
 
+    /** calculate hash
+     * @param key
+     * @return int
+     */
     static final int hash(Object key) {
         int h;
         return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
     }
 
+    /** create new DictionaryNode
+     * @param hash
+     * @param key
+     * @param value
+     * @param next
+     * @return DictionaryNode
+     */
     DictionaryNode<K,V> newNode(int hash, K key, V value, DictionaryNode<K,V> next) {
         return new DictionaryNode<>(hash, key, value, next);
     }
 
+    /** get value by key
+     * @param key
+     * @return V
+     */
     public V get(K key) {
         DictionaryNode<K,V> e;
         return (e = getNode(hash(key), key)) == null ? null : e.value;
@@ -180,16 +240,32 @@ public class Dictionary<K, V> {
         return null;
     }
 
+    /** return true if delete happen
+     * @param key
+     * @return boolean
+     */
     public boolean delete(K key){
         return remove(key) != null;
     }
 
+    /** remove value by key
+     * @param key
+     * @return V
+     */
     public V remove(K key) {
         DictionaryNode<K,V> e;
         return (e = removeNode(hash(key), key, null, false, true)) == null ?
                 null : e.value;
     }
 
+    /** remove value by key
+     * @param hash
+     * @param key
+     * @param value
+     * @param matchValue
+     * @param movable
+     * @return Dictionary
+     */
     final DictionaryNode<K,V> removeNode(int hash, Object key, Object value,
                                boolean matchValue, boolean movable) {
         DictionaryNode<K,V>[] tab; DictionaryNode<K,V> p; int n, index;
@@ -225,12 +301,27 @@ public class Dictionary<K, V> {
         return null;
     }
 
-
+    // class that describe a map
     static class DictionaryNode<K, V> implements Map.Entry<K, V>{
 
+        /**
+         * hash
+         */
         final int hash;
+
+        /**
+         * key of a map
+         */
         final K key;
+
+        /**
+         * value of a map
+         */
         V value;
+
+        /**
+         * next map relatively current map
+         */
         DictionaryNode<K,V> next;
 
         DictionaryNode(int hash, K key, V value, DictionaryNode<K,V> next) {
@@ -244,16 +335,27 @@ public class Dictionary<K, V> {
         public final V getValue()      { return value; }
         public final String toString() { return key + "=" + value; }
 
+        /** calculate hash of a map
+         * @return int
+         */
         public final int hashCode() {
             return Objects.hashCode(key) ^ Objects.hashCode(value);
         }
 
+        /** set new value
+         * @param newValue
+         * @return V
+         */
         public final V setValue(V newValue) {
             V oldValue = value;
             value = newValue;
             return oldValue;
         }
 
+        /** checked equals
+         * @param o
+         * @return boolean
+         */
         public final boolean equals(Object o) {
             if (o == this)
                 return true;
@@ -271,6 +373,7 @@ public class Dictionary<K, V> {
         return new DictionaryIterator();
     }
 
+    // class that describe iterator
     public class DictionaryIterator{
 
         DictionaryNode<K,V> next;        // next entry to return
@@ -286,10 +389,16 @@ public class Dictionary<K, V> {
             }
         }
 
+        /** return true if in this index has a map
+         * @return boolean
+         */
         public final boolean hasNext() {
             return next != null;
         }
 
+        /**
+         * @return DictionaryNode
+         */
         final DictionaryNode<K,V> nextNode() {
             DictionaryNode<K,V>[] t;
             DictionaryNode<K,V> e = next;
