@@ -1,9 +1,9 @@
-package ru.yalymar.map.usermodel;
+package ru.yalymar.map.collusion;
 
 import org.junit.Test;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
+
+import java.util.*;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -12,7 +12,7 @@ import static org.hamcrest.core.Is.is;
  * @since 14.03.2017
  * @version 1
  */
-public class MapTest {
+public class CollusionTest {
 
     // inner class
     public class User {
@@ -48,22 +48,6 @@ public class MapTest {
             result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
             return result;
         }
-
-        /**checked equals
-         * @param o
-         * @return boolean
-         */
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-
-            User user = (User) o;
-
-            if (children != user.children) return false;
-            if (name != null ? !name.equals(user.name) : user.name != null) return false;
-            return birthday != null ? birthday.equals(user.birthday) : user.birthday == null;
-        }
     }
 
     @Test
@@ -85,7 +69,12 @@ public class MapTest {
         System.out.println(user1.hashCode());
         System.out.println(user2.hashCode());
         System.out.println(user1.equals(user2));
-
-        assertThat(map.size(), is(2));
+        Set<User> set = map.keySet();
+        Iterator<User> iterator = set.iterator();
+        //while(iterator.hasNext()){
+        //    System.out.println(iterator.next());
+        //}
+        //assertThat(map.size(), is(2));
     }
 }
+
