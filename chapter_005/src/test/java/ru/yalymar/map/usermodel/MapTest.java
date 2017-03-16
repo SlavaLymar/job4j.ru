@@ -4,6 +4,9 @@ import org.junit.Test;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+
+import static junit.framework.TestCase.assertFalse;
+import static junit.framework.TestCase.assertTrue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -87,5 +90,41 @@ public class MapTest {
         System.out.println(user1.equals(user2));
 
         assertThat(map.size(), is(2));
+    }
+
+    @Test
+    public void whenMakeEqualsObjectThenShouldCompileTheRules(){
+
+        // create three equals users
+        Calendar calendarUser = Calendar.getInstance();
+        calendarUser.set(1963, 03, 12);
+        User user1 = new User("Vasya", 1, calendarUser);
+        User user2 = new User("Vasya", 1, calendarUser);
+        User user3 = new User("Vasya", 1, calendarUser);
+
+        //rule 1 - reflection
+        assertTrue(user1.equals(user1));
+
+        //rule 2 - symmetry
+        boolean result = user1.equals(user2);
+        assertThat(result, is(user2.equals(user1)));
+
+        //rule 3 - transivity
+        boolean result1 = user1.equals(user2);
+        boolean result2 = user2.equals(user3);
+        assertThat(result1, is(result2));
+        assertThat(user1.equals(user3), is(true));
+
+        //rule 4 - consistency
+        assertThat(result1, is(result2));
+        assertThat(result1, is(result2));
+        assertThat(result1, is(result2));
+        assertThat(result1, is(result2));
+        assertThat(result1, is(result2));
+        assertThat(result1, is(result2));
+        assertThat(result1, is(result2));
+
+        //rule 5 - equals with null
+        assertFalse(user1.equals(null));
     }
 }
