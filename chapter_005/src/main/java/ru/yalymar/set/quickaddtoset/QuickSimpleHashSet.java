@@ -19,7 +19,7 @@ public class QuickSimpleHashSet<E> implements Iterator<E>{
      * index is counter of iterator.
      * containerCounter is counter for add objects to container
      */
-    private int index = 0, containerCounter = 0;;
+    private int index = 0, containerCounter = 0;
 
     public QuickSimpleHashSet(E[] container) {
         this.container = container;
@@ -35,33 +35,47 @@ public class QuickSimpleHashSet<E> implements Iterator<E>{
      */
     public boolean add(E e){
         boolean result = true;
-        if(this.binarySearch(e, this.container) == 1) {
+        if(this.search(e) == 1) {
             result = false;
             return result;
         }
         this.container[this.containerCounter++] = e;
-        this.sortedContainer();
+        //this.sortedContainer();
         return result;
     }
 
+    /*
     private int binarySearch(E e, E[] container) {
         int result = 1;
-        int midpoint = (this.containerCounter/2)-1;
-        if(container[midpoint].hashCode() < e.hashCode()){
-            this.binarySearch(e, Arrays.copyOfRange(container,
-                    midpoint+1, container.length-midpoint+1));
-        }
-        else if(container[midpoint].hashCode() > e.hashCode()){
-            this.binarySearch(e, Arrays.copyOfRange(container, 0, midpoint-1));
+        int midpoint = (container.length/2)-1;
+        if(midpoint > 0 && container[midpoint] != null) {
+            if (container[midpoint].hashCode() < e.hashCode()) {
+                this.binarySearch(e, Arrays.copyOfRange(container,
+                        midpoint + 1, container.length - 1));
+            } else if (container[midpoint].hashCode() > e.hashCode()) {
+                this.binarySearch(e, Arrays.copyOfRange(container, 0, midpoint - 1));
+            }
         }
         else return -1;
+        return result;
+    }
+    */
+
+    private int search(E e) {
+        int result = 1;
+        for(E value : this.container){
+            if(value != null && value.hashCode() == e.hashCode()) {
+                result = -1;
+                return result;
+            }
+        }
         return result;
     }
 
     /**
      * sorted container depends of hashcode
      */
-    public void sortedContainer() {
+    /*public void sortedContainer() {
         for(int i = 0; i<this.container.length; i++){
             for(int j = this.container.length-1; j>i; j--){
                 if((this.container[i] != null && this.container[j] != null) &&
@@ -73,6 +87,7 @@ public class QuickSimpleHashSet<E> implements Iterator<E>{
             }
         }
     }
+    */
 
     /**return true if container has an object
      * @return boolean

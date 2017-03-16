@@ -59,9 +59,15 @@ public class ConvertIteratorsTest {
 
         ConvertIterators ci = new ConvertIterators();
         Iterator <Integer> resultIt = ci.convert(list.iterator());
+        Integer[] expected = new Integer[]{1};
+        Integer[] result = new Integer[1];
 
-        boolean result = resultIt.hasNext();
+        assertThat(resultIt.hasNext(), is(true));
 
-        assertThat(result, is(true));
+        int index = 0;
+        while(resultIt.hasNext()){
+            result[index++] = resultIt.next();
+        }
+        assertThat(result, is(expected));
     }
 }
