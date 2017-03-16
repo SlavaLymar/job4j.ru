@@ -127,4 +127,22 @@ public class MapTest {
         //rule 5 - equals with null
         assertFalse(user1.equals(null));
     }
+
+    @Test
+    public void whenMakeHashCodeOfObjectThenShouldCompileTheRules() {
+        // create user
+        Calendar calendarUser = Calendar.getInstance();
+        calendarUser.set(1963, 03, 12);
+        User user1 = new User("Vasya", 1, calendarUser);
+        User user2 = new User("Vasya", 1, calendarUser);
+
+        // rule 1. Same value
+        assertThat(user1.hashCode(), is(user1.hashCode()));
+
+        // rule 2. If objects are equals then the hash will be the same
+        assertThat(user1.equals(user2), is(user1.hashCode() == user2.hashCode()));
+
+        // rule 3. a.equals(b) doesn`t mean a.hashcode() == b.hashcode()
+
+    }
 }
