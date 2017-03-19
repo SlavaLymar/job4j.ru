@@ -13,7 +13,6 @@ public class QuickSimpleHashSetTest {
     public void whenAddDuplicateObjectsThenGetNull(){
         String[] array = new String[10];
         QuickSimpleHashSet<String> set = new QuickSimpleHashSet<>(array);
-        SimpleHashSet<String> set1 = new SimpleHashSet<>(array);
 
         long startSet = System.nanoTime();
         // add to QuickSet
@@ -25,6 +24,19 @@ public class QuickSimpleHashSetTest {
         set.add("core");
         long finishSet = System.nanoTime();
         System.out.println("Time QuickSet "+(finishSet-startSet)+" ns");
+
+        int counter = 0;
+        for(String s: set.getContainer()){
+            if(s != null) counter++;
+        }
+        assertNull(set.getContainer()[5]);
+        assertThat(counter, is(5));
+    }
+
+    @Test
+    public void whenAddDuplicateObjectsToSimpleHashSetThenGetTime(){
+        String[] array = new String[10];
+        SimpleHashSet<String> set1 = new SimpleHashSet<>(array);
 
         long startSet1 = System.nanoTime();
         // add to Set
@@ -38,11 +50,10 @@ public class QuickSimpleHashSetTest {
         System.out.println("Time Set "+(finishSet1-startSet1)+" ns");
 
         int counter = 0;
-        for(String s: set.getContainer()){
+        for(String s: set1.getContainer()){
             if(s != null) counter++;
         }
-        assertNull(set.getContainer()[5]);
+        assertNull(set1.getContainer()[5]);
         assertThat(counter, is(5));
     }
-
 }

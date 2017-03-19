@@ -35,7 +35,7 @@ public class QuickSimpleHashSet<E> implements Iterator<E>{
      */
     public boolean add(E e){
         boolean result = true;
-        if(this.search(e) == 1) {
+        if(this.search(e) == -1) {
             result = false;
             return result;
         }
@@ -64,7 +64,8 @@ public class QuickSimpleHashSet<E> implements Iterator<E>{
     private int search(E e) {
         int result = 1;
         for(E value : this.container){
-            if(value != null && value.hashCode() == e.hashCode()) {
+            if(value == null) break;
+            if(value.hashCode() == e.hashCode()) {
                 result = -1;
                 return result;
             }
@@ -86,8 +87,8 @@ public class QuickSimpleHashSet<E> implements Iterator<E>{
                 }
             }
         }
-    }
-    */
+    }*/
+
 
     /**return true if container has an object
      * @return boolean
