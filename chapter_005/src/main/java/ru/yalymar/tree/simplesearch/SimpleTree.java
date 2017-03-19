@@ -1,4 +1,4 @@
-package ru.yalymar.tree;
+package ru.yalymar.tree.simplesearch;
 
 import java.util.*;
 

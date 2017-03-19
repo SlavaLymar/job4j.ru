@@ -1,6 +1,7 @@
 package ru.yalymar.tree;
 
 import org.junit.Test;
+import ru.yalymar.tree.simpletree.SimpleTree;
 import java.util.ArrayList;
 import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -15,6 +16,7 @@ public class SimpleTreeTest {
         SimpleTree.Leaf leaf = simpleTree.new Leaf(1, "Serega");
         SimpleTree.Leaf leaf1 = simpleTree.new Leaf(3, "Serega3");
         SimpleTree.Leaf leaf2 = simpleTree.new Leaf(-4, "Serega-4");
+
         simpleTree.addChild(leaf1);
         simpleTree.addChild(leaf);
         simpleTree.addChild(leaf2);
