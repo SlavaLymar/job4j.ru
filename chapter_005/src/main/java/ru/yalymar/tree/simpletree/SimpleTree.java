@@ -72,11 +72,9 @@ public class SimpleTree<K, V> {
     private void insertLeaf(int i, Leaf current, Leaf leaf){
         if(i < 0) {
             current.right = new Leaf(leaf.getKey(), leaf.getValue(), current);
-            current.addToList(leaf);
         }
         else {
             current.left = new Leaf(leaf.getKey(), leaf.getValue(), current);
-            current.addToList(leaf);
         }
     }
 
@@ -108,11 +106,11 @@ public class SimpleTree<K, V> {
             if(current.right != null) result.add(index++, current.right);
             return result;
         }
-        else if(i > 0){
-            if(current.right != null) this.findChildrenByKey(current.right, key);
+        else if(i < 0){
+            if(current.right != null) result = this.findChildrenByKey(current.right, key);
         }
         else {
-            if(current.left != null) this.findChildrenByKey(current.left, key);
+            if(current.left != null) result = this.findChildrenByKey(current.left, key);
         }
         return result;
 

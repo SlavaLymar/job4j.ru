@@ -2,6 +2,8 @@ package ru.yalymar.set.quickaddtoset;
 
 import org.junit.Test;
 import ru.yalymar.set.arraylistsimpleset.SimpleHashSet;
+import ru.yalymar.set.quickaddtoset.QuickSimpleHashSet;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertArrayEquals;
