@@ -10,7 +10,7 @@ import static org.junit.Assert.assertNull;
 public class QuickSimpleHashSetTest {
 
     @Test
-    public void whenAddDuplicateObjectsThenGetNull(){
+    public void whenAddDuplicateObjectsToQuickSimpleHashSetThenGetTime(){
         String[] array = new String[10];
         QuickSimpleHashSet<String> set = new QuickSimpleHashSet<>(array);
 
