@@ -183,6 +183,9 @@ public class SimpleTree<K, V> {
             return cursor;
         }
 
+        /** add value to list of leaf
+         * @param leaf
+         */
         public void addToList(Leaf leaf){
             this.list.add(index++, leaf.getValue());
         }
