@@ -3,7 +3,6 @@ package ru.yalymar.orderbook.models;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class BookContainer {
 
     private List<OrderBook> list = new ArrayList<>();
