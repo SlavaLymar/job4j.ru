@@ -1,4 +1,4 @@
-package ru.yalymar.tree.simplesearch;
+package ru.yalymar.tree.binarysearch;
 
 import java.util.*;
 
@@ -15,6 +15,11 @@ public class SimpleTree<K, V> {
      */
     private Leaf root;
 
+    /**
+     * list of leaves
+     */
+    private List<Leaf> leaves = new LinkedList<>();
+
     public Leaf getRoot() {
         return this.root;
     }
@@ -29,6 +34,7 @@ public class SimpleTree<K, V> {
         else {
             this.root = leaf;
             this.root.addToList(leaf);
+            this.leaves.add(leaf);
         }
     }
 
@@ -72,9 +78,11 @@ public class SimpleTree<K, V> {
     private void insertLeaf(int i, Leaf current, Leaf leaf){
         if(i < 0) {
             current.right = new Leaf(leaf.getKey(), leaf.getValue(), current);
+            this.leaves.add(current.right);
         }
         else {
             current.left = new Leaf(leaf.getKey(), leaf.getValue(), current);
+            this.leaves.add(current.left);
         }
     }
 
@@ -132,6 +140,46 @@ public class SimpleTree<K, V> {
         }
         else {
             if(current.left != null) result = this.findByKey(current.left, key);
+        }
+        return result;
+    }
+
+    public boolean isBalanced(){
+        boolean result = true;
+        for(Leaf leaf : this.leaves){
+            int i = this.getChildrenByLeaf(leaf).size();
+            if(i != 2 && i != 0){
+                result = false;
+                return result;
+            }
+        }
+        return result;
+    }
+
+    /**return children of current leaf
+     * @param current
+     * @return List
+     */
+    public List<Leaf> getChildrenByLeaf(Leaf current){
+        List<Leaf> result;
+        int index = 0;
+        result = new ArrayList<>();
+        if(current.left != null) result.add(index++, current.left);
+        if(current.right != null) result.add(index++, current.right);
+        return result;
+    }
+
+    /** simple search leaf by key
+     * @param key
+     * @return Leaf
+     */
+    public Leaf simpleSearch(K key){
+        Leaf result = null;
+        for(Leaf leaf : this.leaves){
+            if(leaf != null && leaf.getKey().equals(key)){
+                result = leaf;
+                return result;
+            }
         }
         return result;
     }
@@ -235,6 +283,7 @@ public class SimpleTree<K, V> {
             if(this.hasNext()) return this.list.get(cursor++);
             return null;
         }
+
     }
 
 

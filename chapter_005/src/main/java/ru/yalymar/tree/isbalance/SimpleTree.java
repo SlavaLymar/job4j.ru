@@ -115,10 +115,10 @@ public class SimpleTree<K, V> {
             return result;
         }
         else if(i > 0){
-            if(current.right != null) this.findChildrenByKey(current.right, key);
+            if(current.right != null) result = this.findChildrenByKey(current.right, key);
         }
         else {
-            if(current.left != null) this.findChildrenByKey(current.left, key);
+            if(current.left != null) result = this.findChildrenByKey(current.left, key);
         }
         return result;
     }
