@@ -18,7 +18,6 @@ public class Order {
         this.price = price;
     }
 
-
     public String operation() {
         return operation;
     }

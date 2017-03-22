@@ -31,17 +31,16 @@ public class XMLParser {
 
             long s = input.length();
             while (s > 0) {
-                byte[] buffer = new byte[1024];
+                byte[] buffer = new byte[1024*1024*5];
                 int i = in.read(buffer);
                 ByteBuffer buf = ByteBuffer.wrap(buffer);
                 CharBuffer charbuf = Charset.forName("Cp866").decode(buf);
                 char[] ch_array = charbuf.array();
                 this.workWithStrings(new String(ch_array));
-
-
                 //out.write(ch_array);
 
                 s -= i;
+
             }
         }
         catch(IOException e){
@@ -102,7 +101,9 @@ public class XMLParser {
                     this.getPrice(list.get(2)));
             ob.addOrder(o);
         }
-        if(list.size() == 2) ob.removeOrder(this.getOrderID(list.get(1)));
+        if(list.size() == 2) {
+            ob.removeOrder(this.getOrderID(list.get(1)));
+        }
     }
 
     private float getPrice(String string) {
