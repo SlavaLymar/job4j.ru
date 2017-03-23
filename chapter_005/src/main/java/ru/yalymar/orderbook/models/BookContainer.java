@@ -3,15 +3,23 @@ package ru.yalymar.orderbook.models;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author slavalymar
+ * @since 23.03.2017
+ * @version 1
+ */
 public class BookContainer {
 
-    private List<OrderBook> list = new ArrayList<>();
+    /**
+     * list of books
+     */
+    private List<Book> list = new ArrayList<>();
     
-    public List<OrderBook> getList() {
+    public List<Book> getList() {
         return this.list;
     }
 
-    public void setList(List<OrderBook> list) {
+    public void setList(List<Book> list) {
         this.list = list;
     }
 

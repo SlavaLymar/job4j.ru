@@ -2,55 +2,34 @@ package ru.yalymar.orderbook.models;
 
 public class Order {
 
-    private OrderBook orderBook;
-    private int orderID;
-    private String operation;
-    private short volume;
-    private float price;
+    private final int id;
 
-    public Order(OrderBook orderBook, int orderID,
-                 String operation, short volume, float price) {
+    private final String operation;
 
-        this.orderBook = orderBook;
-        this.orderID = orderID;
+    private final int volume;
+
+    private final double price;
+
+    public Order(int id, String operation, int volume, double price) {
+        this.id = id;
         this.operation = operation;
         this.volume = volume;
         this.price = price;
     }
 
-    public String operation() {
+    public int getId() {
+        return id;
+    }
+
+    public String getOperation() {
         return operation;
     }
 
-    public float getPrice() {
-        return price;
-    }
-
-    public short getVolume() {
+    public int getVolume() {
         return volume;
     }
 
-    public int getOrderID() {
-        return orderID;
-    }
-
-    public void setOrderBook(OrderBook orderBook) {
-        this.orderBook = orderBook;
-    }
-
-    public void setOrderID(int orderID) {
-        this.orderID = orderID;
-    }
-
-    public void setOperation(String operation) {
-        this.operation = operation;
-    }
-
-    public void setVolume(short volume) {
-        this.volume = volume;
-    }
-
-    public void setPrice(float price) {
-        this.price = price;
+    public double getPrice() {
+        return price;
     }
 }
