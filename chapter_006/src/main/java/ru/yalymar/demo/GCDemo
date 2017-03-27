@@ -1,0 +1,45 @@
+1. Создал класс MemoryUsage с внутренним классом User с полями int age = 90 и String name = "Anatole";
+Переопределил метод finalize();
+
+2. Создал 10000 объектов User.
+
+    Расчет объема памяти, занимаемого объектами класса User:
+    int age - 4 byte;
+
+    String name:
+    Title: 8 byte;
+    Fields int: 4 byte *3 == 12 byte;
+    Reference to array: 4 byte;
+    // 24 byte.
+
+    String array:
+    Title: 8 byte;
+    Length: 4 byte;
+    Chars: 7 * 2 byte == 14 byte;
+    Alignment: + 6 byte;
+    // 32 byte;
+    TOTAL (String name).volumeOf() == 56 byte.
+
+    User:
+    Title: 8 byte;
+    Fields: (age + ref (4 + 4 byte)) + (name + ref (56 + 4 byte)) == 68 byte;
+    Alignment: + 4 byte;
+    TOTAL User.volumeOf() == 72 byte.
+
+    Следовательно, для 10000 объектов User объем необходимой памяти равен: 72*10000 = 720000 byte = 703,125 kb.
+
+    Расчет объема памяти, занимаемого объектами класса User без полей (== null):
+
+            Title: 8 byte;
+            Ref: age + name (4 + 4 byte);
+            TOTAL: 16 byte.
+
+3. Расчет объема памяти, занимаемого объектами класса без полей:
+
+    8 byte for 32-bit system
+    16 byte for 64-bit system
+
+4. Изменил размер heap до 1 мб.
+После того, как создал 10000 объектов и наступил момент приблежения заполнения доступной памяти JVM, размером 1 мб,
+вызвался сборщик мусора, очистил объекты на которых больше нет ссылок.
+

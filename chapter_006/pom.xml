@@ -1,0 +1,19 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>chapter_006</artifactId>
+    <packaging>jar</packaging>
+    <version>2.0</version>
+    <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.5.6</version>
+        </dependency>
+    </dependencies>
+
+    <parent>
+	<groupId>ru.job4j</groupId>
+	<artifactId>job4j.ru</artifactId>
+	<version>2.0</version>
+    </parent>    
+</project>
