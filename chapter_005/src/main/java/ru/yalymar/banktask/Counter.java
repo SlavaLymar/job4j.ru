@@ -56,7 +56,10 @@ public class Counter {
             }
 
             Result r = this.countCustomersInTime(list);
-            if(r.countOfCustomers > count) result = r;
+            if(r.countOfCustomers > count) {
+                count = r.countOfCustomers;
+                result = r;
+            }
         }
 
         return result;
