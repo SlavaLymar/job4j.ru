@@ -5,6 +5,8 @@ import org.junit.Test;
 import ru.yalymar.projectTracker.menu.Menu;
 import ru.yalymar.projectTracker.tracker.Tracker;
 
+import java.util.Scanner;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -27,7 +29,9 @@ public class StartUITest {
         Menu menu = new Menu(SI, tracker);
         menu.fillMenu();
         int key = SI.ask("Question", menu.getIntArr());
+
         menu.select(key);
+
         assertThat(tracker.getItems().get(0).getName(), is("Slava"));
     }
 

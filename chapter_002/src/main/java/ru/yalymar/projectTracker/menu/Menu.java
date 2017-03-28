@@ -115,6 +115,7 @@ public class Menu {
             do {
                 newin = input.getNumber("Do you want to add Item?\n1. Yes\n2. No");
                 if (newin == 1) {
+                    System.out.println("nen");
                     tracker.showAllItems();
                     String name = input.ask("Enter the name: ");
                     String descriprion = input.ask("Enter the description: ");
