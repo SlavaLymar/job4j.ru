@@ -19,7 +19,7 @@ public class MemoryUsage {
 
         @Override
         public String toString() {
-            return "User{" +
+            return "Cache{" +
                     "name='" + name + '\'' +
                     ", age=" + age +
                     '}';
