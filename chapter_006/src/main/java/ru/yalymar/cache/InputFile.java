@@ -5,8 +5,17 @@ import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.Charset;
 
+/**
+ * @author slavalymar
+ * @since 29.03.2017
+ * @version 1
+ */
 public class InputFile {
 
+    /** read file
+     * @param file
+     * @return String
+     */
     public String readFile(File file){
         StringBuffer result = new StringBuffer();
 

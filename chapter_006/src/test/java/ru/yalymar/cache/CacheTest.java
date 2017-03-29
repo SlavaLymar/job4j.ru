@@ -2,7 +2,6 @@ package ru.yalymar.cache;
 
 import org.junit.Test;
 import java.io.File;
-import java.lang.ref.SoftReference;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
