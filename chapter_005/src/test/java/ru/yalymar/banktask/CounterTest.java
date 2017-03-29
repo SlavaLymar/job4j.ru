@@ -17,27 +17,26 @@ public class CounterTest {
         Customer c3 = new Customer(3);
         Customer c4 = new Customer(4);
         Customer c5 = new Customer(5);
-        Customer c6 = new Customer(6);
-        Customer c7 = new Customer(7);
-        Customer c8 = new Customer(8);
-        Customer c9 = new Customer(9);
-        Customer c10 = new Customer(10);
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.HOUR_OF_DAY, 1);
-        c1.setExit(calendar.getTime());
+        Calendar calendar1 = Calendar.getInstance();
+        calendar1.add(Calendar.HOUR_OF_DAY, 1);
+        c1.setExit(calendar1.getTime());
 
-        calendar.add(Calendar.HOUR_OF_DAY, 1);
-        c2.setExit(calendar.getTime());
+        Calendar calendar2 = Calendar.getInstance();
+        calendar2.add(Calendar.HOUR_OF_DAY, 1);
+        c2.setExit(calendar2.getTime());
 
-        calendar.add(Calendar.HOUR_OF_DAY, 1);
-        c3.setExit(calendar.getTime());
+        Calendar calendar3 = Calendar.getInstance();
+        calendar3.add(Calendar.HOUR_OF_DAY, 1);
+        c3.setExit(calendar3.getTime());
 
-        calendar.add(Calendar.HOUR_OF_DAY, 1);
-        c4.setExit(calendar.getTime());
+        Calendar calendar4 = Calendar.getInstance();
+        calendar4.add(Calendar.HOUR_OF_DAY, 1);
+        c4.setExit(calendar4.getTime());
 
-        calendar.add(Calendar.HOUR_OF_DAY, 1);
-        c5.setExit(calendar.getTime());
+        Calendar calendar5 = Calendar.getInstance();
+        calendar5.add(Calendar.HOUR_OF_DAY, 1);
+        c5.setExit(calendar5.getTime());
 
         Counter counter = new Counter();
         counter.addCustomer(c1);
@@ -47,7 +46,7 @@ public class CounterTest {
         counter.addCustomer(c5);
 
         Counter.Result result = counter.calculateCustomers();
-        assertThat(result.countOfCustomers, is(5));
+        assertThat(result.countOfCustomers, is(3));
     }
 
 }

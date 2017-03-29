@@ -49,7 +49,13 @@ public class Counter {
             //internal loop
             while(it2.hasNext()){
                 Customer nextLine = it2.next();
-                list.add(nextLine);
+
+                Iterator<Customer> it3 = it2;
+                if(it3.hasNext()){
+                    if(it3.next().getEnter().getTime() <= nextLine.getExit().getTime()){
+                        list.add(nextLine);
+                    }
+                }
                 if(nextLine.getEnter().getTime() > firstLine.getExit().getTime()){
                     break;
                 }
