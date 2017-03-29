@@ -1,8 +1,8 @@
 package ru.yalymar.cache;
 
-import java.nio.file.Path;
+import java.io.File;
 
 public interface GetCache {
 
-    String getCache(Path path);
+    String getCache(File file);
 }

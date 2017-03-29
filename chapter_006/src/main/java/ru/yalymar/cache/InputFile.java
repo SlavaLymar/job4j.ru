@@ -1,38 +1,31 @@
 package ru.yalymar.cache;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.StringWriter;
+import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.Charset;
-import java.nio.file.Path;
 
 public class InputFile {
 
-    public String readFile(Path path){
-        StringBuffer result = null;
+    public String readFile(File file){
+        StringBuffer result = new StringBuffer();
 
-        try(FileInputStream in = new FileInputStream(path.toFile());
+        try(FileInputStream in = new FileInputStream(file);
             StringWriter out = new StringWriter()){
 
-            byte[] buffer = new byte[1024];
-            int i;
+            long s = file.length();
 
-            do {
-                i = in.read(buffer);
+            while (s > 0) {
+                byte[] buffer = new byte[1024*1024];
+                int i = in.read(buffer);
 
                 ByteBuffer buf = ByteBuffer.wrap(buffer);
                 CharBuffer charbuf = Charset.forName("Cp866").decode(buf);
                 char[] ch_array = charbuf.array();
-
                 out.write(ch_array);
-                out.flush();
+                s-= i;
                 result.append(out.getBuffer());
             }
-            while (i != -1);
-
         }
         catch(FileNotFoundException e){
             System.out.println(e.getMessage());
