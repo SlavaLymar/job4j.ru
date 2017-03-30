@@ -26,10 +26,13 @@ public class Counter {
      * @return int
      */
     public int countSpaces(){
+        System.out.println(String.format("%s%s%s", "Thread ", Thread.currentThread().getName(), " is executing"));
+
         int counter = 0;
         for(int i = 0; i<this.chars.length; i++){
             if(this.chars[i] == ' ') counter++;
         }
+        System.out.println(String.format("%s%s", counter, " spaces."));
         return counter;
     }
 
@@ -37,10 +40,13 @@ public class Counter {
      * @return int
      */
     public int countChars(){
+        System.out.println(String.format("%s%s%s", "Thread ", Thread.currentThread().getName(), " is executing"));
+
         int counter = 0;
         for(int i = 0; i<this.chars.length; i++){
             if(this.chars[i] != ' ') counter++;
         }
+        System.out.println(String.format("%s%s", counter, " chars."));
         return counter;
     }
 
