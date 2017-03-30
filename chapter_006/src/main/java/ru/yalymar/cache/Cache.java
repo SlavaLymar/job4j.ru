@@ -28,7 +28,7 @@ public class Cache {
      */
     public String getObject(File file){
         GetCache gc = file1 -> {
-            return this.cache.containsKey(file) ? this.cache.get(file).get() : null;
+            return this.cache.containsKey(file1) ? this.cache.get(file1).get() : null;
         };
         String result = gc.getCache(file);
 
