@@ -1,4 +1,4 @@
-package ru.yalymar.threads.waitoutput;
+package ru.yalymar.threads.stopthread;
 
 /**
  * @author slavalymar
@@ -11,7 +11,7 @@ public class Counter {
      * original string
      */
     private final String string;
-    
+
     /**
      * array of char of string
      */
@@ -30,18 +30,13 @@ public class Counter {
 
         int counter = 0;
         for(int i = 0; i<this.chars.length; i++){
-
-            // set delay 5 sec
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                System.out.println(String.format("%s%s", Thread.currentThread().getName(), " time`s up!!!!!!"));
-                return 0;
-            }
-
             if(this.chars[i] == ' ') counter++;
         }
         System.out.println(String.format("%s%s", counter, " spaces."));
+
+        // set flag true to current thread
+        Thread.currentThread().interrupt();
+
         return counter;
     }
 
@@ -56,8 +51,11 @@ public class Counter {
             if(this.chars[i] != ' ') counter++;
         }
         System.out.println(String.format("%s%s", counter, " chars."));
+
+        // set flag true to current thread
+        Thread.currentThread().interrupt();
+
         return counter;
     }
-
 
 }
