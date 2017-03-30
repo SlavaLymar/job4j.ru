@@ -1,4 +1,4 @@
-package ru.yalymar.threads.spacewordcounter;
+package ru.yalymar.threads.waitoutput;
 
 import org.junit.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -8,8 +8,12 @@ public class CounterTest {
 
     @Test
     public void whenCountStringShouldGetIt() throws InterruptedException {
+
+        String string = "Privet romashki, ty day te dengi... ";
+        System.out.println(String.format("%s%s%s",
+                "This program will calculate spaces and chars of string: \"", string, "\"."));
         Counter counter =
-                new Counter(new String("Privet romashki, ty day te dengi... "));
+                new Counter(string);
 
         final int[] count = new int[2];
 
@@ -33,12 +37,21 @@ public class CounterTest {
         t1.start();
         t2.start();
 
-        // wait finish threads t1, t2
-        t1.join();
-        t2.join();
+        /**
+         * wait finish threads t1, t2 in 1 second.
+         * After that set flag of interrupt = true
+         */
+        t1.join(1000);
+        t1.interrupt();
+        t2.join(1000);
+        t2.interrupt();
 
-        assertThat(count[0], is(6));
+        // wait finish sleeping thread
+        t1.join();
+
+        System.out.println("Finish program in main thread.");
+
+        assertThat(count[0], is(0));
         assertThat(count[1], is(30));
     }
-
 }
