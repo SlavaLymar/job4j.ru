@@ -11,7 +11,7 @@ public class Counter {
      * original string
      */
     private final String string;
-    
+
     /**
      * array of char of string
      */
