@@ -43,10 +43,7 @@ public class CounterTest {
          */
         t1.join(1000);
         t1.interrupt();
-        t2.join(1000);
-        t2.interrupt();
-
-        // wait finish sleeping thread
+        t2.join();
         t1.join();
 
         System.out.println("Finish program in main thread.");
