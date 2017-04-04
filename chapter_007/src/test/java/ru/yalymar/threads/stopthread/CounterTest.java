@@ -21,9 +21,7 @@ public class CounterTest {
         Thread t1 = new Thread(new Runnable() {
             @Override
             public void run() {
-                while (!Thread.currentThread().isInterrupted()) {
-                    count[0] = counter.countSpaces();
-                }
+                count[0] = counter.countSpaces();
             }
         });
 
@@ -31,14 +29,14 @@ public class CounterTest {
         Thread t2 = new Thread(new Runnable() {
             @Override
             public void run() {
-                while(!Thread.currentThread().isInterrupted()) {
-                    count[1] = counter.countChars();
-                }
+                count[1] = counter.countChars();
             }
         });
 
         // start threads
         t1.start();
+        t1.interrupt();
+
         t2.start();
 
         /**
@@ -49,7 +47,7 @@ public class CounterTest {
 
         System.out.println("Finish program in main thread.");
 
-        assertThat(count[0], is(6));
+        assertThat(count[0], is(0));
         assertThat(count[1], is(30));
     }
 }

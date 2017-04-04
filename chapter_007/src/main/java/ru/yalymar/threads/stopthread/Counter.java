@@ -30,12 +30,13 @@ public class Counter {
 
         int counter = 0;
         for(int i = 0; i<this.chars.length; i++){
+            if(Thread.currentThread().isInterrupted()){
+                System.out.println(String.format("%s%s%s", "Thread ", Thread.currentThread().getName(), " has stopped!!!"));
+                break;
+            }
             if(this.chars[i] == ' ') counter++;
         }
         System.out.println(String.format("%s%s", counter, " spaces."));
-
-        // set flag true to current thread
-        Thread.currentThread().interrupt();
 
         return counter;
     }
