@@ -38,51 +38,6 @@ public class SyncArrayListTest {
         assertThat(result, is(1000));
     }
 
-    @Test
-    public void whenEditObjShouldGetIt() throws InterruptedException {
-
-        Thread t1 = new Thread() {
-            @Override
-            public void run() {
-                for(int i = 0; i<100; i++) {
-                    syncArrayList.add(10);
-                }
-            }
-        };
-
-        t1.start();
-        t1.join();
-
-        new Thread() {
-            @Override
-            public void run() {
-                for(int i = 0; i<100; i++) {
-                    System.out.println(Thread.currentThread().getName());
-                    syncArrayList.add(i, 20);
-                }
-            }
-        }.start();
-
-        new Thread() {
-            @Override
-            public void run() {
-                int count = 0;
-                for(int i = 0; i<100; i++) {
-                    System.out.println(Thread.currentThread().getName());
-                    if(syncArrayList.get(i) == 10) count++;
-                }
-                System.out.println(String.format("Count: %d", count));
-            }
-        }.start();
-
-        do{
-            Thread.sleep(1);
-        }
-        while(Thread.activeCount() > 2);
-
-        //assertThat(result, is(1000));
-    }
-
 
 
 

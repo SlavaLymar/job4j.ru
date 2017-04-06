@@ -33,19 +33,21 @@ public class SyncArrayList<E> {
      * @param e
      */
     public void add(E e) {
-        boolean b = true;
-        int count = 0;
-        do{
-            if(this.array[count] == null){
-                this.array[count] = e;
-                b = false;
+        synchronized (this) {
+            boolean b = true;
+            int count = 0;
+            do {
+                if (this.array[count] == null) {
+                    this.array[count] = e;
+                    b = false;
+                }
+                count++;
+                if (count == this.array.length) {
+                    this.extendArray();
+                }
             }
-            count++;
-            if(count == this.array.length){
-                this.extendArray();
-            }
+            while (b);
         }
-        while(b);
     }
 
     /** add obj by index
@@ -53,17 +55,21 @@ public class SyncArrayList<E> {
      * @param e
      */
     public void add(int i, E e) {
-        if(this.array[i] == null){
-            return;
+        synchronized (this) {
+            if (this.array[i] == null) {
+                return;
+            }
+            this.array[i] = e;
         }
-        this.array[i] = e;
     }
 
     /**
      * extend array
      */
     private void extendArray() {
-        this.array = Arrays.copyOf(this.array, this.array.length*2);
+        synchronized (this) {
+            this.array = Arrays.copyOf(this.array, this.array.length * 2);
+        }
     }
 
     /** return value if one exist
@@ -72,10 +78,11 @@ public class SyncArrayList<E> {
      * @throws IndexOutOfBoundsException
      */
     public E get(int index) throws IndexOutOfBoundsException{
-        if(this.array[index] != null) {
-            return (E) this.array[index];
+        synchronized (this) {
+            if (this.array[index] != null) {
+                return (E) this.array[index];
+            } else throw new NullPointerException();
         }
-        else throw new NullPointerException();
     }
 
     /** return Iterator
