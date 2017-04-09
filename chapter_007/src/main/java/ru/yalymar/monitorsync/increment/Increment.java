@@ -10,12 +10,12 @@ public class Increment {
     /**
      * those what we want to increment
      */
-    private int i = 0;
+    private static int i = 0;
 
     /**
      * monitor of increment class
      */
-    private Object monitor = new Object();
+    private final Object monitor = new Object();
 
     // Class that is thread
     private class IncrementI extends Thread {
@@ -59,7 +59,7 @@ public class Increment {
         thread2.join();
 
         // print result
-        System.out.println(String.format("Value i: %d", increment.i));
+        System.out.println(String.format("Value i: %d", i));
 
     }
 }
