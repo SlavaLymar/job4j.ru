@@ -7,13 +7,41 @@ import java.io.StringWriter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * @author slavalymar
+ * @since 10.04.2017
+ * @version 1
+ */
 public class FindText {
 
+    /**
+     * start path for searching
+     */
     private final File STARTPATH;
+
+    /**
+     * path to have found file
+     */
     private File file;
+
+    /**
+     * text we want to find
+     */
     private final String TEXT;
+
+    /**
+     * flag to exit
+     */
     private boolean flag;
+
+    /**
+     * pattern for searching .txt file
+     */
     private final Pattern PATTERN = Pattern.compile(".+.txt");
+
+    /**
+     * list of Threads
+     */
     private SearchText[] list;
 
     public FindText(String text) {
@@ -33,7 +61,7 @@ public class FindText {
         this.list = new SearchText[10];
     }
 
-    public void getPath(File file){
+    public void setPath(File file){
         this.file = file;
     }
 
@@ -49,6 +77,9 @@ public class FindText {
         this.flag = flag;
     }
 
+    /**
+     * finish app
+     */
     private void finish(){
         for(SearchText st : this.list){
             if(st.isAlive()) {
@@ -62,6 +93,9 @@ public class FindText {
         }
     }
 
+    /**
+     * class for search .txt files
+     */
     public class SearchFile extends Thread{
 
         @Override
@@ -69,6 +103,9 @@ public class FindText {
             this.searchFiles(null);
         }
 
+        /** search .txt file
+         * @param file
+         */
         public synchronized void searchFiles(File file){
             if(file == null) file = STARTPATH;
             File[] files = file.listFiles();
@@ -109,6 +146,9 @@ public class FindText {
         }
     }
 
+    /**
+     * class for search text in .txt file
+     */
     public class SearchText extends Thread{
         final File file;
 
@@ -120,13 +160,16 @@ public class FindText {
         public void run() {
             System.out.println(String.format("%s start working in %s", Thread.currentThread().getName(), this.file.toString()));
             if(this.execute()) {
-                getPath(this.file);
+                setPath(this.file);
                 setFlag(true);
                 System.out.println("BINGO!!!!!!!!!!!!!!!!!!");
             }
             System.out.println(String.format("%s has complete", Thread.currentThread().getName()));
         }
 
+        /** read file and compare
+         * @return boolean
+         */
         private boolean execute(){
             StringBuffer str = new StringBuffer();
             long l = this.file.length();
