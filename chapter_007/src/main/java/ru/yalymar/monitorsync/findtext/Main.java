@@ -7,7 +7,11 @@ public class Main {
         FindText ft = new FindText(text);
         Thread t = ft.new SearchFile();
         t.start();
-        t.join();
+
+        do {
+            Thread.sleep(1);
+        }
+        while(Thread.activeCount() > 2);
 
         System.out.println(String.format("The text \"%s\" contains in \"%s\"",
                 text, ft.getFile().getAbsolutePath()));

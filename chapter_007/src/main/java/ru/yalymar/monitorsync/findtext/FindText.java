@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,14 +14,14 @@ public class FindText {
     private final String TEXT;
     private boolean flag;
     private final Pattern PATTERN = Pattern.compile(".+.txt");
-    private List<SearchText> list;
+    private SearchText[] list;
 
     public FindText(String text) {
         this.STARTPATH = new File("C:/");
         this.TEXT = text;
         this.file = null;
         this.flag = false;
-        this.list = new ArrayList<>(20);
+        this.list = new SearchText[10];
     }
 
     // constructor for test
@@ -32,7 +30,7 @@ public class FindText {
         this.TEXT = text;
         this.file = null;
         this.flag = false;
-        this.list = new ArrayList<>(20);
+        this.list = new SearchText[10];
     }
 
     public void getPath(File file){
@@ -43,7 +41,7 @@ public class FindText {
         return this.file;
     }
 
-    public List<SearchText> getList() {
+    public SearchText[] getList() {
         return this.list;
     }
 
@@ -52,13 +50,13 @@ public class FindText {
     }
 
     private void finish(){
-        for(SearchText st: this.list){
-            if(st != null) {
+        for(SearchText st : this.list){
+            if(st.isAlive()) {
                 try {
                     st.sleep(1000);
                     st.interrupt();
                 } catch (InterruptedException e) {
-                    System.out.println(String.format("%s has been closed!", st.getName()));
+                    System.out.println(String.format("%s has been completed!"));
                 }
             }
         }
@@ -82,23 +80,29 @@ public class FindText {
                         if (matcher.find()) {
                             SearchText t = new SearchText(f);
 
-                            if (list.size() == 0) {
-                                list.add(t);
-                                t.start();
-                            }
-                            for (SearchText st : list) {
-                                if (st == null || !st.isAlive()) {
-                                    list.add(t);
-                                    t.start();
-                                    break;
+                            boolean exit = true;
+                            do {
+                                for (int i = 0; i<list.length; i++) {
+                                    if (list[i] == null || !list[i].isAlive()) {
+                                        list[i] = t;
+                                        list[i].start();
+                                        exit = false;
+                                        break;
+                                    }
                                 }
                             }
-                            if (flag) finish();
+                            while(exit);
+
+                            if (flag) {
+                                finish();
+                                break;
+                            }
                         }
                     }
                 }
 
                 for (File f : files) {
+                    if(flag) break;
                     if (f.isDirectory()) this.searchFiles(f);
                 }
             }
