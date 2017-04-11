@@ -1,7 +1,5 @@
 package ru.yalymar.waitnotify.threadpool;
 
-import java.util.concurrent.BlockingQueue;
-
 /**
  * @author slavalymar
  * @since 11.04.2017
@@ -9,22 +7,12 @@ import java.util.concurrent.BlockingQueue;
  */
 public class MyThread extends Thread {
 
-    /**
-     * queue of tasks
-     */
-    private MyBQueue taskQueue;
     private ThreadPool threadPool;
 
     /**
      * flag to stop
      */
     private boolean isStopped = false;
-
-    /*
-    MyThread(MyBQueue taskQueue){
-        this.taskQueue = taskQueue;
-    }
-*/
 
     MyThread(ThreadPool threadPool){
         this.threadPool = threadPool;
