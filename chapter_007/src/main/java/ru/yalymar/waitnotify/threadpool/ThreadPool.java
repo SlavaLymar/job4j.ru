@@ -2,20 +2,18 @@ package ru.yalymar.waitnotify.threadpool;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * @author slavalymar
  * @since 11.04.2017
  * @version 1
  */
-public class ThreadPool {
+public class ThreadPool<E> {
 
     /**
      * queue of tasks
      */
-    private BlockingQueue taskQueue;
+    private MyBQueue<E> taskQueue;
 
     /**
      * list of threads
@@ -28,7 +26,7 @@ public class ThreadPool {
     private boolean isStopped = false;
 
     public ThreadPool() {
-        this.taskQueue = new LinkedBlockingQueue();
+        this.taskQueue = new MyBQueue();
         this.startThreads();
     }
 
@@ -37,7 +35,7 @@ public class ThreadPool {
      */
     private void startThreads() {
         for(int i = 0; i<this.getNumbOfCPU(); i++){
-            this.threads.add(new MyThread(this.taskQueue));
+            this.threads.add(new MyThread(this));
         }
         for(MyThread t : this.threads){
             t.start();
@@ -52,12 +50,12 @@ public class ThreadPool {
     }
 
     /** add task to queue
-     * @param task
+     * @param e
      */
-    public synchronized void add(Task task){
+    public synchronized void add(E e) throws InterruptedException {
         if(this.isStopped) throw new IllegalStateException("ThreadPool is stopped!");
 
-        this.taskQueue.add(task);
+        this.taskQueue.addiction(e);
     }
 
     /**
@@ -68,5 +66,9 @@ public class ThreadPool {
         for(MyThread t : this.threads){
             t.doStop();
         }
+    }
+
+    public MyBQueue<E> getTaskQueue() {
+        return this.taskQueue;
     }
 }

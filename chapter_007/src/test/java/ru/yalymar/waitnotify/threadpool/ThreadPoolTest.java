@@ -9,6 +9,7 @@ public class ThreadPoolTest {
     @Test
     public void whenAddTaskIntoThreadPoolShouldGetIt() throws InterruptedException {
         ThreadPool threadPool = new ThreadPool();
+        
         threadPool.add(new Task("Task1"));
         threadPool.add(new Task("Task2"));
         threadPool.add(new Task("Task3"));

@@ -12,15 +12,22 @@ public class MyThread extends Thread {
     /**
      * queue of tasks
      */
-    private BlockingQueue taskQueue;
+    private MyBQueue taskQueue;
+    private ThreadPool threadPool;
 
     /**
      * flag to stop
      */
     private boolean isStopped = false;
 
-    MyThread(BlockingQueue taskQueue){
+    /*
+    MyThread(MyBQueue taskQueue){
         this.taskQueue = taskQueue;
+    }
+*/
+
+    MyThread(ThreadPool threadPool){
+        this.threadPool = threadPool;
     }
 
     /**
@@ -29,9 +36,14 @@ public class MyThread extends Thread {
     @Override
     public void run() {
         while(!this.isStopped()){
-            Task task = (Task) this.taskQueue.poll();
+            Task task = null;
             try {
-                task.run(this);
+                task = (Task) this.threadPool.getTaskQueue().withdraw();
+            } catch (InterruptedException e) {
+                System.out.println(String.format("%s closed with wait->interrupt method!", this.getName()));
+            }
+            try {
+                task.run(this, task.getName());
                 this.sleep(1000);
             }
             catch(Exception e){
