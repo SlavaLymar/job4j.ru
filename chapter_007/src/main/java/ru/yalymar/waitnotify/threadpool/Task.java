@@ -8,7 +8,7 @@ public class Task {
         this.name = name;
     }
 
-    public void doTask(){
-        System.out.println(String.format("Task \"%s\" has completed!", this.name));
+    public void run(Thread t){
+        System.out.println(String.format("Task1 is completed by \"%s\"!", t.getName()));
     }
 }
