@@ -1,25 +1,22 @@
 package ru.yalymar.monitorsync.increment;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * @author slavalymar
  * @since 04.04.2017
  * @version 1
  */
-public class Increment {
+public class Increment1 {
 
     /**
      * those what we want to increment
      */
-    private int i = 0;
+    private AtomicInteger i = new AtomicInteger(0);
 
-    public int getI() {
+    public AtomicInteger getI() {
         return this.i;
     }
-
-    /**
-     * monitor of increment class
-     */
-    private final Object monitor = new Object();
 
     // Class that is thread
     private class IncrementI extends Thread {
@@ -28,10 +25,8 @@ public class Increment {
          * increment i
          */
         private void add() {
-            synchronized (monitor) {
-                System.out.println(this.getName());
-                i++;
-            }
+            System.out.println(this.getName());
+            i.incrementAndGet();
         }
 
         /**
@@ -51,7 +46,7 @@ public class Increment {
      */
     public static void main(String[] args) throws InterruptedException {
         // initialized
-        Increment increment = new Increment();
+        Increment1 increment = new Increment1();
         IncrementI thread1 = increment.new IncrementI();
         IncrementI thread2 = increment.new IncrementI();
 
@@ -64,7 +59,7 @@ public class Increment {
         thread2.join();
 
         // print result
-        System.out.println(String.format("Value i: %d", increment.i));
+        System.out.println(String.format("Value i: %s", increment.getI().toString()));
 
     }
 }

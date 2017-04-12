@@ -1,11 +1,14 @@
 package ru.yalymar.monitorsync.increment;
 
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 /**
  * @author slavalymar
  * @since 04.04.2017
  * @version 1
  */
-public class Increment {
+public class Increment2 {
 
     /**
      * those what we want to increment
@@ -16,10 +19,7 @@ public class Increment {
         return this.i;
     }
 
-    /**
-     * monitor of increment class
-     */
-    private final Object monitor = new Object();
+    private Lock lock = new ReentrantLock();
 
     // Class that is thread
     private class IncrementI extends Thread {
@@ -28,9 +28,13 @@ public class Increment {
          * increment i
          */
         private void add() {
-            synchronized (monitor) {
-                System.out.println(this.getName());
+            if(lock.tryLock()){
                 i++;
+                lock.unlock();
+                return;
+            }
+            else {
+                this.add();
             }
         }
 
@@ -40,6 +44,7 @@ public class Increment {
         @Override
         public void run() {
             for(int i = 0; i<10; i++) {
+                System.out.println(this.getName());
                 this.add();
             }
         }
@@ -51,7 +56,7 @@ public class Increment {
      */
     public static void main(String[] args) throws InterruptedException {
         // initialized
-        Increment increment = new Increment();
+        Increment2 increment = new Increment2();
         IncrementI thread1 = increment.new IncrementI();
         IncrementI thread2 = increment.new IncrementI();
 
