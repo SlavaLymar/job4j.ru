@@ -64,7 +64,7 @@ public class Increment {
         thread2.join();
 
         // print result
-        System.out.println(String.format("Value i: %d", increment.i));
+        System.out.println(String.format("Value i: %d", increment.getI()));
 
     }
 }
