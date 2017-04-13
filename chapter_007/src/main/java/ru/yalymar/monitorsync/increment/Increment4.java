@@ -12,7 +12,7 @@ public class Increment4 {
      */
     private int i = 0;
 
-    public int getI() {
+    public synchronized int getI() {
         return this.i;
     }
 

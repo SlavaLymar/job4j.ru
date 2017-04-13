@@ -15,11 +15,18 @@ public class Increment2 {
      */
     private int i = 0;
 
-    public int getI() {
-        return this.i;
-    }
-
     private Lock lock = new ReentrantLock();
+
+    public int getI() {
+        if(lock.tryLock()){
+            int result = this.i;
+            lock.unlock();
+            return result;
+        }
+        else {
+            return this.getI();
+        }
+    }
 
     // Class that is thread
     private class IncrementI extends Thread {

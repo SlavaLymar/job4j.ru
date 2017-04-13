@@ -12,14 +12,16 @@ public class Increment {
      */
     private int i = 0;
 
-    public int getI() {
-        return this.i;
-    }
-
     /**
      * monitor of increment class
      */
     private final Object monitor = new Object();
+
+    public int getI() {
+        synchronized (monitor) {
+            return this.i;
+        }
+    }
 
     // Class that is thread
     private class IncrementI extends Thread {
