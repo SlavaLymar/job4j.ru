@@ -1,5 +1,7 @@
 package ru.yalymar.testtask;
 
+import ru.yalymar.testtask.field.Field;
+
 public class Main {
 
     private Field field;
@@ -30,7 +32,9 @@ public class Main {
 
 
         }
-        while(this.field.isAliveBomberman() && this.field.win());
+        while(true
+                //this.field.isAliveBomberman() && this.field.win()
+                );
     }
 
     public static void main(String[] args) throws InterruptedException {

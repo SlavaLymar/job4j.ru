@@ -14,6 +14,14 @@ public abstract class Cell implements Addiction, Delete{
         this.available = available;
     }
 
+    public Essence getE() {
+        return this.e;
+    }
+
+    public boolean isAvailable() {
+        return this.available;
+    }
+
     @Override
     public void add(Essence e) {
         this.e = e;
@@ -23,4 +31,6 @@ public abstract class Cell implements Addiction, Delete{
     public void delete() {
         this.e = null;
     }
+
+
 }
