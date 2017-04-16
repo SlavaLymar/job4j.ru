@@ -5,6 +5,7 @@ import ru.yalymar.testtask.field.Field;
 import ru.yalymar.testtask.model.Monsters;
 import ru.yalymar.testtask.model.Player;
 
+
 public class Main {
 
     private Field field;
@@ -54,10 +55,12 @@ public class Main {
         t1.join();
         t2.join();
         log.info("Game Over!");
+        System.out.println("Game Over");
     }
 
     public static void main(String[] args) throws InterruptedException {
         log.info("Start Game");
+        System.out.println("Start Game");
         new Main().init();
     }
 }

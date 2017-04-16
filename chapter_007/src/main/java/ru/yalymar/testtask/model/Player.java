@@ -2,6 +2,11 @@ package ru.yalymar.testtask.model;
 
 import ru.yalymar.testtask.field.Field;
 
+/**
+ * @author slavalymar
+ * @since 16.04.2017
+ * @version 1
+ */
 public class Player extends Essence{
 
     public Player(Field field) {
@@ -9,6 +14,9 @@ public class Player extends Essence{
         this.createPlayer();
     }
 
+    /**
+     * create player
+     */
     private void createPlayer() {
         int size = super.field.getSize();
         for (int i = 0; i<size; i++){
@@ -24,6 +32,9 @@ public class Player extends Essence{
         }
     }
 
+    /** create move
+     * @return int[]
+     */
     @Override
     public int[] createMove() {
         boolean success = false;
@@ -56,5 +67,6 @@ public class Player extends Essence{
             Thread.sleep(300);
         }
         while(super.isAlive());
+
     }
 }

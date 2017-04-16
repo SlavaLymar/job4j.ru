@@ -3,10 +3,20 @@ package ru.yalymar.testtask.model;
 import ru.yalymar.testtask.field.Field;
 import java.util.Random;
 
+/** create move
+ * @return int[]
+ * @throws InterruptedException
+ */
 public class Monsters {
 
+    /**
+     * array of monsters
+     */
     private Monster[] monsters;
-    private Random random = new Random();
+
+    /**
+     * field instance
+     */
     private Field field;
 
     public Monsters(Field field) {
@@ -19,6 +29,9 @@ public class Monsters {
         return this.monsters;
     }
 
+    /**
+     * create monsters
+     */
     private void createMonsters() {
         int count = this.monsters.length;
         int size = this.field.getSize();
@@ -28,7 +41,7 @@ public class Monsters {
                     if (count == 0) {
                         return;
                     }
-                    if ((this.random.nextInt(10)) > 6 &&
+                    if ((this.field.getRandom().nextInt(10)) > 6 &&
                             this.field.getCells()[i][j].isAvailable() &&
                             this.field.getCells()[i][j].getE() == null) {
                         this.field.getCells()[i][j].add(new Monster(String.format("Monster %d", count), this.field));
@@ -42,8 +55,11 @@ public class Monsters {
         }
     }
 
+    /** action of monsters
+     * @throws InterruptedException
+     */
     public void monstersActions() throws InterruptedException {
-        while (this.monsters.length > 0){
+        while (this.monsters.length > 0 && !this.field.isFinish()){
             for(Monster m : this.monsters){
                 m.createMove();
                 Thread.sleep(300);
