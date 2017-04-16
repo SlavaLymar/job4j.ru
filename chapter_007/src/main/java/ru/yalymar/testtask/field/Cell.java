@@ -1,10 +1,9 @@
 package ru.yalymar.testtask.field;
 
 import ru.yalymar.testtask.mechanic.Addiction;
-import ru.yalymar.testtask.mechanic.Delete;
 import ru.yalymar.testtask.model.Essence;
 
-public abstract class Cell implements Addiction, Delete{
+public abstract class Cell implements Addiction{
 
     private Essence e;
     private boolean available;
@@ -18,6 +17,14 @@ public abstract class Cell implements Addiction, Delete{
         return this.e;
     }
 
+    public void delete(Essence e) {
+        this.e = null;
+    }
+
+    public void setE(Essence e) {
+        this.e = e;
+    }
+
     public boolean isAvailable() {
         return this.available;
     }
@@ -27,10 +34,6 @@ public abstract class Cell implements Addiction, Delete{
         this.e = e;
     }
 
-    @Override
-    public void delete() {
-        this.e = null;
-    }
 
 
 }

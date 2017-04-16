@@ -2,5 +2,7 @@ package ru.yalymar.testtask.mechanic;
 
 public interface Mobility {
 
-    void move();
+    int[] createMove() throws InterruptedException;
+
+    void move(int x, int y);
 }

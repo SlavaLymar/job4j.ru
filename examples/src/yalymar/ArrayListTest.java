@@ -1,16 +1,14 @@
 package yalymar;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
-/**
- * Created by SLava on 05.04.2017.
- */
 public class ArrayListTest {
 
     public static void main(String[] args) {
-        List<Integer> list = new ArrayList<>();
-        list.set(0, 0);
-        list.set(1,1);
+        int[] ints   = new int[20];
+
+        ints[0] = 10;
+
+        System.out.println(Arrays.toString(ints));
     }
 }

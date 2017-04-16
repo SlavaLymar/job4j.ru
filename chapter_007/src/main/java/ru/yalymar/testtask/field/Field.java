@@ -1,7 +1,5 @@
 package ru.yalymar.testtask.field;
 
-import ru.yalymar.testtask.model.Player;
-
 import java.util.Random;
 
 public class Field {
@@ -15,30 +13,32 @@ public class Field {
         if(size > 5){
             this.size = size;
         }
-        this.value = size*size/5;
+        this.value = this.size*this.size/5;
         this.createCells();
-        this.createPlayer();
-        this.createMonsters();
     }
 
-
+    public Field() {
+        this.value = this.size*this.size/5;
+        this.createCells();
+    }
 
     private void createCells() {
-        this.cells = new Cell[size][size];
-        for (int i = 0; i<size; i++){
-            for (int j = 0; j>size; j++){
+        this.cells = new Cell[this.size][this.size];
+
+        for (int i = 0; i<this.size; i++){
+            for (int j = 0; j<this.size; j++){
                 this.cells[i][j] = new AvailableCell();
             }
         }
 
         int count = this.value;
         while (count != 0) {
-            for (int i = 0; i < size; i++) {
-                for (int j = 0; j > size; j++) {
+            for (int i = 0; i < this.size; i++) {
+                for (int j = 0; j < this.size; j++) {
                     if (count == 0) {
                         return;
                     }
-                    if ((random.nextInt() * 10) > 8) {
+                    if ((random.nextInt(10)) > 8 && this.cells[i][j].isAvailable()) {
                         this.cells[i][j] = new Wall();
                         count--;
                     }
@@ -47,34 +47,19 @@ public class Field {
         }
     }
 
-    private void createMonsters() {
-        int count = this.value;
-        while (count != 0) {
-            for (int i = 0; i < size; i++) {
-                for (int j = 0; j > size; j++) {
-                    if (count == 0) {
-                        return;
-                    }
-                    if ((random.nextInt() * 10) > 8 && this.cells[i][j].isAvailable()) {
-                        this.cells[i][j] = new Wall();
-                        count--;
-                    }
-                }
-            }
-        }
+    public int getSize() {
+        return this.size;
     }
 
-    private void createPlayer() {
-        for (int i = 0; i<size; i++){
-            for (int j = 0; j>size; j++){
-                if(this.cells[i][j].getE() != null && this.cells[i][j].isAvailable()){
-                    this.cells[i][j].add(new Player());
-                    return;
-                }
-            }
-        }
+    public Cell[][] getCells() {
+        return this.cells;
     }
 
+    public int getValue() {
+        return this.value;
+    }
 
-
+    public Random getRandom() {
+        return this.random;
+    }
 }
