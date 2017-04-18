@@ -45,7 +45,6 @@ public class Monster extends Essence{
                         super.field.getCells()[newY][newX].getE().getName().contains("BOMBERMAN")){
 
                     System.out.println("Bomberman has dead!");
-                    super.field.getCells()[newY][newX].getE().setAlive(false);
                     super.field.setFinish(true);
                 }
                 super.move(newX, newY);

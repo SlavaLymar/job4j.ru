@@ -5,7 +5,6 @@ import ru.yalymar.testtask.field.Field;
 import ru.yalymar.testtask.model.Monsters;
 import ru.yalymar.testtask.model.Player;
 
-
 public class Main {
 
     private Field field;

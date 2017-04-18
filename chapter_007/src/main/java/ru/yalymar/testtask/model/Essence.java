@@ -87,4 +87,8 @@ public abstract class Essence implements Mobility{
     public void setY(int y) {
         this.y = y;
     }
+
+    public Field getField() {
+        return this.field;
+    }
 }

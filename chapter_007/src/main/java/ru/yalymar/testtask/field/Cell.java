@@ -3,6 +3,9 @@ package ru.yalymar.testtask.field;
 import ru.yalymar.testtask.mechanic.Addiction;
 import ru.yalymar.testtask.model.Essence;
 
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 /**
  * @author slavalymar
  * @since 16.04.2017
@@ -36,7 +39,7 @@ public abstract class Cell implements Addiction{
     /** get essence
      * @return Essence
      */
-    public Essence getE() {
+    public synchronized Essence getE() {
         return this.e;
     }
 
@@ -54,12 +57,8 @@ public abstract class Cell implements Addiction{
         this.e = e;
     }
 
-    public boolean isAvailable() {
+    public synchronized boolean isAvailable() {
         return this.available;
     }
-
-
-
-
 
 }

@@ -51,6 +51,10 @@ public class Player extends Essence{
                 continue;
             }
             if(super.field.getCells()[newY][newX].isAvailable()){
+                if(super.field.getCells()[newY][newX].getE() != null &&
+                        super.field.getCells()[newY][newX].getE().getName().contains("Monster")){
+                    continue;
+                }
                 super.move(newX, newY);
                 success = true;
             }
@@ -66,7 +70,7 @@ public class Player extends Essence{
             this.createMove();
             Thread.sleep(300);
         }
-        while(super.isAlive());
+        while(!super.field.isFinish());
 
     }
 }

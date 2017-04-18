@@ -1,7 +1,6 @@
 package ru.yalymar.testtask.model;
 
 import ru.yalymar.testtask.field.Field;
-import java.util.Random;
 
 /** create move
  * @return int[]
