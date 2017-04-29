@@ -1,0 +1,2 @@
+select name, b.type, e.type, t.type from car as c left outer join body as b on c.body_id = b.id
+left outer join engine as e on c.engine_id = e.id left outer join transmission as t on c.transmission_id = t.id;
