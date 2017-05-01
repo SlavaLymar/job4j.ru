@@ -1,8 +1,6 @@
 package ru.yalymar.jdbc.model;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author slavalymar
@@ -15,13 +13,11 @@ public class Item {
     private String description;
     private Date time;
     private String id;
-    private List <Comment> comments;
 
     public Item(String name, String description) {
         this.name = name;
         this.description = description;
         this.time = new Date();
-        this.comments = new ArrayList<Comment>();
     }
 
     public Item(String name, String description, String id) {
@@ -29,11 +25,6 @@ public class Item {
         this.description = description;
         this.time = new Date();
         this.id = id;
-        this.comments = new ArrayList<Comment>();
-    }
-
-    public List<Comment> getComments() {
-        return comments;
     }
 
     public String getDescription() {
@@ -77,10 +68,6 @@ public class Item {
         result = prime * result + (description == null ? 0 : description.hashCode());
         result = prime * result + (id == null ? 0 : id.hashCode());
         return result;
-    }
-
-    public void addToListComments(Comment comment){
-        comments.add(comment);
     }
 
 

@@ -12,18 +12,32 @@ import java.util.Properties;
 
 public class DBManager {
 
-    private Go go;
+    private GoCreate goCreate;
+    private GoUpdate goUpdate;
     private Connection c;
     private Properties properties = new Properties();
     private static final Logger logger = Logger.getLogger(Tracker.class);
 
     public DBManager() {
         this.initProperties();
-        this.initGo();
+        this.initGoCreate();
+        this.initGoUpdate();
     }
 
-    private void initGo() {
-        this.go = (s) -> {
+    public Connection getC() {
+        return this.c;
+    }
+
+    public GoCreate getGoCreate() {
+        return this.goCreate;
+    }
+
+    public GoUpdate getGoUpdate() {
+        return this.goUpdate;
+    }
+
+    private void initGoCreate() {
+        this.goCreate = (s) -> {
             PreparedStatement st = null;
             try {
                 if(!this.c.isClosed()) {
@@ -50,6 +64,30 @@ public class DBManager {
         };
     }
 
+    private void initGoUpdate() {
+        this.goUpdate = (st) -> {
+            try {
+                if (st != null) {
+                    return st.executeUpdate();
+                }
+                return -1;
+            } catch (SQLException e) {
+                logger.error(e.getMessage(), e);
+                this.disconnectDB();
+                return -1;
+            }
+            finally {
+                if(st != null){
+                    try {
+                        st.close();
+                    } catch (SQLException e) {
+                        logger.error(e.getMessage(), e);
+                    }
+                }
+            }
+        };
+    }
+
     private void initProperties() {
         try(FileInputStream in = new FileInputStream(
                 "C:/Java/job4j.ru/chapter_008/resources/resources.properties")) {
@@ -59,10 +97,6 @@ public class DBManager {
         catch(IOException e){
             logger.error(e.getMessage(), e);
         }
-    }
-
-    public Connection getC() {
-        return this.c;
     }
 
     public boolean createDB(){
@@ -123,11 +157,11 @@ public class DBManager {
     }
 
     public boolean createItemsTable(){
-        return this.go.go(this.properties.getProperty("CREATE_ITEMS_TABLE"));
+        return this.goCreate.goCreate(this.properties.getProperty("CREATE_ITEMS_TABLE"));
     }
 
     public boolean createCommentsTable(){
-        return this.go.go(this.properties.getProperty("CREATE_COMMENTS_TABLE"));
+        return this.goCreate.goCreate(this.properties.getProperty("CREATE_COMMENTS_TABLE"));
     }
 
 }

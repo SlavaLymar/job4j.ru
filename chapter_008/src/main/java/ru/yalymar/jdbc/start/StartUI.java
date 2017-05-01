@@ -1,6 +1,7 @@
 package ru.yalymar.jdbc.start;
 
 import ru.yalymar.jdbc.menu.Menu;
+import ru.yalymar.jdbc.model.DBManager;
 import ru.yalymar.jdbc.tracker.Tracker;
 
 /**
@@ -20,7 +21,8 @@ public class StartUI {
      * start programm
      */
    public void init(){
-       Tracker tracker = new Tracker();
+       DBManager dbManager = new DBManager();
+       Tracker tracker = new Tracker(dbManager);
        Menu menu = new Menu(this.input, tracker);
        menu.fillMenu();
        menu.greetings();

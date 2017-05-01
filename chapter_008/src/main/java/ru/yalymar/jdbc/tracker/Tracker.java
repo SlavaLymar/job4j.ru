@@ -1,5 +1,12 @@
 package ru.yalymar.jdbc.tracker;
 
+import org.apache.log4j.Logger;
+import ru.yalymar.jdbc.model.DBManager;
+import ru.yalymar.jdbc.model.Item;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -13,31 +20,74 @@ public class Tracker {
     private static final Random RANDOM = new Random();
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss");
     private int idCounter = 0;
+    private DBManager dbManager;
+    private static final Logger logger = Logger.getLogger(Tracker.class);
 
-
-
-
-
-    /*
-    public Item add(Item item){
-        item.setId(this.generateId());
-        this.items.add(item);
-        return item;
+    public Tracker(DBManager dbManager) {
+        this.dbManager = dbManager;
     }
 
+    public int add(Item item){
+        PreparedStatement st = null;
+        try {
+            st = this.dbManager.getC().prepareStatement(
+                    "INSERT INTO Items (name, description, date) values (?, ?, ?)");
 
-    public void update(Item item){
-        int index = this.items.indexOf(item);
-        if(index != -1) {
-            Collections.replaceAll(this.items, this.items.get(index), item);
+            st.setString(1, item.getName());
+            st.setString(2, item.getDescription());
+            st.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
+            return this.dbManager.getGoUpdate().goUpdate(st);
+        } catch (SQLException e) {
+            logger.error(e.getMessage(), e);
         }
+        finally {
+            if(st != null){
+                try {
+                    st.close();
+                } catch (SQLException e) {
+                    logger.error(e.getMessage(), e);
+                }
+            }
+        }
+        return -2;
     }
+
+
+    public int update(Item item){
+        PreparedStatement st = null;
+        try {
+            st = this.dbManager.getC().prepareStatement(
+                    "UPDATE Items SET name = ?, description = ? where id = ?");
+
+            st.setString(1, item.getName());
+            st.setString(2, item.getDescription());
+            st.setInt(3, Integer.parseInt(item.getId()));
+            return this.dbManager.getGoUpdate().goUpdate(st);
+        } catch (SQLException e) {
+            logger.error(e.getMessage(), e);
+        }
+        finally {
+            if(st != null){
+                try {
+                    st.close();
+                } catch (SQLException e) {
+                    logger.error(e.getMessage(), e);
+                }
+            }
+        }
+        return -2;
+    }
+
 
     public void delete(Item item){
+
+
+
             if(this.items.indexOf(item) != -1)
                 this.items.remove(this.items.indexOf(item));
     }
 
+    /*
     public List <Item> findAll(){
         List <Item> result = new ArrayList<Item>();
         for(Item i: this.items) {
