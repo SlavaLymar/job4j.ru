@@ -1,14 +1,5 @@
 package ru.yalymar.jdbc.tracker;
 
-import org.apache.log4j.Logger;
-import ru.yalymar.jdbc.model.Comment;
-import ru.yalymar.jdbc.model.Item;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -19,105 +10,13 @@ import java.util.*;
  */
 public class Tracker {
 
-    private Connection conn = null;
-    private Properties props = new Properties();
-    private static final Logger logger = Logger.getLogger(Tracker.class);
     private static final Random RANDOM = new Random();
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss");
     private int idCounter = 0;
 
-    public Connection getConn() {
-        return this.conn;
-    }
 
-    public boolean createDB(){
-        try(FileInputStream in = new FileInputStream(
-                "C:/Java/job4j.ru/chapter_008/resources/resources.properties")) {
 
-            props.load(in);
-        }
-        catch(IOException e){
-            e.printStackTrace();
-        }
 
-        String url = this.props.getProperty("urlCreate");
-        String login = this.props.getProperty("login");
-        String password = this.props.getProperty("password");
-        PreparedStatement st = null;
-        try {
-            this.conn = DriverManager.getConnection(url, login, password);
-            st = this.conn.prepareStatement("CREATE DATABASE Tracker;");
-            return st.execute();
-        } catch (SQLException e) {
-            logger.error(e.getMessage(), e);
-            this.disconnectDB();
-            return false;
-        }
-        finally {
-            if(st != null){
-                try {
-                    st.close();
-                } catch (SQLException e) {
-                    logger.error(e.getMessage(), e);
-                }
-            }
-        }
-    }
-
-    public Connection connectDB(){
-        try(FileInputStream in = new FileInputStream(
-                "C:/Java/job4j.ru/chapter_008/resources/resources.properties")) {
-
-            props.load(in);
-        }
-        catch(IOException e){
-            e.printStackTrace();
-        }
-
-        String url = this.props.getProperty("urlConnect");
-        String login = this.props.getProperty("login");
-        String password = this.props.getProperty("password");
-        try {
-            return this.conn = DriverManager.getConnection(url, login, password);
-        } catch (SQLException e) {
-            logger.error(e.getMessage(), e);
-            this.disconnectDB();
-        }
-        return null;
-    }
-
-    public void disconnectDB(){
-        if (this.conn != null) {
-            try {
-                this.conn.close();
-            } catch (SQLException e) {
-                logger.error(e.getMessage(), e);
-            }
-        }
-    }
-
-    public boolean createItemsTable(){
-        PreparedStatement st = null;
-        try {
-            if(!this.conn.isClosed()){
-                st = this.conn.prepareStatement("CREATE TABLE Items(?, ?, ?);");
-
-                return st.execute();
-            }
-        } catch (SQLException e) {
-            logger.error(e.getMessage(), e);
-        }
-        finally {
-            if(st != null){
-                try {
-                    st.close();
-                } catch (SQLException e) {
-                    logger.error(e.getMessage(), e);
-                }
-            }
-        }
-        return false;
-    }
 
     /*
     public Item add(Item item){
