@@ -27,6 +27,15 @@ public class TrackerTest {
         dbManager.disconnectDB();
     }
 
+    @Test
+    public void whenShowAllItemsItemShouldGetTrue(){
+        DBManager dbManager = new DBManager();
+        Tracker tracker = new Tracker(dbManager);
+        dbManager.connectDB();
+        boolean result = tracker.showAllItems();
+        assertTrue(result);
+        dbManager.disconnectDB();
+    }
 
 
 

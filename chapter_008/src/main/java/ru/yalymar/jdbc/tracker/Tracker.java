@@ -5,6 +5,7 @@ import ru.yalymar.jdbc.model.DBManager;
 import ru.yalymar.jdbc.model.Item;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -79,12 +80,27 @@ public class Tracker {
     }
 
 
-    public void delete(Item item){
+    public int delete(Item item){
+        PreparedStatement st = null;
+        try {
+            st = this.dbManager.getC().prepareStatement(
+                    "DELETE FROM Items where id = ?");
 
-
-
-            if(this.items.indexOf(item) != -1)
-                this.items.remove(this.items.indexOf(item));
+            st.setInt(1, Integer.parseInt(item.getId()));
+            return this.dbManager.getGoUpdate().goUpdate(st);
+        } catch (SQLException e) {
+            logger.error(e.getMessage(), e);
+        }
+        finally {
+            if(st != null){
+                try {
+                    st.close();
+                } catch (SQLException e) {
+                    logger.error(e.getMessage(), e);
+                }
+            }
+        }
+        return -2;
     }
 
     /*
@@ -150,16 +166,45 @@ public class Tracker {
         return items;
     }
 
-    public void showAllItems(){
+*/
+    public boolean showAllItems(){
         System.out.printf("%1$-30s%2$-30s%3$-30s%4$-20s\n", "Id", "Name", "Description", "Date");
         System.out.printf("--------------------------------------------------------------------------------------------------------------\n");
-        for(Item i: this.items){
-            if(i != null) {
-                System.out.printf("%1$-30s%2$-30s%3$-30s%4$-20s\n", i.getId(), i.getName(), i.getDescription(), sdf.format(i.getTime()));
+
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = this.dbManager.getC().prepareStatement("SELECT * FROM Items");
+            rs = this.dbManager.getGo().go(st);
+            while (rs.next()){
+                System.out.printf("%1$-30d%2$-30s%3$-30s%4$-20s\n", rs.getInt("id"),
+                        rs.getString("name").trim(), rs.getString("description").trim(),
+                        sdf.format(rs.getTimestamp("date")));
+            }
+            return true;
+        } catch (SQLException e) {
+            logger.error(e.getMessage(), e);
+            return false;
+        }
+        finally {
+            if(st != null){
+                try {
+                    st.close();
+                } catch (SQLException e) {
+                    logger.error(e.getMessage(), e);
+                }
+            }
+            if(rs != null){
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    logger.error(e.getMessage(), e);
+                }
             }
         }
     }
 
+    /*
     public void showAllItems(List<Item> item){
         System.out.printf("%1$-30s%2$-30s%3$-30s%4$-20s\n", "Id", "Name", "Description", "Date");
         System.out.printf("--------------------------------------------------------------------------------------------------------------\n");

@@ -112,7 +112,6 @@ public class Menu {
         @Override
         public void execute(Input input, Tracker tracker) {
 
-            /*
             int newin = 0;
             do {
                 newin = input.getNumber("Do you want to add Item?\n1. Yes\n2. No");
@@ -126,7 +125,6 @@ public class Menu {
                 }
             }
             while (newin != 2);
-            */
         }
 
     }
@@ -161,7 +159,6 @@ public class Menu {
             boolean exist = false;
             String id = " ";
 
-            /*
             do {
                 tracker.showAllItems();
                 id = input.ask("Enter the id: ");
@@ -189,7 +186,6 @@ public class Menu {
                     }
                     while (newin != 3);
                 }
-*/
 
 
         }

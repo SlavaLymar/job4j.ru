@@ -14,6 +14,7 @@ public class DBManager {
 
     private GoCreate goCreate;
     private GoUpdate goUpdate;
+    private Go go;
     private Connection c;
     private Properties properties = new Properties();
     private static final Logger logger = Logger.getLogger(Tracker.class);
@@ -22,18 +23,33 @@ public class DBManager {
         this.initProperties();
         this.initGoCreate();
         this.initGoUpdate();
+        this.initGo();
     }
 
     public Connection getC() {
         return this.c;
     }
 
-    public GoCreate getGoCreate() {
-        return this.goCreate;
-    }
-
     public GoUpdate getGoUpdate() {
         return this.goUpdate;
+    }
+
+    public Go getGo() {
+        return this.go;
+    }
+
+    private void initGo() {
+        this.go = (st) -> {
+            try {
+                if (st != null) {
+                    return st.executeQuery();
+                }
+                return null;
+            } catch (SQLException e) {
+                logger.error(e.getMessage(), e);
+                return null;
+            }
+        };
     }
 
     private void initGoCreate() {
@@ -73,7 +89,6 @@ public class DBManager {
                 return -1;
             } catch (SQLException e) {
                 logger.error(e.getMessage(), e);
-                this.disconnectDB();
                 return -1;
             }
             finally {
