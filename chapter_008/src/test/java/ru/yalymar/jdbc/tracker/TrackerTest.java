@@ -1,11 +1,10 @@
 package ru.yalymar.jdbc.tracker;
 
 import org.junit.Test;
+import ru.yalymar.jdbc.model.Comment;
 import ru.yalymar.jdbc.model.DBManager;
 import ru.yalymar.jdbc.model.Item;
-
 import java.util.List;
-
 import static junit.framework.TestCase.assertNotNull;
 import static junit.framework.TestCase.assertTrue;
 
@@ -74,4 +73,24 @@ public class TrackerTest {
         dbManager.disconnectDB();
     }
 
+    @Test
+    public void whenAddCommentShouldGetIt(){
+        DBManager dbManager = new DBManager();
+        Tracker tracker = new Tracker(dbManager);
+        dbManager.connectDB();
+        int result = tracker.addCommentByName("item1", new Comment("privet"));
+        tracker.showComments("1");
+        assertTrue(result > 0);
+        dbManager.disconnectDB();
+    }
+
+    @Test
+    public void whenShowCommentShouldGetIt(){
+        DBManager dbManager = new DBManager();
+        Tracker tracker = new Tracker(dbManager);
+        dbManager.connectDB();
+        boolean result = tracker.showComments("1");
+        assertTrue(result);
+        dbManager.disconnectDB();
+    }
 }

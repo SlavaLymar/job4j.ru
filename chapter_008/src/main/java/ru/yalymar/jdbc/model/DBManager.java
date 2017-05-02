@@ -10,13 +10,38 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Properties;
 
+/**
+ * @author slavalymar
+ * @since 02.05.2017
+ * @version 1
+ */
 public class DBManager {
 
+    /**
+     * create query interface
+     */
     private GoCreate goCreate;
+
+    /**
+     * update query interface
+     */
     private GoUpdate goUpdate;
+
+    /**
+     * select query interface
+     */
     private Go go;
+
+    /**
+     * connect to database
+     */
     private Connection c;
+
+    /**
+     * properties
+     */
     private Properties properties = new Properties();
+
     private static final Logger logger = Logger.getLogger(Tracker.class);
 
     public DBManager() {
@@ -38,6 +63,9 @@ public class DBManager {
         return this.go;
     }
 
+    /**
+     * initialized go interface
+     */
     private void initGo() {
         this.go = (st) -> {
             try {
@@ -52,6 +80,9 @@ public class DBManager {
         };
     }
 
+    /**
+     * initialized goCreate interface
+     */
     private void initGoCreate() {
         this.goCreate = (s) -> {
             PreparedStatement st = null;
@@ -80,6 +111,9 @@ public class DBManager {
         };
     }
 
+    /**
+     * initialized goUpdate interface
+     */
     private void initGoUpdate() {
         this.goUpdate = (st) -> {
             try {
@@ -103,6 +137,9 @@ public class DBManager {
         };
     }
 
+    /**
+     * initialized properties
+     */
     private void initProperties() {
         try(FileInputStream in = new FileInputStream(
                 "C:/Java/job4j.ru/chapter_008/resources/resources.properties")) {
@@ -114,6 +151,9 @@ public class DBManager {
         }
     }
 
+    /** create database
+     * @return boolean
+     */
     public boolean createDB(){
         String url = this.properties.getProperty("urlCreate");
         String login = this.properties.getProperty("login");
@@ -139,6 +179,9 @@ public class DBManager {
         }
     }
 
+    /** get connection to database
+     * @return Connection
+     */
     public Connection connectDB(){
         try(FileInputStream in = new FileInputStream(
                 "C:/Java/job4j.ru/chapter_008/resources/resources.properties")) {
@@ -161,6 +204,9 @@ public class DBManager {
         return null;
     }
 
+    /**
+     * disconnect database
+     */
     public void disconnectDB(){
         if (this.c != null) {
             try {
@@ -171,10 +217,16 @@ public class DBManager {
         }
     }
 
+    /** create items` table
+     * @return boolean
+     */
     public boolean createItemsTable(){
         return this.goCreate.goCreate(this.properties.getProperty("CREATE_ITEMS_TABLE"));
     }
 
+    /** create comments` table
+     * @return boolean
+     */
     public boolean createCommentsTable(){
         return this.goCreate.goCreate(this.properties.getProperty("CREATE_COMMENTS_TABLE"));
     }

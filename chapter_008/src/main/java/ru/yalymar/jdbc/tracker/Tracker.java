@@ -1,6 +1,7 @@
 package ru.yalymar.jdbc.tracker;
 
 import org.apache.log4j.Logger;
+import ru.yalymar.jdbc.model.Comment;
 import ru.yalymar.jdbc.model.DBManager;
 import ru.yalymar.jdbc.model.Item;
 import java.sql.PreparedStatement;
@@ -12,14 +13,17 @@ import java.util.*;
 
 /**
  * @author slavalymar
- * @since 13.01.2017
+ * @since 02.05.2017
  * @version 1
  */
 public class Tracker {
 
     private static final Random RANDOM = new Random();
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss");
-    private int idCounter = 0;
+
+    /**
+     * database manager
+     */
     private DBManager dbManager;
     private static final Logger logger = Logger.getLogger(Tracker.class);
 
@@ -27,6 +31,10 @@ public class Tracker {
         this.dbManager = dbManager;
     }
 
+    /** add item
+     * @param item
+     * @return int
+     */
     public int add(Item item){
         PreparedStatement st = null;
         try {
@@ -53,6 +61,10 @@ public class Tracker {
     }
 
 
+    /** update item
+     * @param item
+     * @return int
+     */
     public int update(Item item){
         PreparedStatement st = null;
         try {
@@ -79,6 +91,10 @@ public class Tracker {
     }
 
 
+    /** delete item
+     * @param item
+     * @return int
+     */
     public int delete(Item item){
         PreparedStatement st = null;
         try {
@@ -102,18 +118,10 @@ public class Tracker {
         return -2;
     }
 
-    /*
-    public List <Item> findAll(){
-        List <Item> result = new ArrayList<Item>();
-        for(Item i: this.items) {
-            if (i!=null) {
-                result.add(i);
-            }
-        }
-        return result;
-    }
-
-*/
+    /** find items by name
+     * @param key
+     * @return List
+     */
     public List<Item> findByName(String key){
         List <Item> result = new ArrayList<>();
         PreparedStatement st = null;
@@ -151,21 +159,70 @@ public class Tracker {
         }
     }
 
-    /*
+    /** add comment by id
+     * @param id
+     * @param comment
+     * @return int
+     */
+    public int addCommentById(String id, Comment comment){
+        PreparedStatement st = null;
+        try {
+            st = this.dbManager.getC().prepareStatement(
+                    "INSERT INTO Comments (comment, date, item_id) values (?, ?, ?)");
 
-    public void addCommentById(String id, Comment comment){
-        Item item = this.findById(id);
-        item.addToListComments(comment);
-    }
-
-    public void addCommentByName(String name, Comment comment){
-        List<Item> item = this.findByName(name);
-        for(Item i: item){
-            i.addToListComments(comment);
+            st.setString(1, comment.getComment());
+            st.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
+            st.setInt(3, Integer.parseInt(id));
+            return this.dbManager.getGoUpdate().goUpdate(st);
+        } catch (SQLException e) {
+            logger.error(e.getMessage(), e);
         }
+        finally {
+            if(st != null){
+                try {
+                    st.close();
+                } catch (SQLException e) {
+                    logger.error(e.getMessage(), e);
+                }
+            }
+        }
+        return -2;
     }
 
-*/
+    /** add comment by name
+     * @param name
+     * @param comment
+     * @return int
+     */
+    public int addCommentByName(String name, Comment comment){
+        PreparedStatement st = null;
+        try {
+            st = this.dbManager.getC().prepareStatement(
+                    "INSERT INTO Comments (comment, date, item_id) values (?, ?, ?)");
+
+            st.setString(1, comment.getComment());
+            st.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
+            st.setInt(3, Integer.parseInt(this.findByName(name).get(0).getId()));
+            return this.dbManager.getGoUpdate().goUpdate(st);
+        } catch (SQLException e) {
+            logger.error(e.getMessage(), e);
+        }
+        finally {
+            if(st != null){
+                try {
+                    st.close();
+                } catch (SQLException e) {
+                    logger.error(e.getMessage(), e);
+                }
+            }
+        }
+        return -2;
+    }
+
+    /** find item by id
+     * @param id
+     * @return Item
+     */
     public Item findById(String id){
         Item result = null;
         PreparedStatement st = null;
@@ -203,6 +260,10 @@ public class Tracker {
         }
     }
 
+    /** find item by desc
+     * @param desc
+     * @return List
+     */
     public List <Item> findByDescription(String desc){
         List <Item> result = new ArrayList<>();
         PreparedStatement st = null;
@@ -240,6 +301,9 @@ public class Tracker {
         }
     }
 
+    /** show all items
+     * @return boolean
+     */
     public boolean showAllItems(){
         System.out.printf("%1$-30s%2$-30s%3$-30s%4$-20s\n", "Id", "Name", "Description", "Date");
         System.out.printf("--------------------------------------------------------------------------------------------------------------\n");
@@ -277,6 +341,9 @@ public class Tracker {
         }
     }
 
+    /** show all items into List
+     * @param item
+     */
     public void showAllItems(List<Item> item){
         System.out.printf("%1$-30s%2$-30s%3$-30s%4$-20s\n", "Id", "Name", "Description", "Date");
         System.out.printf("--------------------------------------------------------------------------------------------------------------\n");
@@ -287,6 +354,9 @@ public class Tracker {
         }
     }
 
+    /** show an item
+     * @param item
+     */
     public void showOneItem(Item item){
         System.out.printf("%1$-30s%2$-30s%3$-30s%4$-20s\n", "Id", "Name", "Description", "Date");
         System.out.printf("--------------------------------------------------------------------------------------------------------------\n");
@@ -295,15 +365,50 @@ public class Tracker {
         }
     }
 
-    /*
-    public void showComments(String id){
+    /** show item`s comments
+     * @param id
+     * @return boolean
+     */
+    public boolean showComments(String id){
         Item item = this.findById(id);
-        List<Comment> commentsItem = item.getComments();
+        List<Comment> commentsItem = new ArrayList<>();
+        boolean result = false;
+
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = this.dbManager.getC().prepareStatement("SELECT * FROM Comments where item_id = ?");
+            st.setInt(1, Integer.parseInt(id));
+            rs = this.dbManager.getGo().go(st);
+            while (rs.next()){
+                commentsItem.add(new Comment(rs.getString("comment")));
+            }
+            result = true;
+        } catch (SQLException e) {
+            logger.error(e.getMessage(), e);
+            return result;
+        }
+        finally {
+            if(st != null){
+                try {
+                    st.close();
+                } catch (SQLException e) {
+                    logger.error(e.getMessage(), e);
+                }
+            }
+            if(rs != null){
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    logger.error(e.getMessage(), e);
+                }
+            }
+        }
         int position = 1;
         for (Comment c: commentsItem){
             System.out.printf("%1$-3d%2$-50s%3$-20s\n", position++, c.getComment(), sdf.format(item.getTime()));
         }
+        return result;
     }
 
-*/
 }

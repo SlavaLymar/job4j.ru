@@ -6,7 +6,7 @@ import ru.yalymar.jdbc.tracker.Tracker;
 
 /**
  * @author slavalymar
- * @since 13.01.2017
+ * @since 02.05.2017
  * @version 1
  */
 public class StartUI {
@@ -22,6 +22,7 @@ public class StartUI {
      */
    public void init(){
        DBManager dbManager = new DBManager();
+       dbManager.connectDB();
        Tracker tracker = new Tracker(dbManager);
        Menu menu = new Menu(this.input, tracker);
        menu.fillMenu();
