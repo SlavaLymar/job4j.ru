@@ -3,6 +3,10 @@ package ru.yalymar.jdbc.tracker;
 import org.junit.Test;
 import ru.yalymar.jdbc.model.DBManager;
 import ru.yalymar.jdbc.model.Item;
+
+import java.util.List;
+
+import static junit.framework.TestCase.assertNotNull;
 import static junit.framework.TestCase.assertTrue;
 
 public class TrackerTest {
@@ -37,6 +41,37 @@ public class TrackerTest {
         dbManager.disconnectDB();
     }
 
+    @Test
+    public void whenFindItemByIdShouldGetItem(){
+        DBManager dbManager = new DBManager();
+        Tracker tracker = new Tracker(dbManager);
+        dbManager.connectDB();
+        Item result = tracker.findById("1");
+        tracker.showOneItem(result);
+        assertNotNull(result);
+        dbManager.disconnectDB();
+    }
 
+    @Test
+    public void whenFindItemByNameShouldGetItem(){
+        DBManager dbManager = new DBManager();
+        Tracker tracker = new Tracker(dbManager);
+        dbManager.connectDB();
+        List<Item> result = tracker.findByName("item1");
+        tracker.showOneItem(result.get(0));
+        assertNotNull(result);
+        dbManager.disconnectDB();
+    }
+
+    @Test
+    public void whenFindItemByDescShouldGetItem(){
+        DBManager dbManager = new DBManager();
+        Tracker tracker = new Tracker(dbManager);
+        dbManager.connectDB();
+        List<Item> result = tracker.findByDescription("blabla");
+        tracker.showOneItem(result.get(0));
+        assertNotNull(result);
+        dbManager.disconnectDB();
+    }
 
 }

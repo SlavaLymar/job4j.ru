@@ -162,7 +162,7 @@ public class Menu {
             do {
                 tracker.showAllItems();
                 id = input.ask("Enter the id: ");
-                tracker.showOneItems(tracker.findById(id));
+                tracker.showOneItem(tracker.findById(id));
                 if(tracker.findById(id) == null) {
                     System.out.println("Wrong id!");
                     continue;
@@ -186,8 +186,6 @@ public class Menu {
                     }
                     while (newin != 3);
                 }
-
-
         }
     }
 
@@ -218,7 +216,6 @@ public class Menu {
         @Override
         public void execute(Input input, Tracker tracker) {
 
-            /*
             tracker.showAllItems();
             int newin = 0;
 
@@ -235,7 +232,6 @@ public class Menu {
                 }
             }
             while (newin != 2);
-            */
         }
 
     }
@@ -266,10 +262,7 @@ public class Menu {
          */
         @Override
         public void execute(Input input, Tracker tracker) {
-
-            /*
             tracker.showAllItems();
-            */
         }
     }
 
@@ -299,8 +292,7 @@ public class Menu {
          */
         @Override
         public void execute(Input input, Tracker tracker) {
-            /*
-        }
+
             tracker.showAllItems();
             int newin = 0;
 
@@ -310,7 +302,7 @@ public class Menu {
                 if (newin == 1) {
                     String str = input.ask("Enter the id: ");
                     Item i = tracker.findById(str);
-                    tracker.showOneItems(i);
+                    tracker.showOneItem(i);
                 }
                 if (newin == 2) {
                     String str = input.ask("Enter the name: ");
@@ -324,7 +316,6 @@ public class Menu {
                 }
             }
             while (newin != 4);
-*/
         }
     }
 
@@ -354,8 +345,6 @@ public class Menu {
          */
         @Override
         public void execute(Input input, Tracker tracker) {
-            /*
-        }
             tracker.showAllItems();
             int newin = 0;
 
@@ -369,14 +358,13 @@ public class Menu {
                     String comment = input.ask("Enter a comment");
                     tracker.addCommentByName(name, new Comment(comment));
                 }
-                if(newin == 2){
+                if (newin == 2) {
                     tracker.showAllItems();
                     String id = input.ask("Enter the Item`s id you will want to show comments: ");
                     tracker.showComments(id);
                 }
             }
-            while(newin != 3);
-            */
+            while (newin != 3);
         }
     }
 

@@ -3,7 +3,6 @@ package ru.yalymar.jdbc.tracker;
 import org.apache.log4j.Logger;
 import ru.yalymar.jdbc.model.DBManager;
 import ru.yalymar.jdbc.model.Item;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -114,15 +113,45 @@ public class Tracker {
         return result;
     }
 
-    public List <Item> findByName(String key){
-        List <Item> result = new ArrayList<Item>();
-        for(Item i: this.items){
-            if(i!= null && i.getName().equals(key)){
-                result.add(i);
+*/
+    public List<Item> findByName(String key){
+        List <Item> result = new ArrayList<>();
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = this.dbManager.getC().prepareStatement("SELECT * FROM Items where name = ?");
+            st.setString(1, key);
+            rs = this.dbManager.getGo().go(st);
+            while (rs.next()){
+                result.add(new Item(Integer.toString(rs.getInt("id")),
+                        rs.getString("name").trim(),
+                        rs.getString("description").trim(),
+                        rs.getTimestamp("date")));
+            }
+            return result;
+        } catch (SQLException e) {
+            logger.error(e.getMessage(), e);
+            return null;
+        }
+        finally {
+            if(st != null){
+                try {
+                    st.close();
+                } catch (SQLException e) {
+                    logger.error(e.getMessage(), e);
+                }
+            }
+            if(rs != null){
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    logger.error(e.getMessage(), e);
+                }
             }
         }
-        return result;
     }
+
+    /*
 
     public void addCommentById(String id, Comment comment){
         Item item = this.findById(id);
@@ -136,37 +165,81 @@ public class Tracker {
         }
     }
 
-    public String generateId(){
-
-        return String.valueOf(this.idCounter++);
-    }
-
+*/
     public Item findById(String id){
         Item result = null;
-        for(Item i: this.items){
-            if(i != null && i.getId().equals(id)){
-                result = i;
-                break;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = this.dbManager.getC().prepareStatement("SELECT * FROM Items where id = ?");
+            st.setInt(1, Integer.parseInt(id));
+            rs = this.dbManager.getGo().go(st);
+            while (rs.next()){
+                result = new Item(Integer.toString(rs.getInt("id")),
+                        rs.getString("name").trim(),
+                        rs.getString("description").trim(),
+                        rs.getTimestamp("date"));
+            }
+            return result;
+        } catch (SQLException e) {
+            logger.error(e.getMessage(), e);
+            return null;
+        }
+        finally {
+            if(st != null){
+                try {
+                    st.close();
+                } catch (SQLException e) {
+                    logger.error(e.getMessage(), e);
+                }
+            }
+            if(rs != null){
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    logger.error(e.getMessage(), e);
+                }
             }
         }
-        return result;
     }
 
     public List <Item> findByDescription(String desc){
-        List <Item> result = new ArrayList<Item>();
-        for(Item i: this.items){
-            if(i!= null && i.getDescription().equals(desc)){
-                result.add(i);
+        List <Item> result = new ArrayList<>();
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = this.dbManager.getC().prepareStatement("SELECT * FROM Items where description = ?");
+            st.setString(1, desc);
+            rs = this.dbManager.getGo().go(st);
+            while (rs.next()){
+                result.add(new Item(Integer.toString(rs.getInt("id")),
+                        rs.getString("name").trim(),
+                        rs.getString("description").trim(),
+                        rs.getTimestamp("date")));
+            }
+            return result;
+        } catch (SQLException e) {
+            logger.error(e.getMessage(), e);
+            return null;
+        }
+        finally {
+            if(st != null){
+                try {
+                    st.close();
+                } catch (SQLException e) {
+                    logger.error(e.getMessage(), e);
+                }
+            }
+            if(rs != null){
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    logger.error(e.getMessage(), e);
+                }
             }
         }
-        return result;
     }
 
-    public List <Item> getItems() {
-        return items;
-    }
-
-*/
     public boolean showAllItems(){
         System.out.printf("%1$-30s%2$-30s%3$-30s%4$-20s\n", "Id", "Name", "Description", "Date");
         System.out.printf("--------------------------------------------------------------------------------------------------------------\n");
@@ -204,7 +277,6 @@ public class Tracker {
         }
     }
 
-    /*
     public void showAllItems(List<Item> item){
         System.out.printf("%1$-30s%2$-30s%3$-30s%4$-20s\n", "Id", "Name", "Description", "Date");
         System.out.printf("--------------------------------------------------------------------------------------------------------------\n");
@@ -215,13 +287,15 @@ public class Tracker {
         }
     }
 
-    public void showOneItems(Item item){
+    public void showOneItem(Item item){
         System.out.printf("%1$-30s%2$-30s%3$-30s%4$-20s\n", "Id", "Name", "Description", "Date");
         System.out.printf("--------------------------------------------------------------------------------------------------------------\n");
-        if(item!=null)
-        System.out.printf("%1$-30s%2$-30s%3$-30s%4$-20s\n", item.getId(), item.getName(), item.getDescription(), sdf.format(item.getTime()));
+        if(item!=null) {
+            System.out.printf("%1$-30s%2$-30s%3$-30s%4$-20s\n", item.getId(), item.getName(), item.getDescription(), sdf.format(item.getTime()));
+        }
     }
 
+    /*
     public void showComments(String id){
         Item item = this.findById(id);
         List<Comment> commentsItem = item.getComments();

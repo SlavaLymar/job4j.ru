@@ -20,6 +20,13 @@ public class Item {
         this.time = new Date();
     }
 
+    public Item(String id, String name, String description, Date time) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.time = time;
+    }
+
     public Item(String name, String description, String id) {
         this.name = name;
         this.description = description;
