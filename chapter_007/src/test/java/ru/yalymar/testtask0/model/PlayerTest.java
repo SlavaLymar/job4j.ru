@@ -1,7 +1,7 @@
-package ru.yalymar.testtask.model;
+package ru.yalymar.testtask0.model;
 
 import org.junit.Test;
-import ru.yalymar.testtask.field.Field;
+import ru.yalymar.testtask0.field.Field;
 import static junit.framework.TestCase.assertNotNull;
 import static org.junit.Assert.assertNull;
 

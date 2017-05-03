@@ -1,4 +1,4 @@
-package ru.yalymar.testtask;
+package ru.yalymar.testtask0;
 
 import org.junit.Test;
 import static org.hamcrest.core.Is.is;

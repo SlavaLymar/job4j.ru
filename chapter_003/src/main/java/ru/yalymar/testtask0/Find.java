@@ -1,6 +1,4 @@
-package ru.yalymar.testtask;
-
-import com.sun.org.apache.xalan.internal.xsltc.dom.SimpleResultTreeImpl;
+package ru.yalymar.testtask0;
 
 import java.io.File;
 import java.io.FileWriter;

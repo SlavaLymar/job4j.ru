@@ -1,10 +1,7 @@
-package ru.yalymar.testtask.field;
+package ru.yalymar.testtask0.field;
 
-import ru.yalymar.testtask.mechanic.Addiction;
-import ru.yalymar.testtask.model.Essence;
-
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+import ru.yalymar.testtask0.mechanic.Addiction;
+import ru.yalymar.testtask0.model.Essence;
 
 /**
  * @author slavalymar

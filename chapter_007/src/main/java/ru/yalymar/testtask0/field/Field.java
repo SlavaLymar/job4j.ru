@@ -1,4 +1,4 @@
-package ru.yalymar.testtask.field;
+package ru.yalymar.testtask0.field;
 
 import java.util.Random;
 

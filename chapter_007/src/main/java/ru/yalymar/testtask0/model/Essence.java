@@ -1,8 +1,8 @@
-package ru.yalymar.testtask.model;
+package ru.yalymar.testtask0.model;
 
-import ru.yalymar.testtask.field.Field;
-import ru.yalymar.testtask.mechanic.Mobility;
-import ru.yalymar.testtask.mechanic.Randomize;
+import ru.yalymar.testtask0.field.Field;
+import ru.yalymar.testtask0.mechanic.Mobility;
+import ru.yalymar.testtask0.mechanic.Randomize;
 
 /**
  * @author slavalymar

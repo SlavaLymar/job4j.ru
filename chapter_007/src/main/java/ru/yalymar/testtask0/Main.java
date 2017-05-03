@@ -1,9 +1,9 @@
-package ru.yalymar.testtask;
+package ru.yalymar.testtask0;
 
 import org.apache.log4j.Logger;
-import ru.yalymar.testtask.field.Field;
-import ru.yalymar.testtask.model.Monsters;
-import ru.yalymar.testtask.model.Player;
+import ru.yalymar.testtask0.field.Field;
+import ru.yalymar.testtask0.model.Monsters;
+import ru.yalymar.testtask0.model.Player;
 
 public class Main {
 

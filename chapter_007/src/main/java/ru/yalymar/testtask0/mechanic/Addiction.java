@@ -1,6 +1,6 @@
-package ru.yalymar.testtask.mechanic;
+package ru.yalymar.testtask0.mechanic;
 
-import ru.yalymar.testtask.model.Essence;
+import ru.yalymar.testtask0.model.Essence;
 
 /**
  * @author slavalymar

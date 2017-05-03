@@ -1,6 +1,6 @@
-package ru.yalymar.testtask.model;
+package ru.yalymar.testtask0.model;
 
-import ru.yalymar.testtask.field.Field;
+import ru.yalymar.testtask0.field.Field;
 
 /**
  * @author slavalymar

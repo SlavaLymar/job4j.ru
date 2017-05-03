@@ -1,4 +1,4 @@
-package ru.yalymar.testtask.mechanic;
+package ru.yalymar.testtask0.mechanic;
 
 /**
  * @author slavalymar

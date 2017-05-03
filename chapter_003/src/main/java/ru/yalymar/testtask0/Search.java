@@ -1,4 +1,4 @@
-package ru.yalymar.testtask;
+package ru.yalymar.testtask0;
 
 import java.io.File;
 import java.io.FileWriter;
