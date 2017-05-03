@@ -1,0 +1,1 @@
+select p.id, p.name, c.name from person p inner join company c on p.company_id = c.id;

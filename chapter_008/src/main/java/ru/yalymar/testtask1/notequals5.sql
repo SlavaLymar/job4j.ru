@@ -1,0 +1,1 @@
+select name from person where company_id != 3;
