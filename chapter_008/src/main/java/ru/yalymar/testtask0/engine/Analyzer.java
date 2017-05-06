@@ -7,23 +7,46 @@ import org.jsoup.select.Elements;
 import ru.yalymar.testtask0.db.DBManager;
 import ru.yalymar.testtask0.models.Month;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * @author slavalymar
+ * @since 06.05.2017
+ * @version 1
+ */
 public class Analyzer {
 
+    /**
+     * downloader html
+     */
     private HTMLDownloader htmlDownloader = new HTMLDownloader();
+
+    /**
+     * database manager
+     */
     private DBManager dbManager = new DBManager();
+
     private static final Logger logger = Logger.getLogger(Analyzer.class);
+
+    /**
+     * date of topic
+     */
     private Calendar date_of_create = Calendar.getInstance();
 
     public Document getHTML(String url){
         return this.htmlDownloader.download(url);
     }
 
+    /** analyze: topic`s actuality depends of date of create,
+     * it has duplicate into database, whether the offer is valid
+     * @param url
+     * @return boolean
+     */
     public boolean analyze(String url){
         this.dbManager.connectDB();
         boolean result = true;
@@ -45,19 +68,24 @@ public class Analyzer {
                 }
                 else {
                     result = false;
+                    this.fillLogger();
                     break;
                 }
             }
             else {
                 result = false;
+                this.fillLogger();
                 break;
             }
         }
-
         this.dbManager.disconnectDB();
         return result;
     }
 
+    /** it has duplicate into database
+     * @param eRow
+     * @return boolean
+     */
     public boolean checkDuplicate(Element eRow){
         Elements elements = eRow.getElementsByClass("postslisttopic");
         if(elements.size() == 0) {
@@ -85,6 +113,12 @@ public class Analyzer {
         }
     }
 
+    /** fill database
+     * @param topic
+     * @param ref
+     * @param date_of_create
+     * @return int
+     */
     private int fillDB(String topic, String ref, Timestamp date_of_create) {
         PreparedStatement st = null;
         try {
@@ -109,6 +143,47 @@ public class Analyzer {
         }
     }
 
+    /**
+     * fill log.log by offers
+     */
+    public void fillLogger(){
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = this.dbManager.getC().prepareStatement("SELECT * FROM offers");
+            rs = this.dbManager.getGo().go(st);
+            while(rs.next()){
+                int id = rs.getInt("id");
+                String desc = rs.getString("description");
+                String link = rs.getString("link");
+                Timestamp date_of_create = rs.getTimestamp("date_of_create");
+                logger.info(String.format("%1$-6d%2$-100s%3$-200s%4$-10s", id, desc, link, date_of_create.toString()));
+            }
+        } catch (SQLException e) {
+            logger.error(e.getMessage(), e);
+        }
+        finally {
+            if(st != null){
+                try {
+                    st.close();
+                } catch (SQLException e) {
+                    logger.error(e.getMessage(), e);
+                }
+            }
+            if(rs != null){
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    logger.error(e.getMessage(), e);
+                }
+            }
+        }
+    }
+
+    /** check whether the offer is valid
+     * @param eRow
+     * @return boolean
+     */
     public boolean isJAVA(Element eRow) {
         boolean result = false;
         Elements elements = eRow.getElementsByClass("postslisttopic");
@@ -127,6 +202,10 @@ public class Analyzer {
         return result;
     }
 
+    /** check whether the offer is valid by regex
+     * @param topic
+     * @return boolean
+     */
     public boolean isReallyJAVA(String topic) {
         List<String> strings =  Arrays.asList(topic.split("\\s"));
         Pattern pattern = Pattern.compile("(^java$)|(java[^s])");
@@ -145,6 +224,10 @@ public class Analyzer {
     }
 
 
+    /** check topic`s actuality depends of date of create
+     * @param eRow
+     * @return boolean
+     */
     public boolean isActual(Element eRow){
         Elements els = eRow.getElementsByClass("postslisttopic");
         if(els.size() != 0) {
@@ -167,6 +250,10 @@ public class Analyzer {
         return result;
     }
 
+    /** get difference of dates
+     * @param calendar
+     * @return boolean
+     */
     public boolean getDifferenceDate(Calendar calendar) {
         Calendar current = Calendar.getInstance();
         long diff = current.getTimeInMillis() - calendar.getTimeInMillis();
@@ -174,6 +261,10 @@ public class Analyzer {
         return years < 1;
     }
 
+    /** create correct date
+     * @param text
+     * @return Calendar
+     */
     public Calendar createCorrectDate(String text) {
         Calendar result = Calendar.getInstance(TimeZone.getDefault(), Locale.getDefault());
         Pattern todayYesterdayPattern = Pattern.compile("[0-9]+");
@@ -209,6 +300,10 @@ public class Analyzer {
         }
     }
 
+    /** translates the Russian name into a number. E.g 'янв' -> 01
+     * @param text
+     * @return int
+     */
     public int getMonth(String text) {
         Pattern pattern = Pattern.compile("\\W{3}\\s");
         Matcher matcher = pattern.matcher(text);

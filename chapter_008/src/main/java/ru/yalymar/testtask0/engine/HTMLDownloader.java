@@ -5,6 +5,11 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import java.io.IOException;
 
+/**
+ * @author slavalymar
+ * @since 06.05.2017
+ * @version 1
+ */
 public class HTMLDownloader {
 
     private Document document;
@@ -14,6 +19,10 @@ public class HTMLDownloader {
         return this.document;
     }
 
+    /** download html. Ten attempts are given
+     * @param url
+     * @return Document
+     */
     public Document download(String url){
         for (int i = 0; i < 10; i++) {
             try {
