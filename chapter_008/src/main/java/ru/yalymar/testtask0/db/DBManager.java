@@ -79,6 +79,7 @@ public class DBManager {
         this.goUpdate = (st) -> {
             try {
                 if (st != null) {
+                    System.out.println("New offer!");
                     return st.executeUpdate();
                 }
                 return -1;
@@ -117,7 +118,7 @@ public class DBManager {
      */
     public Connection connectDB(){
         try(FileInputStream in = new FileInputStream(
-                "C:/Java/job4j.ru/chapter_008/resources/analyzehtml.properties")) {
+                "C:/Java/job4j.ru/chapter_008/resources/a.properties")) {
 
             this.properties.load(in);
         }

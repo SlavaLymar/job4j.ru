@@ -6,8 +6,9 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import ru.yalymar.testtask0.db.DBManager;
 import ru.yalymar.testtask0.models.Month;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -17,56 +18,160 @@ public class Analyzer {
     private HTMLDownloader htmlDownloader = new HTMLDownloader();
     private DBManager dbManager = new DBManager();
     private static final Logger logger = Logger.getLogger(Analyzer.class);
-    private Properties properties = new Properties();
-
-    public Analyzer() {
-        this.initProperties();
-    }
-
-    private void initProperties() {
-        try(FileInputStream in = new FileInputStream(
-                "C:/Java/job4j.ru/chapter_008/resources/a.properties")){
-
-            this.properties.load(in);
-        }
-        catch (IOException e){
-            logger.error(e.getMessage(), e);
-        }
-    }
+    private Calendar date_of_create = Calendar.getInstance();
 
     public Document getHTML(String url){
         return this.htmlDownloader.download(url);
     }
 
-    public void analyze(){
-        boolean stop = false;
-        int pageCounter = 1;
+    public boolean analyze(String url){
+        this.dbManager.connectDB();
+        boolean result = true;
 
-        do{
-            Document doc = this.getHTML(String.format("%s%s%s", this.properties.getProperty("url"), "/", pageCounter++));
-            Elements elementsRow = doc.select("tr");
-            for(Element eRow : elementsRow){
-                if (this.isActual(eRow)
-                        //&& this.isJAVA(eRow)
-                        ) {
-
+        Document doc = this.getHTML(url);
+        Elements elementsRow = doc.select("tr");
+        for (Element eRow : elementsRow) {
+            if (this.isActual(eRow)) {
+                if (this.checkDuplicate(eRow)){
+                    if (this.isJAVA(eRow)) {
+                        Elements elements = eRow.getElementsByClass("postslisttopic");
+                        Element element = elements.first().child(0);
+                        String ref = element.attr("href");
+                        String topic = element.text();
+                        Timestamp date_of_create = new Timestamp(this.date_of_create.getTimeInMillis());
+                        this.fillDB(topic, ref, date_of_create);
+                        result = true;
+                    }
                 }
-                else stop = true;
+                else {
+                    result = false;
+                    break;
+                }
             }
-
-
+            else {
+                result = false;
+                break;
+            }
         }
-        while (!stop);
+
+        this.dbManager.disconnectDB();
+        return result;
+    }
+
+    public boolean checkDuplicate(Element eRow){
+        Elements elements = eRow.getElementsByClass("postslisttopic");
+        if(elements.size() == 0) {
+            return true;
+        }
+        Element element = elements.first().child(0);
+        String topic = element.text();
+        PreparedStatement st = null;
+        try {
+            st = this.dbManager.getC().prepareStatement("SELECT * FROM offers WHERE description = ?");
+            st.setString(1, topic);
+            return this.dbManager.getGo().go(st).getRow() == 0;
+        } catch (SQLException e) {
+            logger.error(e.getMessage(), e);
+            return true;
+        }
+        finally {
+            if(st != null){
+                try {
+                    st.close();
+                } catch (SQLException e) {
+                    logger.error(e.getMessage(), e);
+                }
+            }
+        }
+    }
+
+    private int fillDB(String topic, String ref, Timestamp date_of_create) {
+        PreparedStatement st = null;
+        try {
+            st = this.dbManager.getC().prepareStatement("INSERT INTO offers " +
+                    "(description, link, date_of_create) values (?, ?, ?)");
+            st.setString(1, topic);
+            st.setString(2, ref);
+            st.setTimestamp(3, date_of_create);
+            return this.dbManager.getGoUpdate().goUpdate(st);
+        } catch (SQLException e) {
+            logger.error(e.getMessage(), e);
+            return 0;
+        }
+        finally {
+            if(st != null){
+                try {
+                    st.close();
+                } catch (SQLException e) {
+                    logger.error(e.getMessage(), e);
+                }
+            }
+        }
+    }
+
+    public boolean isJAVA(Element eRow) {
+        boolean result = false;
+        Elements elements = eRow.getElementsByClass("postslisttopic");
+        if(elements.size() != 0) {
+            Element element = elements.first();
+            String topic = element.text();
+            if (topic != null) {
+                if(topic.contains("закрыт")){
+                    return false;
+                }
+                else{
+                    result = this.isReallyJAVA(topic);
+                }
+            }
+        }
+        return result;
+    }
+
+    public boolean isReallyJAVA(String topic) {
+        List<String> strings =  Arrays.asList(topic.split("\\s"));
+        Pattern pattern = Pattern.compile("(^java$)|(java[^s])");
+        boolean[] result = new boolean[]{false};
+        for(String s : strings) {
+            if(s.toLowerCase().contains("java")){
+                Matcher matcher = pattern.matcher(s.toLowerCase());
+                if(matcher.find()) {
+                    result[0] = !(strings.size() - 1 != strings.indexOf(s) &&
+                            "script".equals(strings.get(strings.indexOf(s) + 1).toLowerCase()));
+                    break;
+                }
+            }
+        }
+        return result[0];
     }
 
 
-    public boolean isActual(Element e){
-        Elements elements = e.getElementsByClass("altCol");
+    public boolean isActual(Element eRow){
+        Elements els = eRow.getElementsByClass("postslisttopic");
+        if(els.size() != 0) {
+            Element element = els.first();
+            String topic = element.text();
+            if (topic != null) {
+                if(topic.toLowerCase().contains("важно")){
+                    return true;
+                }
+            }
+        }
+
+        boolean result;
+        Elements elements = eRow.getElementsByClass("altCol");
         if(elements.size() == 2) {
             Calendar calendar = this.createCorrectDate(elements.get(1).text());
-
+            result = this.getDifferenceDate(calendar);
         }
-        return false;
+        else result = true;
+        return result;
+    }
+
+    public boolean getDifferenceDate(Calendar calendar) {
+        Calendar current = Calendar.getInstance();
+        long diff = current.getTimeInMillis() - calendar.getTimeInMillis();
+        double years = (diff/(31536000000L));
+        return years < 1;
     }
 
     public Calendar createCorrectDate(String text) {
@@ -79,17 +184,20 @@ public class Analyzer {
             while (todayYesterdayMatcher.find()){
                 arr[i++] = Integer.parseInt(todayYesterdayMatcher.group(0));
             }
-            result.set(result.get(Calendar.YEAR), result.get(Calendar.MONTH), result.get(Calendar.DAY_OF_MONTH), arr[0], arr[1]);
-            return result;
+            result.set(result.get(Calendar.YEAR), result.get(Calendar.MONTH),
+                    result.get(Calendar.DAY_OF_MONTH), arr[0], arr[1]);
+            return this.date_of_create = result;
         }
         else if(text.contains("вчера")){
             int[] arr = new int[2];
             while (todayYesterdayMatcher.find()){
                 arr[i++] = Integer.parseInt(todayYesterdayMatcher.group(0));
             }
-            result.set(result.get(Calendar.YEAR), result.get(Calendar.MONTH), result.get(Calendar.DAY_OF_MONTH), arr[0], arr[1]);
-            result.add(Calendar.DAY_OF_MONTH, -1);
-            return result;
+
+            result.set(result.get(Calendar.YEAR), result.get(Calendar.MONTH),
+                    result.get(Calendar.DAY_OF_MONTH), arr[0], arr[1]);
+            result.add(Calendar.DAY_OF_MONTH, -2);
+            return this.date_of_create = result;
         }
         else {
             int[] arr = new int[4];
@@ -97,8 +205,7 @@ public class Analyzer {
                 arr[i++] = Integer.parseInt(todayYesterdayMatcher.group(0));
             }
             result.set(arr[1] + 2000, this.getMonth(text), arr[0], arr[2], arr[3]);
-            result.add(Calendar.MONTH, 1);
-            return result;
+            return this.date_of_create = result;
         }
     }
 
