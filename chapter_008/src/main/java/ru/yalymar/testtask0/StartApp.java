@@ -1,9 +1,12 @@
 package ru.yalymar.testtask0;
 
 import org.apache.log4j.Logger;
+import ru.yalymar.jdbc.start.Input;
 import ru.yalymar.testtask0.engine.Analyzer;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.Properties;
 
 /**
@@ -16,6 +19,13 @@ public class StartApp {
     private static final Logger logger = Logger.getLogger(StartApp.class);
     private Properties properties = new Properties();
     private Analyzer analyzer;
+
+    /** return property`s instance for testing
+     * @return Properties
+     */
+    public Properties getProperties() {
+        return this.properties;
+    }
 
     /**
      * initialized
@@ -58,13 +68,13 @@ public class StartApp {
     /**
      * initialized prorepties
      */
-    private void initProperties() {
-        try(FileInputStream in = new FileInputStream(
-                "C:/Java/job4j.ru/chapter_008/resources/a.properties")){
-
-            this.properties.load(in);
-        }
-        catch (IOException e){
+    public void initProperties(){
+        Class c = this.getClass();
+        ClassLoader classLoader = c.getClassLoader();
+        InputStream inputStream = c.getResourceAsStream("/a.properties");
+        try {
+            this.properties.load(inputStream);
+        } catch (IOException e) {
             logger.error(e.getMessage(), e);
         }
     }

@@ -36,7 +36,7 @@ public class Analyzer {
     /**
      * date of topic
      */
-    private Calendar date_of_create = Calendar.getInstance();
+    private Calendar dateOfCreate = Calendar.getInstance();
 
     public Document getHTML(String url){
         return this.htmlDownloader.download(url);
@@ -61,8 +61,8 @@ public class Analyzer {
                         Element element = elements.first().child(0);
                         String ref = element.attr("href");
                         String topic = element.text();
-                        Timestamp date_of_create = new Timestamp(this.date_of_create.getTimeInMillis());
-                        this.fillDB(topic, ref, date_of_create);
+                        Timestamp dateOfCreate = new Timestamp(this.dateOfCreate.getTimeInMillis());
+                        this.fillDB(topic, ref, dateOfCreate);
                         result = true;
                     }
                 }
@@ -116,17 +116,17 @@ public class Analyzer {
     /** fill database
      * @param topic
      * @param ref
-     * @param date_of_create
+     * @param dateOfCreate
      * @return int
      */
-    private int fillDB(String topic, String ref, Timestamp date_of_create) {
+    private int fillDB(String topic, String ref, Timestamp dateOfCreate) {
         PreparedStatement st = null;
         try {
             st = this.dbManager.getC().prepareStatement("INSERT INTO offers " +
-                    "(description, link, date_of_create) values (?, ?, ?)");
+                    "(description, link, dateOfCreate) values (?, ?, ?)");
             st.setString(1, topic);
             st.setString(2, ref);
-            st.setTimestamp(3, date_of_create);
+            st.setTimestamp(3, dateOfCreate);
             return this.dbManager.getGoUpdate().goUpdate(st);
         } catch (SQLException e) {
             logger.error(e.getMessage(), e);
@@ -156,8 +156,8 @@ public class Analyzer {
                 int id = rs.getInt("id");
                 String desc = rs.getString("description");
                 String link = rs.getString("link");
-                Timestamp date_of_create = rs.getTimestamp("date_of_create");
-                logger.info(String.format("%1$-6d%2$-100s%3$-200s%4$-10s", id, desc, link, date_of_create.toString()));
+                Timestamp dateOfCreate = rs.getTimestamp("dateOfCreate");
+                logger.info(String.format("%1$-6d%2$-100s%3$-200s%4$-10s", id, desc, link, dateOfCreate.toString()));
             }
         } catch (SQLException e) {
             logger.error(e.getMessage(), e);
@@ -277,7 +277,7 @@ public class Analyzer {
             }
             result.set(result.get(Calendar.YEAR), result.get(Calendar.MONTH),
                     result.get(Calendar.DAY_OF_MONTH), arr[0], arr[1]);
-            return this.date_of_create = result;
+            return this.dateOfCreate = result;
         }
         else if(text.contains("вчера")){
             int[] arr = new int[2];
@@ -288,7 +288,7 @@ public class Analyzer {
             result.set(result.get(Calendar.YEAR), result.get(Calendar.MONTH),
                     result.get(Calendar.DAY_OF_MONTH), arr[0], arr[1]);
             result.add(Calendar.DAY_OF_MONTH, -2);
-            return this.date_of_create = result;
+            return this.dateOfCreate = result;
         }
         else {
             int[] arr = new int[4];
@@ -296,7 +296,7 @@ public class Analyzer {
                 arr[i++] = Integer.parseInt(todayYesterdayMatcher.group(0));
             }
             result.set(arr[1] + 2000, this.getMonth(text), arr[0], arr[2], arr[3]);
-            return this.date_of_create = result;
+            return this.dateOfCreate = result;
         }
     }
 
