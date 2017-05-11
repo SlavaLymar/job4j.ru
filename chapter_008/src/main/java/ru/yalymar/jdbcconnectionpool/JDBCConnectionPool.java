@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * @author slavalymar
- * @since 11.04.2017
+ * @since 11.05.2017
  * @version 1
  */
 public class JDBCConnectionPool {
@@ -70,9 +70,5 @@ public class JDBCConnectionPool {
 
     public MyBQueue<Task> getTaskQueue() {
         return this.taskQueue;
-    }
-
-    public List<MyThread> getThreads() {
-        return this.threads;
     }
 }

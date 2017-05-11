@@ -4,29 +4,29 @@ import ru.yalymar.jdbcconnectionpool.db.DBManager;
 
 /**
  * @author slavalymar
- * @since 11.04.2017
+ * @since 11.05.2017
  * @version 1
  */
 public class MyThread extends Thread {
 
-    private JDBCConnectionPool JDBCConnectionPool;
+    private JDBCConnectionPool jDBCConnectionPool;
     private DBManager dbManager;
     /**
      * flag to stop
      */
     private boolean isStopped = false;
 
-    MyThread(JDBCConnectionPool JDBCConnectionPool){
-        this.JDBCConnectionPool = JDBCConnectionPool;
+    MyThread(JDBCConnectionPool jDBCConnectionPool){
+        this.jDBCConnectionPool = jDBCConnectionPool;
         this.dbManager = new DBManager();
+    }
+
+    public JDBCConnectionPool getjDBCConnectionPool() {
+        return this.jDBCConnectionPool;
     }
 
     public DBManager getDbManager() {
         return this.dbManager;
-    }
-
-    public JDBCConnectionPool getJDBCConnectionPool() {
-        return this.JDBCConnectionPool;
     }
 
     /**
@@ -37,7 +37,7 @@ public class MyThread extends Thread {
         while(!this.isStopped()){
             Task task = null;
             try {
-                task = this.JDBCConnectionPool.getTaskQueue().withdraw();
+                task = this.jDBCConnectionPool.getTaskQueue().withdraw();
             } catch (InterruptedException e) {
                 System.out.println(String.format("%s closed with wait->interrupt method!", this.getName()));
             }

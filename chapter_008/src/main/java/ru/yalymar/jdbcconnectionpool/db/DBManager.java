@@ -1,8 +1,6 @@
 package ru.yalymar.jdbcconnectionpool.db;
 
 import org.apache.log4j.Logger;
-
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -12,7 +10,7 @@ import java.util.Properties;
 
 /**
  * @author slavalymar
- * @since 02.05.2017
+ * @since 11.05.2017
  * @version 1
  */
 public class DBManager {

@@ -1,8 +1,15 @@
 package ru.yalymar.jdbcconnectionpool;
 
+import ru.yalymar.jdbcconnectionpool.db.DBManager;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * @author slavalymar
+ * @since 11.05.2017
+ * @version 1
+ */
 public class Result {
 
     private ResultSet rs;
@@ -13,8 +20,16 @@ public class Result {
         this.task = task;
     }
 
+    /** get ResultSet and close it
+     * @return ResultSet
+     */
     public ResultSet getRs() {
-        return this.rs;
+        try{
+            return this.rs;
+        }
+        finally {
+            this.closeRS();
+        }
     }
 
     public void setRs(ResultSet rs) {
@@ -35,7 +50,7 @@ public class Result {
                 this.rs.close();
             }
             catch (SQLException e) {
-
+                DBManager.getLogger().error(e.getMessage(), e);
             }
         }
     }

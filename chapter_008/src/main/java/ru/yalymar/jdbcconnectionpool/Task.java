@@ -5,11 +5,31 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * @author slavalymar
+ * @since 11.05.2017
+ * @version 1
+ */
 public class Task {
 
+    /**
+     * SQL query
+     */
     private String sqlQuery;
+
+    /**
+     * if flag is true the Task will return ResultSet to Result class
+     */
     private boolean flagGo;
+
+    /**
+     * result class
+     */
     private Result result;
+
+    /**
+     * thread
+     */
     private MyThread t;
 
     public Task(String sqlQuery, boolean flagGo) {
@@ -18,18 +38,17 @@ public class Task {
         this.result = new Result(this);
     }
 
-    public String getSqlQuery() {
-        return this.sqlQuery;
+    public MyThread getT() {
+        return this.t;
     }
 
     public Result getResult() {
         return this.result;
     }
 
-    public MyThread getT() {
-        return this.t;
-    }
-
+    /** execute query in depends of flagGO
+     * @param t
+     */
     public void run(MyThread t){
         this.t = t;
         PreparedStatement st = null;
