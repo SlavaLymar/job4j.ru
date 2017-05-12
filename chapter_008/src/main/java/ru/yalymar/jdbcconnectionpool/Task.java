@@ -27,40 +27,30 @@ public class Task {
      */
     private Result result;
 
-    /**
-     * thread
-     */
-    private MyThread t;
-
     public Task(String sqlQuery, boolean flagGo) {
         this.sqlQuery = sqlQuery;
         this.flagGo = flagGo;
         this.result = new Result(this);
     }
 
-    public MyThread getT() {
-        return this.t;
-    }
-
     public Result getResult() {
         return this.result;
     }
 
-    /** execute query in depends of flagGO
-     * @param t
+    /**
+     * execute query in depends of flagGO
      */
-    public void run(MyThread t){
-        this.t = t;
+    public void run(DBManager dbManager){
         PreparedStatement st = null;
         try {
-            st = t.getDbManager().getC().prepareStatement(this.sqlQuery);
+            st = dbManager.getC().prepareStatement(this.sqlQuery);
             if(this.flagGo) {
-                ResultSet rs = t.getDbManager().getGo().go(st);
+                ResultSet rs = dbManager.getGo().go(st);
                 this.result.setRs(rs);
                 rs.close();
             }
             else {
-                this.result.setResult(t.getDbManager().getGoUpdate().goUpdate(st));
+                this.result.setResult(dbManager.getGoUpdate().goUpdate(st));
             }
         }
         catch (SQLException e) {
@@ -73,6 +63,6 @@ public class Task {
                 DBManager.getLogger().error(e.getMessage(), e);
             }
         }
-        System.out.println(String.format("\"%s\" is completed by \"%s\"!", this.sqlQuery, t.getName()));
+        System.out.println(String.format("\"%s\" is completed by DBManager #\"%d\"!", this.sqlQuery, dbManager.getI()));
     }
 }

@@ -7,7 +7,7 @@ public class DBManagerTest {
 
     @Test
     public void whenConnectToDBShouldGetNotNull(){
-        DBManager dbManager = new DBManager();
+        DBManager dbManager = new DBManager(1);
         assertNotNull(dbManager.getC());
     }
 }

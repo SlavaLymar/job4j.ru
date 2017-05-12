@@ -15,6 +15,8 @@ import java.util.Properties;
  */
 public class DBManager {
 
+
+    private int i;
     /**
      * update query interface
      */
@@ -37,11 +39,16 @@ public class DBManager {
 
     private static final Logger logger = Logger.getLogger(DBManager.class);
 
-    public DBManager() {
+    public DBManager(int i) {
+        this.i = i;
         this.initProperties();
         this.initGoUpdate();
         this.initGo();
         this.connectDB();
+    }
+
+    public int getI() {
+        return this.i;
     }
 
     public Connection getC() {

@@ -1,5 +1,7 @@
 package ru.yalymar.jdbcconnectionpool;
 
+import ru.yalymar.jdbcconnectionpool.db.DBManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,14 +13,11 @@ import java.util.List;
 public class JDBCConnectionPool {
 
     /**
-     * queue of tasks
-     */
-    private MyBQueue<Task> taskQueue;
-
-    /**
      * list of threads
      */
-    private List<MyThread> threads = new ArrayList<>();
+    private List<DBManager> dbManagers = new ArrayList<>();
+
+    private int index = 0;
 
     /**
      * flag to stop
@@ -26,19 +25,15 @@ public class JDBCConnectionPool {
     private boolean isStopped = false;
 
     public JDBCConnectionPool() {
-        this.taskQueue = new MyBQueue<>();
-        this.startThreads();
+        this.dbManagers();
     }
 
     /**
      * start threads depends of numerous of cpu
      */
-    private void startThreads() {
+    private void dbManagers() {
         for(int i = 0; i<this.getNumbOfCPU(); i++){
-            this.threads.add(new MyThread(this));
-        }
-        for(MyThread t : this.threads){
-            t.start();
+            this.dbManagers.add(new DBManager(i+1));
         }
     }
 
@@ -52,23 +47,46 @@ public class JDBCConnectionPool {
     /** add task to queue
      * @param e
      */
-    public synchronized void add(Task e) throws InterruptedException {
-        if(this.isStopped) throw new IllegalStateException("JDBCConnectionPool is stopped!");
-
-        this.taskQueue.addiction(e);
+    public void add(Task e){
+        e.run(this.getDBManager());
     }
 
     /**
      * stop JDBCConnectionPool
      */
-    public synchronized void stop(){
+    public void stop(){
         this.isStopped = true;
-        for(MyThread t : this.threads){
-            t.doStop();
+        for(DBManager dbManager : this.dbManagers){
+            dbManager.disconnectDB();
         }
     }
 
-    public MyBQueue<Task> getTaskQueue() {
-        return this.taskQueue;
+    /** get dbManager
+     * @return DBManager
+     */
+    public DBManager getDBManager() {
+        int size = this.dbManagers.size();
+        if(this.index == size) {
+            this.index = 0;
+        }
+        DBManager result = this.dbManagers.get(this.index++);
+        boolean flag = false;
+        do {
+            try {
+                if(!result.getC().isClosed()){
+                    flag = true;
+                }
+                else {
+                    if(this.index == size) {
+                        this.index = 0;
+                    }
+                    result = this.dbManagers.get(this.index++);
+                }
+            } catch (SQLException e) {
+                DBManager.getLogger().error(e.getMessage(), e);
+            }
+        }
+        while (!flag);
+        return result;
     }
 }
