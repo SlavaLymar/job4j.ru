@@ -7,4 +7,9 @@
         <servlet-name>EchoServlet</servlet-name>
         <url-pattern>/echo</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UsersServlet</servlet-name>
+        <servlet-class>ru.yalymar.crudservlet.UsersServlet</servlet-class>
+    </servlet>
 </web-app>

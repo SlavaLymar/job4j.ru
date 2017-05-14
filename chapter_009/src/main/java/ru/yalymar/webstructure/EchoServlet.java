@@ -8,6 +8,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * @author slavalymar
+ * @since 14.05.2017
+ * @version 1
+ */
 public class EchoServlet extends HttpServlet{
 
     private static final Logger logger = Logger.getLogger(EchoServlet.class);
