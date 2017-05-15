@@ -1,4 +1,4 @@
-package ru.yalymar.crudservlet;
+package ru.yalymar.crudservlet.model;
 
 import java.util.Calendar;
 
@@ -14,5 +14,21 @@ public class User {
         this.login = login;
         this.email = email;
         this.createDate = createDate;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Calendar getCreateDate() {
+        return createDate;
     }
 }
