@@ -9,8 +9,10 @@ import java.util.Calendar;
 
 public class UserManager {
 
-    public int add(DBManager dbManager, User user) {
-        PreparedStatement st = null;
+    private final DBManager dbManager = new DBManager();
+
+    public int add(User user) {
+        PreparedStatement st;
         try {
             st = dbManager.getC().prepareStatement(
                     "INSERT INTO users (name, login, dateCreate) VALUES (?, ?, ?)");
@@ -25,8 +27,8 @@ public class UserManager {
         return -1;
     }
 
-    public ResultSet get(DBManager dbManager, String id){
-        PreparedStatement st = null;
+    public ResultSet get(String id){
+        PreparedStatement st;
         try {
             st = dbManager.getC().prepareStatement(
                     "SELECT * FROM users WHERE id = ?");
@@ -38,8 +40,8 @@ public class UserManager {
         return null;
     }
 
-    public ResultSet getAll(DBManager dbManager){
-        PreparedStatement st = null;
+    public ResultSet getAll(){
+        PreparedStatement st;
         try {
             st = dbManager.getC().prepareStatement(
                     "SELECT * FROM users");
@@ -50,11 +52,12 @@ public class UserManager {
         return null;
     }
 
-    public int edit(DBManager dbManager, String id, User newUser){
+    public int edit(String id, User newUser){
         User oldUser = null;
-        ResultSet rs = this.get(dbManager, id);
+        ResultSet rs = this.get(id);
         try {
             Calendar c = Calendar.getInstance();
+            rs.next();
             c.setTimeInMillis(rs.getTimestamp("dateCreate").getTime());
             oldUser = new User(rs.getString("name"), rs.getString("login"),
                     rs.getString("email"), c);
@@ -62,24 +65,24 @@ public class UserManager {
             DBManager.logger.error(e.getMessage(), e);
         }
         if(oldUser.getName() != newUser.getName()){
-            return this.editColumn(dbManager, id, "name", newUser.getName());
+            return this.editColumnName(id, newUser.getName());
         }
         if(oldUser.getLogin() != newUser.getLogin()){
-            return this.editColumn(dbManager, id, "login", newUser.getLogin());
+            return this.editColumnLogin(id, newUser.getLogin());
         }
         if(oldUser.getEmail() != newUser.getEmail()){
-            return this.editColumn(dbManager, id, "email", newUser.getEmail());
+            return this.editColumnEmail(id, newUser.getEmail());
         }
         return -1;
     }
 
-    private int editColumn(DBManager dbManager, String id, String key, String value) {
-        PreparedStatement st = null;
+    private int editColumnEmail(String id, String value) {
+        PreparedStatement st;
         try {
             st = dbManager.getC().prepareStatement(
-                    "UPDATE users SET ? = ?");
-            st.setString(1, key);
-            st.setString(2, value);
+                    "UPDATE users SET email = ? WHERE id = ?");
+            st.setString(1, value);
+            st.setInt(2, Integer.parseInt(id));
             return dbManager.getGoUpdate().goUpdate(st);
 
         } catch (SQLException e) {
@@ -88,8 +91,38 @@ public class UserManager {
         return -1;
     }
 
-    public int delete(DBManager dbManager, String id){
-        PreparedStatement st = null;
+    private int editColumnLogin(String id, String value) {
+        PreparedStatement st;
+        try {
+            st = dbManager.getC().prepareStatement(
+                    "UPDATE users SET login = ? WHERE id = ?");
+            st.setString(1, value);
+            st.setInt(2, Integer.parseInt(id));
+            return dbManager.getGoUpdate().goUpdate(st);
+
+        } catch (SQLException e) {
+            DBManager.logger.error(e.getMessage(), e);
+        }
+        return -1;
+    }
+
+    private int editColumnName(String id, String value) {
+        PreparedStatement st;
+        try {
+            st = dbManager.getC().prepareStatement(
+                    "UPDATE users SET name = ? WHERE id = ?");
+            st.setString(1, value);
+            st.setInt(2, Integer.parseInt(id));
+            return dbManager.getGoUpdate().goUpdate(st);
+
+        } catch (SQLException e) {
+            DBManager.logger.error(e.getMessage(), e);
+        }
+        return -1;
+    }
+
+    public int delete(String id){
+        PreparedStatement st;
         try {
             st = dbManager.getC().prepareStatement(
                     "DELETE FROM users WHERE id = ?");
@@ -103,28 +136,35 @@ public class UserManager {
     }
 
     public String print(ResultSet rs){
-        String str1 = String.format("%1$-5s%2$-10s%3$-10s%4$-10s%5$-10s\n", "id", "name", "login", "email", "dateCreate");
+        String str1 = String.format("%1$-5s%2$-10s%3$-10s%4$-30s%5$-20s%6$s", "id", "name", "login", "email", "dateCreate",
+                System.getProperty("line.separator"));
         String str2 = null;
         try {
-            str2 = String.format("%1$-5s%2$-10s%3$-10s%4$-10s%5$-10s\n", rs.getInt("id"),
+            rs.next();
+            str2 = String.format("%1$-5s%2$-10s%3$-10s%4$-30s%5$-20s%6$s", rs.getInt("id"),
                     rs.getString("name"), rs.getString("login"),
-                    rs.getString("email"), rs.getTimestamp("dateCreate").toString());
+                    rs.getString("email"), rs.getTimestamp("dateCreate").toString(),
+                    System.getProperty("line.separator"));
         } catch (SQLException e) {
             DBManager.logger.error(e.getMessage(), e);
         }
-        return str1.concat(str2);
+        String result = str1.concat(str2);
+        return result;
     }
 
-    public String printAll(ResultSet rs){
-        String str1 = String.format("%1$-5s%2$-10s%3$-10s%4$-10s%5$-10s\n", "id", "name", "login", "email", "dateCreate");
+    public String printAll(){
+        ResultSet rs = this.getAll();
+        String str1 = String.format("%1$-5s%2$-10s%3$-10s%4$-30s%5$-20s%6$s", "id", "name", "login", "email", "dateCreate",
+                System.getProperty("line.separator"));
 
         try {
             while (rs.next()) {
                 String str2 = null;
                 try {
-                    str2 = String.format("%1$-5s%2$-10s%3$-10s%4$-10s%5$-10s\n", rs.getInt("id"),
+                    str2 = String.format("%1$-5s%2$-10s%3$-10s%4$-10s%5$-10s%6$s", rs.getInt("id"),
                             rs.getString("name"), rs.getString("login"),
-                            rs.getString("email"), rs.getTimestamp("dateCreate").toString());
+                            rs.getString("email"), rs.getTimestamp("dateCreate").toString(),
+                            System.getProperty("line.separator"));
                 } catch (SQLException e) {
                     DBManager.logger.error(e.getMessage(), e);
                 }

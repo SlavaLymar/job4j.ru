@@ -104,7 +104,7 @@ public class DBManager {
      */
     private void initProperties() {
         try (FileInputStream in = new FileInputStream(
-                "C:/Java/job4j.ru/chapter_008/src/main/resources/a.properties")) {
+                "C:/Java/job4j.ru/chapter_009/src/main/resources/crud.properties")) {
 
             this.properties.load(in);
         } catch (IOException e) {
@@ -118,19 +118,15 @@ public class DBManager {
      * @return Connection
      */
     public Connection connectDB() {
-        try (FileInputStream in = new FileInputStream(
-                "C:/Java/job4j.ru/chapter_009/src/main/resources/a.properties")) {
-
-            this.properties.load(in);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
         String url = this.properties.getProperty("urlConnect");
         String login = this.properties.getProperty("login");
         String password = this.properties.getProperty("password");
         try {
+            Class.forName("org.postgresql.Driver");
             return this.c = DriverManager.getConnection(url, login, password);
+        } catch (ClassNotFoundException e) {
+            logger.error(e.getMessage(), e);
+            this.disconnectDB();
         } catch (SQLException e) {
             logger.error(e.getMessage(), e);
             this.disconnectDB();
