@@ -13,11 +13,30 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
 
+/**
+ * @author slavalymar
+ * @since 15.05.2017
+ * @version 1
+ */
 public class UsersServlet extends HttpServlet{
 
     private static final Logger LOGGER = Logger.getLogger(UsersServlet.class);
+
+    /**
+     * instance of userManager for CRUD operations
+     */
     private final UserManager userManager = new UserManager();
 
+    public UserManager getUserManager() {
+        return this.userManager;
+    }
+
+    /** get user from db
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -39,6 +58,12 @@ public class UsersServlet extends HttpServlet{
         writer.close();
     }
 
+    /** update user
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -50,13 +75,19 @@ public class UsersServlet extends HttpServlet{
             this.doGet(req, resp);
         }
         else {resp.setContentType("text/html");
-            PrintWriter writer = new PrintWriter(resp.getOutputStream());
+            PrintWriter writer = resp.getWriter();
             writer.append("Id`s not found!");
             writer.flush();
             writer.close();
         }
     }
 
+    /** add user to db
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -64,7 +95,7 @@ public class UsersServlet extends HttpServlet{
                 req.getParameter("email"), Calendar.getInstance());
         int i = this.userManager.add(user);
         resp.setContentType("text/html");
-        PrintWriter writer = new PrintWriter(resp.getOutputStream());
+        PrintWriter writer = resp.getWriter();
         if(i > 0) {
             writer.append(this.userManager.printAll());
         }
@@ -76,12 +107,18 @@ public class UsersServlet extends HttpServlet{
         writer.close();
     }
 
+    /** delete user from db
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         int i = this.userManager.delete(req.getParameter("id"));
         resp.setContentType("text/html");
-        PrintWriter writer = new PrintWriter(resp.getOutputStream());
+        PrintWriter writer = resp.getWriter();
         if(i > 0) {
             writer.append(this.userManager.printAll());
         }

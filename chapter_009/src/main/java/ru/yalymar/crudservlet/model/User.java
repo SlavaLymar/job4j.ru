@@ -2,6 +2,11 @@ package ru.yalymar.crudservlet.model;
 
 import java.util.Calendar;
 
+/**
+ * @author slavalymar
+ * @since 15.05.2017
+ * @version 1
+ */
 public class User {
 
     private String name;

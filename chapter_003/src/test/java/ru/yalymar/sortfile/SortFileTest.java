@@ -1,7 +1,6 @@
 package ru.yalymar.sortfile;
 
 import org.junit.Test;
-
 import java.io.*;
 
 /**

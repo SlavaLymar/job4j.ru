@@ -1,14 +1,7 @@
 package ru.yalymar.deletewords;
 
 import org.junit.Test;
-
 import java.io.*;
-
-import static java.lang.System.in;
-import static java.lang.System.out;
-import static java.lang.System.setOut;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.is;
 
 /**
  * @author slavalymar
