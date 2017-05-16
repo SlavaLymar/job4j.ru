@@ -1,4 +1,4 @@
-package ru.yalymar.crudservlet.db;
+package ru.yalymar.crudservlet.model.db;
 
 import org.apache.log4j.Logger;
 import java.io.FileInputStream;

@@ -1,4 +1,4 @@
-package ru.yalymar.crudservlet.db;
+package ru.yalymar.crudservlet.model.db;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

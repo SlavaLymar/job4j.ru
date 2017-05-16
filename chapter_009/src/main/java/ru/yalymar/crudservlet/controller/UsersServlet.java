@@ -1,14 +1,14 @@
-package ru.yalymar.crudservlet;
+package ru.yalymar.crudservlet.controller;
 
 import org.apache.log4j.Logger;
 import ru.yalymar.crudservlet.model.User;
 import ru.yalymar.crudservlet.model.UserManager;
+import ru.yalymar.crudservlet.view.Print;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
@@ -27,6 +27,8 @@ public class UsersServlet extends HttpServlet{
      */
     private final UserManager userManager = new UserManager();
 
+    private final Print print = new Print(userManager);
+
     public UserManager getUserManager() {
         return this.userManager;
     }
@@ -40,22 +42,13 @@ public class UsersServlet extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        PrintWriter writer = resp.getWriter();
-        resp.setContentType("text/html");
         ResultSet rs = this.userManager.get(req.getParameter("id"));
-        if(rs != null) {
-            writer.append(this.userManager.print(rs));
-        }
-        else {
-            writer.append("Something was wrong. Try one more time!");
-        }
+        this.print.print(rs, resp);
         try {
             rs.close();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
         }
-        writer.flush();
-        writer.close();
     }
 
     /** update user
@@ -74,11 +67,8 @@ public class UsersServlet extends HttpServlet{
         if(i > 0) {
             this.doGet(req, resp);
         }
-        else {resp.setContentType("text/html");
-            PrintWriter writer = resp.getWriter();
-            writer.append("Id`s not found!");
-            writer.flush();
-            writer.close();
+        else{
+            this.print.printError(resp, "Id`s not found!");
         }
     }
 
@@ -94,17 +84,13 @@ public class UsersServlet extends HttpServlet{
         User user = new User(req.getParameter("name"), req.getParameter("login"),
                 req.getParameter("email"), Calendar.getInstance());
         int i = this.userManager.add(user);
-        resp.setContentType("text/html");
-        PrintWriter writer = resp.getWriter();
         if(i > 0) {
-            writer.append(this.userManager.printAll());
+            this.print.printAll(resp);
         }
         else {
-            writer.append(String.format("%s, you didnt add. Try one more time!!!",
+            this.print.printError(resp, String.format("%s, you didnt add. Try one more time!!!",
                     req.getParameter("name")));
         }
-        writer.flush();
-        writer.close();
     }
 
     /** delete user from db
@@ -117,15 +103,11 @@ public class UsersServlet extends HttpServlet{
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         int i = this.userManager.delete(req.getParameter("id"));
-        resp.setContentType("text/html");
-        PrintWriter writer = resp.getWriter();
         if(i > 0) {
-            writer.append(this.userManager.printAll());
+            this.print.printAll(resp);
         }
         else {
-            writer.append("Id`s not found!");
+            this.print.printError(resp, "Id`s not found!");
         }
-        writer.flush();
-        writer.close();
     }
 }

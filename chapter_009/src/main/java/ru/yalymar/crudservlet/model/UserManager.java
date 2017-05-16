@@ -1,6 +1,6 @@
 package ru.yalymar.crudservlet.model;
 
-import ru.yalymar.crudservlet.db.DBManager;
+import ru.yalymar.crudservlet.model.db.DBManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -183,51 +183,5 @@ public class UserManager {
         return -1;
     }
 
-    /** return a row from a table as String
-     * @param rs
-     * @return String
-     */
-    public String print(ResultSet rs){
-        String str1 = String.format("%1$-5s%2$-10s%3$-10s%4$-30s%5$-20s%6$s", "id", "name", "login", "email", "dateCreate",
-                System.getProperty("line.separator"));
-        String str2 = null;
-        try {
-            rs.next();
-            str2 = String.format("%1$-5s%2$-10s%3$-10s%4$-30s%5$-20s%6$s", rs.getInt("id"),
-                    rs.getString("name"), rs.getString("login"),
-                    rs.getString("email"), rs.getTimestamp("dateCreate").toString(),
-                    System.getProperty("line.separator"));
-        } catch (SQLException e) {
-            DBManager.logger.error(e.getMessage(), e);
-        }
-        String result = str1.concat(str2);
-        return result;
-    }
 
-    /** return all rows from a table as String
-     * @return String
-     */
-    public String printAll(){
-        ResultSet rs = this.getAll();
-        String str1 = String.format("%1$-5s%2$-10s%3$-10s%4$-30s%5$-20s%6$s", "id", "name", "login", "email", "dateCreate",
-                System.getProperty("line.separator"));
-
-        try {
-            while (rs.next()) {
-                String str2 = null;
-                try {
-                    str2 = String.format("%1$-5s%2$-10s%3$-10s%4$-30s%5$-20s%6$s", rs.getInt("id"),
-                            rs.getString("name"), rs.getString("login"),
-                            rs.getString("email"), rs.getTimestamp("dateCreate").toString(),
-                            System.getProperty("line.separator"));
-                } catch (SQLException e) {
-                    DBManager.logger.error(e.getMessage(), e);
-                }
-                str1 = str1.concat(str2);
-            }
-        } catch (SQLException e) {
-            DBManager.logger.error(e.getMessage(), e);
-        }
-        return str1;
-    }
 }
