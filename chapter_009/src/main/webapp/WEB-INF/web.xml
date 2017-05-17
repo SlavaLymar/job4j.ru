@@ -23,7 +23,7 @@
     </servlet>
     <servlet>
         <servlet-name>AddUserServlet</servlet-name>
-        <servlet-class>ru.yalymar.servlet.controller.UsersServlet</servlet-class>
+        <servlet-class>ru.yalymar.servlet.controller.AddUserServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>EditUserServlet</servlet-name>

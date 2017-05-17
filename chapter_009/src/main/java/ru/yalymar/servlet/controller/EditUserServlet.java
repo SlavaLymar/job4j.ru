@@ -1,7 +1,5 @@
 package ru.yalymar.servlet.controller;
 
-import org.apache.log4j.Logger;
-import ru.yalymar.servlet.model.User;
 import ru.yalymar.servlet.model.UserManager;
 import ru.yalymar.servlet.view.Print;
 import javax.servlet.ServletException;
@@ -9,7 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Calendar;
 
 /**
  * @author slavalymar
@@ -17,8 +14,6 @@ import java.util.Calendar;
  * @version 1
  */
 public class EditUserServlet extends HttpServlet{
-
-    private static final Logger LOGGER = Logger.getLogger(EditUserServlet.class);
 
     /**
      * instance of userManager for CRUD operations
@@ -52,16 +47,8 @@ public class EditUserServlet extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        User newUser = new User(req.getParameter("name"), req.getParameter("login"),
-                req.getParameter("email"), Calendar.getInstance());
-        int i = this.userManager.edit(req.getParameter("id"), newUser);
-
-        if(i > 0) {
-            this.doGet(req, resp);
-        }
-        else{
-            this.print.printError(resp, "Id`s not found!");
-        }
+        this.userManager.edit(req);
+        this.print.printAllUsers(req, resp);
     }
 
 }

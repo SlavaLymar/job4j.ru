@@ -59,11 +59,13 @@ public class Print {
                         "        <TD>" +
                         "           <form action='" + req.getContextPath() + "/edit' method='get'>" +
                         "           <input type='submit' value='edit'>" +
+                        "           <input type='hidden' name='id' value='"+rs.getInt("id")+"'>"+
                         "           </form>" +
                         "        </TD>" +
                         "        <TD>" +
                         "           <form action='" + req.getContextPath() + "/delete' method='post'>" +
                         "           <input type='submit' value='delete'>" +
+                        "           <input type='hidden' name='id' value='"+rs.getInt("id")+"'>"+
                         "           </form>" +
                         "        </TD>" +
                         "   </TR>");
@@ -94,6 +96,11 @@ public class Print {
         writer.close();
     }
 
+    /** print add form
+     * @param req
+     * @param resp
+     * @throws IOException
+     */
     public void printAddForm(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html");
         PrintWriter writer = resp.getWriter();
@@ -104,11 +111,11 @@ public class Print {
                 "    <title>Start</title>" +
                 "</head>" +
                 "<body>" +
-                "    <form action="+req.getContextPath()+"'/add' method='post'>" +
+                "    <form action='"+req.getContextPath()+"/add' method='post'>" +
                 "        Name: <input type='text' name='name'/>" +
                 "        Login: <input type='text' name='login'/>" +
                 "        Email: <input type='text' name='email'/>" +
-                "        <input type='submit'>" +
+                "        <input type='submit' value='add'>" +
                 "    </form>" +
                 "</body>" +
                 "</html>");
@@ -116,6 +123,11 @@ public class Print {
         writer.close();
     }
 
+    /** print edit form
+     * @param req
+     * @param resp
+     * @throws IOException
+     */
     public void printEditForm(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html");
         PrintWriter writer = resp.getWriter();
@@ -140,12 +152,12 @@ public class Print {
                 "    <title>Start</title>" +
                 "</head>" +
                 "<body>" +
-                "    <form action="+req.getContextPath()+"'/edit' method='post'>" +
-                "        Name: <input type='text' placeholder='"+name+"' name='name'/>" +
-                "        Login: <input type='text' placeholder='"+login+"' name='login'/>" +
-                "        Email: <input type='text' placeholder='"+email+"' name='email'/>" +
-                "        <input type='hidden' name='id' value='"+id+"'"+
-                "        <input type='submit'>" +
+                "    <form action='"+req.getContextPath()+"/edit' method='post'>" +
+                "        Name: <input type='text' name='name' value='"+name+"'/>" +
+                "        Login: <input type='text' name='login' value='"+login+"'/>" +
+                "        Email: <input type='text' name='email' value='"+email+"'/>" +
+                "        <input type='submit' value='edit'>" +
+                "        <input type='hidden' name='id' value='"+id+"'>"+
                 "    </form>" +
                 "</body>" +
                 "</html>");

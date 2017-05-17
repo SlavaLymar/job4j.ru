@@ -1,18 +1,13 @@
 package ru.yalymar.servlet.controller;
 
 import org.apache.log4j.Logger;
-import ru.yalymar.servlet.model.User;
 import ru.yalymar.servlet.model.UserManager;
 import ru.yalymar.servlet.view.Print;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Calendar;
 
 /**
  * @author slavalymar

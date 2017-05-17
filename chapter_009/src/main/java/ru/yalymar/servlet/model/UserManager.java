@@ -1,6 +1,7 @@
 package ru.yalymar.servlet.model;
 
 import ru.yalymar.servlet.model.db.DBManager;
+import javax.servlet.http.HttpServletRequest;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -73,12 +74,12 @@ public class UserManager {
     }
 
     /** edit user in db
-     * @param id
-     * @param newUser
+     * @param req
      * @return int
      */
-    public int edit(String id, User newUser){
+    public int edit(HttpServletRequest req){
         User oldUser = null;
+        String id = req.getParameter("id");
         ResultSet rs = this.get(id);
         int i = -1;
         try {
@@ -91,15 +92,15 @@ public class UserManager {
             DBManager.logger.error(e.getMessage(), e);
         }
         int tmp;
-        if(oldUser.getName() != newUser.getName()){
-            i = this.editColumnName(id, newUser.getName());
+        if(oldUser.getName() != req.getParameter("name")){
+            i = this.editColumnName(id, req.getParameter("name"));
         }
-        if(oldUser.getLogin() != newUser.getLogin()){
-            tmp = this.editColumnLogin(id, newUser.getLogin());
+        if(oldUser.getLogin() != req.getParameter("login")){
+            tmp = this.editColumnLogin(id, req.getParameter("login"));
             if(tmp > i) i = tmp;
         }
-        if(oldUser.getEmail() != newUser.getEmail()){
-            tmp = this.editColumnEmail(id, newUser.getEmail());
+        if(oldUser.getEmail() != req.getParameter("email")){
+            tmp = this.editColumnEmail(id, req.getParameter("email"));
             if(tmp > i) i = tmp;
         }
         return i;
