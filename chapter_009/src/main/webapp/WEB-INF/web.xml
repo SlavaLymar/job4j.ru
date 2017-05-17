@@ -12,6 +12,11 @@
         <servlet-name>UserServlet</servlet-name>
         <servlet-class>ru.yalymar.crudservlet.controller.UserServlet</servlet-class>
     </servlet>
+    <servlet-mapping>
+        <servlet-name>UserServlet</servlet-name>
+        <url-pattern>/crudservlet</url-pattern>
+    </servlet-mapping>
+
     <servlet>
         <servlet-name>UsersServlet</servlet-name>
         <servlet-class>ru.yalymar.servlet.controller.UsersServlet</servlet-class>
@@ -20,12 +25,14 @@
         <servlet-name>AddUserServlet</servlet-name>
         <servlet-class>ru.yalymar.servlet.controller.UsersServlet</servlet-class>
     </servlet>
-
-
-    <servlet-mapping>
-        <servlet-name>UserServlet</servlet-name>
-        <url-pattern>/crudservlet</url-pattern>
-    </servlet-mapping>
+    <servlet>
+        <servlet-name>EditUserServlet</servlet-name>
+        <servlet-class>ru.yalymar.servlet.controller.EditUserServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteUserServlet</servlet-name>
+        <servlet-class>ru.yalymar.servlet.controller.DeleteUserServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UsersServlet</servlet-name>
         <url-pattern>/users</url-pattern>
@@ -33,6 +40,14 @@
     <servlet-mapping>
         <servlet-name>AddUserServlet</servlet-name>
         <url-pattern>/add</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditUserServlet</servlet-name>
+        <url-pattern>/edit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteUserServlet</servlet-name>
+        <url-pattern>/delete</url-pattern>
     </servlet-mapping>
 
 </web-app>

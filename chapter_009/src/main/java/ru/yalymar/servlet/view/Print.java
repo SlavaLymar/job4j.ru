@@ -2,7 +2,6 @@ package ru.yalymar.servlet.view;
 
 import ru.yalymar.servlet.model.UserManager;
 import ru.yalymar.servlet.model.db.DBManager;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -59,12 +58,12 @@ public class Print {
                         "        <TD>"+rs.getTimestamp("datecreate")+"</TD>" +
                         "        <TD>" +
                         "           <form action='" + req.getContextPath() + "/edit' method='get'>" +
-                        "           <input type='edit'>" +
+                        "           <input type='submit' value='edit'>" +
                         "           </form>" +
                         "        </TD>" +
                         "        <TD>" +
                         "           <form action='" + req.getContextPath() + "/delete' method='post'>" +
-                        "           <input type='delete'>" +
+                        "           <input type='submit' value='delete'>" +
                         "           </form>" +
                         "        </TD>" +
                         "   </TR>");
@@ -75,7 +74,7 @@ public class Print {
         sb.append(
                 "<TD>" +
                         "<form action='" + req.getContextPath() + "/add' method='get'>" +
-                        "        <input type='+'>" +
+                        "        <input type='submit' value='+'>" +
                         "    </form>" +
                  "</TD>" +
                 "</table>" +
@@ -124,11 +123,13 @@ public class Print {
         String name = null;
         String login = null;
         String email = null;
+        String id = null;
         try {
             rs.next();
             name = rs.getString("name");
             login = rs.getString("login");
             email = rs.getString("email");
+            id = String.valueOf(rs.getInt("id"));
         } catch (SQLException e) {
             DBManager.logger.error(e.getMessage(), e);
         }
@@ -143,6 +144,7 @@ public class Print {
                 "        Name: <input type='text' placeholder='"+name+"' name='name'/>" +
                 "        Login: <input type='text' placeholder='"+login+"' name='login'/>" +
                 "        Email: <input type='text' placeholder='"+email+"' name='email'/>" +
+                "        <input type='hidden' name='id' value='"+id+"'"+
                 "        <input type='submit'>" +
                 "    </form>" +
                 "</body>" +

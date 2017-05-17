@@ -45,7 +45,7 @@ public class AddUserServlet extends HttpServlet{
                 req.getParameter("email"), Calendar.getInstance());
         int i = this.userManager.add(user);
         if(i > 0) {
-            this.print.printAllUsers(resp);
+            this.print.printAllUsers(req, resp);
         }
         else {
             this.print.printError(resp, String.format("%s, you didnt add. Try one more time!!!",
@@ -56,6 +56,6 @@ public class AddUserServlet extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        this.print.printAddForm(resp);
+        this.print.printAddForm(req, resp);
     }
 }

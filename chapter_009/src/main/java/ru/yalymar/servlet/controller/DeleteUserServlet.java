@@ -34,25 +34,7 @@ public class DeleteUserServlet extends HttpServlet{
         return this.userManager;
     }
 
-    /** get user from db
-     * @param req
-     * @param resp
-     * @throws ServletException
-     * @throws IOException
-     */
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        ResultSet rs = this.userManager.get(req.getParameter("id"));
-        this.print.print(rs, resp);
-        try {
-            rs.close();
-        } catch (SQLException e) {
-            LOGGER.error(e.getMessage(), e);
-        }
-    }
-
-    /** update user
+    /** delete user from db
      * @param req
      * @param resp
      * @throws ServletException
@@ -61,51 +43,9 @@ public class DeleteUserServlet extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        User newUser = new User(req.getParameter("name"), req.getParameter("login"),
-                req.getParameter("email"), Calendar.getInstance());
-        int i = this.userManager.edit(req.getParameter("id"), newUser);
-
-        if(i > 0) {
-            this.doGet(req, resp);
-        }
-        else{
-            this.print.printError(resp, "Id`s not found!");
-        }
-    }
-
-    /** add user to db
-     * @param req
-     * @param resp
-     * @throws ServletException
-     * @throws IOException
-     */
-    @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        User user = new User(req.getParameter("name"), req.getParameter("login"),
-                req.getParameter("email"), Calendar.getInstance());
-        int i = this.userManager.add(user);
-        if(i > 0) {
-            this.print.printAllUsers(resp);
-        }
-        else {
-            this.print.printError(resp, String.format("%s, you didnt add. Try one more time!!!",
-                    req.getParameter("name")));
-        }
-    }
-
-    /** delete user from db
-     * @param req
-     * @param resp
-     * @throws ServletException
-     * @throws IOException
-     */
-    @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
         int i = this.userManager.delete(req.getParameter("id"));
         if(i > 0) {
-            this.print.printAllUsers(resp);
+            this.print.printAllUsers(req, resp);
         }
         else {
             this.print.printError(resp, "Id`s not found!");

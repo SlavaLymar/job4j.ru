@@ -38,7 +38,7 @@ public class UsersServlet extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        this.print.printAllUsers(resp);
+        this.print.printAllUsers(req, resp);
     }
 
 }

@@ -36,8 +36,6 @@ public class UserManager {
 
         } catch (SQLException e) {
             DBManager.logger.error(e.getMessage(), e);
-        } finally {
-            this.dbManager.disconnectDB();
         }
         return -1;
     }
@@ -56,9 +54,6 @@ public class UserManager {
         } catch (SQLException e) {
             DBManager.logger.error(e.getMessage(), e);
         }
-        finally {
-            this.dbManager.disconnectDB();
-        }
         return null;
     }
 
@@ -73,9 +68,6 @@ public class UserManager {
             return dbManager.getGo().go(st);
         } catch (SQLException e) {
             DBManager.logger.error(e.getMessage(), e);
-        }
-        finally {
-            this.dbManager.disconnectDB();
         }
         return null;
     }
@@ -130,9 +122,6 @@ public class UserManager {
         } catch (SQLException e) {
             DBManager.logger.error(e.getMessage(), e);
         }
-        finally {
-            this.dbManager.disconnectDB();
-        }
         return -1;
     }
 
@@ -152,9 +141,6 @@ public class UserManager {
 
         } catch (SQLException e) {
             DBManager.logger.error(e.getMessage(), e);
-        }
-        finally {
-            this.dbManager.disconnectDB();
         }
         return -1;
     }
@@ -176,9 +162,6 @@ public class UserManager {
         } catch (SQLException e) {
             DBManager.logger.error(e.getMessage(), e);
         }
-        finally {
-            this.dbManager.disconnectDB();
-        }
         return -1;
     }
 
@@ -196,9 +179,6 @@ public class UserManager {
 
         } catch (SQLException e) {
             DBManager.logger.error(e.getMessage(), e);
-        }
-        finally {
-            this.dbManager.disconnectDB();
         }
         return -1;
     }
