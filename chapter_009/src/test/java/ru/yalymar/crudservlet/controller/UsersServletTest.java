@@ -1,7 +1,6 @@
 package ru.yalymar.crudservlet.controller;
 
 import org.junit.Test;
-import ru.yalymar.crudservlet.controller.UsersServlet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

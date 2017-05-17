@@ -1,10 +1,10 @@
 package ru.yalymar.crudservlet.model.db;
 
+import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.log4j.Logger;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
@@ -30,15 +30,9 @@ public class DBManager {
      */
     private Connection c;
 
-    /**
-     * properties
-     */
-    private Properties properties = new Properties();
-
     public static final Logger logger = Logger.getLogger(DBManager.class);
 
     public DBManager() {
-        this.initProperties();
         this.initGoUpdate();
         this.initGo();
         this.connectDB();
@@ -99,36 +93,20 @@ public class DBManager {
     }
 
     /**
-     * initialized properties
-     */
-    private void initProperties() {
-        try (FileInputStream in = new FileInputStream(
-                "C:/Java/job4j.ru/chapter_009/src/main/resources/crud.properties")) {
-
-            this.properties.load(in);
-        } catch (IOException e) {
-            logger.error(e.getMessage(), e);
-        }
-    }
-
-    /**
      * get connection to database
-     *
      * @return Connection
      */
     public Connection connectDB() {
-        String url = this.properties.getProperty("urlConnect");
-        String login = this.properties.getProperty("login");
-        String password = this.properties.getProperty("password");
+        BasicDataSource source = new BasicDataSource();
+        source.setDriverClassName("org.postgresql.Driver");
+        source.setUsername("postgres");
+        source.setPassword("lymar123");
+        source.setUrl("jdbc:postgresql://localhost:5432/crudservlet");
+
         try {
-            Class.forName("org.postgresql.Driver");
-            return this.c = DriverManager.getConnection(url, login, password);
-        } catch (ClassNotFoundException e) {
-            logger.error(e.getMessage(), e);
-            this.disconnectDB();
+            return this.c = source.getConnection();
         } catch (SQLException e) {
             logger.error(e.getMessage(), e);
-            this.disconnectDB();
         }
         return null;
     }
