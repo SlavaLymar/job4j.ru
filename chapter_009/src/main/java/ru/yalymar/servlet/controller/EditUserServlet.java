@@ -1,9 +1,9 @@
-package ru.yalymar.crudservlet.controller;
+package ru.yalymar.servlet.controller;
 
 import org.apache.log4j.Logger;
-import ru.yalymar.crudservlet.model.User;
-import ru.yalymar.crudservlet.model.UserManager;
-import ru.yalymar.crudservlet.view.Print;
+import ru.yalymar.servlet.model.User;
+import ru.yalymar.servlet.model.UserManager;
+import ru.yalymar.servlet.view.Print;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,9 +18,9 @@ import java.util.Calendar;
  * @since 15.05.2017
  * @version 1
  */
-public class UsersServlet extends HttpServlet{
+public class EditUserServlet extends HttpServlet{
 
-    private static final Logger LOGGER = Logger.getLogger(UsersServlet.class);
+    private static final Logger LOGGER = Logger.getLogger(EditUserServlet.class);
 
     /**
      * instance of userManager for CRUD operations
@@ -85,7 +85,7 @@ public class UsersServlet extends HttpServlet{
                 req.getParameter("email"), Calendar.getInstance());
         int i = this.userManager.add(user);
         if(i > 0) {
-            this.print.printAll(resp);
+            this.print.printAllUsers(resp);
         }
         else {
             this.print.printError(resp, String.format("%s, you didnt add. Try one more time!!!",
@@ -104,7 +104,7 @@ public class UsersServlet extends HttpServlet{
             throws ServletException, IOException {
         int i = this.userManager.delete(req.getParameter("id"));
         if(i > 0) {
-            this.print.printAll(resp);
+            this.print.printAllUsers(resp);
         }
         else {
             this.print.printError(resp, "Id`s not found!");

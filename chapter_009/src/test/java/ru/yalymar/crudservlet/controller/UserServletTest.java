@@ -13,14 +13,14 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class UsersServletTest {
+public class UserServletTest {
 
     @Test
     public void whenAddUserShouldGetResultSet() throws ServletException, IOException, SQLException {
         HttpServletRequest req = mock(HttpServletRequest.class);
         HttpServletResponse resp = mock(HttpServletResponse.class);
         PrintWriter writer = new PrintWriter(System.out);
-        UsersServlet us = new UsersServlet();
+        UserServlet us = new UserServlet();
 
         when(req.getParameter("name")).thenReturn("slava");
         when(req.getParameter("login")).thenReturn("slava123");

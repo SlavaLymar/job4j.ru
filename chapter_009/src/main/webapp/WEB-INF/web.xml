@@ -9,11 +9,30 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>UsersServlet</servlet-name>
-        <servlet-class>ru.yalymar.crudservlet.controller.UsersServlet</servlet-class>
+        <servlet-name>UserServlet</servlet-name>
+        <servlet-class>ru.yalymar.crudservlet.controller.UserServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UsersServlet</servlet-name>
+        <servlet-class>ru.yalymar.servlet.controller.UsersServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddUserServlet</servlet-name>
+        <servlet-class>ru.yalymar.servlet.controller.UsersServlet</servlet-class>
+    </servlet>
+
+
+    <servlet-mapping>
+        <servlet-name>UserServlet</servlet-name>
+        <url-pattern>/crudservlet</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UsersServlet</servlet-name>
-        <url-pattern>/userservlet</url-pattern>
+        <url-pattern>/users</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddUserServlet</servlet-name>
+        <url-pattern>/add</url-pattern>
+    </servlet-mapping>
+
 </web-app>
