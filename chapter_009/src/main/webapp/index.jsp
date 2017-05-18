@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
     <meta charset=\"UTF-8\">
-    <title>Start</title>
+    <title>Users</title>
 </head>
 <body>
 <table>
@@ -32,13 +32,13 @@
         <TD><%= sdf.format(user.getCreateDate().getTime()) %>
         </TD>
         <TD>
-            <form action='/edit' method='get'>
+            <form action='<%= request.getContextPath() %>/edit.jsp' method='get'>
                 <input type='submit' value='edit'>
                 <input type='hidden' name='id' value='<%= user.getId() %>'>
             </form>
         </TD>
         <TD>
-            <form action='/delete' method='post'>
+            <form action='<%= request.getContextPath() %>/delete' method='post'>
                 <input type='submit' value='delete'>
                 <input type='hidden' name='id' value='<%= user.getId() %>'>
             </form>
@@ -47,7 +47,7 @@
         <% } %>
 
     <TD>
-    <form action='/add' method='get'>
+    <form action='<%= request.getContextPath() %>/add.jsp' method='get'>
             <input type='submit' value='+'>
     </form>
     </TD>

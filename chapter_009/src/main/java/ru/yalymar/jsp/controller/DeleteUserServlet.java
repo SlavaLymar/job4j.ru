@@ -1,9 +1,6 @@
 package ru.yalymar.jsp.controller;
 
-import org.apache.log4j.Logger;
 import ru.yalymar.jsp.model.UserManager;
-import ru.yalymar.jsp.view.Print;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,19 +13,10 @@ import java.io.IOException;
  * @version 1
  */
 public class DeleteUserServlet extends HttpServlet{
-
-    private static final Logger LOGGER = Logger.getLogger(DeleteUserServlet.class);
-
     /**
      * instance of userManager for CRUD operations
      */
     private final UserManager userManager = new UserManager();
-
-    private final Print print = new Print(userManager);
-
-    public UserManager getUserManager() {
-        return this.userManager;
-    }
 
     /** delete user from db
      * @param req
@@ -39,12 +27,7 @@ public class DeleteUserServlet extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        int i = this.userManager.delete(req.getParameter("id"));
-        if(i > 0) {
-            this.print.printAllUsers(req, resp);
-        }
-        else {
-            this.print.printError(resp, "Id`s not found!");
-        }
+        this.userManager.delete(req.getParameter("id"));
+        resp.sendRedirect(String.format("%s/index.jsp", req.getContextPath()));
     }
 }

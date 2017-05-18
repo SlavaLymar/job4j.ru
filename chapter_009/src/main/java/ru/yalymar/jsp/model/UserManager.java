@@ -36,7 +36,6 @@ public class UserManager {
             st.setString(3, user.getEmail());
             st.setTimestamp(4, new Timestamp(user.getCreateDate().getTimeInMillis()));
             return dbManager.getGoUpdate().goUpdate(st);
-
         } catch (SQLException e) {
             DBManager.logger.error(e.getMessage(), e);
         }
@@ -47,15 +46,30 @@ public class UserManager {
      * @param id
      * @return ResultSet
      */
-    public ResultSet get(String id){
+    public User get(String id){
         PreparedStatement st;
+        ResultSet rs = null;
         try {
             st = dbManager.getC().prepareStatement(
                     "SELECT * FROM users WHERE id = ?");
             st.setInt(1, Integer.parseInt(id));
-            return dbManager.getGo().go(st);
+            rs = dbManager.getGo().go(st);
+            rs.next();
+            Calendar c = Calendar.getInstance();
+            c.setTimeInMillis(rs.getTimestamp("datecreate").getTime());
+            return new User(id,
+                    rs.getString("name"),
+                    rs.getString("login"),
+                    rs.getString("email"),
+                    c);
         } catch (SQLException e) {
             DBManager.logger.error(e.getMessage(), e);
+        } finally {
+            try {
+                rs.close();
+            } catch (SQLException e) {
+                DBManager.logger.error(e.getMessage(), e);
+            }
         }
         return null;
     }
@@ -65,11 +79,12 @@ public class UserManager {
      */
     public List<User> getAll(){
         PreparedStatement st;
+        ResultSet rs = null;
         List<User> users = new ArrayList<>();
         try {
             st = dbManager.getC().prepareStatement(
                     "SELECT * FROM users");
-            ResultSet rs = dbManager.getGo().go(st);
+            rs = dbManager.getGo().go(st);
             while(rs.next()){
                 Calendar c = Calendar.getInstance();
                 c.setTimeInMillis(rs.getTimestamp("datecreate").getTime());
@@ -83,6 +98,13 @@ public class UserManager {
         } catch (SQLException e) {
             DBManager.logger.error(e.getMessage(), e);
         }
+        finally {
+            try {
+                rs.close();
+            } catch (SQLException e) {
+                DBManager.logger.error(e.getMessage(), e);
+            }
+        }
         return null;
     }
 
@@ -93,7 +115,7 @@ public class UserManager {
     public int edit(HttpServletRequest req){
         User oldUser = null;
         String id = req.getParameter("id");
-        ResultSet rs = this.get(id);
+        ResultSet rs = this.getRS(id);
         int i = -1;
         try {
             Calendar c = Calendar.getInstance();
@@ -117,6 +139,20 @@ public class UserManager {
             if(tmp > i) i = tmp;
         }
         return i;
+    }
+
+    public ResultSet getRS(String id) {
+        PreparedStatement st;
+        try {
+            st = dbManager.getC().prepareStatement(
+                    "SELECT * FROM users WHERE id = ?");
+            st.setInt(1, Integer.parseInt(id));
+            return dbManager.getGo().go(st);
+
+        } catch (SQLException e) {
+            DBManager.logger.error(e.getMessage(), e);
+        }
+        return null;
     }
 
     /** edit user`s email
