@@ -1,6 +1,3 @@
-<%@ page import="ru.yalymar.jsp.model.UserManager" %>
-<%@ page import="ru.yalymar.jsp.model.User" %>
-<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -26,22 +23,22 @@
         <TD><c:out value="${user.login}"></c:out></TD>
         <TD><c:out value="${user.email}"></c:out></TD>
         <TD><fmt:formatDate type="both" value="${user.createDate.time}"/><TD>
-            <form action='${pageContext.servletContext.contextPath}/mvcedit.jsp' method='get'>
+            <form action='${pageContext.servletContext.contextPath}/mvcedit' method='get'>
                 <input type='submit' value='edit'>
                 <input type='hidden' name='id' value='${user.id}'>
             </form>
         </TD>
         <TD>
-            <form action='${pageContext.servletContext.contextPath}/delete' method='post'>
+            <form action='${pageContext.servletContext.contextPath}/mvcdelete' method='post'>
                 <input type='submit' value='delete'>
                 <input type='hidden' name='id' value='${user.id}'>
             </form>
-    </TD>
+        </TD>
     </TR>
         </c:forEach>
 
     <TD>
-    <form action='${pageContext.servletContext.contextPath}/mvcadd.jsp' method='get'>
+    <form action='${pageContext.servletContext.contextPath}/mvcadd' method='get'>
             <input type='submit' value='+'>
     </form>
     </TD>

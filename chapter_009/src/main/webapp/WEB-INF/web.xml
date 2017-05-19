@@ -58,8 +58,32 @@
         <servlet-name>StartController</servlet-name>
         <servlet-class>ru.yalymar.mvc.controller.StartController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddController</servlet-name>
+        <servlet-class>ru.yalymar.mvc.controller.AddController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteController</servlet-name>
+        <servlet-class>ru.yalymar.mvc.controller.DeleteController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditController</servlet-name>
+        <servlet-class>ru.yalymar.mvc.controller.EditController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>StartController</servlet-name>
         <url-pattern>/mvc</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddController</servlet-name>
+        <url-pattern>/mvcadd</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteController</servlet-name>
+        <url-pattern>/mvcdelete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditController</servlet-name>
+        <url-pattern>/mvcedit</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 
 /**
  * @author slavalymar
@@ -16,7 +15,6 @@ import java.text.SimpleDateFormat;
 public class StartController extends HttpServlet{
 
     UserManager userManager = new UserManager();
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss");
 
     /** get user from db
      * @param req
@@ -28,7 +26,6 @@ public class StartController extends HttpServlet{
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         req.setAttribute("users", this.userManager.getAll());
-        req.setAttribute("dateformat", this.sdf);
         req.getRequestDispatcher("/WEB-INF/views/mvcusers.jsp").forward(req, resp);
     }
 
