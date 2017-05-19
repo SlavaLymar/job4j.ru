@@ -42,13 +42,8 @@ public class UserServlet extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        ResultSet rs = this.userManager.get(req.getParameter("id"));
-        this.print.print(rs, resp);
-        try {
-            rs.close();
-        } catch (SQLException e) {
-            LOGGER.error(e.getMessage(), e);
-        }
+        User user = this.userManager.get(req.getParameter("id"));
+        this.print.print(user, resp);
     }
 
     /** update user

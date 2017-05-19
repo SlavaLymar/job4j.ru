@@ -9,6 +9,7 @@ import java.util.Calendar;
  */
 public class User {
 
+    private String id;
     private String name;
     private String login;
     private String email;
@@ -19,6 +20,18 @@ public class User {
         this.login = login;
         this.email = email;
         this.createDate = createDate;
+    }
+
+    public User(String  id, String name, String login, String email, Calendar createDate) {
+        this.id = id;
+        this.name = name;
+        this.login = login;
+        this.email = email;
+        this.createDate = createDate;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getName() {

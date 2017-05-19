@@ -44,15 +44,30 @@ public class UserManager {
      * @param id
      * @return ResultSet
      */
-    public ResultSet get(String id){
+    public User get(String id){
         PreparedStatement st;
+        ResultSet rs = null;
         try {
             st = dbManager.getC().prepareStatement(
                     "SELECT * FROM users WHERE id = ?");
             st.setInt(1, Integer.parseInt(id));
-            return dbManager.getGo().go(st);
+            rs = dbManager.getGo().go(st);
+            rs.next();
+            Calendar c = Calendar.getInstance();
+            c.setTimeInMillis(rs.getTimestamp("datecreate").getTime());
+            return new User(String.valueOf(rs.getInt("id")),
+                    rs.getString("name"),
+                    rs.getString("login"),
+                    rs.getString("email"),
+                    c);
         } catch (SQLException e) {
             DBManager.logger.error(e.getMessage(), e);
+        } finally {
+            try {
+                rs.close();
+            } catch (SQLException e) {
+                DBManager.logger.error(e.getMessage(), e);
+            }
         }
         return null;
     }
@@ -79,17 +94,12 @@ public class UserManager {
      */
     public int edit(String id, User newUser){
         User oldUser = null;
-        ResultSet rs = this.get(id);
+        User user = this.get(id);
         int i = -1;
-        try {
-            Calendar c = Calendar.getInstance();
-            rs.next();
-            c.setTimeInMillis(rs.getTimestamp("dateCreate").getTime());
-            oldUser = new User(rs.getString("name"), rs.getString("login"),
-                    rs.getString("email"), c);
-        } catch (SQLException e) {
-            DBManager.logger.error(e.getMessage(), e);
-        }
+
+        oldUser = new User(user.getName(), user.getLogin(),
+                user.getEmail(), user.getCreateDate());
+
         int tmp;
         if(oldUser.getName() != newUser.getName()){
             i = this.editColumnName(id, newUser.getName());
