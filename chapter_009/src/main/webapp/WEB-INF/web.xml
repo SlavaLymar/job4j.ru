@@ -1,4 +1,5 @@
 <web-app>
+    <!-- /webstructure-->
     <servlet>
         <servlet-name>EchoServlet</servlet-name>
         <servlet-class>ru.yalymar.webstructure.EchoServlet</servlet-class>
@@ -8,6 +9,7 @@
         <url-pattern>/echo</url-pattern>
     </servlet-mapping>
 
+    <!-- /crudservlet-->
     <servlet>
         <servlet-name>UserServlet</servlet-name>
         <servlet-class>ru.yalymar.crudservlet.controller.UserServlet</servlet-class>
@@ -17,6 +19,7 @@
         <url-pattern>/crudservlet</url-pattern>
     </servlet-mapping>
 
+    <!-- /servlet-->
     <servlet>
         <servlet-name>UsersServlet</servlet-name>
         <servlet-class>ru.yalymar.servlet.controller.UsersServlet</servlet-class>
@@ -50,4 +53,13 @@
         <url-pattern>/delete</url-pattern>
     </servlet-mapping>
 
+    <!-- /mvc-->
+    <servlet>
+        <servlet-name>StartController</servlet-name>
+        <servlet-class>ru.yalymar.mvc.controller.StartController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StartController</servlet-name>
+        <url-pattern>/mvc</url-pattern>
+    </servlet-mapping>
 </web-app>
