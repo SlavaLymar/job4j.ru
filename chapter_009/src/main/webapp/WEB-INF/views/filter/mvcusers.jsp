@@ -8,7 +8,7 @@
 </head>
 <body>
 <table border="1">
-    <caption ALIGN=center>USERS</caption>
+    <caption ALIGN=center style="background-color: red">USERS</caption>
     <TR style="background-color: gray">
         <TD>ID</TD>
         <TD>LOGIN</TD>
@@ -50,5 +50,6 @@
             </form>
         </TD>
     </table>
+    <!--<c:out value="You was sign in as ${user.role}"></c:out> -->
 </body>
 </html>

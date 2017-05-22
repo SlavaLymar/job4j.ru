@@ -11,6 +11,6 @@ public class ExitController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getSession().invalidate();
-        req.getRequestDispatcher("/WEB-INF/views/filter/mvcusers.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/filter/signin.jsp").forward(req, resp);
     }
 }
