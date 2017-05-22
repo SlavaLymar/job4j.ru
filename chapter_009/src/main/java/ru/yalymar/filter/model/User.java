@@ -10,28 +10,28 @@ import java.util.Calendar;
 public class User {
 
     private String id;
-    private String name;
+    private String password;
     private String login;
     private String email;
     private Calendar createDate;
 
-    public User(String id, String name, String login, String email, Calendar createDate) {
+    public User(String id, String login,String password, String email, Calendar createDate) {
         this.id = id;
-        this.name = name;
+        this.password = password;
         this.login = login;
         this.email = email;
         this.createDate = createDate;
     }
 
-    public User(String name, String login, String email, Calendar createDate) {
-        this.name = name;
+    public User(String login, String password, String email, Calendar createDate) {
+        this.password = password;
         this.login = login;
         this.email = email;
         this.createDate = createDate;
     }
 
-    public String getName() {
-        return name;
+    public String getPassword() {
+        return password;
     }
 
     public String getLogin() {

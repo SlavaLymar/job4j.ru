@@ -28,7 +28,7 @@ public class EditController extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("user", this.userManager.get(req.getParameter("id")));
-        req.getRequestDispatcher("/WEB-INF/views/mvcedit.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/mvc/mvcedit.jsp").forward(req, resp);
     }
 
     /** update user
@@ -42,7 +42,7 @@ public class EditController extends HttpServlet{
             throws ServletException, IOException {
         this.userManager.edit(req);
         req.setAttribute("users", this.userManager.getAll());
-        req.getRequestDispatcher("/WEB-INF/views/mvcusers.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/mvc/mvcusers.jsp").forward(req, resp);
     }
 
 }

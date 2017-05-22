@@ -30,7 +30,7 @@ public class AddController extends HttpServlet{
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/views/mvcadd.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/mvc/mvcadd.jsp").forward(req, resp);
     }
 
     /** update user
@@ -46,6 +46,6 @@ public class AddController extends HttpServlet{
                 req.getParameter("email"), Calendar.getInstance());
         this.userManager.add(user);
         req.setAttribute("users", this.userManager.getAll());
-        req.getRequestDispatcher("/WEB-INF/views/mvcusers.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/mvc/mvcusers.jsp").forward(req, resp);
     }
 }

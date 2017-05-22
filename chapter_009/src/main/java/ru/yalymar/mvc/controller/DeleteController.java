@@ -29,6 +29,6 @@ public class DeleteController extends HttpServlet{
             throws ServletException, IOException {
         this.userManager.delete(req.getParameter("id"));
         req.setAttribute("users", this.userManager.getAll());
-        req.getRequestDispatcher("/WEB-INF/views/mvcusers.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/mvc/mvcusers.jsp").forward(req, resp);
     }
 }
