@@ -2,7 +2,6 @@ package ru.yalymar.filter.controller;
 
 import ru.yalymar.filter.model.User;
 import ru.yalymar.filter.model.UserManager;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +29,7 @@ public class AddController extends HttpServlet{
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/views/mvcadd.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/filter/mvcadd.jsp").forward(req, resp);
     }
 
     /** update user
@@ -42,10 +41,10 @@ public class AddController extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        User user = new User(req.getParameter("name"), req.getParameter("login"),
+        User user = new User(req.getParameter("login"), req.getParameter("password"),
                 req.getParameter("email"), Calendar.getInstance());
         this.userManager.add(user);
         req.setAttribute("users", this.userManager.getAll());
-        req.getRequestDispatcher("/WEB-INF/views/mvcusers.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/filter/mvcusers.jsp").forward(req, resp);
     }
 }

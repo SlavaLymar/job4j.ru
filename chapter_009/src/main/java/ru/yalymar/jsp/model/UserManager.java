@@ -127,14 +127,14 @@ public class UserManager {
             DBManager.logger.error(e.getMessage(), e);
         }
         int tmp;
-        if(oldUser.getName() != req.getParameter("name")){
+        if(oldUser.getName().equals(req.getParameter("name"))){
             i = this.editColumnName(id, req.getParameter("name"));
         }
-        if(oldUser.getLogin() != req.getParameter("login")){
+        if(oldUser.getLogin().equals(req.getParameter("login"))){
             tmp = this.editColumnLogin(id, req.getParameter("login"));
             if(tmp > i) i = tmp;
         }
-        if(oldUser.getEmail() != req.getParameter("email")){
+        if(oldUser.getEmail().equals(req.getParameter("email"))){
             tmp = this.editColumnEmail(id, req.getParameter("email"));
             if(tmp > i) i = tmp;
         }

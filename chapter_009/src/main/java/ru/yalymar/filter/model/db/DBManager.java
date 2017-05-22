@@ -2,7 +2,6 @@ package ru.yalymar.filter.model.db;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.log4j.Logger;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 

@@ -101,14 +101,14 @@ public class UserManager {
                 user.getEmail(), user.getCreateDate());
 
         int tmp;
-        if(oldUser.getName() != newUser.getName()){
+        if(oldUser.getName().equals(newUser.getName())){
             i = this.editColumnName(id, newUser.getName());
         }
-        if(oldUser.getLogin() != newUser.getLogin()){
+        if(oldUser.getLogin().equals(newUser.getLogin())){
             tmp = this.editColumnLogin(id, newUser.getLogin());
             if(tmp > i) i = tmp;
         }
-        if(oldUser.getEmail() != newUser.getEmail()){
+        if(oldUser.getEmail().equals(newUser.getEmail())){
             tmp = this.editColumnEmail(id, newUser.getEmail());
             if(tmp > i) i = tmp;
         }

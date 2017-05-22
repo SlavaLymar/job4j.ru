@@ -92,6 +92,46 @@
         <filter-name>AuthFilter</filter-name>
         <filter-class>ru.yalymar.filter.controller.AuthFilter</filter-class>
     </filter>
+    <servlet>
+        <servlet-name>ExitController</servlet-name>
+        <servlet-class>ru.yalymar.filter.controller.ExitController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddController</servlet-name>
+        <servlet-class>ru.yalymar.filter.controller.AddController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SigninController</servlet-name>
+        <servlet-class>ru.yalymar.filter.controller.SigninController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditController</servlet-name>
+        <servlet-class>ru.yalymar.filter.controller.EditController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteController</servlet-name>
+        <servlet-class>ru.yalymar.filter.controller.DeleteController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ExitController</servlet-name>
+        <url-pattern>/exit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddController</servlet-name>
+        <url-pattern>/filteradd</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteController</servlet-name>
+        <url-pattern>/filterdelete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SigninController</servlet-name>
+        <url-pattern>/signin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditController</servlet-name>
+        <url-pattern>/filteredit</url-pattern>
+    </servlet-mapping>
     <filter-mapping>
         <filter-name>AuthFilter</filter-name>
         <url-pattern>*</url-pattern>

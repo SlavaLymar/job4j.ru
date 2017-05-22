@@ -1,7 +1,6 @@
 package ru.yalymar.filter.model;
 
 import ru.yalymar.filter.model.db.DBManager;
-
 import javax.servlet.http.HttpServletRequest;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -31,9 +30,9 @@ public class UserManager {
         PreparedStatement st;
         try {
             st = dbManager.getC().prepareStatement(
-                    "INSERT INTO users (name, login, email, dateCreate) VALUES (?, ?, ?, ?)");
-            st.setString(1, user.getName());
-            st.setString(2, user.getLogin());
+                    "INSERT INTO users1 (login, password, email, dateCreate) VALUES (?, ?, ?, ?)");
+            st.setString(1, user.getLogin());
+            st.setString(2, user.getPassword());
             st.setString(3, user.getEmail());
             st.setTimestamp(4, new Timestamp(user.getCreateDate().getTimeInMillis()));
             return dbManager.getGoUpdate().goUpdate(st);
@@ -52,15 +51,49 @@ public class UserManager {
         ResultSet rs = null;
         try {
             st = dbManager.getC().prepareStatement(
-                    "SELECT * FROM users WHERE id = ?");
+                    "SELECT * FROM users1 WHERE id = ?;");
             st.setInt(1, Integer.parseInt(id));
             rs = dbManager.getGo().go(st);
             rs.next();
             Calendar c = Calendar.getInstance();
             c.setTimeInMillis(rs.getTimestamp("datecreate").getTime());
             return new User(id,
-                    rs.getString("name"),
                     rs.getString("login"),
+                    rs.getString("password"),
+                    rs.getString("email"),
+                    c);
+        } catch (SQLException e) {
+            DBManager.logger.error(e.getMessage(), e);
+        } finally {
+            try {
+                rs.close();
+            } catch (SQLException e) {
+                DBManager.logger.error(e.getMessage(), e);
+            }
+        }
+        return null;
+    }
+
+    /** get user from db
+     * @param login
+     * @param password
+     * @return ResultSet
+     */
+    public User getByLoginPassword(String login, String password){
+        PreparedStatement st;
+        ResultSet rs = null;
+        try {
+            st = dbManager.getC().prepareStatement(
+                    "SELECT * FROM users1 WHERE login = ? AND password = ?");
+            st.setString(1, login);
+            st.setString(2, password);
+            rs = dbManager.getGo().go(st);
+            rs.next();
+            Calendar c = Calendar.getInstance();
+            c.setTimeInMillis(rs.getTimestamp("datecreate").getTime());
+            return new User(
+                    rs.getString("login"),
+                    rs.getString("password"),
                     rs.getString("email"),
                     c);
         } catch (SQLException e) {
@@ -84,14 +117,14 @@ public class UserManager {
         List<User> users = new ArrayList<>();
         try {
             st = dbManager.getC().prepareStatement(
-                    "SELECT * FROM users");
+                    "SELECT * FROM users1");
             rs = dbManager.getGo().go(st);
             while(rs.next()){
                 Calendar c = Calendar.getInstance();
                 c.setTimeInMillis(rs.getTimestamp("datecreate").getTime());
                 users.add(new User(String.valueOf(rs.getInt("id")),
-                        rs.getString("name"),
                         rs.getString("login"),
+                        rs.getString("password"),
                         rs.getString("email"),
                         c));
             }
@@ -122,20 +155,20 @@ public class UserManager {
             Calendar c = Calendar.getInstance();
             rs.next();
             c.setTimeInMillis(rs.getTimestamp("dateCreate").getTime());
-            oldUser = new User(rs.getString("name"), rs.getString("login"),
+            oldUser = new User(rs.getString("login"), rs.getString("password"),
                     rs.getString("email"), c);
         } catch (SQLException e) {
             DBManager.logger.error(e.getMessage(), e);
         }
-        int tmp;
-        if(oldUser.getName() != req.getParameter("name")){
-            i = this.editColumnName(id, req.getParameter("name"));
-        }
-        if(oldUser.getLogin() != req.getParameter("login")){
+        int tmp = 0;
+        if(!oldUser.getLogin().equals(req.getParameter("login"))){
             tmp = this.editColumnLogin(id, req.getParameter("login"));
+        }
+        if(!oldUser.getPassword().equals(req.getParameter("password"))){
+            i = this.editColumnPassword(id, req.getParameter("password"));
             if(tmp > i) i = tmp;
         }
-        if(oldUser.getEmail() != req.getParameter("email")){
+        if(!oldUser.getEmail().equals(req.getParameter("email"))){
             tmp = this.editColumnEmail(id, req.getParameter("email"));
             if(tmp > i) i = tmp;
         }
@@ -146,7 +179,7 @@ public class UserManager {
         PreparedStatement st;
         try {
             st = dbManager.getC().prepareStatement(
-                    "SELECT * FROM users WHERE id = ?");
+                    "SELECT * FROM users1 WHERE id = ?");
             st.setInt(1, Integer.parseInt(id));
             return dbManager.getGo().go(st);
 
@@ -165,7 +198,7 @@ public class UserManager {
         PreparedStatement st;
         try {
             st = dbManager.getC().prepareStatement(
-                    "UPDATE users SET email = ? WHERE id = ?");
+                    "UPDATE users1 SET email = ? WHERE id = ?");
             st.setString(1, value);
             st.setInt(2, Integer.parseInt(id));
             return dbManager.getGoUpdate().goUpdate(st);
@@ -185,7 +218,7 @@ public class UserManager {
         PreparedStatement st;
         try {
             st = dbManager.getC().prepareStatement(
-                    "UPDATE users SET login = ? WHERE id = ?");
+                    "UPDATE users1 SET login = ? WHERE id = ?");
             st.setString(1, value);
             st.setInt(2, Integer.parseInt(id));
             return dbManager.getGoUpdate().goUpdate(st);
@@ -201,11 +234,11 @@ public class UserManager {
      * @param value
      * @return int
      */
-    private int editColumnName(String id, String value) {
+    private int editColumnPassword(String id, String value) {
         PreparedStatement st;
         try {
             st = dbManager.getC().prepareStatement(
-                    "UPDATE users SET name = ? WHERE id = ?");
+                    "UPDATE users1 SET password = ? WHERE id = ?");
             st.setString(1, value);
             st.setInt(2, Integer.parseInt(id));
             return dbManager.getGoUpdate().goUpdate(st);
@@ -224,7 +257,7 @@ public class UserManager {
         PreparedStatement st;
         try {
             st = dbManager.getC().prepareStatement(
-                    "DELETE FROM users WHERE id = ?");
+                    "DELETE FROM users1 WHERE id = ?");
             st.setInt(1, Integer.parseInt(id));
             return dbManager.getGoUpdate().goUpdate(st);
 
@@ -234,4 +267,10 @@ public class UserManager {
         return -1;
     }
 
+    public boolean isValid(String login, String password){
+        if(this.getByLoginPassword(login, password) != null){
+            return true;
+        }
+        return false;
+    }
 }
