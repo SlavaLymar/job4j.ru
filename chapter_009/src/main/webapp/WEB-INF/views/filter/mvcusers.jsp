@@ -50,6 +50,6 @@
             </form>
         </TD>
     </table>
-    <!--<c:out value="You was sign in as ${user.role}"></c:out> -->
+    <!-- <c:out value="You was sign in as ${user.role}"></c:out> -->
 </body>
 </html>
