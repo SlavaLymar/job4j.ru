@@ -86,4 +86,14 @@
         <servlet-name>EditController</servlet-name>
         <url-pattern>/mvcedit</url-pattern>
     </servlet-mapping>
+
+    <!-- filter-->
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>ru.yalymar.filter.controller.AuthFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>*</url-pattern>
+    </filter-mapping>
 </web-app>
