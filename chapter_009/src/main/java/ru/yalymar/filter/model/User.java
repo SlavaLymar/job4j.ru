@@ -14,20 +14,31 @@ public class User {
     private String login;
     private String email;
     private Calendar createDate;
+    private String role = "user";
 
-    public User(String id, String login, String password, String email, Calendar createDate) {
+    public User(String id, String login, String password, String email, Calendar createDate, String role) {
         this.id = id;
         this.password = password;
         this.login = login;
         this.email = email;
         this.createDate = createDate;
+        this.role = role;
     }
 
-    public User(String login, String password, String email, Calendar createDate) {
+    public User(String login, String password, String email, Calendar createDate, String role) {
         this.password = password;
         this.login = login;
         this.email = email;
         this.createDate = createDate;
+        this.role = role;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getPassword() {

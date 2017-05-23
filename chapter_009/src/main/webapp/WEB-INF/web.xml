@@ -92,9 +92,17 @@
         <filter-name>AuthFilter</filter-name>
         <filter-class>ru.yalymar.filter.controller.AuthFilter</filter-class>
     </filter>
+    <filter>
+        <filter-name>UserFilter</filter-name>
+        <filter-class>ru.yalymar.filter.controller.UserFilter</filter-class>
+    </filter>
     <servlet>
         <servlet-name>ExitController</servlet-name>
         <servlet-class>ru.yalymar.filter.controller.ExitController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserEditController</servlet-name>
+        <servlet-class>ru.yalymar.filter.controller.UserEditController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddController</servlet-name>
@@ -125,6 +133,10 @@
         <url-pattern>/filterdelete</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>UserEditController</servlet-name>
+        <url-pattern>/edituser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>SigninController</servlet-name>
         <url-pattern>/signin</url-pattern>
     </servlet-mapping>
@@ -134,6 +146,10 @@
     </servlet-mapping>
     <filter-mapping>
         <filter-name>AuthFilter</filter-name>
+        <url-pattern>*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>UserFilter</filter-name>
         <url-pattern>*</url-pattern>
     </filter-mapping>
 </web-app>

@@ -5,7 +5,7 @@
     <title>Edit</title>
 </head>
 <body>
-<form action='${pageContext.servletContext.contextPath}/mvcedit' method='post'>
+<form action='${pageContext.servletContext.contextPath}/edituser' method='post'>
     Login: <input type='text' name='newlogin' value='${user.login}'/><br>
     Password: <input type='text' name='newpassword' value='${user.password}'/><br>
     Email: <input type='text' name='email' value='${user.email}'/><br>

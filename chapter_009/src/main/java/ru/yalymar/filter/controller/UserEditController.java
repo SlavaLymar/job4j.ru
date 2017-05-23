@@ -1,27 +1,22 @@
 package ru.yalymar.filter.controller;
 
-import ru.yalymar.filter.model.User;
 import ru.yalymar.filter.model.UserManager;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Calendar;
 
 /**
  * @author slavalymar
  * @since 15.05.2017
  * @version 1
  */
-public class AddController extends HttpServlet{
+public class UserEditController extends HttpServlet {
 
-    /**
-     * instance of userManager for CRUD operations
-     */
     private final UserManager userManager = new UserManager();
 
-    /** get add form
+    /** get edit form
      * @param req
      * @param resp
      * @throws ServletException
@@ -29,7 +24,9 @@ public class AddController extends HttpServlet{
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/views/filter/mvcadd.jsp").forward(req, resp);
+        String id = req.getParameter("id");
+        req.setAttribute("user", this.userManager.get(id));
+        req.getRequestDispatcher("/WEB-INF/views/filter/edituser.jsp").forward(req, resp);
     }
 
     /** update user
@@ -41,10 +38,8 @@ public class AddController extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        User user = new User(req.getParameter("login"), req.getParameter("password"),
-                req.getParameter("email"), Calendar.getInstance(), "user");
-        this.userManager.add(user);
-        req.setAttribute("users", this.userManager.getAll());
-        req.getRequestDispatcher("/WEB-INF/views/filter/mvcusers.jsp").forward(req, resp);
+        this.userManager.edit(req);
+        req.setAttribute("user", this.userManager.get(req.getParameter("id")));
+        req.getRequestDispatcher("/WEB-INF/views/filter/mvcusersforuser.jsp").forward(req, resp);
     }
 }

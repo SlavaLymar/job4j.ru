@@ -61,7 +61,7 @@ public class UserManager {
                     rs.getString("login"),
                     rs.getString("password"),
                     rs.getString("email"),
-                    c);
+                    c, rs.getString("role"));
         } catch (SQLException e) {
             DBManager.logger.error(e.getMessage(), e);
         } finally {
@@ -92,10 +92,11 @@ public class UserManager {
             Calendar c = Calendar.getInstance();
             c.setTimeInMillis(rs.getTimestamp("datecreate").getTime());
             return new User(
+                    rs.getString("id"),
                     rs.getString("login"),
                     rs.getString("password"),
                     rs.getString("email"),
-                    c);
+                    c, rs.getString("role"));
         } catch (SQLException e) {
             DBManager.logger.error(e.getMessage(), e);
         } finally {
@@ -126,7 +127,7 @@ public class UserManager {
                         rs.getString("login"),
                         rs.getString("password"),
                         rs.getString("email"),
-                        c));
+                        c, rs.getString("role")));
             }
             return users;
         } catch (SQLException e) {
@@ -156,16 +157,16 @@ public class UserManager {
             rs.next();
             c.setTimeInMillis(rs.getTimestamp("dateCreate").getTime());
             oldUser = new User(rs.getString("login"), rs.getString("password"),
-                    rs.getString("email"), c);
+                    rs.getString("email"), c, rs.getString("role"));
         } catch (SQLException e) {
             DBManager.logger.error(e.getMessage(), e);
         }
         int tmp = 0;
-        if(!oldUser.getLogin().equals(req.getParameter("login"))){
-            tmp = this.editColumnLogin(id, req.getParameter("login"));
+        if(!oldUser.getLogin().equals(req.getParameter("newlogin"))){
+            tmp = this.editColumnLogin(id, req.getParameter("newlogin"));
         }
-        if(!oldUser.getPassword().equals(req.getParameter("password"))){
-            i = this.editColumnPassword(id, req.getParameter("password"));
+        if(!oldUser.getPassword().equals(req.getParameter("newpassword"))){
+            i = this.editColumnPassword(id, req.getParameter("newpassword"));
             if(tmp > i) i = tmp;
         }
         if(!oldUser.getEmail().equals(req.getParameter("email"))){
@@ -269,6 +270,13 @@ public class UserManager {
 
     public boolean isValid(String login, String password){
         if(this.getByLoginPassword(login, password) != null){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isAdmin(String login, String password){
+        if("admin".equals(this.getByLoginPassword(login, password).getRole())){
             return true;
         }
         return false;

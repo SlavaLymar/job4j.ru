@@ -1,7 +1,6 @@
 package ru.yalymar.filter.controller;
 
 import ru.yalymar.filter.model.UserManager;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
