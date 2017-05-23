@@ -173,7 +173,26 @@ public class UserManager {
             tmp = this.editColumnEmail(id, req.getParameter("email"));
             if(tmp > i) i = tmp;
         }
+        if(!oldUser.getRole().equals(req.getParameter("role"))){
+            tmp = this.editColumnRole(id, req.getParameter("role"));
+            if(tmp > i) i = tmp;
+        }
         return i;
+    }
+
+    private int editColumnRole(String id, String value) {
+        PreparedStatement st;
+        try {
+            st = dbManager.getC().prepareStatement(
+                    "UPDATE users1 SET role = ? WHERE id = ?");
+            st.setString(1, value);
+            st.setInt(2, Integer.parseInt(id));
+            return dbManager.getGoUpdate().goUpdate(st);
+
+        } catch (SQLException e) {
+            DBManager.logger.error(e.getMessage(), e);
+        }
+        return -1;
     }
 
     public ResultSet getRS(String id) {

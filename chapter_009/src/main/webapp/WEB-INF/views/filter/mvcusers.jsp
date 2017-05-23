@@ -15,6 +15,7 @@
         <TD>PASSWORD</TD>
         <TD>EMAIL</TD>
         <TD>DATE OF CREATE</TD>
+        <TD>ROLE</TD>
     </TR>
         <c:forEach items="${users}" var="user">
     <TR>
@@ -22,7 +23,9 @@
         <TD><c:out value="${user.login}"></c:out></TD>
         <TD><c:out value="${user.password}"></c:out></TD>
         <TD><c:out value="${user.email}"></c:out></TD>
-        <TD><fmt:formatDate type="both" value="${user.createDate.time}"/><TD>
+        <TD><fmt:formatDate type="both" value="${user.createDate.time}"/></TD>
+        <TD><c:out value="${user.role}"></c:out></TD>
+        <TD>
             <form action='${pageContext.servletContext.contextPath}/filteredit' method='get'>
                 <input type='submit' value='edit'>
                 <input type='hidden' name='id' value='${user.id}'>

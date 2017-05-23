@@ -101,6 +101,10 @@
         <servlet-class>ru.yalymar.filter.controller.ExitController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>UController</servlet-name>
+        <servlet-class>ru.yalymar.filter.controller.UController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>UserEditController</servlet-name>
         <servlet-class>ru.yalymar.filter.controller.UserEditController</servlet-class>
     </servlet>
@@ -127,6 +131,10 @@
     <servlet-mapping>
         <servlet-name>AddController</servlet-name>
         <url-pattern>/filteradd</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UController</servlet-name>
+        <url-pattern>/u</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DeleteController</servlet-name>
