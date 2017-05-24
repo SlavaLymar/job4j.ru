@@ -75,6 +75,7 @@ public class Print {
         } catch (SQLException e) {
             DBManager.logger.error(e.getMessage(), e);
         }
+        writer.append(str1);
         writer.flush();
         writer.close();
     }
