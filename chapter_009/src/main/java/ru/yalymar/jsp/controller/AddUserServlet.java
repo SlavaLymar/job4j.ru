@@ -21,6 +21,10 @@ public class AddUserServlet extends HttpServlet{
      */
     private final UserManager userManager = new UserManager();
 
+    public UserManager getUserManager() {
+        return this.userManager;
+    }
+
     /** update user
      * @param req
      * @param resp

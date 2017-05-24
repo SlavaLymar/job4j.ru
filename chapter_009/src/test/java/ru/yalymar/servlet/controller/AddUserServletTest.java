@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 public class AddUserServletTest {
 
     @Test
-    public void whenAddAndDeleteUserShouldGetResultSet() throws ServletException, IOException, SQLException {
+    public void whenAddAndDeleteUserShouldGetResultSetSERVLET() throws ServletException, IOException, SQLException {
         HttpServletRequest req = mock(HttpServletRequest.class);
         HttpServletResponse resp = mock(HttpServletResponse.class);
         StringWriter stringWriter = new StringWriter();
