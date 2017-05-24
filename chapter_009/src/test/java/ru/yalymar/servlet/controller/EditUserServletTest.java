@@ -14,7 +14,7 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class AddUserServletTest {
+public class EditUserServletTest {
 
     @Test
     public void whenAddAndDeleteUserShouldGetResultSet() throws ServletException, IOException, SQLException {
@@ -45,14 +45,30 @@ public class AddUserServletTest {
         }
         rs.close();
 
-        //delete user
+        //edit user
+        EditUserServlet es = new EditUserServlet();
+        when(req.getParameter("name")).thenReturn("slavalymar");
         when(req.getParameter("id")).thenReturn(id);
+        es.doPost(req, resp);
+        ResultSet rs2 = us.getUserManager().getAll();
+        boolean findName = false;
+        while(rs2.next()){
+            if("slavalymar".equals(rs2.getString("name"))){
+                findName = true;
+                break;
+            }
+        }
+        rs.close();
+        assertTrue(findName);
+
+
+        //delete user
         DeleteUserServlet ds = new DeleteUserServlet();
         ds.doPost(req, resp);
         ResultSet rs1 = ds.getUserManager().getAll();
         boolean findUser = false;
         while(rs1.next()){
-            if("slava".equals(rs1.getString("name"))){
+            if("slavalymar".equals(rs1.getString("name"))){
                 findUser = true;
                 break;
             }
@@ -62,5 +78,4 @@ public class AddUserServletTest {
         writer.close();
 
     }
-
 }
