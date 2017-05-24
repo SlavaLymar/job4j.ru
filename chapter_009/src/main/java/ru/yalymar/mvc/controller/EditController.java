@@ -19,6 +19,10 @@ public class EditController extends HttpServlet{
      */
     private final UserManager userManager = new UserManager();
 
+    public UserManager getUserManager() {
+        return this.userManager;
+    }
+
     /** get edit form
      * @param req
      * @param resp

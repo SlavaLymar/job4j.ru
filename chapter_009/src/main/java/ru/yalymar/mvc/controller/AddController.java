@@ -1,6 +1,5 @@
 package ru.yalymar.mvc.controller;
 
-import ru.yalymar.crudservlet.model.db.DBManager;
 import ru.yalymar.mvc.model.User;
 import ru.yalymar.mvc.model.UserManager;
 import javax.servlet.ServletException;
@@ -21,6 +20,10 @@ public class AddController extends HttpServlet{
      * instance of userManager for CRUD operations
      */
     private final UserManager userManager = new UserManager();
+
+    public UserManager getUserManager() {
+        return this.userManager;
+    }
 
     /** get add form
      * @param req
