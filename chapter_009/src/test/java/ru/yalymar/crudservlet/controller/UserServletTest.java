@@ -43,6 +43,7 @@ public class UserServletTest {
             }
         }
         assertTrue(result);
+        rs.close();
 
         when(req.getParameter("id")).thenReturn(String.valueOf(id));
         us.doDelete(req, resp);
@@ -59,6 +60,7 @@ public class UserServletTest {
             }
         }
         assertFalse(result1);
+        writer.close();
     }
 
 }
