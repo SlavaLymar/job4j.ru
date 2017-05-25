@@ -32,29 +32,26 @@ public class UserFilter implements Filter {
             throws IOException, ServletException {
 
         HttpServletRequest request = (HttpServletRequest) req;
-
         HttpSession session = request.getSession();
-        synchronized (session) {
-            String login = request.getParameter("login");
-            String password = request.getParameter("password");
-            String newlogin = request.getParameter("newlogin");
-            String newpassword = request.getParameter("newpassword");
-            String id = request.getParameter("id");
 
-            if (login != null && password != null && !this.userManager.isAdmin(login, password)) {
-                if(newlogin != null || newpassword != null) {
-                    chain.doFilter(req, resp);
-                }
-                req.setAttribute("user", this.userManager.getByLoginPassword(login, password));
-                session.setAttribute("login", login);
-                session.setAttribute("password", password);
-                session.setAttribute("id", id);
-                req.getRequestDispatcher("/WEB-INF/views/filter/mvcusersforuser.jsp").forward(req, resp);
-                return;
+        String login = request.getParameter("login");
+        String password = request.getParameter("password");
+        String newlogin = request.getParameter("newlogin");
+        String newpassword = request.getParameter("newpassword");
+        String id = request.getParameter("id");
+
+        if (login != null && password != null && !this.userManager.isAdmin(login, password)) {
+            if (newlogin != null || newpassword != null) {
+                chain.doFilter(req, resp);
             }
+            req.setAttribute("user", this.userManager.getByLoginPassword(login, password));
+            session.setAttribute("login", login);
+            session.setAttribute("password", password);
+            session.setAttribute("id", id);
+            req.getRequestDispatcher("/WEB-INF/views/filter/mvcusersforuser.jsp").forward(req, resp);
+            return;
         }
         chain.doFilter(req, resp);
-
     }
 
     @Override

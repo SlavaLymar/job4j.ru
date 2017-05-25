@@ -8,8 +8,8 @@ import java.io.IOException;
 
 /**
  * @author slavalymar
- * @since 15.05.2017
  * @version 1
+ * @since 15.05.2017
  */
 public class AuthFilter implements Filter {
 
@@ -18,7 +18,9 @@ public class AuthFilter implements Filter {
 
     }
 
-    /** determine that user has already exist
+    /**
+     * determine that user has already exist
+     *
      * @param req
      * @param resp
      * @param chain
@@ -29,16 +31,13 @@ public class AuthFilter implements Filter {
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
             throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) req;
-        if(request.getRequestURI().contains("/signin")){
+        if (request.getRequestURI().contains("/signin")) {
             chain.doFilter(req, resp);
-        }
-        else {
+        } else {
             HttpSession session = request.getSession();
-            synchronized (session){
-                if(session.getAttribute("login") == null){
-                    ((HttpServletResponse) resp).sendRedirect(String.format("%s/signin", request.getContextPath()));
-                    return;
-                }
+            if (session.getAttribute("login") == null) {
+                ((HttpServletResponse) resp).sendRedirect(String.format("%s/signin", request.getContextPath()));
+                return;
             }
             chain.doFilter(req, resp);
         }
