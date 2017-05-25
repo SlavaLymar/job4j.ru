@@ -162,18 +162,18 @@ public class UserManager {
             DBManager.logger.error(e.getMessage(), e);
         }
         int tmp = 0;
-        if(!oldUser.getLogin().equals(req.getParameter("newlogin"))){
+        if(req.getParameter("newlogin") != null && !oldUser.getLogin().equals(req.getParameter("newlogin"))){
             tmp = this.editColumnLogin(id, req.getParameter("newlogin"));
         }
-        if(!oldUser.getPassword().equals(req.getParameter("newpassword"))){
+        if(req.getParameter("newpassword") != null && !oldUser.getPassword().equals(req.getParameter("newpassword"))){
             i = this.editColumnPassword(id, req.getParameter("newpassword"));
             if(tmp > i) i = tmp;
         }
-        if(!oldUser.getEmail().equals(req.getParameter("email"))){
+        if(req.getParameter("email") != null && !oldUser.getEmail().equals(req.getParameter("email"))){
             tmp = this.editColumnEmail(id, req.getParameter("email"));
             if(tmp > i) i = tmp;
         }
-        if(!oldUser.getRole().equals(req.getParameter("role"))){
+        if(req.getParameter("role") != null && !oldUser.getRole().equals(req.getParameter("role"))){
             tmp = this.editColumnRole(id, req.getParameter("role"));
             if(tmp > i) i = tmp;
         }

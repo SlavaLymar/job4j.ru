@@ -18,6 +18,10 @@ public class DeleteController extends HttpServlet{
      */
     private final UserManager userManager = new UserManager();
 
+    public UserManager getUserManager() {
+        return this.userManager;
+    }
+
     /** delete user from db
      * @param req
      * @param resp

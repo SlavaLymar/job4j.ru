@@ -21,6 +21,10 @@ public class AddController extends HttpServlet{
      */
     private final UserManager userManager = new UserManager();
 
+    public UserManager getUserManager() {
+        return this.userManager;
+    }
+
     /** get add form
      * @param req
      * @param resp
