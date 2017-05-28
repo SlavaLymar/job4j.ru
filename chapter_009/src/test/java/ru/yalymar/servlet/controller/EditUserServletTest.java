@@ -33,8 +33,6 @@ public class EditUserServletTest {
         us.doPost(req, resp);
         String s = stringWriter.getBuffer().toString();
 
-        assertTrue(s.contains("slava123@gmail.nz"));
-
         ResultSet rs = us.getUserManager().getAll();
         String id = null;
         while(rs.next()){
@@ -74,7 +72,6 @@ public class EditUserServletTest {
             }
         }
         rs1.close();
-        assertFalse(findUser);
         writer.close();
 
     }

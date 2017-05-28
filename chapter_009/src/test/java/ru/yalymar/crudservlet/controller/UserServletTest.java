@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 public class UserServletTest {
 
     @Test
-    public void whenAddAndDeleteUserShouldGetResultSet() throws ServletException, IOException, SQLException {
+    public void whenAddUserShouldGetResultSet() throws ServletException, IOException, SQLException {
         HttpServletRequest req = mock(HttpServletRequest.class);
         HttpServletResponse resp = mock(HttpServletResponse.class);
         StringWriter stringWriter = new StringWriter();
@@ -28,12 +28,40 @@ public class UserServletTest {
         when(req.getParameter("login")).thenReturn("slava123");
         when(req.getParameter("email")).thenReturn("slava123@gmail.nz");
         when(resp.getWriter()).thenReturn(writer);
+
         // add user
         us.doPut(req, resp);
         String s = stringWriter.getBuffer().toString();
 
         assertTrue(s.contains("slava123@gmail.nz"));
 
+        ResultSet rs = us.getUserManager().getAll();
+        String id = null;
+        while(rs.next()){
+            if("slava".equals(rs.getString("name"))){
+                id = rs.getString("id");
+                break;
+            }
+        }
+
+        rs.close();
+        writer.close();
+    }
+
+    @Test
+    public void whenDeleteUserShouldGetResultSet() throws ServletException, IOException, SQLException {
+        HttpServletRequest req = mock(HttpServletRequest.class);
+        HttpServletResponse resp = mock(HttpServletResponse.class);
+        StringWriter stringWriter = new StringWriter();
+        PrintWriter writer = new PrintWriter(stringWriter);
+        UserServlet us = new UserServlet();
+
+        when(req.getParameter("name")).thenReturn("slava");
+        when(req.getParameter("login")).thenReturn("slava123");
+        when(req.getParameter("email")).thenReturn("slava123@gmail.nz");
+        when(resp.getWriter()).thenReturn(writer);
+
+        // find user
         ResultSet rs = us.getUserManager().getAll();
         String id = null;
         while(rs.next()){
@@ -58,7 +86,5 @@ public class UserServletTest {
         rs1.close();
         assertFalse(findUser);
         writer.close();
-
     }
-
 }

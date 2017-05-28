@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 public class AddControllerTest {
 
     @Test
-    public void whenAddAndDeleteUserShouldGetResultSetMVC() throws ServletException, IOException, SQLException {
+    public void whenAddUserShouldGetResultSetMVC() throws ServletException, IOException, SQLException {
         HttpServletRequest req = mock(HttpServletRequest.class);
         HttpServletResponse resp = mock(HttpServletResponse.class);
         AddController us = new AddController();
@@ -43,6 +43,33 @@ public class AddControllerTest {
             }
         });
         assertTrue(findUser[0]);
+    }
+
+    @Test
+    public void whenDeleteUserShouldGetResultSetMVC() throws ServletException, IOException, SQLException {
+        HttpServletRequest req = mock(HttpServletRequest.class);
+        HttpServletResponse resp = mock(HttpServletResponse.class);
+        AddController us = new AddController();
+
+        when(req.getParameter("name")).thenReturn("slava");
+        when(req.getParameter("login")).thenReturn("slava123");
+        when(req.getParameter("email")).thenReturn("slava123@gmail.nz");
+        RequestDispatcher rd = mock(RequestDispatcher.class);
+        when(req.getRequestDispatcher(("/WEB-INF/views/mvc/mvcusers.jsp"))).thenReturn(rd);
+
+        // find user
+        List<User> users = us.getUserManager().getAll();
+        boolean[] findUser = new boolean[1];
+        String[] id = new String[1];
+        users.forEach((user)->{
+            if("slava".equals(user.getName()) &&
+                    "slava123".equals(user.getLogin()) &&
+                    "slava123@gmail.nz".equals(user.getEmail())){
+                findUser[0] = true;
+                id[0] = user.getId();
+                return;
+            }
+        });
 
         //delete user
         when(req.getParameter("id")).thenReturn(id[0]);
@@ -59,7 +86,5 @@ public class AddControllerTest {
             }
         });
         assertFalse(findUserD[0]);
-
-
     }
 }

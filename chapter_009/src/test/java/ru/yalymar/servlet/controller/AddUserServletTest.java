@@ -34,7 +34,22 @@ public class AddUserServletTest {
         String s = stringWriter.getBuffer().toString();
 
         assertTrue(s.contains("slava123@gmail.nz"));
+    }
 
+    @Test
+    public void whenAddUserShouldGetResultSetSERVLET() throws ServletException, IOException, SQLException {
+        HttpServletRequest req = mock(HttpServletRequest.class);
+        HttpServletResponse resp = mock(HttpServletResponse.class);
+        StringWriter stringWriter = new StringWriter();
+        PrintWriter writer = new PrintWriter(stringWriter);
+        AddUserServlet us = new AddUserServlet();
+
+        when(req.getParameter("name")).thenReturn("slava");
+        when(req.getParameter("login")).thenReturn("slava123");
+        when(req.getParameter("email")).thenReturn("slava123@gmail.nz");
+        when(resp.getWriter()).thenReturn(writer);
+
+        // find user
         ResultSet rs = us.getUserManager().getAll();
         String id = null;
         while(rs.next()){
@@ -62,5 +77,4 @@ public class AddUserServletTest {
         writer.close();
 
     }
-
 }

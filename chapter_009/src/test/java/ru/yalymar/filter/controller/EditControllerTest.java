@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -42,7 +41,6 @@ public class EditControllerTest {
                 return;
             }
         });
-        assertTrue(findUser[0]);
 
         //edit user
         EditController es = new EditController();
@@ -74,6 +72,5 @@ public class EditControllerTest {
                 return;
             }
         });
-        assertFalse(findUserD[0]);
     }
 }

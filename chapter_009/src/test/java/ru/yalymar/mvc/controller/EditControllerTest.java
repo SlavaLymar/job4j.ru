@@ -42,7 +42,6 @@ public class EditControllerTest {
                 return;
             }
         });
-        assertTrue(findUser[0]);
 
         //edit user
         EditController es = new EditController();
@@ -74,7 +73,6 @@ public class EditControllerTest {
                 return;
             }
         });
-        assertFalse(findUserD[0]);
 
 
     }

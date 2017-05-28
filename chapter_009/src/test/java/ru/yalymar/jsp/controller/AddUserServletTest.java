@@ -16,7 +16,7 @@ import static org.mockito.Mockito.when;
 public class AddUserServletTest {
 
     @Test
-    public void whenAddAndDeleteUserShouldGetResultSetJSP() throws ServletException, IOException, SQLException {
+    public void whenAddUserShouldGetResultSetJSP() throws ServletException, IOException, SQLException {
         HttpServletRequest req = mock(HttpServletRequest.class);
         HttpServletResponse resp = mock(HttpServletResponse.class);
         AddUserServlet us = new AddUserServlet();
@@ -40,6 +40,31 @@ public class AddUserServletTest {
             }
         });
         assertTrue(findUser[0]);
+    }
+
+    @Test
+    public void whenDeleteUserShouldGetResultSetJSP() throws ServletException, IOException, SQLException {
+        HttpServletRequest req = mock(HttpServletRequest.class);
+        HttpServletResponse resp = mock(HttpServletResponse.class);
+        AddUserServlet us = new AddUserServlet();
+
+        when(req.getParameter("name")).thenReturn("slava");
+        when(req.getParameter("login")).thenReturn("slava123");
+        when(req.getParameter("email")).thenReturn("slava123@gmail.nz");
+
+        // find user
+        List<User> users = us.getUserManager().getAll();
+        boolean[] findUser = new boolean[1];
+        String[] id = new String[1];
+        users.forEach((user)->{
+            if("slava".equals(user.getName()) &&
+                    "slava123".equals(user.getLogin()) &&
+                    "slava123@gmail.nz".equals(user.getEmail())){
+                findUser[0] = true;
+                id[0] = user.getId();
+                return;
+            }
+        });
 
         //delete user
         when(req.getParameter("id")).thenReturn(id[0]);
@@ -56,7 +81,5 @@ public class AddUserServletTest {
             }
         });
         assertFalse(findUserD[0]);
-
-
     }
 }

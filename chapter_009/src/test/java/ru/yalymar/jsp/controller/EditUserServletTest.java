@@ -39,7 +39,6 @@ public class EditUserServletTest {
                 return;
             }
         });
-        assertTrue(findUser[0]);
 
         //edit user
         EditUserServlet es = new EditUserServlet();
@@ -71,8 +70,6 @@ public class EditUserServletTest {
                 return;
             }
         });
-        assertFalse(findUserD[0]);
-
-
     }
+
 }
