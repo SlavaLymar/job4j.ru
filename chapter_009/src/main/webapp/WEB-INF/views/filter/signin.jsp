@@ -34,7 +34,6 @@
             return result;
         }
 
-
     </script>
 </head>
 <body>
@@ -46,8 +45,8 @@
 </c:if>
     <form id="sn" action='${pageContext.servletContext.contextPath}/signin' method='post' onsubmit="return validate()">
 
-        Login: <input type='text' name='login' id="login"/><br>
-        Password: <input type='password' name='password' id="password"/><br>
+        Login: <input type='text' name='slogin' id="login"/><br>
+        Password: <input type='password' name='spassword' id="password"/><br>
         <input type='submit' value="SIGN IN">
 
     </form>

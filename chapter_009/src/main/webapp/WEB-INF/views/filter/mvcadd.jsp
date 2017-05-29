@@ -21,13 +21,35 @@
             margin: 0 auto;
         }
     </style>
+
+    <script>
+        function validate(){
+            var result = true;
+            var login = document.getElementById("login").value;
+            var password = document.getElementById("password").value;
+            var email = document.getElementById("email").value;
+            if(login == ''){
+                alert("You must fill login!\nTry again.");
+                result = false;
+            }
+            else if(password == ''){
+                alert("You must fill password!\nTry again.");
+                result = false;
+            }
+            else if(email == ''){
+                alert("You must fill email!\nTry again.");
+                result = false;
+            }
+            return result;
+        }
+    </script>
 </head>
 <body>
     <h2 align="center">Add user</h2>
-    <form action='${pageContext.servletContext.contextPath}/filteradd' method='post'>
-    Login: <input type='text' name='login'/><br>
-    Password: <input type='text' name='password'/><br>
-    Email: <input type='text' name='email'/><br>
+    <form action='${pageContext.servletContext.contextPath}/filteradd' method='post' onsubmit="return validate()">
+    Login: <input type='text' name='login' id="login"/><br>
+    Password: <input type='text' name='password' id="password"/><br>
+    Email: <input type='text' name='email' id="email"/><br>
     <input type='submit' value='add'>
     </form>
 

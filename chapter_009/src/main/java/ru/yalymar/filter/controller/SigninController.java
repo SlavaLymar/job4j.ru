@@ -37,14 +37,10 @@ public class SigninController extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        String login = req.getParameter("login");
-        String password = req.getParameter("password");
+        String login = req.getParameter("slogin");
+        String password = req.getParameter("spassword");
         if(this.userManager.isValid(login, password)){
-            req.setAttribute("users", this.userManager.getAll());
-            req.getSession().setAttribute("login", login);
-            req.getSession().setAttribute("password", password);
-            req.getSession().setAttribute("role", this.userManager.isAdmin(login, password) ? "admin" : "user");
-            req.getRequestDispatcher("/WEB-INF/views/filter/mvcusers.jsp").forward(req, resp);
+            resp.sendRedirect(String.format("%s/u", req.getContextPath()));
         }
         else {
             req.setAttribute("error", "User has not exist!");

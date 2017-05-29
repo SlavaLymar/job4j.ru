@@ -3,6 +3,7 @@ package ru.yalymar.filter.controller;
 import ru.yalymar.filter.model.UserManager;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
@@ -32,24 +33,32 @@ public class UserFilter implements Filter {
             throws IOException, ServletException {
 
         HttpServletRequest request = (HttpServletRequest) req;
-        HttpSession session = request.getSession();
+        String sLogin = request.getParameter("slogin");
+        String sPassword = request.getParameter("spassword");
+        String l = (String) ((HttpServletRequest) req).getSession().getAttribute("slogin");
+        String p = (String) ((HttpServletRequest) req).getSession().getAttribute("spassword");
 
-        String login = request.getParameter("login");
-        String password = request.getParameter("password");
-        String newlogin = request.getParameter("newlogin");
-        String newpassword = request.getParameter("newpassword");
-        String id = request.getParameter("id");
-
-        if (login != null && password != null && !this.userManager.isAdmin(login, password)) {
-            if (newlogin != null || newpassword != null) {
-                chain.doFilter(req, resp);
+            if (sLogin != null && sPassword != null) {
+                if (l == null && p == null) {
+                    ((HttpServletRequest) req).getSession().setAttribute("slogin", sLogin);
+                    ((HttpServletRequest) req).getSession().setAttribute("spassword", sPassword);
+                    ((HttpServletRequest) req).getSession().setAttribute(
+                            "role", this.userManager.isAdmin(sLogin, sPassword) ? "admin" : "user");
+                    chain.doFilter(req, resp);
+                    return;
+                }
             }
-            req.setAttribute("user", this.userManager.getByLoginPassword(login, password));
-            session.setAttribute("login", login);
-            session.setAttribute("password", password);
-            session.setAttribute("id", id);
-            req.getRequestDispatcher("/WEB-INF/views/filter/mvcusersforuser.jsp").forward(req, resp);
-            return;
+        if (sLogin != null && sPassword != null) {
+            if (l != null && p != null) {
+                if (!sLogin.equals(l) && !sPassword.equals(p)) {
+                    ((HttpServletRequest) req).getSession().setAttribute("slogin", sLogin);
+                    ((HttpServletRequest) req).getSession().setAttribute("spassword", sPassword);
+                    ((HttpServletRequest) req).getSession().setAttribute(
+                            "role", this.userManager.isAdmin(sLogin, sPassword) ? "admin" : "user");
+                    chain.doFilter(req, resp);
+                    return;
+                }
+            }
         }
         chain.doFilter(req, resp);
     }
