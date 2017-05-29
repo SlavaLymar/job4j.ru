@@ -5,10 +5,17 @@
 <head>
     <meta charset=\"UTF-8\">
     <title>Users</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        table{
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
 <table border="1">
-    <caption ALIGN=center style="background-color: red">USERS</caption>
+    <h2 align="center">Users</h2>
     <TR style="background-color: gray">
         <TD>ID</TD>
         <TD>LOGIN</TD>
