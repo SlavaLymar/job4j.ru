@@ -30,11 +30,14 @@ public class UserManager {
         PreparedStatement st;
         try {
             st = dbManager.getC().prepareStatement(
-                    "INSERT INTO users1 (login, password, email, dateCreate) VALUES (?, ?, ?, ?)");
+                    "INSERT INTO users1 (login, password, email, dateCreate, country, city) " +
+                            "VALUES (?, ?, ?, ?, ?, ?)");
             st.setString(1, user.getLogin());
             st.setString(2, user.getPassword());
             st.setString(3, user.getEmail());
             st.setTimestamp(4, new Timestamp(user.getCreateDate().getTimeInMillis()));
+            st.setString(5, user.getCountry());
+            st.setString(6, user.getCity());
             return dbManager.getGoUpdate().goUpdate(st);
         } catch (SQLException e) {
             DBManager.logger.error(e.getMessage(), e);
@@ -61,7 +64,9 @@ public class UserManager {
                     rs.getString("login"),
                     rs.getString("password"),
                     rs.getString("email"),
-                    c, rs.getString("role"));
+                    c, rs.getString("role"),
+                    rs.getString("country"),
+                    rs.getString("city"));
         } catch (SQLException e) {
             DBManager.logger.error(e.getMessage(), e);
         } finally {
@@ -96,7 +101,9 @@ public class UserManager {
                     rs.getString("login"),
                     rs.getString("password"),
                     rs.getString("email"),
-                    c, rs.getString("role"));
+                    c, rs.getString("role"),
+                    rs.getString("country"),
+                    rs.getString("city"));
         } catch (SQLException e) {
             DBManager.logger.error(e.getMessage(), e);
         } finally {
@@ -127,7 +134,9 @@ public class UserManager {
                         rs.getString("login"),
                         rs.getString("password"),
                         rs.getString("email"),
-                        c, rs.getString("role")));
+                        c, rs.getString("role"),
+                        rs.getString("country"),
+                        rs.getString("city")));
             }
             return users;
         } catch (SQLException e) {
@@ -156,8 +165,12 @@ public class UserManager {
             Calendar c = Calendar.getInstance();
             rs.next();
             c.setTimeInMillis(rs.getTimestamp("dateCreate").getTime());
-            oldUser = new User(rs.getString("login"), rs.getString("password"),
-                    rs.getString("email"), c, rs.getString("role"));
+            oldUser = new User(rs.getString("login"),
+                    rs.getString("password"),
+                    rs.getString("email"), c,
+                    rs.getString("role"),
+                    rs.getString("country"),
+                    rs.getString("city"));
         } catch (SQLException e) {
             DBManager.logger.error(e.getMessage(), e);
         }
@@ -177,7 +190,45 @@ public class UserManager {
             tmp = this.editColumnRole(id, req.getParameter("role"));
             if(tmp > i) i = tmp;
         }
+        if(req.getParameter("country") != null && !oldUser.getRole().equals(req.getParameter("country"))){
+            tmp = this.editColumnCountry(id, req.getParameter("country"));
+            if(tmp > i) i = tmp;
+        }
+        if(req.getParameter("city") != null && !oldUser.getRole().equals(req.getParameter("city"))){
+            tmp = this.editColumnCity(id, req.getParameter("city"));
+            if(tmp > i) i = tmp;
+        }
         return i;
+    }
+
+    private int editColumnCity(String id, String value) {
+        PreparedStatement st;
+        try {
+            st = dbManager.getC().prepareStatement(
+                    "UPDATE users1 SET city = ? WHERE id = ?");
+            st.setString(1, value);
+            st.setInt(2, Integer.parseInt(id));
+            return dbManager.getGoUpdate().goUpdate(st);
+
+        } catch (SQLException e) {
+            DBManager.logger.error(e.getMessage(), e);
+        }
+        return -1;
+    }
+
+    private int editColumnCountry(String id, String value) {
+        PreparedStatement st;
+        try {
+            st = dbManager.getC().prepareStatement(
+                    "UPDATE users1 SET country = ? WHERE id = ?");
+            st.setString(1, value);
+            st.setInt(2, Integer.parseInt(id));
+            return dbManager.getGoUpdate().goUpdate(st);
+
+        } catch (SQLException e) {
+            DBManager.logger.error(e.getMessage(), e);
+        }
+        return -1;
     }
 
     private int editColumnRole(String id, String value) {

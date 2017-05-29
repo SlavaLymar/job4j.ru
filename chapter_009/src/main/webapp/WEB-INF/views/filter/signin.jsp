@@ -37,7 +37,7 @@
     </script>
 </head>
 <body>
-<h2 align="center">Login Form</h2>
+<h2 align="center">SIGN IN</h2>
 <c:if test="${error != ''}">
     <div style="background-color: red">
         <c:out value="${error}"></c:out>

@@ -21,6 +21,7 @@
             margin: 0 auto;
         }
     </style>
+
 </head>
 <body>
 <h2 align="center">Edit user</h2>

@@ -46,7 +46,8 @@ public class AddController extends HttpServlet{
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         User user = new User(req.getParameter("login"), req.getParameter("password"),
-                req.getParameter("email"), Calendar.getInstance(), "user");
+                req.getParameter("email"), Calendar.getInstance(), "user", req.getParameter("country"),
+                req.getParameter("city"));
         this.userManager.add(user);
         req.setAttribute("users", this.userManager.getAll());
         req.getRequestDispatcher("/WEB-INF/views/filter/mvcusers.jsp").forward(req, resp);

@@ -36,6 +36,8 @@
         <TD>PASSWORD</TD>
         <TD>EMAIL</TD>
         <TD>DATE OF CREATE</TD>
+        <TD>COUNTRY</TD>
+        <TD>CITY</TD>
     </TR>
         <TR>
             <TD><c:out value="${user.id}"></c:out></TD>
@@ -43,6 +45,8 @@
             <TD><c:out value="${user.password}"></c:out></TD>
             <TD><c:out value="${user.email}"></c:out></TD>
             <TD><fmt:formatDate type="both" value="${user.createDate.time}"/><TD>
+            <TD><c:out value="${user.country}"></c:out></TD>
+            <TD><c:out value="${user.city}"></c:out></TD>
             <form action='${pageContext.servletContext.contextPath}/edituser' method='get'>
                 <input type='submit' value='edit'>
                 <input type='hidden' name='id' value='${user.id}'>
