@@ -18,12 +18,12 @@ public class SigninControllerTest {
         HttpSession session = mock(HttpSession.class);
         RequestDispatcher rd = mock(RequestDispatcher.class);
 
-        when(req.getParameter("login")).thenReturn("admin");
-        when(req.getParameter("password")).thenReturn("admin");
+        when(req.getParameter("slogin")).thenReturn("admin");
+        when(req.getParameter("spassword")).thenReturn("admin");
         when(req.getSession()).thenReturn(session);
         when(req.getRequestDispatcher("/WEB-INF/views/filter/mvcusers.jsp")).thenReturn(rd);
 
         new SigninController().doPost(req, resp);
-        verify(req, atLeastOnce()).getRequestDispatcher("/WEB-INF/views/filter/mvcusers.jsp");
+        verify(resp, atLeastOnce()).sendRedirect(String.format("%s/u", req.getContextPath()));
     }
 }

@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,15 +27,14 @@ public class UserFilterTest {
         HttpServletResponse resp = mock(HttpServletResponse.class);
         FilterChain chain = mock(FilterChain.class);
         HttpSession session = mock(HttpSession.class);
-        RequestDispatcher rd = mock(RequestDispatcher.class);
 
-        when(req.getParameter("login")).thenReturn("slava");
-        when(req.getParameter("password")).thenReturn("lymar");
+        when(req.getParameter("slogin")).thenReturn("slava");
+        when(req.getParameter("spassword")).thenReturn("lymar");
         when(req.getSession()).thenReturn(session);
-        when(req.getRequestDispatcher("/WEB-INF/views/filter/mvcusersforuser.jsp")).thenReturn(rd);
 
         this.initSet();
         this.userFilter.doFilter(req, resp, chain);
-        verify(req, atLeastOnce()).getRequestDispatcher("/WEB-INF/views/filter/mvcusersforuser.jsp");
+
+        verify(session, atLeastOnce()).setAttribute("slogin", "slava");;
     }
 }

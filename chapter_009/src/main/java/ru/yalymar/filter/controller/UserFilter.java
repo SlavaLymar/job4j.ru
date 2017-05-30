@@ -35,15 +35,15 @@ public class UserFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
         String sLogin = request.getParameter("slogin");
         String sPassword = request.getParameter("spassword");
-        String l = (String) ((HttpServletRequest) req).getSession().getAttribute("slogin");
-        String p = (String) ((HttpServletRequest) req).getSession().getAttribute("spassword");
+        HttpSession session = ((HttpServletRequest) req).getSession();
+        String l = (String) session.getAttribute("slogin");
+        String p = (String) session.getAttribute("spassword");
 
             if (sLogin != null && sPassword != null) {
                 if (l == null && p == null) {
-                    ((HttpServletRequest) req).getSession().setAttribute("slogin", sLogin);
-                    ((HttpServletRequest) req).getSession().setAttribute("spassword", sPassword);
-                    ((HttpServletRequest) req).getSession().setAttribute(
-                            "role", this.userManager.isAdmin(sLogin, sPassword) ? "admin" : "user");
+                    session.setAttribute("slogin", sLogin);
+                    session.setAttribute("spassword", sPassword);
+                    session.setAttribute("role", this.userManager.isAdmin(sLogin, sPassword) ? "admin" : "user");
                     chain.doFilter(req, resp);
                     return;
                 }
@@ -51,10 +51,9 @@ public class UserFilter implements Filter {
         if (sLogin != null && sPassword != null) {
             if (l != null && p != null) {
                 if (!sLogin.equals(l) && !sPassword.equals(p)) {
-                    ((HttpServletRequest) req).getSession().setAttribute("slogin", sLogin);
-                    ((HttpServletRequest) req).getSession().setAttribute("spassword", sPassword);
-                    ((HttpServletRequest) req).getSession().setAttribute(
-                            "role", this.userManager.isAdmin(sLogin, sPassword) ? "admin" : "user");
+                    session.setAttribute("slogin", sLogin);
+                    session.setAttribute("spassword", sPassword);
+                    session.setAttribute("role", this.userManager.isAdmin(sLogin, sPassword) ? "admin" : "user");
                     chain.doFilter(req, resp);
                     return;
                 }

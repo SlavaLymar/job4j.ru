@@ -7,10 +7,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * @author slavalymar
+ * @since 30.05.2017
+ * @version 1
+ */
 public class UController extends HttpServlet {
 
     private UserManager userManager = new UserManager();
 
+    /** get all users
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
