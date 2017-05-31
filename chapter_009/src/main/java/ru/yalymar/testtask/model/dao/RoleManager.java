@@ -13,6 +13,12 @@ import java.util.List;
 
 public class RoleManager extends Manager<Role> implements IRepoRole{
 
+    private DAOFabric daoFabric;
+
+    public RoleManager(DAOFabric daoFabric) {
+        this.daoFabric = daoFabric;
+    }
+
     @Override
     public int create(Role role) {
         try {
@@ -77,13 +83,21 @@ public class RoleManager extends Manager<Role> implements IRepoRole{
 
     @Override
     public int edit(int id, Role role) {
-
-
+        try {
+            PreparedStatement st =
+                    super.dbManager.getC().prepareStatement(
+                            "UPDATE roles SET role = ? WHERE id = ?");
+            st.setString(1, role.getRole());
+            st.setInt(2, id);
+            return super.dbManager.getGoUpdate().goUpdate(st);
+        } catch (SQLException e) {
+            DBManager.logger.error(e.getMessage(), e);
+            return -1;
+        }
     }
 
     @Override
     public int remove(int id) {
-        ResultSet rs = null;
         try {
             PreparedStatement st =
                     super.dbManager.getC().prepareStatement(
