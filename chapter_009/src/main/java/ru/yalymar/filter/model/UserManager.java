@@ -175,6 +175,7 @@ public class UserManager {
             DBManager.logger.error(e.getMessage(), e);
         }
         int tmp = 0;
+
         if(req.getParameter("newlogin") != null && !oldUser.getLogin().equals(req.getParameter("newlogin"))){
             tmp = this.editColumnLogin(id, req.getParameter("newlogin"));
         }

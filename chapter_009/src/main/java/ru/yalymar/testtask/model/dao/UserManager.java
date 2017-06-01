@@ -118,29 +118,109 @@ public class UserManager extends Manager<User> implements IRepoUser{
             tmp = this.editColumnName(id, newUser.getName());
             if(tmp > i) i = tmp;
         }
-        if(req.getParameter("role") != null && !oldUser.getRole().equals(req.getParameter("role"))){
-            tmp = this.editColumnRole(id, req.getParameter("role"));
+        if(oldUser.getRole_id() != newUser.getRole_id()){
+            tmp = this.editColumnRole(id, newUser.getRole_id());
             if(tmp > i) i = tmp;
         }
-        if(req.getParameter("country") != null && !oldUser.getRole().equals(req.getParameter("country"))){
-            tmp = this.editColumnCountry(id, req.getParameter("country"));
-            if(tmp > i) i = tmp;
-        }
-        if(req.getParameter("city") != null && !oldUser.getRole().equals(req.getParameter("city"))){
-            tmp = this.editColumnCity(id, req.getParameter("city"));
+        if( oldUser.getAddress_id() != newUser.getAddress_id()){
+            tmp = this.editColumnAddress(id, newUser.getAddress_id());
             if(tmp > i) i = tmp;
         }
         return i;
     }
 
+    private int editColumnLogin(int id, String value) {
+        PreparedStatement st;
+        try {
+            st = dbManager.getC().prepareStatement(
+                    "UPDATE users SET login = ? WHERE id = ?");
+            st.setString(1, value);
+            st.setInt(2, id);
+            return dbManager.getGoUpdate().goUpdate(st);
+
+        } catch (SQLException e) {
+            DBManager.logger.error(e.getMessage(), e);
+        }
+        return -1;
+    }
+
+    private int editColumnPassword(int id, String value) {
+        PreparedStatement st;
+        try {
+            st = dbManager.getC().prepareStatement(
+                    "UPDATE users SET password = ? WHERE id = ?");
+            st.setString(1, value);
+            st.setInt(2, id);
+            return dbManager.getGoUpdate().goUpdate(st);
+
+        } catch (SQLException e) {
+            DBManager.logger.error(e.getMessage(), e);
+        }
+        return -1;
+    }
+
+    private int editColumnName(int id, String value) {
+        PreparedStatement st;
+        try {
+            st = dbManager.getC().prepareStatement(
+                    "UPDATE users SET name = ? WHERE id = ?");
+            st.setString(1, value);
+            st.setInt(2, id);
+            return dbManager.getGoUpdate().goUpdate(st);
+
+        } catch (SQLException e) {
+            DBManager.logger.error(e.getMessage(), e);
+        }
+        return -1;
+    }
+
+    private int editColumnRole(int id, int value) {
+        PreparedStatement st;
+        try {
+            st = dbManager.getC().prepareStatement(
+                    "UPDATE users SET role_id = ? WHERE id = ?");
+            st.setInt(1, value);
+            st.setInt(2, id);
+            return dbManager.getGoUpdate().goUpdate(st);
+
+        } catch (SQLException e) {
+            DBManager.logger.error(e.getMessage(), e);
+        }
+        return -1;
+    }
+
+    private int editColumnAddress(int id, int value) {
+        PreparedStatement st;
+        try {
+            st = dbManager.getC().prepareStatement(
+                    "UPDATE users SET adress_id = ? WHERE id = ?");
+            st.setInt(1, value);
+            st.setInt(2, id);
+            return dbManager.getGoUpdate().goUpdate(st);
+
+        } catch (SQLException e) {
+            DBManager.logger.error(e.getMessage(), e);
+        }
+        return -1;
+    }
+
     @Override
     public int remove(int id) {
-
+        try {
+            PreparedStatement st =
+                    super.dbManager.getC().prepareStatement(
+                            "DELETE FROM users WHERE id = ?");
+            st.setInt(1, id);
+            return super.dbManager.getGoUpdate().goUpdate(st);
+        } catch (SQLException e) {
+            DBManager.logger.error(e.getMessage(), e);
+            return -1;
+        }
     }
 
     @Override
     public int add() {
-
+        return 0;
     }
 
     @Override
