@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface IRepoUser {
 
-    int add();
+    int add(User user);
 
     List<User> findByAddress(Address address);
 

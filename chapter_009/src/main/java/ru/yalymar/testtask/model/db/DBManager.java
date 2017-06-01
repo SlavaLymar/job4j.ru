@@ -2,7 +2,6 @@ package ru.yalymar.testtask.model.db;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.log4j.Logger;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -99,7 +98,7 @@ public class DBManager {
         source.setDriverClassName("org.postgresql.Driver");
         source.setUsername("postgres");
         source.setPassword("lymar123");
-        source.setUrl("jdbc:postgresql://localhost:5432/crudservlet");
+        source.setUrl("jdbc:postgresql://localhost:5432/servlettesktask");
 
         try {
             return this.c = source.getConnection();

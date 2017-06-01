@@ -10,27 +10,26 @@ public class User {
     private String login;
     private String password;
     private Timestamp date;
-    private int role_id;
-    private int address_id;
+    private String role;
+    private String address;
 
-    public User(String login, String password, String name, int role_id, int address_id) {
+    public User(String login, String password, String name, Timestamp date, String role, String address) {
         this.name = name;
         this.login = login;
         this.password = password;
-        this.date = new Timestamp(Calendar.getInstance().getTimeInMillis());
-        this.role_id = role_id;
-        this.address_id = address_id;
+        this.date = date;
+        this.role = role;
+        this.address = address;
     }
 
-    public User(int id, String login, String password, String name, Timestamp date,
-                int role_id, int address_id) {
+    public User(int id, String login, String password, String name, Timestamp date, String role, String address) {
         this.id = id;
         this.name = name;
         this.login = login;
         this.password = password;
         this.date = date;
-        this.role_id = role_id;
-        this.address_id = address_id;
+        this.role = role;
+        this.address = address;
     }
 
     public int getId() {
@@ -53,11 +52,11 @@ public class User {
         return date;
     }
 
-    public int getRole_id() {
-        return role_id;
+    public String getRole() {
+        return role;
     }
 
-    public int getAddress_id() {
-        return address_id;
+    public String getAddress() {
+        return address;
     }
 }

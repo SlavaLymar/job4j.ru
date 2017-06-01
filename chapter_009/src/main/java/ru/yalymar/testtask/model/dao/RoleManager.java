@@ -13,12 +13,6 @@ import java.util.List;
 
 public class RoleManager extends Manager<Role> implements IRepoRole{
 
-    private DAOFabric daoFabric;
-
-    public RoleManager(DAOFabric daoFabric) {
-        this.daoFabric = daoFabric;
-    }
-
     @Override
     public int create(Role role) {
         try {

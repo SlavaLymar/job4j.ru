@@ -1,9 +1,7 @@
 package ru.yalymar.testtask.model.dao;
 
-import ru.yalymar.testtask.model.Role;
 import ru.yalymar.testtask.model.TypeOfMusic;
 import ru.yalymar.testtask.model.db.DBManager;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,12 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TypeOfMusicManager extends Manager<TypeOfMusic> {
-
-    private DAOFabric daoFabric;
-
-    public TypeOfMusicManager(DAOFabric daoFabric) {
-        this.daoFabric = daoFabric;
-    }
 
     @Override
     public int create(TypeOfMusic typeOfMusic) {
