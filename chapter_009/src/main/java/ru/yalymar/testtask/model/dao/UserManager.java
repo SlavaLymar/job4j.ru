@@ -16,24 +16,27 @@ public class UserManager extends Manager<User> implements IRepoUser{
 
     @Override
     public int create(User user) {
-        try {
-            PreparedStatement st =
-                    super.dbManager.getC().prepareStatement(
-                            "INSERT INTO users " +
-                                    "(login, password, name, date, role_id, adress_id) " +
-                                    "values (?, ?, ?, ?, ?, ?)");
-            st.setString(1, user.getLogin());
-            st.setString(2, user.getPassword());
-            st.setString(3, user.getName());
-            st.setTimestamp(4, user.getDate());
-            //TODO add to 3 tables
-//            st.setString(5, user.getRole());
-//            st.setString(6, user.getAddress());
-            return super.dbManager.getGoUpdate().goUpdate(st);
-        } catch (SQLException e) {
-            DBManager.logger.error(e.getMessage(), e);
-            return -1;
+        int i = super.daoFabric.getAddressManager().
+                create(new Address(user.getAddress()));
+        if(i > 0) {
+            try {
+                PreparedStatement st =
+                        super.dbManager.getC().prepareStatement(
+                                "INSERT INTO users (login, password, name, date, role_id, adress_id)" +
+                                        "VALUES (?, ?, ?, ?, (SELECT r.id FROM roles r WHERE r.role = ?)," +
+                                        "       (SELECT adr.id FROM adresses adr WHERE adr.adress = ?));");
+                st.setString(1, user.getLogin());
+                st.setString(2, user.getPassword());
+                st.setString(3, user.getName());
+                st.setTimestamp(4, user.getDate());
+                st.setString(5, user.getRole());
+                st.setString(6, user.getAddress());
+                return super.dbManager.getGoUpdate().goUpdate(st);
+            } catch (SQLException e) {
+                DBManager.logger.error(e.getMessage(), e);
+            }
         }
+        return -1;
     }
 
     @Override
@@ -74,8 +77,9 @@ public class UserManager extends Manager<User> implements IRepoUser{
             PreparedStatement st =
                     super.dbManager.getC().prepareStatement(
                             "SELECT u.id, u.login, u.password, u.name, u.date, " +
-                                    "(SELECT role FROM roles r WHERE u.role_id = r.id), adr.adress" +
-                                    "FROM users u LEFT JOIN adresses adr ON u.adress_id = adr.id WHERE u.id = ?");
+                                    "(SELECT role FROM roles r WHERE u.role_id = r.id), " +
+                                    "adr.adress FROM users u LEFT JOIN adresses adr ON " +
+                                    "u.adress_id = adr.id WHERE u.id = ?");
             st.setInt(1, id);
             rs = super.dbManager.getGo().go(st);
             rs.next();

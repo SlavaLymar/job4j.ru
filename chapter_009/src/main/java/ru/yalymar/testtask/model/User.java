@@ -13,7 +13,8 @@ public class User {
     private String role;
     private String address;
 
-    public User(String login, String password, String name, Timestamp date, String role, String address) {
+    public User(String login, String password, String name,
+                Timestamp date, String role, String address) {
         this.name = name;
         this.login = login;
         this.password = password;
@@ -22,7 +23,8 @@ public class User {
         this.address = address;
     }
 
-    public User(int id, String login, String password, String name, Timestamp date, String role, String address) {
+    public User(int id, String login, String password, String name,
+                Timestamp date, String role, String address) {
         this.id = id;
         this.name = name;
         this.login = login;

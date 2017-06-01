@@ -105,12 +105,66 @@ public class RoleManager extends Manager<Role> implements IRepoRole{
     }
 
     @Override
-    public List<Address> getAddresses() {
-        return null;
+    public List<Address> getAddresses(Role role) {
+        List<Address> result = new ArrayList<>();
+        ResultSet rs = null;
+        try {
+            PreparedStatement st =
+                    super.dbManager.getC().prepareStatement(
+                            "SELECT adr.id, adr.adress FROM adresses adr JOIN users u ON " +
+                                    "u.adress_id = adr.id WHERE u.role_id = (SELECT " +
+                                    "r.id FROM roles r WHERE r.role = ?);");
+            st.setString(1, role.getRole());
+            rs = super.dbManager.getGo().go(st);
+            while(rs.next()){
+                result.add(new Address(rs.getInt("id"),
+                        rs.getString("adress")));
+            }
+            return result;
+        } catch (SQLException e) {
+            DBManager.logger.error(e.getMessage(), e);
+            return null;
+        } finally {
+            try {
+                rs.close();
+            } catch (SQLException e) {
+                DBManager.logger.error(e.getMessage(), e);
+            }
+        }
     }
 
     @Override
-    public List<User> getUsers() {
-        return null;
+    public List<User> getUsers(Role role) {
+        List<User> result = new ArrayList<>();
+        ResultSet rs = null;
+        try {
+            PreparedStatement st =
+                    super.dbManager.getC().prepareStatement(
+                            "SELECT u.id, u.login, u.password, u.name, u.date, r.role, adr.adress" +
+                                    "from users u JOIN roles r ON u.role_id = r.id JOIN adresses adr ON " +
+                                    "u.adress_id = adr.id WHERE u.role_id = (SELECT r.id FROM roles r WHERE " +
+                                    "r.role = ?);");
+            st.setString(1, role.getRole());
+            rs = super.dbManager.getGo().go(st);
+            while(rs.next()){
+                result.add(new User(rs.getInt("id"),
+                        rs.getString("login"),
+                        rs.getString("password"),
+                        rs.getString("name"),
+                        rs.getTimestamp("date"),
+                        rs.getString("role"),
+                        rs.getString("adress")));
+            }
+            return result;
+        } catch (SQLException e) {
+            DBManager.logger.error(e.getMessage(), e);
+            return null;
+        } finally {
+            try {
+                rs.close();
+            } catch (SQLException e) {
+                DBManager.logger.error(e.getMessage(), e);
+            }
+        }
     }
 }
