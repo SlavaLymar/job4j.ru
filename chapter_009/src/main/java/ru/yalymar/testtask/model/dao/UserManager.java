@@ -25,8 +25,7 @@ public class UserManager extends Manager<User> implements IRepoUser{
                 create(new Address(user.getAddress()));
         if(i > 0) {
             try {
-                st =
-                        super.dbManager.getC().prepareStatement(
+                st = super.dbManager.getC().prepareStatement(
                                 "INSERT INTO users (login, password, name, date, role_id, adress_id)" +
                                         "VALUES (?, ?, ?, ?, (SELECT r.id FROM roles r WHERE r.role = ?)," +
                                         "(SELECT adr.id FROM adresses adr WHERE adr.adress = ?));",
@@ -126,8 +125,7 @@ public class UserManager extends Manager<User> implements IRepoUser{
         ResultSet rs = null;
         PreparedStatement st = null;
         try {
-            st =
-                    super.dbManager.getC().prepareStatement(
+            st = super.dbManager.getC().prepareStatement(
                             "SELECT u.id, u.login, u.password, u.name, u.date, " +
                                     "(SELECT role FROM roles r WHERE u.role_id = r.id), " +
                                     "adr.adress FROM users u LEFT JOIN adresses adr ON " +
@@ -312,8 +310,7 @@ public class UserManager extends Manager<User> implements IRepoUser{
     public int remove(int id) {
         PreparedStatement st = null;
         try {
-            st =
-                    super.dbManager.getC().prepareStatement(
+            st = super.dbManager.getC().prepareStatement(
                             "DELETE FROM users WHERE id = ?");
             st.setInt(1, id);
             return super.dbManager.getGoUpdate().goUpdate(st);
@@ -343,8 +340,7 @@ public class UserManager extends Manager<User> implements IRepoUser{
         List<User> result = new ArrayList<>();
         PreparedStatement st = null;
         try {
-            st =
-                    super.dbManager.getC().prepareStatement(
+            st = super.dbManager.getC().prepareStatement(
                             "SELECT u.id, u.login, u.password, u.name, u.date, " +
                                     "(SELECT role FROM roles r WHERE u.role_id = r.id), adr.adress" +
                                     "FROM users u LEFT JOIN adresses adr ON u.adress_id = adr.id WHERE " +
@@ -434,11 +430,11 @@ public class UserManager extends Manager<User> implements IRepoUser{
         PreparedStatement st = null;
         try {
             st = super.dbManager.getC().prepareStatement(
-                    "SELECT u.id, u.login, u.password, u.name, u.date, \n" +
-                            "(SELECT r.role FROM roles r WHERE r.id = u.role_id),\n" +
-                            "(SELECT adr.adress FROM adresses adr WHERE u.adress_id = adr.id) FROM users u \n" +
-                            "LEFT JOIN user_musictype u_m ON u.id = u_m.user_id \n" +
-                            "LEFT JOIN musictypes m on u_m.type_id = m.id WHERE m.type = ?;");
+                    "SELECT u.id, u.login, u.password, u.name, u.date," +
+                            "(SELECT r.role FROM roles r WHERE r.id = u.role_id)," +
+                            "(SELECT adr.adress FROM adresses adr WHERE u.adress_id = adr.id) FROM " +
+                            "users u LEFT JOIN user_musictype u_m ON u.id = u_m.user_id LEFT JOIN " +
+                            "musictypes m on u_m.type_id = m.id WHERE m.type = ?;");
             st.setString(1, typeOfMusic.getType());
             rs = super.dbManager.getGo().go(st);
             while (rs.next()){

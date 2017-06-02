@@ -18,8 +18,7 @@ public class RoleManager extends Manager<Role> implements IRepoRole{
     public int create(Role role) {
         PreparedStatement st = null;
         try {
-            st =
-                    super.dbManager.getC().prepareStatement(
+            st = super.dbManager.getC().prepareStatement(
                             "INSERT INTO roles (role) values (?)");
             st.setString(1, role.getRole());
             return super.dbManager.getGoUpdate().goUpdate(st);
@@ -44,8 +43,7 @@ public class RoleManager extends Manager<Role> implements IRepoRole{
         ResultSet rs = null;
         PreparedStatement st = null;
         try {
-            st =
-                    super.dbManager.getC().prepareStatement(
+            st = super.dbManager.getC().prepareStatement(
                             "SELECT * FROM roles");
             rs = super.dbManager.getGo().go(st);
             while(rs.next()){
@@ -74,8 +72,7 @@ public class RoleManager extends Manager<Role> implements IRepoRole{
         ResultSet rs = null;
         PreparedStatement st = null;
         try {
-            st =
-                    super.dbManager.getC().prepareStatement(
+            st =  super.dbManager.getC().prepareStatement(
                             "SELECT * FROM roles WHERE id = ?");
             st.setInt(1, id);
             rs = super.dbManager.getGo().go(st);
@@ -102,8 +99,7 @@ public class RoleManager extends Manager<Role> implements IRepoRole{
     public int edit(int id, Role role) {
         PreparedStatement st = null;
         try {
-            st =
-                    super.dbManager.getC().prepareStatement(
+            st = super.dbManager.getC().prepareStatement(
                             "UPDATE roles SET role = ? WHERE id = ?");
             st.setString(1, role.getRole());
             st.setInt(2, id);
@@ -127,8 +123,7 @@ public class RoleManager extends Manager<Role> implements IRepoRole{
     public int remove(int id) {
         PreparedStatement st = null;
         try {
-            st =
-                    super.dbManager.getC().prepareStatement(
+            st = super.dbManager.getC().prepareStatement(
                             "DELETE FROM roles WHERE id = ?");
             st.setInt(1, id);
             return super.dbManager.getGoUpdate().goUpdate(st);
@@ -153,8 +148,7 @@ public class RoleManager extends Manager<Role> implements IRepoRole{
         ResultSet rs = null;
         PreparedStatement st = null;
         try {
-            st =
-                    super.dbManager.getC().prepareStatement(
+            st = super.dbManager.getC().prepareStatement(
                             "SELECT adr.id, adr.adress FROM adresses adr JOIN users u ON " +
                                     "u.adress_id = adr.id WHERE u.role_id = (SELECT " +
                                     "r.id FROM roles r WHERE r.role = ?);");
@@ -188,8 +182,7 @@ public class RoleManager extends Manager<Role> implements IRepoRole{
         ResultSet rs = null;
         PreparedStatement st = null;
         try {
-            st =
-                    super.dbManager.getC().prepareStatement(
+            st = super.dbManager.getC().prepareStatement(
                             "SELECT u.id, u.login, u.password, u.name, u.date, r.role, adr.adress" +
                                     "from users u JOIN roles r ON u.role_id = r.id JOIN adresses adr ON " +
                                     "u.adress_id = adr.id WHERE u.role_id = (SELECT r.id FROM roles r WHERE " +
