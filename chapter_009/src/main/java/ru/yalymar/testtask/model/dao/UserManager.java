@@ -117,8 +117,9 @@ public class UserManager extends Manager<User> implements IRepoUser{
     @Override
     public User getById(int id) {
         ResultSet rs = null;
+        PreparedStatement st = null;
         try {
-            PreparedStatement st =
+            st =
                     super.dbManager.getC().prepareStatement(
                             "SELECT u.id, u.login, u.password, u.name, u.date, " +
                                     "(SELECT role FROM roles r WHERE u.role_id = r.id), " +
@@ -139,7 +140,12 @@ public class UserManager extends Manager<User> implements IRepoUser{
             return null;
         } finally {
             try {
-                rs.close();
+                if (st != null) {
+                    st.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
             } catch (SQLException e) {
                 DBManager.logger.error(e.getMessage(), e);
             }
@@ -175,7 +181,7 @@ public class UserManager extends Manager<User> implements IRepoUser{
     }
 
     private int editColumnLogin(int id, String value) {
-        PreparedStatement st;
+        PreparedStatement st = null;
         try {
             st = dbManager.getC().prepareStatement(
                     "UPDATE users SET login = ? WHERE id = ?");
@@ -186,11 +192,20 @@ public class UserManager extends Manager<User> implements IRepoUser{
         } catch (SQLException e) {
             DBManager.logger.error(e.getMessage(), e);
         }
+        finally {
+            try {
+                if (st != null) {
+                    st.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
         return -1;
     }
 
     private int editColumnPassword(int id, String value) {
-        PreparedStatement st;
+        PreparedStatement st = null;
         try {
             st = dbManager.getC().prepareStatement(
                     "UPDATE users SET password = ? WHERE id = ?");
@@ -201,11 +216,20 @@ public class UserManager extends Manager<User> implements IRepoUser{
         } catch (SQLException e) {
             DBManager.logger.error(e.getMessage(), e);
         }
+        finally {
+            try {
+                if (st != null) {
+                    st.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
         return -1;
     }
 
     private int editColumnName(int id, String value) {
-        PreparedStatement st;
+        PreparedStatement st = null;
         try {
             st = dbManager.getC().prepareStatement(
                     "UPDATE users SET name = ? WHERE id = ?");
@@ -216,11 +240,20 @@ public class UserManager extends Manager<User> implements IRepoUser{
         } catch (SQLException e) {
             DBManager.logger.error(e.getMessage(), e);
         }
+        finally {
+            try {
+                if (st != null) {
+                    st.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
         return -1;
     }
 
     private int editColumnRole(int id, String role) {
-        PreparedStatement st;
+        PreparedStatement st = null;
         try {
             st = dbManager.getC().prepareStatement(
                     "UPDATE users SET role_id = " +
@@ -231,11 +264,20 @@ public class UserManager extends Manager<User> implements IRepoUser{
         } catch (SQLException e) {
             DBManager.logger.error(e.getMessage(), e);
         }
+        finally {
+            try {
+                if (st != null) {
+                    st.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
         return -1;
     }
 
     private int editColumnAddress(int id, String address) {
-        PreparedStatement st;
+        PreparedStatement st = null;
         try {
             st = dbManager.getC().prepareStatement(
                     "UPDATE users SET adress_id = " +
@@ -247,13 +289,23 @@ public class UserManager extends Manager<User> implements IRepoUser{
         } catch (SQLException e) {
             DBManager.logger.error(e.getMessage(), e);
         }
+        finally {
+            try {
+                if (st != null) {
+                    st.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
         return -1;
     }
 
     @Override
     public int remove(int id) {
+        PreparedStatement st = null;
         try {
-            PreparedStatement st =
+            st =
                     super.dbManager.getC().prepareStatement(
                             "DELETE FROM users WHERE id = ?");
             st.setInt(1, id);
@@ -261,6 +313,15 @@ public class UserManager extends Manager<User> implements IRepoUser{
         } catch (SQLException e) {
             DBManager.logger.error(e.getMessage(), e);
             return -1;
+        }
+        finally {
+            try {
+                if (st != null) {
+                    st.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -273,8 +334,9 @@ public class UserManager extends Manager<User> implements IRepoUser{
     public List<User> findByAddress(Address address) {
         ResultSet rs = null;
         List<User> result = new ArrayList<>();
+        PreparedStatement st = null;
         try {
-            PreparedStatement st =
+            st =
                     super.dbManager.getC().prepareStatement(
                             "SELECT u.id, u.login, u.password, u.name, u.date, " +
                                     "(SELECT role FROM roles r WHERE u.role_id = r.id), adr.adress" +
@@ -297,7 +359,12 @@ public class UserManager extends Manager<User> implements IRepoUser{
             return null;
         } finally {
             try {
-                rs.close();
+                if (st != null) {
+                    st.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
             } catch (SQLException e) {
                 DBManager.logger.error(e.getMessage(), e);
             }

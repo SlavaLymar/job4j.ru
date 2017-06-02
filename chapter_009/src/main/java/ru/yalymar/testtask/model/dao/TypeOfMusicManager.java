@@ -12,8 +12,9 @@ public class TypeOfMusicManager extends Manager<TypeOfMusic> {
 
     @Override
     public int create(TypeOfMusic typeOfMusic) {
+        PreparedStatement st = null;
         try {
-            PreparedStatement st =
+            st =
                     super.dbManager.getC().prepareStatement(
                             "INSERT INTO musictypes (type) values (?)");
             st.setString(1, typeOfMusic.getType());
@@ -22,14 +23,24 @@ public class TypeOfMusicManager extends Manager<TypeOfMusic> {
             DBManager.logger.error(e.getMessage(), e);
             return -1;
         }
+        finally {
+            try {
+                if (st != null) {
+                    st.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
     public List<TypeOfMusic> getAll() {
         List<TypeOfMusic> result = new ArrayList<>();
         ResultSet rs = null;
+        PreparedStatement st = null;
         try {
-            PreparedStatement st =
+            st =
                     super.dbManager.getC().prepareStatement(
                             "SELECT * FROM musictypes");
             rs = super.dbManager.getGo().go(st);
@@ -42,7 +53,12 @@ public class TypeOfMusicManager extends Manager<TypeOfMusic> {
             return null;
         } finally {
             try {
-                rs.close();
+                if (st != null) {
+                    st.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
             } catch (SQLException e) {
                 DBManager.logger.error(e.getMessage(), e);
             }
@@ -52,8 +68,9 @@ public class TypeOfMusicManager extends Manager<TypeOfMusic> {
     @Override
     public TypeOfMusic getById(int id) {
         ResultSet rs = null;
+        PreparedStatement st = null;
         try {
-            PreparedStatement st =
+            st =
                     super.dbManager.getC().prepareStatement(
                             "SELECT * FROM musictypes WHERE id = ?");
             st.setInt(1, id);
@@ -65,7 +82,12 @@ public class TypeOfMusicManager extends Manager<TypeOfMusic> {
             return null;
         } finally {
             try {
-                rs.close();
+                if (st != null) {
+                    st.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
             } catch (SQLException e) {
                 DBManager.logger.error(e.getMessage(), e);
             }
@@ -74,8 +96,9 @@ public class TypeOfMusicManager extends Manager<TypeOfMusic> {
 
     @Override
     public int edit(int id, TypeOfMusic typeOfMusic) {
+        PreparedStatement st = null;
         try {
-            PreparedStatement st =
+            st =
                     super.dbManager.getC().prepareStatement(
                             "UPDATE musictypes SET type = ? WHERE id = ?");
             st.setString(1, typeOfMusic.getType());
@@ -85,12 +108,22 @@ public class TypeOfMusicManager extends Manager<TypeOfMusic> {
             DBManager.logger.error(e.getMessage(), e);
             return -1;
         }
+        finally {
+            try {
+                if (st != null) {
+                    st.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
     public int remove(int id) {
+        PreparedStatement st = null;
         try {
-            PreparedStatement st =
+            st =
                     super.dbManager.getC().prepareStatement(
                             "DELETE FROM musictypes WHERE id = ?");
             st.setInt(1, id);
@@ -98,6 +131,15 @@ public class TypeOfMusicManager extends Manager<TypeOfMusic> {
         } catch (SQLException e) {
             DBManager.logger.error(e.getMessage(), e);
             return -1;
+        }
+        finally {
+            try {
+                if (st != null) {
+                    st.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

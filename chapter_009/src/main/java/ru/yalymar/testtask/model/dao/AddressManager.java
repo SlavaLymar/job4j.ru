@@ -12,8 +12,9 @@ public class AddressManager extends Manager<Address> {
 
     @Override
     public int create(Address address) {
+        PreparedStatement st = null;
         try {
-            PreparedStatement st =
+            st =
                     super.dbManager.getC().prepareStatement(
                             "INSERT INTO adresses (adress) values (?)");
             st.setString(1, address.getAddress());
@@ -22,14 +23,24 @@ public class AddressManager extends Manager<Address> {
             DBManager.logger.error(e.getMessage(), e);
             return -1;
         }
+        finally {
+            try {
+                if (st != null) {
+                    st.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
     public List<Address> getAll() {
         List<Address> result = new ArrayList<>();
         ResultSet rs = null;
+        PreparedStatement st = null;
         try {
-            PreparedStatement st =
+            st =
                     super.dbManager.getC().prepareStatement(
                             "SELECT * FROM adresses");
             rs = super.dbManager.getGo().go(st);
@@ -42,7 +53,12 @@ public class AddressManager extends Manager<Address> {
             return null;
         } finally {
             try {
-                rs.close();
+                if (st != null) {
+                    st.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
             } catch (SQLException e) {
                 DBManager.logger.error(e.getMessage(), e);
             }
@@ -52,8 +68,9 @@ public class AddressManager extends Manager<Address> {
     @Override
     public Address getById(int id) {
         ResultSet rs = null;
+        PreparedStatement st = null;
         try {
-            PreparedStatement st =
+            st =
                     super.dbManager.getC().prepareStatement(
                             "SELECT * FROM adresses WHERE id = ?");
             st.setInt(1, id);
@@ -65,7 +82,12 @@ public class AddressManager extends Manager<Address> {
             return null;
         } finally {
             try {
-                rs.close();
+                if (st != null) {
+                    st.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
             } catch (SQLException e) {
                 DBManager.logger.error(e.getMessage(), e);
             }
@@ -74,8 +96,9 @@ public class AddressManager extends Manager<Address> {
 
     @Override
     public int edit(int id, Address address) {
+        PreparedStatement st = null;
         try {
-            PreparedStatement st =
+            st =
                     super.dbManager.getC().prepareStatement(
                             "UPDATE adresses SET adress = ? WHERE id = ?");
             st.setString(1, address.getAddress());
@@ -85,12 +108,22 @@ public class AddressManager extends Manager<Address> {
             DBManager.logger.error(e.getMessage(), e);
             return -1;
         }
+        finally {
+            try {
+                if (st != null) {
+                    st.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
     public int remove(int id) {
+        PreparedStatement st = null;
         try {
-            PreparedStatement st =
+            st =
                     super.dbManager.getC().prepareStatement(
                             "DELETE FROM adresses WHERE id = ?");
             st.setInt(1, id);
@@ -98,6 +131,15 @@ public class AddressManager extends Manager<Address> {
         } catch (SQLException e) {
             DBManager.logger.error(e.getMessage(), e);
             return -1;
+        }
+        finally {
+            try {
+                if (st != null) {
+                    st.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
