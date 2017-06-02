@@ -19,7 +19,7 @@ public class AddressManagerTest {
     }
 
     @Test
-    public void whenAddAddressShouldGetIt(){
+    public void whenAddAddressShouldGetId(){
         Address address = new Address("Bolshaya Gruzinskaya 1");
         int id = this.manager.create(address);
         assertTrue(id > 0);

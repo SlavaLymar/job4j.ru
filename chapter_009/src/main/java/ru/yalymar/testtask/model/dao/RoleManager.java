@@ -9,6 +9,7 @@ import ru.yalymar.testtask.model.repo.IRepoRole;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,11 +22,19 @@ public class RoleManager extends Manager<Role> implements IRepoRole{
     @Override
     public int create(Role role) {
         PreparedStatement st = null;
+        ResultSet gk = null;
+        int id = -1;
         try {
             st = super.dbManager.getC().prepareStatement(
-                            "INSERT INTO roles (role) values (?)");
+                            "INSERT INTO roles (role) values (?)", new String[]{"id"});
             st.setString(1, role.getRole());
-            return super.dbManager.getGoUpdate().goUpdate(st);
+            super.dbManager.getGoUpdate().goUpdate(st);
+
+            gk = st.getGeneratedKeys();
+            while (gk.next()){
+                id = gk.getInt("id");
+            }
+            return id;
         } catch (SQLException e) {
             DBManager.logger.error(e.getMessage(), e);
             return -1;
@@ -34,6 +43,9 @@ public class RoleManager extends Manager<Role> implements IRepoRole{
             try {
                 if (st != null) {
                     st.close();
+                }
+                if (gk != null) {
+                    gk.close();
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -187,7 +199,7 @@ public class RoleManager extends Manager<Role> implements IRepoRole{
         PreparedStatement st = null;
         try {
             st = super.dbManager.getC().prepareStatement(
-                            "SELECT u.id, u.login, u.password, u.name, u.date, r.role, adr.adress" +
+                            "SELECT u.id, u.login, u.password, u.name, u.date, r.role, adr.adress " +
                                     "from users u JOIN roles r ON u.role_id = r.id JOIN adresses adr ON " +
                                     "u.adress_id = adr.id WHERE u.role_id = (SELECT r.id FROM roles r WHERE " +
                                     "r.role = ?);");

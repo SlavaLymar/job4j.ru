@@ -23,6 +23,7 @@ public class AddressManager extends Manager<Address> {
     public int create(Address address) {
         PreparedStatement st = null;
         ResultSet gk = null;
+        int id = -1;
         try {
             st = super.dbManager.getC().prepareStatement(
                             "INSERT INTO adresses (adress) values (?)", new String[]{"id"});
@@ -30,14 +31,13 @@ public class AddressManager extends Manager<Address> {
             super.dbManager.getGoUpdate().goUpdate(st);
 
             gk = st.getGeneratedKeys();
-            int id = -1;
             while (gk.next()){
                 id = gk.getInt("id");
             }
             return id;
         } catch (SQLException e) {
             DBManager.logger.error(e.getMessage(), e);
-            return -1;
+            return id;
         }
         finally {
             try {
