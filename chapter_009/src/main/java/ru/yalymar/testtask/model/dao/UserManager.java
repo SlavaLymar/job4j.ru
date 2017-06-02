@@ -16,24 +16,62 @@ public class UserManager extends Manager<User> implements IRepoUser{
 
     @Override
     public int create(User user) {
+        int id = -1;
         int i = super.daoFabric.getAddressManager().
                 create(new Address(user.getAddress()));
+        PreparedStatement st = null;
+        PreparedStatement stType = null;
+        ResultSet gk = null;
         if(i > 0) {
             try {
-                PreparedStatement st =
+                st =
                         super.dbManager.getC().prepareStatement(
                                 "INSERT INTO users (login, password, name, date, role_id, adress_id)" +
                                         "VALUES (?, ?, ?, ?, (SELECT r.id FROM roles r WHERE r.role = ?)," +
-                                        "       (SELECT adr.id FROM adresses adr WHERE adr.adress = ?));");
+                                        "       (SELECT adr.id FROM adresses adr WHERE adr.adress = ?));",
+                                            new String[]{"id"});
                 st.setString(1, user.getLogin());
                 st.setString(2, user.getPassword());
                 st.setString(3, user.getName());
                 st.setTimestamp(4, user.getDate());
                 st.setString(5, user.getRole());
                 st.setString(6, user.getAddress());
-                return super.dbManager.getGoUpdate().goUpdate(st);
+                i = super.dbManager.getGoUpdate().goUpdate(st);
+
+                gk = st.getGeneratedKeys();
+                if(gk.next()){
+                    id = gk.getInt("id");
+                }
+
+                if(id != -1) {
+                    for (TypeOfMusic type : user.getTypes()) {
+                        stType = super.dbManager.getC().prepareStatement(
+                                "INSERT INTO user_musictype (type_id, user_id) VALUES " +
+                                        "((SELECT t.id from types WHERE t.type = ?), ?);");
+                        stType.setString(1, type.getType());
+                        stType.setInt(2, id);
+                        i += super.dbManager.getGoUpdate().goUpdate(stType);
+                    }
+                }
+
+                return i;
             } catch (SQLException e) {
                 DBManager.logger.error(e.getMessage(), e);
+            }
+            finally {
+                try {
+                    if (st != null) {
+                        st.close();
+                    }
+                    if (stType != null) {
+                        stType.close();
+                    }
+                    if (gk != null) {
+                        gk.close();
+                    }
+                } catch (SQLException e) {
+                    DBManager.logger.error(e.getMessage(), e);
+                }
             }
         }
         return -1;
@@ -43,8 +81,9 @@ public class UserManager extends Manager<User> implements IRepoUser{
     public List<User> getAll() {
         List<User> result = new ArrayList<>();
         ResultSet rs = null;
+        PreparedStatement st = null;
         try {
-            PreparedStatement st =
+            st =
                     super.dbManager.getC().prepareStatement(
                             "SELECT * FROM users");
             rs = super.dbManager.getGo().go(st);
@@ -63,7 +102,12 @@ public class UserManager extends Manager<User> implements IRepoUser{
             return null;
         } finally {
             try {
-                rs.close();
+                if (st != null) {
+                    st.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
             } catch (SQLException e) {
                 DBManager.logger.error(e.getMessage(), e);
             }

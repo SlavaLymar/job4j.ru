@@ -1,7 +1,8 @@
 package ru.yalymar.testtask.model;
 
 import java.sql.Timestamp;
-import java.util.Calendar;
+import java.util.HashSet;
+import java.util.Set;
 
 public class User {
 
@@ -12,6 +13,7 @@ public class User {
     private Timestamp date;
     private String role;
     private String address;
+    private Set<TypeOfMusic> types;
 
     public User(String login, String password, String name,
                 Timestamp date, String role, String address) {
@@ -21,6 +23,7 @@ public class User {
         this.date = date;
         this.role = role;
         this.address = address;
+        this.types = new HashSet<>();
     }
 
     public User(int id, String login, String password, String name,
@@ -32,6 +35,7 @@ public class User {
         this.date = date;
         this.role = role;
         this.address = address;
+        this.types = new HashSet<>();
     }
 
     public int getId() {
@@ -60,5 +64,9 @@ public class User {
 
     public String getAddress() {
         return address;
+    }
+
+    public Set<TypeOfMusic> getTypes() {
+        return types;
     }
 }

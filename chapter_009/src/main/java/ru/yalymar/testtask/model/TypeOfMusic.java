@@ -21,4 +21,19 @@ public class TypeOfMusic {
     public String getType() {
         return type;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        TypeOfMusic that = (TypeOfMusic) o;
+
+        return type != null ? type.equals(that.type) : that.type == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return type != null ? type.hashCode() : 0;
+    }
 }

@@ -6,12 +6,14 @@ public class DAOFabric {
     private RoleManager roleManager;
     private TypeOfMusicManager typeOfMusicManager;
     private UserManager userManager;
+    private UserTypesManager userTypesManager;
 
     public DAOFabric() {
         this.addressManager = new AddressManager();
         this.roleManager = new RoleManager();
         this.typeOfMusicManager = new TypeOfMusicManager();
         this.userManager = new UserManager();
+        this.userTypesManager = new UserTypesManager();
     }
 
     public AddressManager getAddressManager() {
@@ -28,5 +30,9 @@ public class DAOFabric {
 
     public UserManager getUserManager() {
         return this.userManager;
+    }
+
+    public UserTypesManager getUserTypesManager() {
+        return userTypesManager;
     }
 }
