@@ -10,15 +10,31 @@ import java.util.List;
 
 public class AddressManager extends Manager<Address> {
 
+    public AddressManager(DAOFabric daoFabric) {
+        super(daoFabric);
+    }
+
+    /** add address into database.
+     * return id of the record
+     * @param address
+     * @return int
+     */
     @Override
     public int create(Address address) {
         PreparedStatement st = null;
+        ResultSet gk = null;
         try {
-            st =
-                    super.dbManager.getC().prepareStatement(
-                            "INSERT INTO adresses (adress) values (?)");
+            st = super.dbManager.getC().prepareStatement(
+                            "INSERT INTO adresses (adress) values (?)", new String[]{"id"});
             st.setString(1, address.getAddress());
-            return super.dbManager.getGoUpdate().goUpdate(st);
+            super.dbManager.getGoUpdate().goUpdate(st);
+
+            gk = st.getGeneratedKeys();
+            int id = -1;
+            while (gk.next()){
+                id = gk.getInt("id");
+            }
+            return id;
         } catch (SQLException e) {
             DBManager.logger.error(e.getMessage(), e);
             return -1;
@@ -27,6 +43,9 @@ public class AddressManager extends Manager<Address> {
             try {
                 if (st != null) {
                     st.close();
+                }
+                if (gk != null) {
+                    gk.close();
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -40,8 +59,7 @@ public class AddressManager extends Manager<Address> {
         ResultSet rs = null;
         PreparedStatement st = null;
         try {
-            st =
-                    super.dbManager.getC().prepareStatement(
+            st = super.dbManager.getC().prepareStatement(
                             "SELECT * FROM adresses");
             rs = super.dbManager.getGo().go(st);
             while(rs.next()){
@@ -70,8 +88,7 @@ public class AddressManager extends Manager<Address> {
         ResultSet rs = null;
         PreparedStatement st = null;
         try {
-            st =
-                    super.dbManager.getC().prepareStatement(
+            st = super.dbManager.getC().prepareStatement(
                             "SELECT * FROM adresses WHERE id = ?");
             st.setInt(1, id);
             rs = super.dbManager.getGo().go(st);
@@ -98,8 +115,7 @@ public class AddressManager extends Manager<Address> {
     public int edit(int id, Address address) {
         PreparedStatement st = null;
         try {
-            st =
-                    super.dbManager.getC().prepareStatement(
+            st = super.dbManager.getC().prepareStatement(
                             "UPDATE adresses SET adress = ? WHERE id = ?");
             st.setString(1, address.getAddress());
             st.setInt(2, id);
@@ -123,8 +139,7 @@ public class AddressManager extends Manager<Address> {
     public int remove(int id) {
         PreparedStatement st = null;
         try {
-            st =
-                    super.dbManager.getC().prepareStatement(
+            st = super.dbManager.getC().prepareStatement(
                             "DELETE FROM adresses WHERE id = ?");
             st.setInt(1, id);
             return super.dbManager.getGoUpdate().goUpdate(st);

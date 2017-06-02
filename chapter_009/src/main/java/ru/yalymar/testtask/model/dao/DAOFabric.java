@@ -8,10 +8,10 @@ public class DAOFabric {
     private UserManager userManager;
 
     public DAOFabric() {
-        this.addressManager = new AddressManager();
-        this.roleManager = new RoleManager();
-        this.typeOfMusicManager = new TypeOfMusicManager();
-        this.userManager = new UserManager();
+        this.addressManager = new AddressManager(this);
+        this.roleManager = new RoleManager(this);
+        this.typeOfMusicManager = new TypeOfMusicManager(this);
+        this.userManager = new UserManager(this);
     }
 
     public AddressManager getAddressManager() {

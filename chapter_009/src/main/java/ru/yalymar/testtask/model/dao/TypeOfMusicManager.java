@@ -1,7 +1,6 @@
 package ru.yalymar.testtask.model.dao;
 
 import ru.yalymar.testtask.model.TypeOfMusic;
-import ru.yalymar.testtask.model.User;
 import ru.yalymar.testtask.model.db.DBManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TypeOfMusicManager extends Manager<TypeOfMusic> {
+
+    public TypeOfMusicManager(DAOFabric daoFabric) {
+        super(daoFabric);
+    }
 
     public List<TypeOfMusic> getTypes(int id){
         List<TypeOfMusic> result = new ArrayList<>();
@@ -48,8 +51,7 @@ public class TypeOfMusicManager extends Manager<TypeOfMusic> {
     public int create(TypeOfMusic typeOfMusic) {
         PreparedStatement st = null;
         try {
-            st =
-                    super.dbManager.getC().prepareStatement(
+            st = super.dbManager.getC().prepareStatement(
                             "INSERT INTO musictypes (type) values (?)");
             st.setString(1, typeOfMusic.getType());
             return super.dbManager.getGoUpdate().goUpdate(st);
@@ -74,8 +76,7 @@ public class TypeOfMusicManager extends Manager<TypeOfMusic> {
         ResultSet rs = null;
         PreparedStatement st = null;
         try {
-            st =
-                    super.dbManager.getC().prepareStatement(
+            st = super.dbManager.getC().prepareStatement(
                             "SELECT * FROM musictypes");
             rs = super.dbManager.getGo().go(st);
             while(rs.next()){
@@ -105,8 +106,7 @@ public class TypeOfMusicManager extends Manager<TypeOfMusic> {
         ResultSet rs = null;
         PreparedStatement st = null;
         try {
-            st =
-                    super.dbManager.getC().prepareStatement(
+            st = super.dbManager.getC().prepareStatement(
                             "SELECT * FROM musictypes WHERE id = ?");
             st.setInt(1, id);
             rs = super.dbManager.getGo().go(st);
@@ -134,8 +134,7 @@ public class TypeOfMusicManager extends Manager<TypeOfMusic> {
     public int edit(int id, TypeOfMusic typeOfMusic) {
         PreparedStatement st = null;
         try {
-            st =
-                    super.dbManager.getC().prepareStatement(
+            st = super.dbManager.getC().prepareStatement(
                             "UPDATE musictypes SET type = ? WHERE id = ?");
             st.setString(1, typeOfMusic.getType());
             st.setInt(2, id);
@@ -159,8 +158,7 @@ public class TypeOfMusicManager extends Manager<TypeOfMusic> {
     public int remove(int id) {
         PreparedStatement st = null;
         try {
-            st =
-                    super.dbManager.getC().prepareStatement(
+            st = super.dbManager.getC().prepareStatement(
                             "DELETE FROM musictypes WHERE id = ?");
             st.setInt(1, id);
             return super.dbManager.getGoUpdate().goUpdate(st);
@@ -178,4 +176,6 @@ public class TypeOfMusicManager extends Manager<TypeOfMusic> {
             }
         }
     }
+
+
 }

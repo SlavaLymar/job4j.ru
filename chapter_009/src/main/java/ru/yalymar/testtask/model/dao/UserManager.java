@@ -14,6 +14,10 @@ import java.util.List;
 
 public class UserManager extends Manager<User> implements IRepoUser{
 
+    public UserManager(DAOFabric daoFabric) {
+        super(daoFabric);
+    }
+
     @Override
     public int create(User user) {
         int id = -1;

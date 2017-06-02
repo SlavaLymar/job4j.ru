@@ -77,14 +77,6 @@ public class DBManager {
             } catch (SQLException e) {
                 logger.error(e.getMessage(), e);
                 return -1;
-            } finally {
-                if (st != null) {
-                    try {
-                        st.close();
-                    } catch (SQLException e) {
-                        logger.error(e.getMessage(), e);
-                    }
-                }
             }
         };
     }
@@ -98,7 +90,7 @@ public class DBManager {
         source.setDriverClassName("org.postgresql.Driver");
         source.setUsername("postgres");
         source.setPassword("lymar123");
-        source.setUrl("jdbc:postgresql://localhost:5432/servlettesktask");
+        source.setUrl("jdbc:postgresql://localhost:5432/servtettesttask");
 
         try {
             return this.c = source.getConnection();

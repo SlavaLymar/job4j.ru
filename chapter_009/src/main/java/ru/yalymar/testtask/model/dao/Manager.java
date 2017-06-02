@@ -7,9 +7,9 @@ public abstract class Manager<E> implements DAO<E>{
     protected DBManager dbManager;
     protected DAOFabric daoFabric;
 
-    public Manager() {
+    public Manager(DAOFabric daoFabric) {
         this.dbManager = new DBManager();
-        this.daoFabric = new DAOFabric();
+        this.daoFabric = daoFabric;
     }
 
 }

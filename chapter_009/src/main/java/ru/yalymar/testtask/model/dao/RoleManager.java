@@ -14,6 +14,10 @@ import java.util.List;
 
 public class RoleManager extends Manager<Role> implements IRepoRole{
 
+    public RoleManager(DAOFabric daoFabric) {
+        super(daoFabric);
+    }
+
     @Override
     public int create(Role role) {
         PreparedStatement st = null;
