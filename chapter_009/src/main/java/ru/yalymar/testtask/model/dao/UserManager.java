@@ -17,18 +17,19 @@ public class UserManager extends Manager<User> implements IRepoUser{
     @Override
     public int create(User user) {
         int id = -1;
-        int i = super.daoFabric.getAddressManager().
-                create(new Address(user.getAddress()));
         PreparedStatement st = null;
         PreparedStatement stType = null;
         ResultSet gk = null;
+
+        int i = super.daoFabric.getAddressManager().
+                create(new Address(user.getAddress()));
         if(i > 0) {
             try {
                 st =
                         super.dbManager.getC().prepareStatement(
                                 "INSERT INTO users (login, password, name, date, role_id, adress_id)" +
                                         "VALUES (?, ?, ?, ?, (SELECT r.id FROM roles r WHERE r.role = ?)," +
-                                        "       (SELECT adr.id FROM adresses adr WHERE adr.adress = ?));",
+                                        "(SELECT adr.id FROM adresses adr WHERE adr.adress = ?));",
                                             new String[]{"id"});
                 st.setString(1, user.getLogin());
                 st.setString(2, user.getPassword());
@@ -83,18 +84,24 @@ public class UserManager extends Manager<User> implements IRepoUser{
         ResultSet rs = null;
         PreparedStatement st = null;
         try {
-            st =
-                    super.dbManager.getC().prepareStatement(
-                            "SELECT * FROM users");
+            st = super.dbManager.getC().prepareStatement(
+                            "SELECT u.id, u.login, u.password, u.name, u.date, " +
+                                    "r.role, adr.adress FROM users u LEFT JOIN roles r ON " +
+                                    "u.role_id = r.id LEFT JOIN adresses adr ON u.adress_id = adr.id;");
             rs = super.dbManager.getGo().go(st);
             while(rs.next()){
-                result.add(new User(rs.getInt("id"),
+                User user = new User(rs.getInt("id"),
                         rs.getString("login"),
                         rs.getString("password"),
                         rs.getString("name"),
                         rs.getTimestamp("date"),
                         rs.getString("role"),
-                        rs.getString("adress")));
+                        rs.getString("adress"));
+                List<TypeOfMusic> types = super.daoFabric.getTypeOfMusicManager().getTypes(user.getId());
+                types.forEach((type) ->{
+                    user.getTypes().add(type);
+                });
+                result.add(user);
             }
             return result;
         } catch (SQLException e) {
@@ -345,13 +352,18 @@ public class UserManager extends Manager<User> implements IRepoUser{
             st.setString(1, address.getAddress());
             rs = super.dbManager.getGo().go(st);
             while (rs.next()){
-                result.add(new User(rs.getInt("id"),
+                User user = new User(rs.getInt("id"),
                         rs.getString("login"),
                         rs.getString("password"),
                         rs.getString("name"),
                         rs.getTimestamp("date"),
                         rs.getString("role"),
-                        rs.getString("adress")));
+                        rs.getString("adress"));
+                List<TypeOfMusic> types = super.daoFabric.getTypeOfMusicManager().getTypes(user.getId());
+                types.forEach((type) ->{
+                    user.getTypes().add(type);
+                });
+                result.add(user);
             }
             return result;
         } catch (SQLException e) {
@@ -373,11 +385,91 @@ public class UserManager extends Manager<User> implements IRepoUser{
 
     @Override
     public List<User> findByRole(Role role) {
-        return null;
+        ResultSet rs = null;
+        List<User> result = new ArrayList<>();
+        PreparedStatement st = null;
+        try {
+            st = super.dbManager.getC().prepareStatement(
+                            "SELECT u.id, u.login, u.password, u.name, u.date, r.role" +
+                                    "(SELECT adr.adress FROM adresses adr WHERE u.adress_id = adr.id) FROM users u" +
+                                    "LEFT JOIN roles r ON u.role_id = r.id WHERE r.role = ?;");
+            st.setString(1, role.getRole());
+            rs = super.dbManager.getGo().go(st);
+            while (rs.next()){
+                User user = new User(rs.getInt("id"),
+                        rs.getString("login"),
+                        rs.getString("password"),
+                        rs.getString("name"),
+                        rs.getTimestamp("date"),
+                        rs.getString("role"),
+                        rs.getString("adress"));
+                List<TypeOfMusic> types = super.daoFabric.getTypeOfMusicManager().getTypes(user.getId());
+                types.forEach((type) ->{
+                    user.getTypes().add(type);
+                });
+                result.add(user);
+            }
+            return result;
+        } catch (SQLException e) {
+            DBManager.logger.error(e.getMessage(), e);
+            return null;
+        } finally {
+            try {
+                if (st != null) {
+                    st.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException e) {
+                DBManager.logger.error(e.getMessage(), e);
+            }
+        }
     }
 
     @Override
     public List<User> findByTypeOfMusic(TypeOfMusic typeOfMusic) {
-        return null;
+        ResultSet rs = null;
+        List<User> result = new ArrayList<>();
+        PreparedStatement st = null;
+        try {
+            st = super.dbManager.getC().prepareStatement(
+                    "SELECT u.id, u.login, u.password, u.name, u.date, \n" +
+                            "(SELECT r.role FROM roles r WHERE r.id = u.role_id),\n" +
+                            "(SELECT adr.adress FROM adresses adr WHERE u.adress_id = adr.id) FROM users u \n" +
+                            "LEFT JOIN user_musictype u_m ON u.id = u_m.user_id \n" +
+                            "LEFT JOIN musictypes m on u_m.type_id = m.id WHERE m.type = ?;");
+            st.setString(1, typeOfMusic.getType());
+            rs = super.dbManager.getGo().go(st);
+            while (rs.next()){
+                User user = new User(rs.getInt("id"),
+                        rs.getString("login"),
+                        rs.getString("password"),
+                        rs.getString("name"),
+                        rs.getTimestamp("date"),
+                        rs.getString("role"),
+                        rs.getString("adress"));
+                List<TypeOfMusic> types = super.daoFabric.getTypeOfMusicManager().getTypes(user.getId());
+                types.forEach((type) ->{
+                    user.getTypes().add(type);
+                });
+                result.add(user);
+            }
+            return result;
+        } catch (SQLException e) {
+            DBManager.logger.error(e.getMessage(), e);
+            return null;
+        } finally {
+            try {
+                if (st != null) {
+                    st.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException e) {
+                DBManager.logger.error(e.getMessage(), e);
+            }
+        }
     }
 }

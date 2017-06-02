@@ -2,6 +2,7 @@ package ru.yalymar.testtask.model.dao;
 
 import ru.yalymar.testtask.model.Address;
 import ru.yalymar.testtask.model.Role;
+import ru.yalymar.testtask.model.TypeOfMusic;
 import ru.yalymar.testtask.model.User;
 import ru.yalymar.testtask.model.db.DBManager;
 import ru.yalymar.testtask.model.repo.IRepoRole;
@@ -196,13 +197,18 @@ public class RoleManager extends Manager<Role> implements IRepoRole{
             st.setString(1, role.getRole());
             rs = super.dbManager.getGo().go(st);
             while(rs.next()){
-                result.add(new User(rs.getInt("id"),
+                User user = new User(rs.getInt("id"),
                         rs.getString("login"),
                         rs.getString("password"),
                         rs.getString("name"),
                         rs.getTimestamp("date"),
                         rs.getString("role"),
-                        rs.getString("adress")));
+                        rs.getString("adress"));
+                List<TypeOfMusic> types = super.daoFabric.getTypeOfMusicManager().getTypes(user.getId());
+                types.forEach((type) ->{
+                    user.getTypes().add(type);
+                });
+                result.add(user);
             }
             return result;
         } catch (SQLException e) {
@@ -221,4 +227,6 @@ public class RoleManager extends Manager<Role> implements IRepoRole{
             }
         }
     }
+
+
 }
