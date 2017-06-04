@@ -50,11 +50,19 @@ public class TypeOfMusicManager extends Manager<TypeOfMusic> {
     @Override
     public int create(TypeOfMusic typeOfMusic) {
         PreparedStatement st = null;
+        ResultSet gk = null;
+        int id = -1;
         try {
             st = super.dbManager.getC().prepareStatement(
-                            "INSERT INTO musictypes (type) values (?)");
+                            "INSERT INTO musictypes (type) values (?)", new String[]{"id"});
             st.setString(1, typeOfMusic.getType());
-            return super.dbManager.getGoUpdate().goUpdate(st);
+            super.dbManager.getGoUpdate().goUpdate(st);
+
+            gk = st.getGeneratedKeys();
+            while (gk.next()){
+                id = gk.getInt("id");
+            }
+            return id;
         } catch (SQLException e) {
             DBManager.logger.error(e.getMessage(), e);
             return -1;
@@ -63,6 +71,9 @@ public class TypeOfMusicManager extends Manager<TypeOfMusic> {
             try {
                 if (st != null) {
                     st.close();
+                }
+                if (gk != null) {
+                    gk.close();
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
