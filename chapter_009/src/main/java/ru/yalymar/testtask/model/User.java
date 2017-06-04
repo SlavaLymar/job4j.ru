@@ -4,6 +4,11 @@ import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * @author slavalymar
+ * @version 1
+ * @since 04.06.2017
+ */
 public class User {
 
     private int id;

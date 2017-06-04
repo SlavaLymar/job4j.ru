@@ -9,16 +9,25 @@ import ru.yalymar.testtask.model.repo.IRepoRole;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author slavalymar
+ * @version 1
+ * @since 04.06.2017
+ */
 public class RoleManager extends Manager<Role> implements IRepoRole{
 
     public RoleManager(DAOFabric daoFabric) {
         super(daoFabric);
     }
 
+    /** create new role.
+     * return ID of new role
+     * @param role
+     * @return int
+     */
     @Override
     public int create(Role role) {
         PreparedStatement st = null;
@@ -53,6 +62,9 @@ public class RoleManager extends Manager<Role> implements IRepoRole{
         }
     }
 
+    /** get all roles
+     * @return List
+     */
     @Override
     public List<Role> getAll() {
         List<Role> result = new ArrayList<>();
@@ -83,6 +95,10 @@ public class RoleManager extends Manager<Role> implements IRepoRole{
         }
     }
 
+    /** get role by ID
+     * @param id
+     * @return Role
+     */
     @Override
     public Role getById(int id) {
         ResultSet rs = null;
@@ -111,6 +127,11 @@ public class RoleManager extends Manager<Role> implements IRepoRole{
         }
     }
 
+    /** edit role by ID
+     * @param id
+     * @param role
+     * @return int
+     */
     @Override
     public int edit(int id, Role role) {
         PreparedStatement st = null;
@@ -135,6 +156,10 @@ public class RoleManager extends Manager<Role> implements IRepoRole{
         }
     }
 
+    /** remove role by ID
+     * @param id
+     * @return int
+     */
     @Override
     public int remove(int id) {
         PreparedStatement st = null;
@@ -158,6 +183,10 @@ public class RoleManager extends Manager<Role> implements IRepoRole{
         }
     }
 
+    /** get all addresses associated with a role
+     * @param role
+     * @return List
+     */
     @Override
     public List<Address> getAddresses(Role role) {
         List<Address> result = new ArrayList<>();
@@ -192,6 +221,10 @@ public class RoleManager extends Manager<Role> implements IRepoRole{
         }
     }
 
+    /** get all users associated with a role
+     * @param role
+     * @return List
+     */
     @Override
     public List<User> getUsers(Role role) {
         List<User> result = new ArrayList<>();

@@ -8,6 +8,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author slavalymar
+ * @version 1
+ * @since 04.06.2017
+ */
 public class AddressManager extends Manager<Address> {
 
     public AddressManager(DAOFabric daoFabric) {
@@ -53,6 +58,9 @@ public class AddressManager extends Manager<Address> {
         }
     }
 
+    /** get all addresses
+     * @return List
+     */
     @Override
     public List<Address> getAll() {
         List<Address> result = new ArrayList<>();
@@ -83,6 +91,10 @@ public class AddressManager extends Manager<Address> {
         }
     }
 
+    /** get address by ID
+     * @param id
+     * @return Address
+     */
     @Override
     public Address getById(int id) {
         ResultSet rs = null;
@@ -111,6 +123,11 @@ public class AddressManager extends Manager<Address> {
         }
     }
 
+    /** edit address by ID
+     * @param id
+     * @param address
+     * @return int
+     */
     @Override
     public int edit(int id, Address address) {
         PreparedStatement st = null;
@@ -135,6 +152,10 @@ public class AddressManager extends Manager<Address> {
         }
     }
 
+    /** remove address by ID
+     * @param id
+     * @return int
+     */
     @Override
     public int remove(int id) {
         PreparedStatement st = null;

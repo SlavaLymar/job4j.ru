@@ -8,12 +8,21 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author slavalymar
+ * @version 1
+ * @since 04.06.2017
+ */
 public class TypeOfMusicManager extends Manager<TypeOfMusic> {
 
     public TypeOfMusicManager(DAOFabric daoFabric) {
         super(daoFabric);
     }
 
+    /** get all types of music associated with user`s ID
+     * @param id
+     * @return List
+     */
     public List<TypeOfMusic> getTypes(int id){
         List<TypeOfMusic> result = new ArrayList<>();
         ResultSet rs = null;
@@ -21,7 +30,7 @@ public class TypeOfMusicManager extends Manager<TypeOfMusic> {
         try {
             st = super.dbManager.getC().prepareStatement(
                             "SELECT mt.id, mt.type FROM musictypes mt JOIN " +
-                                    "user_musictype u_m ON mt.id = u_m.type_id where " +
+                                    "user_musictype u_m ON mt.id = u_m.type_id WHERE " +
                                     "u_m.user_id = ?;");
             st.setInt(1, id);
             rs = super.dbManager.getGo().go(st);
@@ -47,6 +56,11 @@ public class TypeOfMusicManager extends Manager<TypeOfMusic> {
         }
     }
 
+    /** create new type of music.
+     * return id if new music
+     * @param typeOfMusic
+     * @return int
+     */
     @Override
     public int create(TypeOfMusic typeOfMusic) {
         PreparedStatement st = null;
@@ -81,6 +95,9 @@ public class TypeOfMusicManager extends Manager<TypeOfMusic> {
         }
     }
 
+    /** get all types of music
+     * @return List
+     */
     @Override
     public List<TypeOfMusic> getAll() {
         List<TypeOfMusic> result = new ArrayList<>();
@@ -112,6 +129,10 @@ public class TypeOfMusicManager extends Manager<TypeOfMusic> {
         }
     }
 
+    /** get type of music by ID
+     * @param id
+     * @return TypeOfMusic
+     */
     @Override
     public TypeOfMusic getById(int id) {
         ResultSet rs = null;
@@ -141,6 +162,11 @@ public class TypeOfMusicManager extends Manager<TypeOfMusic> {
         }
     }
 
+    /** edit type of music by ID
+     * @param id
+     * @param typeOfMusic
+     * @return int
+     */
     @Override
     public int edit(int id, TypeOfMusic typeOfMusic) {
         PreparedStatement st = null;
@@ -165,6 +191,10 @@ public class TypeOfMusicManager extends Manager<TypeOfMusic> {
         }
     }
 
+    /** remove type of music by ID
+     * @param id
+     * @return int
+     */
     @Override
     public int remove(int id) {
         PreparedStatement st = null;

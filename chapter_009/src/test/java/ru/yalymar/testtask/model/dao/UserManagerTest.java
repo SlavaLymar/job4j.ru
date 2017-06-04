@@ -11,6 +11,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 public class UserManagerTest {
@@ -126,5 +127,12 @@ public class UserManagerTest {
         assertTrue(users.size() > 0);
 
         this.manager.remove(id);
+    }
+
+    @Test
+    public void whenGiveLoginPasswordShouldGetUser(){
+        User user = this.daoFabric.getUserManager().
+                getByLoginPassword("slava", "lymar");
+        assertNotNull(user);
     }
 }

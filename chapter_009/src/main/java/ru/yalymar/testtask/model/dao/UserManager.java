@@ -12,12 +12,22 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author slavalymar
+ * @version 1
+ * @since 04.06.2017
+ */
 public class UserManager extends Manager<User> implements IRepoUser{
 
     public UserManager(DAOFabric daoFabric) {
         super(daoFabric);
     }
 
+    /** create new user.
+     * return ID of new user
+     * @param user
+     * @return int
+     */
     @Override
     public int create(User user) {
         int id = -1;
@@ -76,6 +86,9 @@ public class UserManager extends Manager<User> implements IRepoUser{
         return -1;
     }
 
+    /** get all users
+     * @return List
+     */
     @Override
     public List<User> getAll() {
         List<User> result = new ArrayList<>();
@@ -119,6 +132,10 @@ public class UserManager extends Manager<User> implements IRepoUser{
         }
     }
 
+    /** get user by ID
+     * @param id
+     * @return User
+     */
     @Override
     public User getById(int id) {
         ResultSet rs = null;
@@ -156,6 +173,11 @@ public class UserManager extends Manager<User> implements IRepoUser{
         }
     }
 
+    /** edit user by ID
+     * @param id
+     * @param newUser
+     * @return int
+     */
     @Override
     public int edit(int id, User newUser) {
         int i = -1;
@@ -184,6 +206,11 @@ public class UserManager extends Manager<User> implements IRepoUser{
         return i;
     }
 
+    /** edit login
+     * @param id
+     * @param value
+     * @return int
+     */
     private int editColumnLogin(int id, String value) {
         PreparedStatement st = null;
         try {
@@ -208,6 +235,11 @@ public class UserManager extends Manager<User> implements IRepoUser{
         return -1;
     }
 
+    /** edit password
+     * @param id
+     * @param value
+     * @return int
+     */
     private int editColumnPassword(int id, String value) {
         PreparedStatement st = null;
         try {
@@ -232,6 +264,11 @@ public class UserManager extends Manager<User> implements IRepoUser{
         return -1;
     }
 
+    /** edit name
+     * @param id
+     * @param value
+     * @return int
+     */
     private int editColumnName(int id, String value) {
         PreparedStatement st = null;
         try {
@@ -256,6 +293,11 @@ public class UserManager extends Manager<User> implements IRepoUser{
         return -1;
     }
 
+    /** edit user`s role
+     * @param id
+     * @param role
+     * @return int
+     */
     private int editColumnRole(int id, String role) {
         PreparedStatement st = null;
         try {
@@ -280,6 +322,11 @@ public class UserManager extends Manager<User> implements IRepoUser{
         return -1;
     }
 
+    /** edit address
+     * @param id
+     * @param address
+     * @return int
+     */
     private int editColumnAddress(int id, String address) {
         PreparedStatement st = null;
         try {
@@ -305,6 +352,10 @@ public class UserManager extends Manager<User> implements IRepoUser{
         return -1;
     }
 
+    /** remove user by ID
+     * @param id
+     * @return int
+     */
     @Override
     public int remove(int id) {
         PreparedStatement st = null;
@@ -356,6 +407,10 @@ public class UserManager extends Manager<User> implements IRepoUser{
         return this.create(user);
     }
 
+    /** find users by address
+     * @param address
+     * @return List
+     */
     @Override
     public List<User> findByAddress(Address address) {
         ResultSet rs = null;
@@ -401,6 +456,10 @@ public class UserManager extends Manager<User> implements IRepoUser{
         }
     }
 
+    /** find users by role
+     * @param role
+     * @return List
+     */
     @Override
     public List<User> findByRole(Role role) {
         ResultSet rs = null;
@@ -445,6 +504,10 @@ public class UserManager extends Manager<User> implements IRepoUser{
         }
     }
 
+    /** find users by type of music
+     * @param typeOfMusic
+     * @return List
+     */
     @Override
     public List<User> findByTypeOfMusic(TypeOfMusic typeOfMusic) {
         ResultSet rs = null;
@@ -489,5 +552,77 @@ public class UserManager extends Manager<User> implements IRepoUser{
                 DBManager.logger.error(e.getMessage(), e);
             }
         }
+    }
+
+    /** get user from db
+     * @param login
+     * @param password
+     * @return ResultSet
+     */
+    public User getByLoginPassword(String login, String password){
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = dbManager.getC().prepareStatement(
+                    "SELECT u.id, u.login, u.password, u.name, u.date, " +
+                            "(SELECT r.role FROM roles r WHERE r.id = u.role_id), " +
+                            "(SELECT adr.adress FROM adresses adr WHERE u.adress_id = adr.id) FROM " +
+                            "users u LEFT JOIN user_musictype u_m ON u.id = u_m.user_id LEFT JOIN " +
+                            "musictypes m on u_m.type_id = m.id WHERE login = ? AND password = ?;");
+            st.setString(1, login);
+            st.setString(2, password);
+            rs = dbManager.getGo().go(st);
+            rs.next();
+            User user = new User(rs.getInt("id"),
+                    rs.getString("login"),
+                    rs.getString("password"),
+                    rs.getString("name"),
+                    rs.getTimestamp("date"),
+                    rs.getString("role"),
+                    rs.getString("adress"));
+            List<TypeOfMusic> types = super.daoFabric.getTypeOfMusicManager().getTypes(user.getId());
+            types.forEach((type) ->{
+                user.getTypes().add(type);
+            });
+            return user;
+        } catch (SQLException e) {
+            DBManager.logger.error(e.getMessage(), e);
+        } finally {
+            try {
+                if (st != null) {
+                    st.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException e) {
+                DBManager.logger.error(e.getMessage(), e);
+            }
+        }
+        return null;
+    }
+
+    /** check that lagin and password are valid
+     * @param login
+     * @param password
+     * @return boolean
+     */
+    public boolean isValid(String login, String password){
+        if(this.getByLoginPassword(login, password) != null){
+            return true;
+        }
+        return false;
+    }
+
+    /** check that the user is admin
+     * @param login
+     * @param password
+     * @return boolean
+     */
+    public boolean isAdmin(String login, String password){
+        if("admin".equals(this.getByLoginPassword(login, password).getRole())){
+            return true;
+        }
+        return false;
     }
 }

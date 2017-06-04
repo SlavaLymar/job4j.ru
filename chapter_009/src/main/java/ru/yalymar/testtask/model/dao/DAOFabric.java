@@ -1,5 +1,10 @@
 package ru.yalymar.testtask.model.dao;
 
+/** class that contains all application daos
+ * @author slavalymar
+ * @version 1
+ * @since 04.06.2017
+ */
 public class DAOFabric {
 
     private AddressManager addressManager;

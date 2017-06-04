@@ -1,5 +1,10 @@
 package ru.yalymar.testtask.model;
 
+/**
+ * @author slavalymar
+ * @version 1
+ * @since 04.06.2017
+ */
 public class Role {
 
     private int id;
