@@ -2,6 +2,8 @@ package ru.yalymar.testtask.model.dao;
 
 import org.junit.Before;
 import org.junit.Test;
+import ru.yalymar.testtask.model.Address;
+import ru.yalymar.testtask.model.Role;
 import ru.yalymar.testtask.model.TypeOfMusic;
 import ru.yalymar.testtask.model.User;
 import java.sql.Timestamp;
@@ -74,7 +76,54 @@ public class UserManagerTest {
 
         int i = this.manager.edit(id, newUser);
         assertTrue(i > 0);
-        System.out.println(i);
+
+        this.manager.remove(id);
+    }
+
+    @Test
+    public void whenFindUsersByAdressShouldGetNewOnes(){
+        User user = new User("test2", "test2", "test2",
+                new Timestamp(Calendar.getInstance().getTimeInMillis()),
+                "user", "Test2 st. ap test2");
+        user.getTypes().add(new TypeOfMusic("rock"));
+        user.getTypes().add(new TypeOfMusic("rap"));
+        user.getTypes().add(new TypeOfMusic("folk"));
+        int id = this.manager.create(user);
+
+        List<User> users = this.manager.findByAddress(new Address("Test2 st. ap test2"));
+        assertTrue(users.size() > 0);
+
+        this.manager.remove(id);
+    }
+
+    @Test
+    public void whenFindUsersByRoleShouldGetNewOnes(){
+        User user = new User("test2", "test2", "test2",
+                new Timestamp(Calendar.getInstance().getTimeInMillis()),
+                "user", "Test2 st. ap test2");
+        user.getTypes().add(new TypeOfMusic("rock"));
+        user.getTypes().add(new TypeOfMusic("rap"));
+        user.getTypes().add(new TypeOfMusic("folk"));
+        int id = this.manager.create(user);
+
+        List<User> users = this.manager.findByRole(new Role("user"));
+        assertTrue(users.size() > 0);
+
+        this.manager.remove(id);
+    }
+
+    @Test
+    public void whenFindUsersByTypeOfMusicShouldGetNewOnes(){
+        User user = new User("test2", "test2", "test2",
+                new Timestamp(Calendar.getInstance().getTimeInMillis()),
+                "user", "Test2 st. ap test2");
+        user.getTypes().add(new TypeOfMusic("rock"));
+        user.getTypes().add(new TypeOfMusic("rap"));
+        user.getTypes().add(new TypeOfMusic("folk"));
+        int id = this.manager.create(user);
+
+        List<User> users = this.manager.findByTypeOfMusic(new TypeOfMusic("rock"));
+        assertTrue(users.size() > 0);
 
         this.manager.remove(id);
     }

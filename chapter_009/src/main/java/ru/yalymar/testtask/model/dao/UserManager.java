@@ -45,7 +45,7 @@ public class UserManager extends Manager<User> implements IRepoUser{
                     id = gk.getInt("id");
                 }
 
-                if(id != -1) {
+                if(id != -1 && user.getTypes().size() != 0) {
                     for (TypeOfMusic type : user.getTypes()) {
                         st = super.dbManager.getC().prepareStatement(
                                 "INSERT INTO user_musictype (type_id, user_id) VALUES " +
@@ -364,7 +364,7 @@ public class UserManager extends Manager<User> implements IRepoUser{
         try {
             st = super.dbManager.getC().prepareStatement(
                             "SELECT u.id, u.login, u.password, u.name, u.date, " +
-                                    "(SELECT role FROM roles r WHERE u.role_id = r.id), adr.adress" +
+                                    "(SELECT role FROM roles r WHERE u.role_id = r.id), adr.adress " +
                                     "FROM users u LEFT JOIN adresses adr ON u.adress_id = adr.id WHERE " +
                                     "adr.adress = ?");
             st.setString(1, address.getAddress());
@@ -408,8 +408,8 @@ public class UserManager extends Manager<User> implements IRepoUser{
         PreparedStatement st = null;
         try {
             st = super.dbManager.getC().prepareStatement(
-                            "SELECT u.id, u.login, u.password, u.name, u.date, r.role" +
-                                    "(SELECT adr.adress FROM adresses adr WHERE u.adress_id = adr.id) FROM users u" +
+                            "SELECT u.id, u.login, u.password, u.name, u.date, r.role, " +
+                                    "(SELECT adr.adress FROM adresses adr WHERE u.adress_id = adr.id) FROM users u " +
                                     "LEFT JOIN roles r ON u.role_id = r.id WHERE r.role = ?;");
             st.setString(1, role.getRole());
             rs = super.dbManager.getGo().go(st);
@@ -452,8 +452,8 @@ public class UserManager extends Manager<User> implements IRepoUser{
         PreparedStatement st = null;
         try {
             st = super.dbManager.getC().prepareStatement(
-                    "SELECT u.id, u.login, u.password, u.name, u.date," +
-                            "(SELECT r.role FROM roles r WHERE r.id = u.role_id)," +
+                    "SELECT u.id, u.login, u.password, u.name, u.date, " +
+                            "(SELECT r.role FROM roles r WHERE r.id = u.role_id), " +
                             "(SELECT adr.adress FROM adresses adr WHERE u.adress_id = adr.id) FROM " +
                             "users u LEFT JOIN user_musictype u_m ON u.id = u_m.user_id LEFT JOIN " +
                             "musictypes m on u_m.type_id = m.id WHERE m.type = ?;");
