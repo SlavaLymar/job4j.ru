@@ -3,9 +3,7 @@ package ru.yalymar.testtask.model.dao;
 import org.junit.Before;
 import org.junit.Test;
 import ru.yalymar.testtask.model.TypeOfMusic;
-
 import java.util.List;
-
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 

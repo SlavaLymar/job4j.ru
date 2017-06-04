@@ -25,22 +25,21 @@ public class UserManager extends Manager<User> implements IRepoUser{
         PreparedStatement stType = null;
         ResultSet gk = null;
 
-        int i = super.daoFabric.getAddressManager().
+        int idAddress = super.daoFabric.getAddressManager().
                 create(new Address(user.getAddress()));
-        if(i > 0) {
+        if(idAddress > 0) {
             try {
                 st = super.dbManager.getC().prepareStatement(
                                 "INSERT INTO users (login, password, name, date, role_id, adress_id)" +
-                                        "VALUES (?, ?, ?, ?, (SELECT r.id FROM roles r WHERE r.role = ?)," +
-                                        "(SELECT adr.id FROM adresses adr WHERE adr.adress = ?));",
+                                        "VALUES (?, ?, ?, ?, (SELECT r.id FROM roles r WHERE r.role = ?), ?);",
                                             new String[]{"id"});
                 st.setString(1, user.getLogin());
                 st.setString(2, user.getPassword());
                 st.setString(3, user.getName());
                 st.setTimestamp(4, user.getDate());
                 st.setString(5, user.getRole());
-                st.setString(6, user.getAddress());
-                i = super.dbManager.getGoUpdate().goUpdate(st);
+                st.setInt(6, idAddress);
+                super.dbManager.getGoUpdate().goUpdate(st);
 
                 gk = st.getGeneratedKeys();
                 if(gk.next()){
@@ -51,14 +50,14 @@ public class UserManager extends Manager<User> implements IRepoUser{
                     for (TypeOfMusic type : user.getTypes()) {
                         stType = super.dbManager.getC().prepareStatement(
                                 "INSERT INTO user_musictype (type_id, user_id) VALUES " +
-                                        "((SELECT t.id from types WHERE t.type = ?), ?);");
+                                        "((SELECT t.id from musictypes t WHERE t.type = ?), ?);");
                         stType.setString(1, type.getType());
                         stType.setInt(2, id);
-                        i += super.dbManager.getGoUpdate().goUpdate(stType);
+                        super.dbManager.getGoUpdate().goUpdate(stType);
                     }
                 }
 
-                return i;
+                return id;
             } catch (SQLException e) {
                 DBManager.logger.error(e.getMessage(), e);
             }
@@ -313,14 +312,36 @@ public class UserManager extends Manager<User> implements IRepoUser{
     @Override
     public int remove(int id) {
         PreparedStatement st = null;
+        int result = -1;
         try {
+            // remove from user_musictype table
             st = super.dbManager.getC().prepareStatement(
-                            "DELETE FROM users WHERE id = ?");
+                    "DELETE FROM user_musictype WHERE user_id = ?");
             st.setInt(1, id);
-            return super.dbManager.getGoUpdate().goUpdate(st);
+            super.dbManager.getGoUpdate().goUpdate(st);
+
+            // remove from users table
+            int adress_id = -1;
+            st = super.dbManager.getC().prepareStatement(
+                    "DELETE FROM users WHERE id = ?", new String[]{"adress_id"});
+            st.setInt(1, id);
+            result = super.dbManager.getGoUpdate().goUpdate(st);
+
+            ResultSet rs = st.getGeneratedKeys();
+            while (rs.next()){
+                adress_id = rs.getInt("adress_id");
+            }
+            rs.close();
+
+            //remove from adresses table
+            st = super.dbManager.getC().prepareStatement(
+                    "DELETE FROM adresses adr WHERE adr.id = ?");
+            st.setInt(1, adress_id);
+            super.dbManager.getGoUpdate().goUpdate(st);
+            return result;
         } catch (SQLException e) {
             DBManager.logger.error(e.getMessage(), e);
-            return -1;
+            return result;
         }
         finally {
             try {
