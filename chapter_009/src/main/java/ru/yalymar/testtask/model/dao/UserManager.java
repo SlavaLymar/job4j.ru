@@ -22,7 +22,6 @@ public class UserManager extends Manager<User> implements IRepoUser{
     public int create(User user) {
         int id = -1;
         PreparedStatement st = null;
-        PreparedStatement stType = null;
         ResultSet gk = null;
 
         int idAddress = super.daoFabric.getAddressManager().
@@ -48,12 +47,12 @@ public class UserManager extends Manager<User> implements IRepoUser{
 
                 if(id != -1) {
                     for (TypeOfMusic type : user.getTypes()) {
-                        stType = super.dbManager.getC().prepareStatement(
+                        st = super.dbManager.getC().prepareStatement(
                                 "INSERT INTO user_musictype (type_id, user_id) VALUES " +
                                         "((SELECT t.id from musictypes t WHERE t.type = ?), ?);");
-                        stType.setString(1, type.getType());
-                        stType.setInt(2, id);
-                        super.dbManager.getGoUpdate().goUpdate(stType);
+                        st.setString(1, type.getType());
+                        st.setInt(2, id);
+                        super.dbManager.getGoUpdate().goUpdate(st);
                     }
                 }
 
@@ -65,9 +64,6 @@ public class UserManager extends Manager<User> implements IRepoUser{
                 try {
                     if (st != null) {
                         st.close();
-                    }
-                    if (stType != null) {
-                        stType.close();
                     }
                     if (gk != null) {
                         gk.close();
@@ -288,8 +284,8 @@ public class UserManager extends Manager<User> implements IRepoUser{
         PreparedStatement st = null;
         try {
             st = dbManager.getC().prepareStatement(
-                    "UPDATE users SET adress_id = " +
-                            "(SELECT adr.id FROM adress adr WHERE adr.adress = ?) WHERE id = ?;");
+                    "UPDATE adresses adr SET adress = ? WHERE adr.id = " +
+                            "(SELECT adress_id FROM users u WHERE u.id = ?);");
             st.setString(1, address);
             st.setInt(2, id);
             return dbManager.getGoUpdate().goUpdate(st);
@@ -338,6 +334,7 @@ public class UserManager extends Manager<User> implements IRepoUser{
                     "DELETE FROM adresses adr WHERE adr.id = ?");
             st.setInt(1, adress_id);
             super.dbManager.getGoUpdate().goUpdate(st);
+
             return result;
         } catch (SQLException e) {
             DBManager.logger.error(e.getMessage(), e);
