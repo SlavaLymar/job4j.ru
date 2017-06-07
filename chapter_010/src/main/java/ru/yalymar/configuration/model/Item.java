@@ -9,6 +9,9 @@ public class Item {
     private Timestamp created;
     private boolean done;
 
+    public Item() {
+    }
+
     public int getId() {
         return id;
     }
