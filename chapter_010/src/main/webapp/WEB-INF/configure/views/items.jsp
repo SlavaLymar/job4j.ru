@@ -36,17 +36,6 @@
 
     <script type="text/javascript">
 
-        function isChecked(d) {
-            if (d) {
-                $('#done1').attr("checked", "checked");
-                return;
-            }
-            else {
-                $('#done1').removeAttr("checked");
-            }
-            return;
-        }
-
         function validate() {
             var result = true;
             var v = document.getElementsByName("description")[0].value;

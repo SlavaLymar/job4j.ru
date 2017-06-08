@@ -16,11 +16,26 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author slavalymar
+ * @since 08.06.2017
+ * @version 1
+ */
 @WebServlet(name = "items", urlPatterns = "/items")
 public class ItemsServlet extends HttpServlet{
 
     private final ManagersFactory mf = new ManagersFactory();
 
+    public ManagersFactory getMf() {
+        return this.mf;
+    }
+
+    /** get items
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -29,6 +44,12 @@ public class ItemsServlet extends HttpServlet{
         req.getRequestDispatcher("/WEB-INF/configure/views/items.jsp").forward(req, resp);
     }
 
+    /** add item
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {

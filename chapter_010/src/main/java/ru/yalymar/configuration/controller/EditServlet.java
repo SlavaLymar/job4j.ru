@@ -14,11 +14,26 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author slavalymar
+ * @since 08.06.2017
+ * @version 1
+ */
 @WebServlet(name = "edit", urlPatterns = "/edit")
 public class EditServlet extends HttpServlet{
 
     private final ManagersFactory mf = new ManagersFactory();
 
+    public ManagersFactory getMf() {
+        return this.mf;
+    }
+
+    /** get edit form
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -28,6 +43,12 @@ public class EditServlet extends HttpServlet{
         req.getRequestDispatcher("/WEB-INF/configure/views/edit.jsp").forward(req, resp);
     }
 
+    /** edit item
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {

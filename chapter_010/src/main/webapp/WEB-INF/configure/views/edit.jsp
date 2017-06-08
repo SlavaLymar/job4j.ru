@@ -81,6 +81,8 @@
     </TR>
 
 </table>
-
+    <form action='${pageContext.servletContext.contextPath}/items' method='get'>
+        <input type="submit" value="back">
+    </form>
 </body>
 </html>
