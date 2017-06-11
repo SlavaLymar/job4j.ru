@@ -9,14 +9,18 @@ import java.util.List;
 public class UserManager extends Manager<User> implements Unproxy<Role>{
 
     @Override
-    public int create(User item) {
+    public int create(User user) {
         Session session = null;
         try {
             session = super.sessionFactory.openSession();
             session.beginTransaction();
-            int i = (Integer) session.save(item);
+            int i = (Integer) session.save(user);
+            int id = -1;
+            if(i > 0){
+                id = user.getId();
+            }
             session.getTransaction().commit();
-            return i;
+            return id;
         }
         finally {
             if(session != null && session.isOpen()){
@@ -30,14 +34,12 @@ public class UserManager extends Manager<User> implements Unproxy<Role>{
         Session session = null;
         try {
             session = super.sessionFactory.openSession();
-            session.beginTransaction();
             User user = session.get(User.class, id);
             Role role = this.initializeAndUnproxy(user.getRole());
             user.setRole(role);
             return user;
         }
         finally {
-            session.getTransaction().commit();
             if(session != null && session.isOpen()){
                 session.close();
             }
@@ -49,7 +51,12 @@ public class UserManager extends Manager<User> implements Unproxy<Role>{
         Session session = null;
         try{
             session = super.sessionFactory.openSession();
-            return session.createQuery("from User").list();
+            List<User> users = session.createQuery("from User").list();
+            for(User user : users){
+                Role role = this.initializeAndUnproxy(user.getRole());
+                user.setRole(role);
+            }
+            return users;
         }
         finally {
             if(session != null && session.isOpen()){
@@ -66,10 +73,22 @@ public class UserManager extends Manager<User> implements Unproxy<Role>{
             session = super.sessionFactory.openSession();
             session.beginTransaction();
             User user = session.get(User.class, id);
-            user.setLogin(newUser.getLogin());
-            user.setPassword(newUser.getPassword());
-            user.setName(newUser.getName());
-            user.setRole(newUser.getRole());
+            if(newUser.getLogin() != null) {
+                user.setLogin(newUser.getLogin());
+                i++;
+            }
+            if(newUser.getPassword() != null) {
+                user.setPassword(newUser.getPassword());
+                i++;
+            }
+            if(newUser.getName() != null){
+                user.setName(newUser.getName());
+                i++;
+            }
+            if(newUser.getRole() != null){
+                user.setRole(newUser.getRole());
+                i++;
+            }
             session.update(user);
             session.getTransaction().commit();
             return i;
@@ -84,7 +103,7 @@ public class UserManager extends Manager<User> implements Unproxy<Role>{
     @Override
     public int delete(int id) {
         Session session = null;
-        int i = -1;
+        int i;
         try {
             session = super.sessionFactory.openSession();
             session.beginTransaction();
