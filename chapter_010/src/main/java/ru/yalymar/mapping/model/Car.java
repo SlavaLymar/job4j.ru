@@ -3,7 +3,6 @@ package ru.yalymar.mapping.model;
 public class Car {
 
     private int id;
-    private Manufactor manuf;
     private Model model;
     private Transmission transmission;
     private Body body;
@@ -18,14 +17,6 @@ public class Car {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public Manufactor getManuf() {
-        return manuf;
-    }
-
-    public void setManuf(Manufactor manuf) {
-        this.manuf = manuf;
     }
 
     public Model getModel() {

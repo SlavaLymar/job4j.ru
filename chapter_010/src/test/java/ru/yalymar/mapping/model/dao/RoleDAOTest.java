@@ -1,4 +1,4 @@
-package ru.yalymar.mapping.model.manager;
+package ru.yalymar.mapping.model.dao;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,13 +21,13 @@ public class RoleDAOTest {
 
     @Test
     public void whenReadRoleShouldGetNotNull(){
-        Role role = this.mf.getRoleManager().read(1);
+        Role role = this.mf.getRoleDAO().read(1);
         assertNotNull(role);
     }
 
     @Test
     public void whenReadAllRolesShouldGetThem(){
-        List<Role> roles = this.mf.getRoleManager().readAll();
+        List<Role> roles = this.mf.getRoleDAO().readAll();
         assertTrue(roles.size() > 0);
     }
 
@@ -35,19 +35,19 @@ public class RoleDAOTest {
     public void whenCreateRoleShouldGetId(){
         Role role = new Role();
         role.setRole("test1");
-        int id = this.mf.getRoleManager().create(role);
+        int id = this.mf.getRoleDAO().create(role);
         assertTrue(id > 0);
 
-        this.mf.getRoleManager().delete(id);
+        this.mf.getRoleDAO().delete(id);
     }
 
     @Test
     public void whenDeleteRoleShouldGetInt(){
         Role role = new Role();
         role.setRole("test1");
-        int id = this.mf.getRoleManager().create(role);
+        int id = this.mf.getRoleDAO().create(role);
 
-        int i = this.mf.getRoleManager().delete(id);
+        int i = this.mf.getRoleDAO().delete(id);
         assertTrue(i > 0);
     }
 

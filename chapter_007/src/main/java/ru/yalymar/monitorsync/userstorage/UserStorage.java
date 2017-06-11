@@ -37,7 +37,7 @@ public class UserStorage {
         return this.users;
     }
 
-    // class that describe user`s manager
+    // class that describe user`s dao
     public class UserStorageManager{
 
         /** add user

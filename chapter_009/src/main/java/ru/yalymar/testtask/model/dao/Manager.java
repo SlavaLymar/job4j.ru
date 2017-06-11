@@ -10,7 +10,7 @@ import ru.yalymar.testtask.model.db.DBManager;
 public abstract class Manager<E> implements DAO<E>{
 
     /**
-     * database manager
+     * database dao
      */
     protected DBManager dbManager;
 

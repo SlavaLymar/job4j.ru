@@ -1,12 +1,13 @@
-package ru.yalymar.mapping.model.manager;
+package ru.yalymar.mapping.model.dao;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
-import ru.yalymar.mapping.model.Car;
-
+import ru.yalymar.mapping.model.Role;
+import ru.yalymar.mapping.model.User;
+import ru.yalymar.mapping.model.unproxy.Unproxy;
 import java.util.List;
 
-public class CarDAO extends DAO<Car> implements Unproxy<Role>{
+public class UserDAO extends DAO<User> implements Unproxy<Role> {
 
     @Override
     public int create(User user) {

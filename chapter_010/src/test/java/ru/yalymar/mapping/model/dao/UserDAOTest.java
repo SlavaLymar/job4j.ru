@@ -1,4 +1,4 @@
-package ru.yalymar.mapping.model.manager;
+package ru.yalymar.mapping.model.dao;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -22,13 +22,13 @@ public class UserDAOTest {
 
     @Test
     public void whenReadUserShouldGetNotNull(){
-        User user = this.mf.getUm().read(1);
+        User user = this.mf.getUserDAO().read(1);
         assertNotNull(user);
     }
 
     @Test
     public void whenReadAllUsersShouldGetThem(){
-        List<User> users = this.mf.getUm().readAll();
+        List<User> users = this.mf.getUserDAO().readAll();
         assertTrue(users.size() > 0);
     }
 
@@ -40,10 +40,10 @@ public class UserDAOTest {
         user.setName("test1");
         user.setCreate(new Timestamp(System.currentTimeMillis()));
         user.setRole(new Role(2));
-        int id = this.mf.getUm().create(user);
+        int id = this.mf.getUserDAO().create(user);
         assertTrue(id > 0);
 
-        this.mf.getUm().delete(id);
+        this.mf.getUserDAO().delete(id);
     }
 
     @Test
@@ -54,9 +54,9 @@ public class UserDAOTest {
         user.setName("test1");
         user.setCreate(new Timestamp(System.currentTimeMillis()));
         user.setRole(new Role(2));
-        int id = this.mf.getUm().create(user);
+        int id = this.mf.getUserDAO().create(user);
 
-        int i = this.mf.getUm().delete(id);
+        int i = this.mf.getUserDAO().delete(id);
         assertThat(i, is(1));
     }
 
@@ -70,16 +70,16 @@ public class UserDAOTest {
         user.setRole(new Role(2));
 
         //add
-        int id = this.mf.getUm().create(user);
+        int id = this.mf.getUserDAO().create(user);
 
         //update
         User newUser = new User();
         newUser.setName("test2");
-        int i = this.mf.getUm().update(id, newUser);
+        int i = this.mf.getUserDAO().update(id, newUser);
         assertThat(i, is(1));
 
         //delete
-        this.mf.getUm().delete(id);
+        this.mf.getUserDAO().delete(id);
     }
 
 }

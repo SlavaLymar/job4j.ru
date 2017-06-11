@@ -1,4 +1,4 @@
-package ru.yalymar.mapping.model.manager;
+package ru.yalymar.mapping.model.dao;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;

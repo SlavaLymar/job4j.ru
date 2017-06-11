@@ -18,7 +18,7 @@ import java.util.List;
 public class UserManager {
 
     /**
-     * instance of db manager
+     * instance of db dao
      */
     private final DBManager dbManager = new DBManager();
 

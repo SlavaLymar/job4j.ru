@@ -22,7 +22,7 @@ public class Tracker {
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss");
 
     /**
-     * database manager
+     * database dao
      */
     private DBManager dbManager;
     private static final Logger logger = Logger.getLogger(Tracker.class);

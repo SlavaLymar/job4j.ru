@@ -1,22 +1,22 @@
-package ru.yalymar.mapping.model.manager;
+package ru.yalymar.mapping.model.dao;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
-import ru.yalymar.mapping.model.Role;
+import ru.yalymar.mapping.model.Manufactor;
 import java.util.List;
 
-public class RoleDAO extends DAO<Role> {
+public class ManufactorDAO extends DAO<Manufactor> {
 
     @Override
-    public int create(Role role) {
+    public int create(Manufactor m) {
         Session session = null;
         try {
             session = super.sessionFactory.openSession();
             session.beginTransaction();
-            int i = (Integer) session.save(role);
+            int i = (Integer) session.save(m);
             int id = -1;
             if(i > 0){
-                id = role.getId();
+                id = m.getId();
             }
             session.getTransaction().commit();
             return id;
@@ -29,11 +29,11 @@ public class RoleDAO extends DAO<Role> {
     }
 
     @Override
-    public Role read(int id) {
+    public Manufactor read(int id) {
         Session session = null;
         try {
             session = super.sessionFactory.openSession();
-            return session.get(Role.class, id);
+            return session.get(Manufactor.class, id);
         }
         finally {
             if(session != null && session.isOpen()){
@@ -43,11 +43,11 @@ public class RoleDAO extends DAO<Role> {
     }
 
     @Override
-    public List<Role> readAll() {
+    public List<Manufactor> readAll() {
         Session session = null;
         try{
             session = super.sessionFactory.openSession();
-            return session.createQuery("from Role").list();
+            return session.createQuery("from Manufactor").list();
         }
         finally {
             if(session != null && session.isOpen()){
@@ -57,7 +57,7 @@ public class RoleDAO extends DAO<Role> {
     }
 
     @Override
-    public int update(int id, Role newRole) {
+    public int update(int id, Manufactor newM) {
         return -1;
     }
 
@@ -69,7 +69,7 @@ public class RoleDAO extends DAO<Role> {
             session = super.sessionFactory.openSession();
             session.beginTransaction();
             Query query = session.createQuery(
-                    "delete Role where id = :i");
+                    "delete Manufactor where id = :i");
             query.setParameter("i", id);
             i = query.executeUpdate();
             session.getTransaction().commit();

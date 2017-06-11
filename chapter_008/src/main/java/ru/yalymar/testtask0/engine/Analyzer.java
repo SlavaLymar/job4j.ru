@@ -27,7 +27,7 @@ public class Analyzer {
     private HTMLDownloader htmlDownloader = new HTMLDownloader();
 
     /**
-     * database manager
+     * database dao
      */
     private DBManager dbManager = new DBManager();
 

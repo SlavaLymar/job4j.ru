@@ -1,23 +1,23 @@
-package ru.yalymar.mapping.model.manager;
+package ru.yalymar.mapping.model.dao;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
-import ru.yalymar.mapping.model.Role;
-import ru.yalymar.mapping.model.User;
+import ru.yalymar.mapping.model.*;
+import ru.yalymar.mapping.model.unproxy.Unproxy;
 import java.util.List;
 
-public class UserDAO extends DAO<User> implements Unproxy<Role>{
+public class CarDAO extends DAO<Car> implements Unproxy {
 
     @Override
-    public int create(User user) {
+    public int create(Car car) {
         Session session = null;
         try {
             session = super.sessionFactory.openSession();
             session.beginTransaction();
-            int i = (Integer) session.save(user);
+            int i = (Integer) session.save(car);
             int id = -1;
             if(i > 0){
-                id = user.getId();
+                id = car.getId();
             }
             session.getTransaction().commit();
             return id;
@@ -30,14 +30,20 @@ public class UserDAO extends DAO<User> implements Unproxy<Role>{
     }
 
     @Override
-    public User read(int id) {
+    public Car read(int id) {
         Session session = null;
         try {
             session = super.sessionFactory.openSession();
-            User user = session.get(User.class, id);
-            Role role = this.initializeAndUnproxy(user.getRole());
-            user.setRole(role);
-            return user;
+            Car car = session.get(Car.class, id);
+            Model model = (Model) this.initializeAndUnproxy(car.getModel());
+            Transmission transmission = (Transmission) this.initializeAndUnproxy(car.getTransmission());
+            Body body = (Body) this.initializeAndUnproxy(car.getBody());
+            Color color = (Color) this.initializeAndUnproxy(car.getColor());
+            car.setModel(model);
+            car.setTransmission(transmission);
+            car.setBody(body);
+            car.setColor(color);
+            return car;
         }
         finally {
             if(session != null && session.isOpen()){
@@ -47,16 +53,22 @@ public class UserDAO extends DAO<User> implements Unproxy<Role>{
     }
 
     @Override
-    public List<User> readAll() {
+    public List<Car> readAll() {
         Session session = null;
         try{
             session = super.sessionFactory.openSession();
-            List<User> users = session.createQuery("from User").list();
-            for(User user : users){
-                Role role = this.initializeAndUnproxy(user.getRole());
-                user.setRole(role);
+            List<Car> cars = session.createQuery("from Car").list();
+            for(Car car : cars){
+                Model model = (Model) this.initializeAndUnproxy(car.getModel());
+                Transmission transmission = (Transmission) this.initializeAndUnproxy(car.getTransmission());
+                Body body = (Body) this.initializeAndUnproxy(car.getBody());
+                Color color = (Color) this.initializeAndUnproxy(car.getColor());
+                car.setModel(model);
+                car.setTransmission(transmission);
+                car.setBody(body);
+                car.setColor(color);
             }
-            return users;
+            return cars;
         }
         finally {
             if(session != null && session.isOpen()){
@@ -66,30 +78,30 @@ public class UserDAO extends DAO<User> implements Unproxy<Role>{
     }
 
     @Override
-    public int update(int id, User newUser) {
+    public int update(int id, Car newCar) {
         Session session = null;
         int i = 0;
         try{
             session = super.sessionFactory.openSession();
             session.beginTransaction();
-            User user = session.get(User.class, id);
-            if(newUser.getLogin() != null) {
-                user.setLogin(newUser.getLogin());
+            Car car = session.get(Car.class, id);
+            if(newCar.getModel() != null) {
+                car.setModel(newCar.getModel());
                 i++;
             }
-            if(newUser.getPassword() != null) {
-                user.setPassword(newUser.getPassword());
+            if(newCar.getTransmission() != null) {
+                car.setTransmission(newCar.getTransmission());
                 i++;
             }
-            if(newUser.getName() != null){
-                user.setName(newUser.getName());
+            if(newCar.getBody() != null){
+                car.setBody(newCar.getBody());
                 i++;
             }
-            if(newUser.getRole() != null){
-                user.setRole(newUser.getRole());
+            if(newCar.getColor() != null){
+                car.setColor(newCar.getColor());
                 i++;
             }
-            session.update(user);
+            session.update(newCar);
             session.getTransaction().commit();
             return i;
         }
@@ -108,7 +120,7 @@ public class UserDAO extends DAO<User> implements Unproxy<Role>{
             session = super.sessionFactory.openSession();
             session.beginTransaction();
             Query query = session.createQuery(
-                    "delete User where id = :i");
+                    "delete Car where id = :i");
             query.setParameter("i", id);
             i = query.executeUpdate();
             session.getTransaction().commit();
@@ -120,4 +132,5 @@ public class UserDAO extends DAO<User> implements Unproxy<Role>{
             }
         }
     }
+
 }

@@ -1,4 +1,4 @@
-package ru.yalymar.mapping.model.manager;
+package ru.yalymar.mapping.model.unproxy;
 
 import org.hibernate.Hibernate;
 import org.hibernate.proxy.HibernateProxy;
