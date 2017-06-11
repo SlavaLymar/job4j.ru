@@ -8,6 +8,10 @@ public class Manufactor {
     public Manufactor() {
     }
 
+    public Manufactor(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }

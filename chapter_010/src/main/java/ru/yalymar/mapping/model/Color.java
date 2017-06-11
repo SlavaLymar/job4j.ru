@@ -8,6 +8,10 @@ public class Color {
     public Color() {
     }
 
+    public Color(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }

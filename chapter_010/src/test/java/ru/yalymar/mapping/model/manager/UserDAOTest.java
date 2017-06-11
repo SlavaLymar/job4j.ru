@@ -11,13 +11,13 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-public class UserManagerTest {
+public class UserDAOTest {
 
-    private ManagersFactory mf;
+    private DAOFactory mf;
 
     @Before
     public void init(){
-        this.mf = new ManagersFactory();
+        this.mf = new DAOFactory();
     }
 
     @Test

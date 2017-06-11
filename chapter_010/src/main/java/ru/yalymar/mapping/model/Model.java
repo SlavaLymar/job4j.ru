@@ -9,6 +9,10 @@ public class Model {
     public Model() {
     }
 
+    public Model(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }

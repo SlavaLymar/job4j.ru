@@ -8,6 +8,10 @@ public class Transmission {
     public Transmission() {
     }
 
+    public Transmission(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }

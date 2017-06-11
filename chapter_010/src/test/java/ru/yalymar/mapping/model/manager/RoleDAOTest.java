@@ -10,13 +10,13 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
-public class RoleManagerTest {
+public class RoleDAOTest {
 
-    private ManagersFactory mf;
+    private DAOFactory mf;
 
     @Before
     public void init(){
-        this.mf = new ManagersFactory();
+        this.mf = new DAOFactory();
     }
 
     @Test

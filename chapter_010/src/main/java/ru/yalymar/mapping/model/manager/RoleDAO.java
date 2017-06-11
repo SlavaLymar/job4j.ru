@@ -5,7 +5,7 @@ import org.hibernate.query.Query;
 import ru.yalymar.mapping.model.Role;
 import java.util.List;
 
-public class RoleManager extends Manager<Role> {
+public class RoleDAO extends DAO<Role> {
 
     @Override
     public int create(Role role) {

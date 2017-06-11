@@ -8,6 +8,10 @@ public class Body {
     public Body() {
     }
 
+    public Body(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }
