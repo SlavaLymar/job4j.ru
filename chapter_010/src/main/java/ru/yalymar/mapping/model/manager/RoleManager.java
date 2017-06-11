@@ -3,20 +3,23 @@ package ru.yalymar.mapping.model.manager;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import ru.yalymar.mapping.model.Role;
-
 import java.util.List;
 
 public class RoleManager extends Manager<Role> {
 
     @Override
-    public int create(Role item) {
+    public int create(Role role) {
         Session session = null;
         try {
             session = super.sessionFactory.openSession();
             session.beginTransaction();
-            int i = (Integer) session.save(item);
+            int i = (Integer) session.save(role);
+            int id = -1;
+            if(i > 0){
+                id = role.getId();
+            }
             session.getTransaction().commit();
-            return i;
+            return id;
         }
         finally {
             if(session != null && session.isOpen()){
@@ -61,7 +64,7 @@ public class RoleManager extends Manager<Role> {
     @Override
     public int delete(int id) {
         Session session = null;
-        int i = -1;
+        int i;
         try {
             session = super.sessionFactory.openSession();
             session.beginTransaction();

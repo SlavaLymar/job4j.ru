@@ -4,10 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 import ru.yalymar.mapping.model.Role;
 import ru.yalymar.mapping.model.User;
-
 import java.sql.Timestamp;
 import java.util.List;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertNotNull;
@@ -35,7 +33,7 @@ public class UserManagerTest {
     }
 
     @Test
-    public void whenCreateUserShouldGetThem(){
+    public void whenCreateUserShouldGetId(){
         User user = new User();
         user.setLogin("test1");
         user.setPassword("test1");
@@ -74,6 +72,7 @@ public class UserManagerTest {
         //add
         int id = this.mf.getUm().create(user);
 
+        //update
         User newUser = new User();
         newUser.setName("test2");
         int i = this.mf.getUm().update(id, newUser);
