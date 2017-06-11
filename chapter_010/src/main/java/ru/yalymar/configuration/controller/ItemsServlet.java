@@ -66,12 +66,12 @@ public class ItemsServlet extends HttpServlet{
         resp.setContentType("text/json");
         PrintWriter writer = resp.getWriter();
 
-        //create json
+        //daoCreate json
         Map<String, String> itemJson = new HashMap<>();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss");
         itemJson.put("id", String.valueOf(id));
         itemJson.put("description", item.getDescription());
-        itemJson.put("create", sdf.format(item.getCreated()));
+        itemJson.put("daoCreate", sdf.format(item.getCreated()));
         itemJson.put("done", String.valueOf(item.isDone()));
         JSONObject.toJSONString(itemJson);
         JSONObject.writeJSONString(itemJson, writer);

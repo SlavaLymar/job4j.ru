@@ -55,13 +55,13 @@ public class RoleDAOTest {
         //add
         int id = this.mf.getRoleDAO().create(role);
 
-        //update
+        //daoUpdate
         Role newRole = new Role();
         newRole.setRole("test2");
         int i = this.mf.getRoleDAO().update(id, newRole);
         assertTrue(i > 0);
 
-        //delete
+        //daoDelete
         this.mf.getRoleDAO().delete(id);
     }
 }

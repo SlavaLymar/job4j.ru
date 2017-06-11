@@ -72,13 +72,13 @@ public class UserDAOTest {
         //add
         int id = this.mf.getUserDAO().create(user);
 
-        //update
+        //daoUpdate
         User newUser = new User();
         newUser.setName("test2");
         int i = this.mf.getUserDAO().update(id, newUser);
         assertThat(i, is(1));
 
-        //delete
+        //daoDelete
         this.mf.getUserDAO().delete(id);
     }
 

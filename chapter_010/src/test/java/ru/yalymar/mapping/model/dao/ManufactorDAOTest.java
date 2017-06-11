@@ -45,13 +45,13 @@ public class ManufactorDAOTest {
         //add
         int id = this.mf.getManufactorDAO().create(manuf);
 
-        //update
+        //daoUpdate
         Manufactor newM = new Manufactor();
         newM.setManuf("test1");
         int i = this.mf.getManufactorDAO().update(id, newM);
         assertThat(i, is(1));
 
-        //delete
+        //daoDelete
         this.mf.getManufactorDAO().delete(id);
     }
 

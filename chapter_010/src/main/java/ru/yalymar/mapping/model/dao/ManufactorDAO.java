@@ -55,7 +55,7 @@ public class ManufactorDAO extends DAO<Manufactor> {
     }
 
     public int delete(int id) {
-        String query = String.format("delete Manufactor where id = %d", id);
+        String query = String.format("daoDelete Manufactor where id = %d", id);
         int i = super.delete.daoDelete(query);
         return i;
     }

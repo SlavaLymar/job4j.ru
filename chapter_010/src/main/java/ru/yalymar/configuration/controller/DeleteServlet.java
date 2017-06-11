@@ -22,7 +22,7 @@ public class DeleteServlet extends HttpServlet {
         return this.mf;
     }
 
-    /** delete item
+    /** daoDelete item
      * @param req
      * @param resp
      * @throws ServletException

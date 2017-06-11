@@ -17,6 +17,6 @@ public class CarDAOTest {
     public void whenCreateCarShouldGetIt(){
         Car car = new Car();
 //        car.setModel();
-//        int id = this.mf.getCarDAO().create();
+//        int id = this.mf.getCarDAO().daoCreate();
     }
 }

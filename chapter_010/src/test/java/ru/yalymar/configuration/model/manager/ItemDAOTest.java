@@ -5,7 +5,6 @@ import org.junit.Test;
 import ru.yalymar.configuration.model.Item;
 import java.sql.Timestamp;
 import java.util.List;
-
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -35,7 +34,7 @@ public class ItemDAOTest {
         System.out.println(id);
         assertTrue(id > 0);
 
-        //delete
+        //daoDelete
         this.mf.getIm().delete(id);
     }
 
@@ -54,14 +53,14 @@ public class ItemDAOTest {
         item.setDone(false);
         int id = this.mf.getIm().create(item);
 
-        //update
+        //daoUpdate
         Item newItem = new Item();
         newItem.setCreated(new Timestamp(System.currentTimeMillis()));
-        newItem.setDescription("update");
+        newItem.setDescription("daoUpdate");
         int i = this.mf.getIm().update(id, newItem);
         assertTrue(i == 1);
 
-        //delete
+        //daoDelete
         this.mf.getIm().delete(id);
     }
 
@@ -74,7 +73,7 @@ public class ItemDAOTest {
         item.setDone(false);
         int id = this.mf.getIm().create(item);
 
-        //delete
+        //daoDelete
         int i = this.mf.getIm().delete(id);
         assertTrue(i == 1);
     }

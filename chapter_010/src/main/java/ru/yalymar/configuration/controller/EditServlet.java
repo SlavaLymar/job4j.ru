@@ -63,13 +63,13 @@ public class EditServlet extends HttpServlet{
         resp.setContentType("text/json");
         PrintWriter writer = resp.getWriter();
 
-        //create json
+        //daoCreate json
         Item newItem = this.mf.getIm().read(id);
         Map<String, String> itemJson = new HashMap<>();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss");
         itemJson.put("id", String.valueOf(newItem.getId()));
         itemJson.put("description", newItem.getDescription());
-        itemJson.put("create", sdf.format(newItem.getCreated()));
+        itemJson.put("daoCreate", sdf.format(newItem.getCreated()));
         itemJson.put("done", String.valueOf(newItem.isDone()));
         JSONObject.toJSONString(itemJson);
         JSONObject.writeJSONString(itemJson, writer);

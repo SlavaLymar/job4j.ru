@@ -47,7 +47,7 @@ public class EditServletTest {
         Item item = es.getMf().getIm().read(id[0]);
         assertTrue("edit".equals(item.getDescription()));
 
-        //delete
+        //daoDelete
         DeleteServlet ds = new DeleteServlet();
         when(req.getParameter("id")).thenReturn(String.valueOf(id[0]));
         RequestDispatcher rd = mock(RequestDispatcher.class);

@@ -55,7 +55,7 @@ public class RoleDAO extends DAO<Role> {
     }
 
     public int delete(int id) {
-        String query = String.format("delete Role where id = %d", id);
+        String query = String.format("daoDelete Role where id = %d", id);
         int i = super.delete.daoDelete(query);
         return i;
     }
