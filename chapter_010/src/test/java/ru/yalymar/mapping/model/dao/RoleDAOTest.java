@@ -4,10 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import ru.yalymar.mapping.model.Role;
 import java.util.List;
-
-import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 public class RoleDAOTest {
@@ -21,13 +18,13 @@ public class RoleDAOTest {
 
     @Test
     public void whenReadRoleShouldGetNotNull(){
-        Role role = this.mf.getRoleDAO().read(1);
+        Role role = this.mf.getRoleDAO().daoRead(1);
         assertNotNull(role);
     }
 
     @Test
     public void whenReadAllRolesShouldGetThem(){
-        List<Role> roles = this.mf.getRoleDAO().readAll();
+        List<Role> roles = this.mf.getRoleDAO().daoReadAll();
         assertTrue(roles.size() > 0);
     }
 
@@ -51,4 +48,20 @@ public class RoleDAOTest {
         assertTrue(i > 0);
     }
 
+    @Test
+    public void whenUpdateRoleShouldGetInt(){
+        Role role = new Role();
+        role.setRole("test1");
+        //add
+        int id = this.mf.getRoleDAO().create(role);
+
+        //update
+        Role newRole = new Role();
+        newRole.setRole("test2");
+        int i = this.mf.getRoleDAO().update(id, newRole);
+        assertTrue(i > 0);
+
+        //delete
+        this.mf.getRoleDAO().delete(id);
+    }
 }

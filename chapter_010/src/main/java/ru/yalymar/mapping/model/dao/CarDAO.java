@@ -8,29 +8,17 @@ import java.util.List;
 
 public class CarDAO extends DAO<Car> implements Unproxy {
 
-    @Override
     public int create(Car car) {
-        Session session = null;
-        try {
-            session = super.sessionFactory.openSession();
-            session.beginTransaction();
-            int i = (Integer) session.save(car);
-            int id = -1;
-            if(i > 0){
-                id = car.getId();
-            }
-            session.getTransaction().commit();
-            return id;
+        int i = super.create.daoCreate(car);
+        int id = -1;
+        if (i > 0) {
+            id = car.getId();
         }
-        finally {
-            if(session != null && session.isOpen()){
-                session.close();
-            }
-        }
+        return id;
     }
 
     @Override
-    public Car read(int id) {
+    public Car daoRead(int id) {
         Session session = null;
         try {
             session = super.sessionFactory.openSession();
@@ -53,7 +41,7 @@ public class CarDAO extends DAO<Car> implements Unproxy {
     }
 
     @Override
-    public List<Car> readAll() {
+    public List<Car> daoReadAll() {
         Session session = null;
         try{
             session = super.sessionFactory.openSession();
@@ -77,60 +65,33 @@ public class CarDAO extends DAO<Car> implements Unproxy {
         }
     }
 
-    @Override
     public int update(int id, Car newCar) {
-        Session session = null;
         int i = 0;
-        try{
-            session = super.sessionFactory.openSession();
-            session.beginTransaction();
-            Car car = session.get(Car.class, id);
-            if(newCar.getModel() != null) {
-                car.setModel(newCar.getModel());
-                i++;
-            }
-            if(newCar.getTransmission() != null) {
-                car.setTransmission(newCar.getTransmission());
-                i++;
-            }
-            if(newCar.getBody() != null){
-                car.setBody(newCar.getBody());
-                i++;
-            }
-            if(newCar.getColor() != null){
-                car.setColor(newCar.getColor());
-                i++;
-            }
-            session.update(newCar);
-            session.getTransaction().commit();
-            return i;
+        Car car = this.daoRead(id);
+        if (newCar.getModel() != null) {
+            car.setModel(newCar.getModel());
+            i++;
         }
-        finally {
-            if(session != null && session.isOpen()){
-                session.close();
-            }
+        if (newCar.getTransmission() != null) {
+            car.setTransmission(newCar.getTransmission());
+            i++;
         }
+        if (newCar.getBody() != null) {
+            car.setBody(newCar.getBody());
+            i++;
+        }
+        if (newCar.getColor() != null) {
+            car.setColor(newCar.getColor());
+            i++;
+        }
+        super.update.daoUpdate(car);
+        return i;
     }
 
-    @Override
     public int delete(int id) {
-        Session session = null;
-        int i;
-        try {
-            session = super.sessionFactory.openSession();
-            session.beginTransaction();
-            Query query = session.createQuery(
-                    "delete Car where id = :i");
-            query.setParameter("i", id);
-            i = query.executeUpdate();
-            session.getTransaction().commit();
-            return i;
-        }
-        finally {
-            if(session != null && session.isOpen()){
-                session.close();
-            }
-        }
+        String query = String.format("delete Car where id = %d", id);
+        int i = super.delete.daoDelete(query);
+        return i;
     }
 
 }

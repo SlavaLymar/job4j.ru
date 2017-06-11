@@ -1,7 +1,6 @@
 package ru.yalymar.mapping.model.dao;
 
 import org.hibernate.Session;
-import org.hibernate.query.Query;
 import ru.yalymar.mapping.model.Role;
 import ru.yalymar.mapping.model.User;
 import ru.yalymar.mapping.model.unproxy.Unproxy;
@@ -9,29 +8,17 @@ import java.util.List;
 
 public class UserDAO extends DAO<User> implements Unproxy<Role> {
 
-    @Override
     public int create(User user) {
-        Session session = null;
-        try {
-            session = super.sessionFactory.openSession();
-            session.beginTransaction();
-            int i = (Integer) session.save(user);
-            int id = -1;
-            if(i > 0){
-                id = user.getId();
-            }
-            session.getTransaction().commit();
-            return id;
+        int i = super.create.daoCreate(user);
+        int id = -1;
+        if (i > 0) {
+            id = user.getId();
         }
-        finally {
-            if(session != null && session.isOpen()){
-                session.close();
-            }
-        }
+        return id;
     }
 
     @Override
-    public User read(int id) {
+    public User daoRead(int id) {
         Session session = null;
         try {
             session = super.sessionFactory.openSession();
@@ -48,7 +35,7 @@ public class UserDAO extends DAO<User> implements Unproxy<Role> {
     }
 
     @Override
-    public List<User> readAll() {
+    public List<User> daoReadAll() {
         Session session = null;
         try{
             session = super.sessionFactory.openSession();
@@ -66,59 +53,32 @@ public class UserDAO extends DAO<User> implements Unproxy<Role> {
         }
     }
 
-    @Override
     public int update(int id, User newUser) {
-        Session session = null;
         int i = 0;
-        try{
-            session = super.sessionFactory.openSession();
-            session.beginTransaction();
-            User user = session.get(User.class, id);
-            if(newUser.getLogin() != null) {
-                user.setLogin(newUser.getLogin());
-                i++;
-            }
-            if(newUser.getPassword() != null) {
-                user.setPassword(newUser.getPassword());
-                i++;
-            }
-            if(newUser.getName() != null){
-                user.setName(newUser.getName());
-                i++;
-            }
-            if(newUser.getRole() != null){
-                user.setRole(newUser.getRole());
-                i++;
-            }
-            session.update(user);
-            session.getTransaction().commit();
-            return i;
+        User user = this.daoRead(id);
+        if (newUser.getLogin() != null) {
+            user.setLogin(newUser.getLogin());
+            i++;
         }
-        finally {
-            if(session != null && session.isOpen()){
-                session.close();
-            }
+        if (newUser.getPassword() != null) {
+            user.setPassword(newUser.getPassword());
+            i++;
         }
+        if (newUser.getName() != null) {
+            user.setName(newUser.getName());
+            i++;
+        }
+        if (newUser.getRole() != null) {
+            user.setRole(newUser.getRole());
+            i++;
+        }
+        super.update.daoUpdate(user);
+        return i;
     }
 
-    @Override
     public int delete(int id) {
-        Session session = null;
-        int i;
-        try {
-            session = super.sessionFactory.openSession();
-            session.beginTransaction();
-            Query query = session.createQuery(
-                    "delete User where id = :i");
-            query.setParameter("i", id);
-            i = query.executeUpdate();
-            session.getTransaction().commit();
-            return i;
-        }
-        finally {
-            if(session != null && session.isOpen()){
-                session.close();
-            }
-        }
+        String query = String.format("delete User where id = %d", id);
+        int i = super.delete.daoDelete(query);
+        return i;
     }
 }

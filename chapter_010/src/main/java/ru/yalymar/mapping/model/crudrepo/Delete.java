@@ -1,6 +1,6 @@
 package ru.yalymar.mapping.model.crudrepo;
 
-public interface Delete {
+public interface Delete<E> {
 
-    int delete(int id);
+    int daoDelete(String query);
 }

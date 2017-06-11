@@ -3,7 +3,6 @@ package ru.yalymar.configuration.model.manager;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import ru.yalymar.configuration.model.Item;
-
 import java.util.List;
 
 public class ItemManager extends Manager<Item>{

@@ -22,13 +22,13 @@ public class UserDAOTest {
 
     @Test
     public void whenReadUserShouldGetNotNull(){
-        User user = this.mf.getUserDAO().read(1);
+        User user = this.mf.getUserDAO().daoRead(1);
         assertNotNull(user);
     }
 
     @Test
     public void whenReadAllUsersShouldGetThem(){
-        List<User> users = this.mf.getUserDAO().readAll();
+        List<User> users = this.mf.getUserDAO().daoReadAll();
         assertTrue(users.size() > 0);
     }
 

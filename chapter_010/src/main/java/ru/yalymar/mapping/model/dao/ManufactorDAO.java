@@ -1,35 +1,22 @@
 package ru.yalymar.mapping.model.dao;
 
 import org.hibernate.Session;
-import org.hibernate.query.Query;
 import ru.yalymar.mapping.model.Manufactor;
 import java.util.List;
 
 public class ManufactorDAO extends DAO<Manufactor> {
 
-    @Override
     public int create(Manufactor m) {
-        Session session = null;
-        try {
-            session = super.sessionFactory.openSession();
-            session.beginTransaction();
-            int i = (Integer) session.save(m);
-            int id = -1;
-            if(i > 0){
-                id = m.getId();
-            }
-            session.getTransaction().commit();
-            return id;
+        int i = super.create.daoCreate(m);
+        int id = -1;
+        if (i > 0) {
+            id = m.getId();
         }
-        finally {
-            if(session != null && session.isOpen()){
-                session.close();
-            }
-        }
+        return id;
     }
 
     @Override
-    public Manufactor read(int id) {
+    public Manufactor daoRead(int id) {
         Session session = null;
         try {
             session = super.sessionFactory.openSession();
@@ -43,7 +30,7 @@ public class ManufactorDAO extends DAO<Manufactor> {
     }
 
     @Override
-    public List<Manufactor> readAll() {
+    public List<Manufactor> daoReadAll() {
         Session session = null;
         try{
             session = super.sessionFactory.openSession();
@@ -56,29 +43,20 @@ public class ManufactorDAO extends DAO<Manufactor> {
         }
     }
 
-    @Override
     public int update(int id, Manufactor newM) {
-        return -1;
+        int i = 0;
+        Manufactor manuf = this.daoRead(id);
+        if (newM.getManuf() != null) {
+            manuf.setManuf(newM.getManuf());
+            i++;
+        }
+        super.update.daoUpdate(manuf);
+        return i;
     }
 
-    @Override
     public int delete(int id) {
-        Session session = null;
-        int i;
-        try {
-            session = super.sessionFactory.openSession();
-            session.beginTransaction();
-            Query query = session.createQuery(
-                    "delete Manufactor where id = :i");
-            query.setParameter("i", id);
-            i = query.executeUpdate();
-            session.getTransaction().commit();
-            return i;
-        }
-        finally {
-            if(session != null && session.isOpen()){
-                session.close();
-            }
-        }
+        String query = String.format("delete Manufactor where id = %d", id);
+        int i = super.delete.daoDelete(query);
+        return i;
     }
 }

@@ -15,4 +15,5 @@ public abstract class Manager<E> implements Create<E>, Read<E>, ReadAll<E>, Upda
     public void closeResources(){
         this.sessionFactory.close();
     }
+
 }
