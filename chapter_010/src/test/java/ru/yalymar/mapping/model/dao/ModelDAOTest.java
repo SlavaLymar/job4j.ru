@@ -5,7 +5,6 @@ import org.junit.Test;
 import ru.yalymar.mapping.model.Manufactor;
 import ru.yalymar.mapping.model.Model;
 import java.util.List;
-
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
@@ -71,7 +70,7 @@ public class ModelDAOTest {
         //delete
         this.mf.getModelDAO().delete(id);
     }
-    
+
 
 
 }

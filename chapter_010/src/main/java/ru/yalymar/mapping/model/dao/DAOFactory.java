@@ -7,6 +7,7 @@ public class DAOFactory {
     private final CarDAO carDAO = new CarDAO();
     private final ManufactorDAO manufactorDAO = new ManufactorDAO();
     private final ModelDAO modelDAO = new ModelDAO();
+    private final AdDAO adDAO = new AdDAO();
 
     public UserDAO getUserDAO() {
         return this.userDAO;
@@ -26,5 +27,9 @@ public class DAOFactory {
 
     public ModelDAO getModelDAO() {
         return this.modelDAO;
+    }
+
+    public AdDAO getAdDAO() {
+        return this.adDAO;
     }
 }

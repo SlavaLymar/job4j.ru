@@ -1,7 +1,6 @@
 package ru.yalymar.mapping.model.dao;
 
 import org.hibernate.Session;
-import org.hibernate.query.Query;
 import ru.yalymar.mapping.model.*;
 import ru.yalymar.mapping.model.unproxy.Unproxy;
 import java.util.List;

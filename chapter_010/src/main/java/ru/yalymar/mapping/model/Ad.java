@@ -1,6 +1,8 @@
 package ru.yalymar.mapping.model;
 
+import java.sql.Timestamp;
 import java.util.List;
+import java.util.Set;
 
 public class Ad {
 
@@ -8,8 +10,9 @@ public class Ad {
     private String tittle;
     private Car car;
     private User user;
-    private List<Image> images;
+    private Set<Image> images;
     private boolean done;
+    private Timestamp create;
 
     public Ad() {
     }
@@ -30,6 +33,14 @@ public class Ad {
         this.tittle = tittle;
     }
 
+    public Timestamp getCreate() {
+        return create;
+    }
+
+    public void setCreate(Timestamp create) {
+        this.create = create;
+    }
+
     public Car getCar() {
         return car;
     }
@@ -46,11 +57,11 @@ public class Ad {
         this.user = user;
     }
 
-    public List<Image> getImages() {
+    public Set<Image> getImages() {
         return images;
     }
 
-    public void setImages(List<Image> images) {
+    public void setImages(Set<Image> images) {
         this.images = images;
     }
 
