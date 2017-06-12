@@ -81,9 +81,23 @@ public class AdDAO extends DAO<Ad> implements Unproxy {
     }
 
     public int delete(int id) {
-        String query = String.format("delete Ad where id = %d", id);
-        int i = super.delete.daoDelete(query);
-        return i;
+        Ad ad = this.daoRead(id);
+        Session session = null;
+        try {
+            session = super.sessionFactory.openSession();
+            session.beginTransaction();
+            session.delete(ad);
+            session.getTransaction().commit();
+            return 1;
+        }
+        finally {
+            if(session != null && session.isOpen()){
+                session.close();
+            }
+        }
+//        String query = String.format("delete Ad where id = %d", id);
+//        int i = super.delete.daoDelete(query);
+//        return i;
     }
 
 }

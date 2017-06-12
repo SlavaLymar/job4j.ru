@@ -4,8 +4,17 @@ public class Image {
 
     private int id;
     private String url;
+    private Ad ad;
 
     public Image() {
+    }
+
+    public Ad getAd() {
+        return ad;
+    }
+
+    public void setAd(Ad ad) {
+        this.ad = ad;
     }
 
     public Image(String url) {
