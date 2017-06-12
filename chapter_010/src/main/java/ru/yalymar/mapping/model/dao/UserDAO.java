@@ -77,7 +77,7 @@ public class UserDAO extends DAO<User> implements Unproxy<Role> {
     }
 
     public int delete(int id) {
-        String query = String.format("daoDelete User where id = %d", id);
+        String query = String.format("delete User where id = %d", id);
         int i = super.delete.daoDelete(query);
         return i;
     }

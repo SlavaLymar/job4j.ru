@@ -89,7 +89,7 @@ public class CarDAO extends DAO<Car> implements Unproxy {
     }
 
     public int delete(int id) {
-        String query = String.format("daoDelete Car where id = %d", id);
+        String query = String.format("delete Car where id = %d", id);
         int i = super.delete.daoDelete(query);
         return i;
     }
