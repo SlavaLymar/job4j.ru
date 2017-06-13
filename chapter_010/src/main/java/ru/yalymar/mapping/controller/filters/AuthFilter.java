@@ -33,12 +33,12 @@ public class AuthFilter implements Filter {
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
             throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) req;
-        if (request.getRequestURI().contains("/testtask")) {
+        if (request.getRequestURI().contains("/login")) {
             chain.doFilter(req, resp);
         } else {
             HttpSession session = request.getSession();
             if (session.getAttribute("slogin") == null) {
-                ((HttpServletResponse) resp).sendRedirect(String.format("%s/testtask", request.getContextPath()));
+                ((HttpServletResponse) resp).sendRedirect(String.format("%s/login", request.getContextPath()));
                 return;
             }
             chain.doFilter(req, resp);

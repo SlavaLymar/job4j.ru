@@ -1,0 +1,22 @@
+<hibernate-mapping>
+    <class name="ru.yalymar.mapping.model.Ad" table="ads">
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+        <!-- title -->
+        <property name="tittle" column="title"/>
+        <!-- create_ads -->
+        <property name="create" column="create_ads"/>
+        <!-- car_id -->
+        <many-to-one name="car" column="car_id" class="ru.yalymar.mapping.model.Car"/>
+        <!-- user_id -->
+        <many-to-one name="user" column="user_id" class="ru.yalymar.mapping.model.User"/>
+        <!-- done -->
+        <property name="done" column="done"/>
+        <!-- images -->
+        <set name="images" table="images" cascade="all">
+            <key column="ads_id"/>
+            <one-to-many class="ru.yalymar.mapping.model.Image"/>
+        </set>
+    </class>
+</hibernate-mapping>

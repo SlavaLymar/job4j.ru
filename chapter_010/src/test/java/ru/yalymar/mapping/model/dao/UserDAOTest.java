@@ -82,4 +82,20 @@ public class UserDAOTest {
         this.mf.getUserDAO().delete(id);
     }
 
+    @Test
+    public void whenGetUserByLoginPasswordShoildGetIt(){
+        User user = new User();
+        user.setLogin("test1");
+        user.setPassword("test1");
+        user.setName("test1");
+        user.setCreate(new Timestamp(System.currentTimeMillis()));
+        user.setRole(new Role(2));
+        int id = this.mf.getUserDAO().create(user);
+
+        User userLP = this.mf.getUserDAO().getByLoginPassword("test1", "test1");
+        assertNotNull(userLP);
+
+        this.mf.getUserDAO().delete(id);
+    }
+
 }

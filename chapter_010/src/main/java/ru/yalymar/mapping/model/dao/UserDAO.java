@@ -1,9 +1,12 @@
 package ru.yalymar.mapping.model.dao;
 
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import ru.yalymar.mapping.model.Role;
 import ru.yalymar.mapping.model.User;
+import ru.yalymar.mapping.model.dao.exceptions.NotFoundUserException;
 import ru.yalymar.mapping.model.unproxy.Unproxy;
+
 import java.util.List;
 
 public class UserDAO extends DAO<User> implements Unproxy<Role> {
@@ -80,5 +83,39 @@ public class UserDAO extends DAO<User> implements Unproxy<Role> {
         String query = String.format("delete User where id = %d", id);
         int i = super.delete.daoDelete(query);
         return i;
+    }
+
+    public boolean isValid(String login, String password) {
+        if(this.getByLoginPassword(login, password) != null){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isAdmin(String login, String password){
+        if("admin".equals(this.getByLoginPassword(login, password).getRole())){
+            return true;
+        }
+        return false;
+    }
+
+    public User getByLoginPassword(String login, String password){
+        Session session = null;
+        try{
+            session = super.sessionFactory.openSession();
+            Query<User> query = session.createQuery("from User where login = :l and password = :p");
+            query.setParameter("l", login);
+            query.setParameter("p", password);
+            List<User> users = query.list();
+            if(users.size() == 1){
+                return users.get(0);
+            }
+            return null;
+        }
+        finally {
+            if(session != null && session.isOpen()){
+                session.close();
+            }
+        }
     }
 }

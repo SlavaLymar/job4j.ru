@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.url">jdbc:postgresql://localhost:5432/hibertest</property>
+        <property name="connection.driver_class">org.postgresql.Driver</property>
+        <property name="connection.username">postgres</property>
+        <property name="connection.password">lymar123</property>
+        <property name="dialect">org.hibernate.dialect.PostgreSQL94Dialect</property>
+
+        <!-- task 1 -->
+        <mapping resource="ru/yalymar/configuration/model/Item.hbm.xml"/>
+
+        <!-- task 2 -->
+        <mapping resource="ru/yalymar/mapping/model/User.hbm.xml"/>
+        <mapping resource="ru/yalymar/mapping/model/Car.hbm.xml"/>
+        <mapping resource="ru/yalymar/mapping/model/Model.hbm.xml"/>
+        <mapping resource="ru/yalymar/mapping/model/Image.hbm.xml"/>
+        <mapping resource="ru/yalymar/mapping/model/Role.hbm.xml"/>
+        <mapping resource="ru/yalymar/mapping/model/Manufactor.hbm.xml"/>
+        <mapping resource="ru/yalymar/mapping/model/Transmission.hbm.xml"/>
+        <mapping resource="ru/yalymar/mapping/model/Body.hbm.xml"/>
+        <mapping resource="ru/yalymar/mapping/model/Color.hbm.xml"/>
+        <mapping resource="ru/yalymar/mapping/model/Ad.hbm.xml"/>
+
+    </session-factory>
+</hibernate-configuration>

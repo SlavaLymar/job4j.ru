@@ -1,14 +1,17 @@
 package ru.yalymar.mapping.controller.filters;
 
+import ru.yalymar.mapping.model.dao.DAOFactory;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+@WebFilter(filterName = "user filter", urlPatterns = "/*")
 public class UserFilter implements Filter {
 
-
+    private final DAOFactory daoFactory = new DAOFactory();
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -37,8 +40,8 @@ public class UserFilter implements Filter {
                 if (l == null && p == null) {
                     session.setAttribute("slogin", sLogin);
                     session.setAttribute("spassword", sPassword);
-//                    session.setAttribute("role", this.daoFabric.getUserManager().
-//                            getByLoginPassword(sLogin, sPassword).getRole());
+                    session.setAttribute("role", this.daoFactory.getUserDAO().
+                            getByLoginPassword(sLogin, sPassword).getRole());
                     chain.doFilter(req, resp);
                     return;
                 }
@@ -48,8 +51,8 @@ public class UserFilter implements Filter {
                 if (!sLogin.equals(l) && !sPassword.equals(p)) {
                     session.setAttribute("slogin", sLogin);
                     session.setAttribute("spassword", sPassword);
-//                    session.setAttribute("role", this.daoFabric.getUserManager().
-//                            getByLoginPassword(sLogin, sPassword).getRole());
+                    session.setAttribute("role", this.daoFactory.getUserDAO().
+                            getByLoginPassword(sLogin, sPassword).getRole());
                     chain.doFilter(req, resp);
                     return;
                 }
