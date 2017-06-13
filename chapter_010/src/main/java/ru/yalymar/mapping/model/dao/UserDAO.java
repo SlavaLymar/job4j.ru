@@ -4,62 +4,40 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import ru.yalymar.mapping.model.Role;
 import ru.yalymar.mapping.model.User;
-import ru.yalymar.mapping.model.dao.exceptions.NotFoundUserException;
 import ru.yalymar.mapping.model.unproxy.Unproxy;
-
 import java.util.List;
 
 public class UserDAO extends DAO<User> implements Unproxy<Role> {
 
     public int create(User user) {
-//        int i = super.create.daoCreate(user);
-//        int id = -1;
-//        if (i > 0) {
-//            id = user.getId();
-//        }
-//        return id;
-        return 0;
+        return super.tx(session -> (int) session.save(user));
     }
 
-    @Override
-    public User daoRead(int id) {
-        Session session = null;
-        try {
-            session = super.sessionFactory.openSession();
-            User user = session.get(User.class, id);
-            Role role = this.initializeAndUnproxy(user.getRole());
-            user.setRole(role);
-            return user;
-        }
-        finally {
-            if(session != null && session.isOpen()){
-                session.close();
-            }
-        }
+    public User read(int id) {
+        User user = super.tx(session -> {
+            User u = session.get(User.class, id);
+            Role role = this.initializeAndUnproxy(u.getRole());
+            u.setRole(role);
+            return u;
+        });
+        return user;
     }
 
-    @Override
-    public List<User> daoReadAll() {
-        Session session = null;
-        try{
-            session = super.sessionFactory.openSession();
-            List<User> users = session.createQuery("from User").list();
-            for(User user : users){
+    public List<User> readAll() {
+        List<User> users = super.tx(session -> {
+            List<User> us = session.createQuery("from User").list();
+            for (User user : us) {
                 Role role = this.initializeAndUnproxy(user.getRole());
                 user.setRole(role);
             }
-            return users;
-        }
-        finally {
-            if(session != null && session.isOpen()){
-                session.close();
-            }
-        }
+            return us;
+        });
+        return users;
     }
 
     public int update(int id, User newUser) {
         int i = 0;
-        User user = this.daoRead(id);
+        User user = this.read(id);
         if (newUser.getLogin() != null) {
             user.setLogin(newUser.getLogin());
             i++;
@@ -76,14 +54,27 @@ public class UserDAO extends DAO<User> implements Unproxy<Role> {
             user.setRole(newUser.getRole());
             i++;
         }
-        super.update.daoUpdate(user);
+        if(i > 0){
+            super.tx(session -> {
+                Query query = session.createQuery("update User set login = :l, " +
+                        "password = :p, name = :n, role = :r where id = :id");
+                query.setParameter("l", user.getLogin());
+                query.setParameter("p", user.getPassword());
+                query.setParameter("n", user.getName());
+                query.setParameter("r", user.getRole());
+                query.setParameter("id", id);
+                return query.executeUpdate();
+            });
+        }
         return i;
     }
 
     public int delete(int id) {
-        String query = String.format("delete User where id = %d", id);
-        int i = super.delete.daoDelete(query);
-        return i;
+        return super.tx(session -> {
+            Query query = session.createQuery("delete User where id = :id");
+            query.setParameter("id", id);
+            return query.executeUpdate();
+        });
     }
 
     public boolean isValid(String login, String password) {
@@ -101,22 +92,14 @@ public class UserDAO extends DAO<User> implements Unproxy<Role> {
     }
 
     public User getByLoginPassword(String login, String password){
-        Session session = null;
-        try{
-            session = super.sessionFactory.openSession();
+        User user = super.tx(session -> {
             Query<User> query = session.createQuery("from User where login = :l and password = :p");
             query.setParameter("l", login);
             query.setParameter("p", password);
             List<User> users = query.list();
-            if(users.size() == 1){
-                return users.get(0);
-            }
-            return null;
-        }
-        finally {
-            if(session != null && session.isOpen()){
-                session.close();
-            }
-        }
+            return users.size() == 1 ? users.get(0) : null;
+        });
+        return user;
     }
+
 }

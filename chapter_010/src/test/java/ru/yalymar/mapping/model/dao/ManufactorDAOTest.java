@@ -57,13 +57,13 @@ public class ManufactorDAOTest {
 
     @Test
     public void whenReadManufShouldGetIt(){
-        Manufactor m = this.mf.getManufactorDAO().daoRead(3);
+        Manufactor m = this.mf.getManufactorDAO().read(3);
         assertNotNull(m);
     }
 
     @Test
     public void whenReadAllManufShouldGetThem(){
-        List<Manufactor> ms = this.mf.getManufactorDAO().daoReadAll();
+        List<Manufactor> ms = this.mf.getManufactorDAO().readAll();
         assertTrue(ms.size() > 0);
     }
 }

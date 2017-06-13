@@ -19,18 +19,6 @@ public class CarDAOTest {
     }
 
     @Test
-    public void whenReadCarShouldGetIt(){
-        Car car = this.mf.getCarDAO().daoRead(1);
-        assertNotNull(car);
-    }
-
-    @Test
-    public void whenReadAllCarsShouldGetThem(){
-        List<Car> cars = this.mf.getCarDAO().daoReadAll();
-        assertTrue(cars.size() > 0);
-    }
-
-    @Test
     public void whenCreateCarShouldGetId(){
         Car car = new Car();
         car.setModel(new Model(5));
@@ -39,6 +27,36 @@ public class CarDAOTest {
         car.setColor(new Color(3));
         int id = this.mf.getCarDAO().create(car);
         assertTrue(id > 0);
+
+        this.mf.getCarDAO().delete(id);
+    }
+
+    @Test
+    public void whenReadCarShouldGetIt(){
+        Car car = new Car();
+        car.setModel(new Model(5));
+        car.setTransmission(new Transmission(1));
+        car.setBody(new Body(2));
+        car.setColor(new Color(3));
+        int id = this.mf.getCarDAO().create(car);
+
+        Car c = this.mf.getCarDAO().read(id);
+        assertNotNull(c);
+
+        this.mf.getCarDAO().delete(id);
+    }
+
+    @Test
+    public void whenReadAllCarsShouldGetThem(){
+        Car car = new Car();
+        car.setModel(new Model(5));
+        car.setTransmission(new Transmission(1));
+        car.setBody(new Body(2));
+        car.setColor(new Color(3));
+        int id = this.mf.getCarDAO().create(car);
+
+        List<Car> cs = this.mf.getCarDAO().readAll();
+        assertTrue(cs.size() > 0);
 
         this.mf.getCarDAO().delete(id);
     }

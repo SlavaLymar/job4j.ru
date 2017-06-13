@@ -21,7 +21,7 @@ public class AdsController extends HttpServlet {
         String password = (String) req.getSession().getAttribute("spassword");
         if(login != null && password != null){
             if(this.daoFactory.getUserDAO().isAdmin(login, password)){
-                req.setAttribute("ads", this.daoFactory.getAdDAO().daoReadAll());
+                req.setAttribute("ads", this.daoFactory.getAdDAO().readAll());
                 req.getRequestDispatcher("/WEB-INF/mapping/views/adsprivate.jsp").forward(req, resp);
             }
             else {

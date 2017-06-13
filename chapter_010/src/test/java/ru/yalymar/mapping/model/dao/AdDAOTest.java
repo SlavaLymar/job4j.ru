@@ -25,13 +25,13 @@ public class AdDAOTest {
 
     @Test
     public void whenReadAdShouldGetIt(){
-        Ad ad = this.mf.getAdDAO().daoRead(1);
+        Ad ad = this.mf.getAdDAO().read(1);
         assertNotNull(ad);
     }
 
     @Test
     public void whenReadAllAdsShouldGetThem(){
-        List<Ad> ads = this.mf.getAdDAO().daoReadAll();
+        List<Ad> ads = this.mf.getAdDAO().readAll();
         assertTrue(ads.size() > 0);
     }
 

@@ -21,13 +21,13 @@ public class ModelDAOTest {
 
     @Test
     public void whenReadModelShouldGetIt(){
-        Model model = this.mf.getModelDAO().daoRead(1);
+        Model model = this.mf.getModelDAO().read(1);
         assertNotNull(model);
     }
 
     @Test
     public void whenReadAllModelsShouldGetThem(){
-        List<Model> models = this.mf.getModelDAO().daoReadAll();
+        List<Model> models = this.mf.getModelDAO().readAll();
         assertTrue(models.size() > 0);
     }
 

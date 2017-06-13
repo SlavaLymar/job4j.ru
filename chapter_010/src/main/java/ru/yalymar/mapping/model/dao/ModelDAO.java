@@ -1,6 +1,6 @@
 package ru.yalymar.mapping.model.dao;
 
-import org.hibernate.Session;
+import org.hibernate.query.Query;
 import ru.yalymar.mapping.model.Manufactor;
 import ru.yalymar.mapping.model.Model;
 import ru.yalymar.mapping.model.unproxy.Unproxy;
@@ -9,54 +9,34 @@ import java.util.List;
 public class ModelDAO extends DAO<Model> implements Unproxy<Manufactor> {
 
     public int create(Model model) {
-//        int i = super.create.daoCreate(model);
-//        int id = -1;
-//        if (i > 0) {
-//            id = model.getId();
-//        }
-//        return id;
-        return 0;
+        return super.tx(session -> (int) session.save(model));
     }
 
-    @Override
-    public Model daoRead(int id) {
-        Session session = null;
-        try {
-            session = super.sessionFactory.openSession();
-            Model model = session.get(Model.class, id);
-            Manufactor manuf = this.initializeAndUnproxy(model.getManuf());
-            model.setManuf(manuf);
-            return model;
-        }
-        finally {
-            if(session != null && session.isOpen()){
-                session.close();
-            }
-        }
+    public Model read(int id) {
+        Model model = super.tx(session -> {
+            Model m = session.get(Model.class, id);
+            Manufactor manuf = this.initializeAndUnproxy(m.getManuf());
+            m.setManuf(manuf);
+            return m;
+        });
+        return model;
     }
 
-    @Override
-    public List<Model> daoReadAll() {
-        Session session = null;
-        try{
-            session = super.sessionFactory.openSession();
+    public List<Model> readAll() {
+        List<Model> ms = super.tx(session -> {
             List<Model> models = session.createQuery("from Model").list();
-            for(Model model : models){
+            for (Model model : models) {
                 Manufactor manuf = this.initializeAndUnproxy(model.getManuf());
                 model.setManuf(manuf);
             }
             return models;
-        }
-        finally {
-            if(session != null && session.isOpen()){
-                session.close();
-            }
-        }
+        });
+        return ms;
     }
 
     public int update(int id, Model newModel) {
         int i = 0;
-        Model model = this.daoRead(id);
+        Model model = this.read(id);
         if (newModel.getModel() != null) {
             model.setModel(newModel.getModel());
             i++;
@@ -65,13 +45,24 @@ public class ModelDAO extends DAO<Model> implements Unproxy<Manufactor> {
             model.setManuf(newModel.getManuf());
             i++;
         }
-        super.update.daoUpdate(model);
+        if(i > 0){
+            super.tx(session -> {
+                Query query = session.createQuery("update Model set model = :m, " +
+                        "manuf = :ma where id = :id");
+                query.setParameter("m", model.getModel());
+                query.setParameter("ma", model.getManuf());
+                query.setParameter("id", id);
+                return query.executeUpdate();
+            });
+        }
         return i;
     }
 
     public int delete(int id) {
-        String query = String.format("delete Model where id = %d", id);
-        int i = super.delete.daoDelete(query);
-        return i;
+        return super.tx(session -> {
+            Query query = session.createQuery("delete Model where id = :id");
+            query.setParameter("id", id);
+            return query.executeUpdate();
+        });
     }
 }

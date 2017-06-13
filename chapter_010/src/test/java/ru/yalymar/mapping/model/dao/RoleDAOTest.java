@@ -18,13 +18,13 @@ public class RoleDAOTest {
 
     @Test
     public void whenReadRoleShouldGetNotNull(){
-        Role role = this.mf.getRoleDAO().daoRead(1);
+        Role role = this.mf.getRoleDAO().read(1);
         assertNotNull(role);
     }
 
     @Test
     public void whenReadAllRolesShouldGetThem(){
-        List<Role> roles = this.mf.getRoleDAO().daoReadAll();
+        List<Role> roles = this.mf.getRoleDAO().readAll();
         assertTrue(roles.size() > 0);
     }
 

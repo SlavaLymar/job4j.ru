@@ -1,63 +1,47 @@
 package ru.yalymar.mapping.model.dao;
 
-import org.hibernate.Session;
+import org.hibernate.query.Query;
 import ru.yalymar.mapping.model.Role;
 import java.util.List;
 
 public class RoleDAO extends DAO<Role> {
 
     public int create(Role role) {
-//        int i = super.create.daoCreate(role);
-//        int id = -1;
-//        if (i > 0) {
-//            id = role.getId();
-//        }
-//        return id;
-        return 0;
+        return super.tx(session -> (int) session.save(role));
     }
 
-    @Override
-    public Role daoRead(int id) {
-        Session session = null;
-        try {
-            session = super.sessionFactory.openSession();
-            return session.get(Role.class, id);
-        }
-        finally {
-            if(session != null && session.isOpen()){
-                session.close();
-            }
-        }
+    public Role read(int id) {
+        return super.tx(session -> session.get(Role.class, id));
     }
 
-    @Override
-    public List<Role> daoReadAll() {
-        Session session = null;
-        try{
-            session = super.sessionFactory.openSession();
-            return session.createQuery("from Role").list();
-        }
-        finally {
-            if(session != null && session.isOpen()){
-                session.close();
-            }
-        }
+    public List<Role> readAll() {
+        return super.tx(session -> session.createQuery("from Role").list());
     }
 
     public int update(int id, Role newRole) {
         int i = 0;
-        Role role = this.daoRead(id);
+        Role role = this.read(id);
         if (newRole.getRole() != null) {
             role.setRole(newRole.getRole());
             i++;
         }
-        super.update.daoUpdate(role);
+        if(i > 0){
+            super.tx(session -> {
+                Query query = session.createQuery("update Role set role = :r " +
+                        "where id = :id");
+                query.setParameter("r", role.getRole());
+                query.setParameter("id", id);
+                return query.executeUpdate();
+            });
+        }
         return i;
     }
 
     public int delete(int id) {
-        String query = String.format("delete Role where id = %d", id);
-        int i = super.delete.daoDelete(query);
-        return i;
+        return super.tx(session -> {
+            Query query = session.createQuery("delete Role where id = :id");
+            query.setParameter("id", id);
+            return query.executeUpdate();
+        });
     }
 }
