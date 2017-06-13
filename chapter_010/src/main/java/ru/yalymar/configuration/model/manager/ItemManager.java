@@ -1,41 +1,25 @@
 package ru.yalymar.configuration.model.manager;
 
-import org.hibernate.Session;
 import ru.yalymar.configuration.model.Item;
 import java.util.List;
 
+/**
+ * @author slavalymar
+ * @since 13.06.2017
+ * @version 1
+ */
 public class ItemManager extends Manager<Item>{
 
     public int create(Item item) {
-        return super.create.daoCreate(item);
+        return super.tx(session -> (int) session.save(item));
     }
 
-    @Override
     public Item read(int id) {
-        Session session = null;
-        try {
-            session = super.sessionFactory.openSession();
-            return session.get(Item.class, id);
-        }
-        finally {
-            if(session != null && session.isOpen()){
-                session.close();
-            }
-        }
+        return super.tx(session -> session.get(Item.class, id));
     }
 
-    @Override
     public List<Item> readAll() {
-        Session session = null;
-        try{
-            session = super.sessionFactory.openSession();
-            return session.createQuery("from Item").list();
-        }
-        finally {
-            if(session != null && session.isOpen()){
-                session.close();
-            }
-        }
+        return super.tx(session -> session.createQuery("from Item").list());
     }
 
     public int update(int id, Item newItem) {
@@ -46,15 +30,20 @@ public class ItemManager extends Manager<Item>{
                 item.setDescription(newItem.getDescription());
                 i++;
             }
-            super.update.daoUpdate(item);
+            super.tx(session -> {
+                session.update(item);
+                return 1;
+            });
         }
         return i;
     }
 
-    public int delete(int id) {
-        String query = String.format("delete Item where id = %d", id);
-        int i = super.delete.daoDelete(query);
-        return i;
+    public void delete(int id) {
+        Item item = this.read(id);
+        super.tx(session -> {
+            session.delete(item);
+            return 1;
+        });
     }
 
 

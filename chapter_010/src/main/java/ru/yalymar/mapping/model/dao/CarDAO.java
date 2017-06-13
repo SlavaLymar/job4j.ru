@@ -1,6 +1,7 @@
 package ru.yalymar.mapping.model.dao;
 
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import ru.yalymar.mapping.model.*;
 import ru.yalymar.mapping.model.unproxy.Unproxy;
 import java.util.List;
@@ -8,35 +9,12 @@ import java.util.List;
 public class CarDAO extends DAO<Car> implements Unproxy {
 
     public int create(Car car) {
-        int i = super.create.daoCreate(car);
-        int id = -1;
-        if (i > 0) {
-            id = car.getId();
-        }
-        return id;
+        return super.tx(session -> (int) session.save(car));
     }
 
     @Override
     public Car daoRead(int id) {
-        Session session = null;
-        try {
-            session = super.sessionFactory.openSession();
-            Car car = session.get(Car.class, id);
-            Model model = (Model) this.initializeAndUnproxy(car.getModel());
-            Transmission transmission = (Transmission) this.initializeAndUnproxy(car.getTransmission());
-            Body body = (Body) this.initializeAndUnproxy(car.getBody());
-            Color color = (Color) this.initializeAndUnproxy(car.getColor());
-            car.setModel(model);
-            car.setTransmission(transmission);
-            car.setBody(body);
-            car.setColor(color);
-            return car;
-        }
-        finally {
-            if(session != null && session.isOpen()){
-                session.close();
-            }
-        }
+        return super.tx(session -> session.get(Car.class, id));
     }
 
     @Override
@@ -88,9 +66,11 @@ public class CarDAO extends DAO<Car> implements Unproxy {
     }
 
     public int delete(int id) {
-        String query = String.format("delete Car where id = %d", id);
-        int i = super.delete.daoDelete(query);
-        return i;
+        Car car = this.daoRead(id);
+        return super.tx(session -> {
+            session.delete(car);
+            return 1;
+        });
     }
 
 }

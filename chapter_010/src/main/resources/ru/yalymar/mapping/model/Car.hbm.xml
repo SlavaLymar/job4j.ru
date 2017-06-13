@@ -4,12 +4,12 @@
             <generator class="identity"/>
         </id>
         <!-- model -->
-        <many-to-one name="model" column="m_id" class="ru.yalymar.mapping.model.Model"/>
+        <many-to-one name="model" column="manufactor_id" class="ru.yalymar.mapping.model.Model"/>
         <!-- transmission -->
-        <many-to-one name="transmission" column="t_id" class="ru.yalymar.mapping.model.Transmission"/>
+        <many-to-one name="transmission" column="transmission_id" class="ru.yalymar.mapping.model.Transmission"/>
         <!-- body -->
-        <many-to-one name="body" column="b_id" class="ru.yalymar.mapping.model.Body"/>
+        <many-to-one name="body" column="body_id" class="ru.yalymar.mapping.model.Body"/>
         <!-- color -->
-        <many-to-one name="color" column="c_id" class="ru.yalymar.mapping.model.Color"/>
+        <many-to-one name="color" column="color_id" class="ru.yalymar.mapping.model.Color"/>
     </class>
 </hibernate-mapping>

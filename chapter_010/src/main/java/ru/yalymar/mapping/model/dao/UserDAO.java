@@ -12,12 +12,13 @@ import java.util.List;
 public class UserDAO extends DAO<User> implements Unproxy<Role> {
 
     public int create(User user) {
-        int i = super.create.daoCreate(user);
-        int id = -1;
-        if (i > 0) {
-            id = user.getId();
-        }
-        return id;
+//        int i = super.create.daoCreate(user);
+//        int id = -1;
+//        if (i > 0) {
+//            id = user.getId();
+//        }
+//        return id;
+        return 0;
     }
 
     @Override

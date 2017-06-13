@@ -6,6 +6,7 @@ import ru.yalymar.configuration.model.Item;
 import java.sql.Timestamp;
 import java.util.List;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 public class ItemDAOTest {
@@ -65,7 +66,7 @@ public class ItemDAOTest {
     }
 
     @Test
-    public void whenDeleteItemShouldGetInt(){
+    public void whenDeleteItemShouldGetNull(){
         //add
         Item item = new Item();
         item.setDescription("test2");
@@ -74,7 +75,8 @@ public class ItemDAOTest {
         int id = this.mf.getIm().create(item);
 
         //daoDelete
-        int i = this.mf.getIm().delete(id);
-        assertTrue(i == 1);
+        this.mf.getIm().delete(id);
+
+        assertNull(this.mf.getIm().read(id));
     }
 }

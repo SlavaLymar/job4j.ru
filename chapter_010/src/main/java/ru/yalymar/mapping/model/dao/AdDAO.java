@@ -9,12 +9,13 @@ import java.util.Set;
 public class AdDAO extends DAO<Ad> implements Unproxy {
 
     public int create(Ad ad) {
-        int i = super.create.daoCreate(ad);
-        int id = -1;
-        if (i > 0) {
-            id = ad.getId();
-        }
-        return id;
+//        int i = super.create.daoCreate(ad);
+//        int id = -1;
+//        if (i > 0) {
+//            id = ad.getId();
+//        }
+//        return id;
+        return 0;
     }
 
     @Override

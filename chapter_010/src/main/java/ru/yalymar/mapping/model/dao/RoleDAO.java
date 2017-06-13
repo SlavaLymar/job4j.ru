@@ -7,12 +7,13 @@ import java.util.List;
 public class RoleDAO extends DAO<Role> {
 
     public int create(Role role) {
-        int i = super.create.daoCreate(role);
-        int id = -1;
-        if (i > 0) {
-            id = role.getId();
-        }
-        return id;
+//        int i = super.create.daoCreate(role);
+//        int id = -1;
+//        if (i > 0) {
+//            id = role.getId();
+//        }
+//        return id;
+        return 0;
     }
 
     @Override

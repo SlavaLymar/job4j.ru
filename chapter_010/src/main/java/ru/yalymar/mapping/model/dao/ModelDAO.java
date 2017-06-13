@@ -9,12 +9,13 @@ import java.util.List;
 public class ModelDAO extends DAO<Model> implements Unproxy<Manufactor> {
 
     public int create(Model model) {
-        int i = super.create.daoCreate(model);
-        int id = -1;
-        if (i > 0) {
-            id = model.getId();
-        }
-        return id;
+//        int i = super.create.daoCreate(model);
+//        int id = -1;
+//        if (i > 0) {
+//            id = model.getId();
+//        }
+//        return id;
+        return 0;
     }
 
     @Override

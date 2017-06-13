@@ -2,11 +2,12 @@ package ru.yalymar.mapping.model.dao;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.query.Query;
 import ru.yalymar.mapping.model.crudrepo.*;
+import java.util.function.Function;
 
-public abstract class DAO<E> implements Read<E>, ReadAll<E>{
+public abstract class DAO<E> implements Read<E>, ReadAll<E>, Create<E>{
 
     protected SessionFactory sessionFactory;
     protected Create<E> create;
@@ -15,15 +16,29 @@ public abstract class DAO<E> implements Read<E>, ReadAll<E>{
 
     public DAO() {
         this.sessionFactory = new Configuration().configure().buildSessionFactory();
-        this.initCreate();
-        this.initDelete();
-        this.initUpdate();
+
+//        this.initCreate();
+//        this.initDelete();
+//        this.initUpdate();
     }
 
     public void closeResources(){
         this.sessionFactory.close();
     }
 
+    @Override
+    public <V, K> V tx(Function<Session, V> function) {
+        try (Session session = this.sessionFactory.openSession()) {
+            Transaction tx = session.beginTransaction();
+            try {
+                return function.apply(session);
+            } finally {
+                tx.commit();
+            }
+        }
+    }
+
+    /*
     private void initUpdate() {
         this.update = (e) -> {
             Session session = null;
@@ -78,5 +93,7 @@ public abstract class DAO<E> implements Read<E>, ReadAll<E>{
             }
         };
     }
+*/
+
 
 }

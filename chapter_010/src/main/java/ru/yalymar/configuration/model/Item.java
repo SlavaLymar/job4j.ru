@@ -2,6 +2,11 @@ package ru.yalymar.configuration.model;
 
 import java.sql.Timestamp;
 
+/**
+ * @author slavalymar
+ * @since 13.06.2017
+ * @version 1
+ */
 public class Item {
 
     private int id;

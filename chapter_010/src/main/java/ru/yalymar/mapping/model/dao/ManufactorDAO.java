@@ -7,12 +7,13 @@ import java.util.List;
 public class ManufactorDAO extends DAO<Manufactor> {
 
     public int create(Manufactor m) {
-        int i = super.create.daoCreate(m);
-        int id = -1;
-        if (i > 0) {
-            id = m.getId();
-        }
-        return id;
+//        int i = super.create.daoCreate(m);
+//        int id = -1;
+//        if (i > 0) {
+//            id = m.getId();
+//        }
+//        return id;
+    return 0;
     }
 
     @Override

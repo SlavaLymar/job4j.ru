@@ -2,76 +2,34 @@ package ru.yalymar.configuration.model.manager;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.query.Query;
 import ru.yalymar.configuration.model.crudrepo.*;
+import java.util.function.Function;
 
-public abstract class Manager<E> implements Read<E>, ReadAll<E>{
+/**
+ * @author slavalymar
+ * @since 13.06.2017
+ * @version 1
+ */
+public abstract class Manager<E> implements Action<E> {
 
     protected SessionFactory sessionFactory;
-    protected Create<E> create;
-    protected Update<E> update;
-    protected Delete delete;
 
     public Manager() {
         this.sessionFactory = new Configuration().configure().buildSessionFactory();
-        this.initCreate();
-        this.initUpdate();
-        this.initDelete();
     }
 
-    private void initDelete() {
-        this.delete = (q) -> {
-            Session session = null;
-            int i;
+    @Override
+    public <V, K> V tx(Function<Session, V> function) {
+        try (Session session = this.sessionFactory.openSession()) {
+            Transaction tx = session.beginTransaction();
             try {
-                session = this.sessionFactory.openSession();
-                session.beginTransaction();
-                Query query = session.createQuery(q);
-                i = query.executeUpdate();
-                session.getTransaction().commit();
-                return i;
-            }
-            finally {
-                if(session != null && session.isOpen()){
-                    session.close();
-                }
-            }
-        };
-    }
-
-    private void initUpdate() {
-        this.update = (e) -> {
-            Session session = null;
-            try {
-                session = this.sessionFactory.openSession();
-                session.beginTransaction();
-                session.update(e);
-                session.getTransaction().commit();
+                return function.apply(session);
             } finally {
-                if (session != null && session.isOpen()) {
-                    session.close();
-                }
+                tx.commit();
             }
-        };
-    }
-
-    private void initCreate() {
-        this.create = (e) -> {
-            Session session = null;
-            try {
-                session = this.sessionFactory.openSession();
-                session.beginTransaction();
-                int i = (Integer) session.save(e);
-                session.getTransaction().commit();
-                return i;
-            }
-            finally {
-                if(session != null && session.isOpen()){
-                    session.close();
-                }
-            }
-        };
+        }
     }
 
     public void closeResources(){
