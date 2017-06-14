@@ -6,7 +6,6 @@
         <property name="connection.username">postgres</property>
         <property name="connection.password">lymar123</property>
         <property name="dialect">org.hibernate.dialect.PostgreSQL94Dialect</property>
-
         <!-- task 1 -->
         <mapping resource="ru/yalymar/configuration/model/Item.hbm.xml"/>
 

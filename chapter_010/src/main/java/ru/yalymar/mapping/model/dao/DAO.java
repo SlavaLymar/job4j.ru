@@ -1,5 +1,6 @@
 package ru.yalymar.mapping.model.dao;
 
+import org.hibernate.AssertionFailure;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -26,7 +27,12 @@ public abstract class DAO<E> implements Action<E> {
             try {
                 return function.apply(session);
             } finally {
-                tx.commit();
+                try {
+                    tx.commit();
+                }
+                catch (AssertionFailure e){
+                    DAOFactory.logger.error(e.getMessage(), e);
+                }
             }
         }
     }

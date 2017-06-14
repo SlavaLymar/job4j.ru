@@ -13,26 +13,32 @@ public class AdDAO extends DAO<Ad> implements Unproxy {
     }
 
     public Ad read(int id) {
-        Ad ad = super.tx(session -> session.get(Ad.class, id));
-        Car car = (Car) this.initializeAndUnproxy(ad.getCar());
-        User user = (User) this.initializeAndUnproxy(ad.getUser());
-        Set<Image> images = (Set<Image>) this.initializeAndUnproxy(ad.getImages());
-        ad.setCar(car);
-        ad.setUser(user);
-        ad.setImages(images);
+        Ad ad = super.tx(session -> {
+            Ad a = session.get(Ad.class, id);
+            Car car = (Car) this.initializeAndUnproxy(a.getCar());
+            User user = (User) this.initializeAndUnproxy(a.getUser());
+            Set<Image> images = (Set<Image>) this.initializeAndUnproxy(a.getImages());
+            a.setCar(car);
+            a.setUser(user);
+            a.setImages(images);
+            return a;
+        });
         return ad;
     }
 
     public List<Ad> readAll() {
-        List<Ad> ads = super.tx(session -> session.createQuery("from Ad").list());
-        for (Ad ad : ads) {
-            Car car = (Car) this.initializeAndUnproxy(ad.getCar());
-            User user = (User) this.initializeAndUnproxy(ad.getUser());
-            Set<Image> images = (Set<Image>) this.initializeAndUnproxy(ad.getImages());
-            ad.setCar(car);
-            ad.setUser(user);
-            ad.setImages(images);
-        }
+        List<Ad> ads = super.tx(session -> {
+            List<Ad> as = session.createQuery("from Ad").list();
+            for (Ad ad : as) {
+                Car car = (Car) this.initializeAndUnproxy(ad.getCar());
+                User user = (User) this.initializeAndUnproxy(ad.getUser());
+                Set<Image> images = (Set<Image>) this.initializeAndUnproxy(ad.getImages());
+                ad.setCar(car);
+                ad.setUser(user);
+                ad.setImages(images);
+            }
+            return as;
+        });
         return ads;
     }
 
@@ -66,10 +72,10 @@ public class AdDAO extends DAO<Ad> implements Unproxy {
     }
 
     public int delete(int id) {
+        Ad ad = this.read(id);
         return super.tx(session -> {
-            Query query = session.createQuery("delete Ad where id = :id");
-            query.setParameter("id", id);
-            return query.executeUpdate();
+            session.delete(ad);
+            return 1;
         });
     }
 

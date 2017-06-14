@@ -2,10 +2,7 @@ package ru.yalymar.mapping.model.dao;
 
 import org.junit.Before;
 import org.junit.Test;
-import ru.yalymar.mapping.model.Ad;
-import ru.yalymar.mapping.model.Car;
-import ru.yalymar.mapping.model.Image;
-import ru.yalymar.mapping.model.User;
+import ru.yalymar.mapping.model.*;
 import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.List;
@@ -25,14 +22,42 @@ public class AdDAOTest {
 
     @Test
     public void whenReadAdShouldGetIt(){
-        Ad ad = this.mf.getAdDAO().read(1);
-        assertNotNull(ad);
+        Ad ad = new Ad();
+        ad.setTittle("test2");
+        ad.setDone(false);
+        ad.setCar(new Car(new Model(6), new Transmission(2), new Body(3), new Color(3)));
+        ad.setUser(new User(26));
+        ad.setCreate(new Timestamp(System.currentTimeMillis()));
+        ad.setImages(new HashSet<Image>(){{
+            add(new Image("urltest21"));
+            add(new Image("urltest22"));
+        }});
+        int id = this.mf.getAdDAO().create(ad);
+
+        Ad ad1 = this.mf.getAdDAO().read(id);
+        assertNotNull(ad1);
+
+        this.mf.getAdDAO().delete(id);
     }
 
     @Test
     public void whenReadAllAdsShouldGetThem(){
+        Ad ad = new Ad();
+        ad.setTittle("test2");
+        ad.setDone(false);
+        ad.setCar(new Car(new Model(6), new Transmission(2), new Body(3), new Color(3)));
+        ad.setUser(new User(26));
+        ad.setCreate(new Timestamp(System.currentTimeMillis()));
+        ad.setImages(new HashSet<Image>(){{
+            add(new Image("urltest21"));
+            add(new Image("urltest22"));
+        }});
+        int id = this.mf.getAdDAO().create(ad);
+
         List<Ad> ads = this.mf.getAdDAO().readAll();
         assertTrue(ads.size() > 0);
+
+        this.mf.getAdDAO().delete(id);
     }
 
     @Test
@@ -40,8 +65,8 @@ public class AdDAOTest {
         Ad ad = new Ad();
         ad.setTittle("test2");
         ad.setDone(false);
-        ad.setCar(new Car(1));
-        ad.setUser(new User(17));
+        ad.setCar(new Car(new Model(6), new Transmission(2), new Body(3), new Color(3)));
+        ad.setUser(new User(26));
         ad.setCreate(new Timestamp(System.currentTimeMillis()));
         ad.setImages(new HashSet<Image>(){{
             add(new Image("urltest21"));
@@ -58,8 +83,8 @@ public class AdDAOTest {
         Ad ad = new Ad();
         ad.setTittle("test2");
         ad.setDone(false);
-        ad.setCar(new Car(1));
-        ad.setUser(new User(17));
+        ad.setCar(new Car(new Model(6), new Transmission(2), new Body(3), new Color(3)));
+        ad.setUser(new User(26));
         ad.setCreate(new Timestamp(System.currentTimeMillis()));
         ad.setImages(new HashSet<Image>(){{
             add(new Image("urltest21"));
@@ -76,8 +101,8 @@ public class AdDAOTest {
         Ad ad = new Ad();
         ad.setTittle("test2");
         ad.setDone(false);
-        ad.setCar(new Car(1));
-        ad.setUser(new User(17));
+        ad.setCar(new Car(new Model(6), new Transmission(2), new Body(3), new Color(3)));
+        ad.setUser(new User(26));
         ad.setCreate(new Timestamp(System.currentTimeMillis()));
         ad.setImages(new HashSet<Image>(){{
             add(new Image("urltest21"));

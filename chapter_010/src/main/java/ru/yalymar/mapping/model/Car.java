@@ -15,6 +15,14 @@ public class Car {
         this.id = id;
     }
 
+    public Car(Model model, Transmission transmission,
+               Body body, Color color) {
+        this.model = model;
+        this.transmission = transmission;
+        this.body = body;
+        this.color = color;
+    }
+
     public int getId() {
         return id;
     }
