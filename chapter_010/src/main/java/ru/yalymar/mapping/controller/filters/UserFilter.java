@@ -1,14 +1,13 @@
 package ru.yalymar.mapping.controller.filters;
 
 import ru.yalymar.mapping.model.dao.DAOFactory;
-
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(filterName = "user filter", urlPatterns = "/*")
+@WebFilter(urlPatterns = "/*")
 public class UserFilter implements Filter {
 
     private final DAOFactory daoFactory = new DAOFactory();

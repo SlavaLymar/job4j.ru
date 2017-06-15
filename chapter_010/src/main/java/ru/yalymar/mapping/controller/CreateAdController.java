@@ -36,7 +36,7 @@ public class CreateAdController extends HttpServlet{
                 new Body(Integer.parseInt(req.getParameter("bodyId"))),
                 new Color(Integer.parseInt(req.getParameter("colorId")))));
         ad.setCreate(new Timestamp(System.currentTimeMillis()));
-        ad.setUser(new User(Integer.parseInt(req.getParameter("userID"))));
+        ad.setUser(new User(Integer.parseInt(req.getParameter("userId"))));
         ad.setDone(false);
         ad.setPrice(Integer.parseInt(req.getParameter("price")));
 

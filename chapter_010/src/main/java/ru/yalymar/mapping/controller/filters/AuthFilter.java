@@ -12,7 +12,7 @@ import java.io.IOException;
  * @version 1
  * @since 04.06.2017
  */
-@WebFilter(filterName = "authorization filter", urlPatterns = "/*")
+@WebFilter(urlPatterns = "/*")
 public class AuthFilter implements Filter {
 
     @Override
@@ -33,7 +33,7 @@ public class AuthFilter implements Filter {
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
             throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) req;
-        if (request.getRequestURI().contains("/login")) {
+        if (request.getRequestURI().contains("/login") || request.getRequestURI().contains("/ads")) {
             chain.doFilter(req, resp);
         } else {
             HttpSession session = request.getSession();

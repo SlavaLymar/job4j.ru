@@ -40,7 +40,7 @@
     </TR>
     <c:forEach items="${ads}" var="ad" varStatus="i">
         <TR id="mainrow" onclick="return inAd(${ad.id});">
-            <TD><img src="warehouse/myCar.jpg" alt=""></TD>
+            <TD><img src="/../warehouse/myCar.jpg" alt=""></TD>
             <TD><c:out value="${ad.tittle}"></c:out></TD>
 
             <TD><c:out value="${ad.car}"></c:out></TD>

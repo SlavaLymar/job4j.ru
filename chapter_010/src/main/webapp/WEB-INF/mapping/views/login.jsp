@@ -43,7 +43,7 @@
         <c:out value="${error}"></c:out>
     </div>
 </c:if>
-<form id="ln" action='${pageContext.servletContext.contextPath}/ads' method='post' onsubmit="return validate()">
+<form id="ln" action='${pageContext.servletContext.contextPath}/ads' method='get' onsubmit="return validate()">
 
     Login: <input type='text' name='slogin' id="login"/><br>
     Password: <input type='password' name='spassword' id="password"/><br>

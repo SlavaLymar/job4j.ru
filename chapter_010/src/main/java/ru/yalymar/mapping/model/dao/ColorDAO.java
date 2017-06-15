@@ -15,7 +15,7 @@ public class ColorDAO extends DAO<Color>{
     }
 
     public List<Color> readAll() {
-        return super.tx(session -> session.createQuery("from Role").list());
+        return super.tx(session -> session.createQuery("from Color").list());
     }
 
     public int update(int id, Color newColor) {

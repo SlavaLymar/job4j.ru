@@ -65,9 +65,9 @@
     </table>
 
 <table border="1">
-    <TD>
-        <input type='button' id="cancel" value='CANCEL'>
-    </TD>
+    <div id="cancel">
+        <input type="button" value="cancel"/>
+    </div>
 </table>
 
     <p><c:out value="You was signed in as ${role}"></c:out></p>
