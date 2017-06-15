@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.List;
+import java.util.Set;
 
 @WebServlet(urlPatterns = "/add")
 public class CreateAdController extends HttpServlet{
@@ -29,19 +31,27 @@ public class CreateAdController extends HttpServlet{
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         Ad ad = new Ad();
+
         ad.setTittle(req.getParameter("title"));
         ad.setCar(new Car(
-                new Model(Integer.parseInt(req.getParameter("modelId"))),
-                new Transmission(Integer.parseInt(req.getParameter("transmissoinId"))),
-                new Body(Integer.parseInt(req.getParameter("bodyId"))),
-                new Color(Integer.parseInt(req.getParameter("colorId")))));
+                new Model(Integer.parseInt(req.getParameter("model"))),
+                new Transmission(Integer.parseInt(req.getParameter("transmissoin"))),
+                new Body(Integer.parseInt(req.getParameter("body"))),
+                new Color(Integer.parseInt(req.getParameter("color")))));
         ad.setCreate(new Timestamp(System.currentTimeMillis()));
-        ad.setUser(new User(Integer.parseInt(req.getParameter("userId"))));
+
+        User user = this.daoFactory.getUserDAO().
+                getByLoginPassword(
+                        (String) req.getSession().getAttribute("slogin"),
+                        (String) req.getSession().getAttribute("spassword"));
+        ad.setUser(user);
+
         ad.setDone(false);
         ad.setPrice(Integer.parseInt(req.getParameter("price")));
 
-        //TODO imgs
+        Set<Image> images = this.daoFactory.getAdDAO().getFiles(req, resp, getServletContext());
+        ad.setImages(images);
 
-        this.daoFactory.getAdDAO().create(ad);
+//        this.daoFactory.getAdDAO().create(ad);
     }
 }

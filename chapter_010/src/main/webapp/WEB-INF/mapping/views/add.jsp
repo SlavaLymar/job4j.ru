@@ -16,21 +16,19 @@
                     <c:forEach items="${models}" var="model">
                         var manuf = ${model.manuf.id};
                         if(manuf == manufId){
-                            modelsList.push("${model.model}");
+                            modelsList.push("${model}");
                         }
                     </c:forEach>
 
                     var selectField = document.getElementById("model");
                     selectField.length = 0;
                     for (var i = 0; i < modelsList.length; i++) {
-                        selectField.options[selectField.length] = new Option(modelsList[i], modelsList[i]);
+                        selectField.options[selectField.length] =
+                            new Option(${modelsList[i].model}, ${modelsList[i].id});
                     }
                     var modelsList = [];
                 });
             });
-
-
-
 
     </script>
 </head>
@@ -52,6 +50,13 @@
             <option value="model">Choose manufactor</option>
         </select><br>
 
+        Transmisson:
+        <select name="transmission" id="transmission" size="1" >
+            <c:forEach items="${transmissions}" var="body">
+                <option value="${transmission.id}">${transmission.name}</option>
+            </c:forEach>
+        </select><br>
+
         Body:
         <select name="body" id="body" size="1" >
             <c:forEach items="${bodies}" var="body">
@@ -70,12 +75,9 @@
         Upload images:
         <div class="files">
             <input type="file" multiple/>
-            <input type='button' value='upload'>
         </div>
 
-        <div id="add">
-            <input type="button" value="add"/>
-        </div>
+        <input type="submit" value="add"/>
 
     </form>
 

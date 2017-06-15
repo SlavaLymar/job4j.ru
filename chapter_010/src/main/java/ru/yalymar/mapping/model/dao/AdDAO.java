@@ -1,12 +1,21 @@
 package ru.yalymar.mapping.model.dao;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.hibernate.query.Query;
 import ru.yalymar.mapping.model.*;
+import ru.yalymar.mapping.model.dao.fileuploader.Upload;
 import ru.yalymar.mapping.model.unproxy.Unproxy;
-import java.util.List;
-import java.util.Set;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
 
-public class AdDAO extends DAO<Ad> implements Unproxy {
+public class AdDAO extends DAO<Ad> implements Unproxy, Upload {
 
     public int create(Ad ad) {
         return super.tx(session -> (int) session.save(ad));
@@ -77,6 +86,61 @@ public class AdDAO extends DAO<Ad> implements Unproxy {
             session.delete(ad);
             return 1;
         });
+    }
+
+    @Override
+    public Set<Image> getFiles(HttpServletRequest req, HttpServletResponse resp,
+                               ServletContext context) throws IOException {
+        Set<Image> result = null;
+
+        boolean isMultipart = ServletFileUpload.isMultipartContent(req);
+        if (!isMultipart) {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+            return result;
+        }
+        DiskFileItemFactory factory = new DiskFileItemFactory();
+        factory.setSizeThreshold(1024*1024);
+        File tempDir = (File)context.getAttribute("javax.servlet.context.tempdir");
+        factory.setRepository(tempDir);
+        ServletFileUpload upload = new ServletFileUpload(factory);
+        upload.setSizeMax(1024 * 1024);
+        try {
+            List items = upload.parseRequest(req);
+            Iterator iter = items.iterator();
+
+            while (iter.hasNext()) {
+                FileItem item = (FileItem) iter.next();
+
+                if (!item.isFormField()) {
+                    File uploadFile;
+                    Random random = new Random();
+
+                    String path;
+                    do{
+                        path = context.
+                                getRealPath("mapping/upload/"+ random.nextInt() + item.getName());
+                        uploadFile = new File(path);
+                    }
+                    while(uploadFile.exists());
+
+                    uploadFile.createNewFile();
+                    item.write(uploadFile);
+
+                    result.add(new Image(path));
+                }
+            }
+        }
+        catch (FileUploadException e){
+            DAOFactory.logger.error(e.getMessage(), e);
+            resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            return result;
+        }
+        catch (Exception e) {
+            DAOFactory.logger.error(e.getMessage(), e);
+            resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            return result;
+        }
+        return result;
     }
 
 }

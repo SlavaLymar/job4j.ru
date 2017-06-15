@@ -9,16 +9,16 @@ public class Image {
     public Image() {
     }
 
+    public Image(String url) {
+        this.url = url;
+    }
+
     public Ad getAd() {
         return ad;
     }
 
     public void setAd(Ad ad) {
         this.ad = ad;
-    }
-
-    public Image(String url) {
-        this.url = url;
     }
 
     public int getId() {

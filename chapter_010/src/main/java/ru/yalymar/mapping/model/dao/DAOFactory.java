@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 public class DAOFactory {
 
     public static final Logger logger = Logger.getLogger(DAOFactory.class);
+
     private final UserDAO userDAO = new UserDAO();
     private final RoleDAO roleDAO = new RoleDAO();
     private final CarDAO carDAO = new CarDAO();
