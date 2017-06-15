@@ -41,7 +41,7 @@ public class UserFilter implements Filter {
                     session.setAttribute("slogin", sLogin);
                     session.setAttribute("spassword", sPassword);
                     session.setAttribute("role", this.daoFactory.getUserDAO().
-                            getByLoginPassword(sLogin, sPassword).getRole());
+                            getByLoginPassword(sLogin, sPassword).getRole().getRole());
                     chain.doFilter(req, resp);
                     return;
                 }
@@ -52,7 +52,7 @@ public class UserFilter implements Filter {
                     session.setAttribute("slogin", sLogin);
                     session.setAttribute("spassword", sPassword);
                     session.setAttribute("role", this.daoFactory.getUserDAO().
-                            getByLoginPassword(sLogin, sPassword).getRole());
+                            getByLoginPassword(sLogin, sPassword).getRole().getRole());
                     chain.doFilter(req, resp);
                     return;
                 }

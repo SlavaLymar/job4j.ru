@@ -9,6 +9,11 @@ public class Model {
     public Model() {
     }
 
+    public Model(String model, Manufactor manuf) {
+        this.model = model;
+        this.manuf = manuf;
+    }
+
     public Model(int id) {
         this.id = id;
     }

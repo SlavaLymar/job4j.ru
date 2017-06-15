@@ -18,5 +18,6 @@
             <key column="ads_id"/>
             <one-to-many class="ru.yalymar.mapping.model.Image"/>
         </set>
+        <property name="price" column="price"/>
     </class>
 </hibernate-mapping>

@@ -2,10 +2,9 @@
 <html>
 <head>
     <title>Log IN</title>
-    <title>SIGN IN</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <style>
         body {
             background-color : #f9fff9;
@@ -25,8 +24,8 @@
     <script>
         function validate(){
             var result = true;
-            var login = $('#login').value;
-            var password = $('#password').value;
+            var login = $('#login').val();
+            var password = $('#password').val();
             if(login == '' || password == ''){
                 alert("You must fill login and password!\nTry again.");
                 result = false;
@@ -44,7 +43,7 @@
         <c:out value="${error}"></c:out>
     </div>
 </c:if>
-<form id="ln" action='${pageContext.servletContext.contextPath}/login' method='post' onsubmit="return validate()">
+<form id="ln" action='${pageContext.servletContext.contextPath}/ads' method='post' onsubmit="return validate()">
 
     Login: <input type='text' name='slogin' id="login"/><br>
     Password: <input type='password' name='spassword' id="password"/><br>

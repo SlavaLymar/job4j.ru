@@ -85,7 +85,7 @@ public class UserDAO extends DAO<User> implements Unproxy<Role> {
     }
 
     public boolean isAdmin(String login, String password){
-        if("admin".equals(this.getByLoginPassword(login, password).getRole())){
+        if("admin".equals(this.getByLoginPassword(login, password).getRole().getRole())){
             return true;
         }
         return false;
@@ -97,6 +97,8 @@ public class UserDAO extends DAO<User> implements Unproxy<Role> {
             query.setParameter("l", login);
             query.setParameter("p", password);
             List<User> users = query.list();
+            Role role = this.initializeAndUnproxy(users.get(0).getRole());
+            users.get(0).setRole(role);
             return users.size() == 1 ? users.get(0) : null;
         });
         return user;

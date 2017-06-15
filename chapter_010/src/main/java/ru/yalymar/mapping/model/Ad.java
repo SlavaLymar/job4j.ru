@@ -11,10 +11,19 @@ public class Ad {
     private Car car;
     private User user;
     private Set<Image> images;
+    private int price;
     private boolean done;
     private Timestamp create;
 
     public Ad() {
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public int getId() {

@@ -11,6 +11,8 @@ public class DAOFactory {
     private final ManufactorDAO manufactorDAO = new ManufactorDAO();
     private final ModelDAO modelDAO = new ModelDAO();
     private final AdDAO adDAO = new AdDAO();
+    private final BodyDAO bodyDAO = new BodyDAO();
+    private final ColorDAO colorDAO = new ColorDAO();
 
     public UserDAO getUserDAO() {
         return this.userDAO;
@@ -34,5 +36,13 @@ public class DAOFactory {
 
     public AdDAO getAdDAO() {
         return this.adDAO;
+    }
+
+    public BodyDAO getBodyDAO() {
+        return this.bodyDAO;
+    }
+
+    public ColorDAO getColorDAO() {
+        return this.colorDAO;
     }
 }
