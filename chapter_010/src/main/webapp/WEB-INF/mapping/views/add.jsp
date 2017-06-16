@@ -13,10 +13,12 @@
                 $('#manufac').on('change', function () {
                     var manufId = $('#manufac').val();
                     var modelsList = [];
+                    var modelListId = []
                     <c:forEach items="${models}" var="model">
                         var manuf = ${model.manuf.id};
                         if(manuf == manufId){
-                            modelsList.push("${model}");
+                            modelsList.push("${model.model}");
+                            modelListId.push(${model.id});
                         }
                     </c:forEach>
 
@@ -24,7 +26,7 @@
                     selectField.length = 0;
                     for (var i = 0; i < modelsList.length; i++) {
                         selectField.options[selectField.length] =
-                            new Option(${modelsList[i].model}, ${modelsList[i].id});
+                            new Option(modelsList[i], modelListId[i]);
                     }
                     var modelsList = [];
                 });
@@ -35,7 +37,8 @@
 <body>
 
     <h1>ADD</h1>
-    <form action='${pageContext.servletContext.contextPath}/add' method='post'>
+    <form enctype="multipart/form-data"
+          action='${pageContext.servletContext.contextPath}/add' method='post'>
         Title: <input type="text" name="title" /><br>
 
         Manufactor:
@@ -52,7 +55,7 @@
 
         Transmisson:
         <select name="transmission" id="transmission" size="1" >
-            <c:forEach items="${transmissions}" var="body">
+            <c:forEach items="${transmissions}" var="transmission">
                 <option value="${transmission.id}">${transmission.name}</option>
             </c:forEach>
         </select><br>
@@ -72,13 +75,10 @@
         </select><br>
 
         Price: <input type="text" name="price" /><br>
-        Upload images:
-        <div class="files">
-            <input type="file" multiple/>
-        </div>
 
-        <input type="submit" value="add"/>
-
+            File to upload: <input type="file" name="upfile" multiple><br/>
+            <br/>
+            <input type="submit" value="add">
     </form>
 
     <form action='${pageContext.servletContext.contextPath}/ads' method='get'>

@@ -14,6 +14,7 @@ public class DAOFactory {
     private final AdDAO adDAO = new AdDAO();
     private final BodyDAO bodyDAO = new BodyDAO();
     private final ColorDAO colorDAO = new ColorDAO();
+    private final TransmissionsDAO transmissionsDAO = new TransmissionsDAO();
 
     public UserDAO getUserDAO() {
         return this.userDAO;
@@ -45,5 +46,9 @@ public class DAOFactory {
 
     public ColorDAO getColorDAO() {
         return this.colorDAO;
+    }
+
+    public TransmissionsDAO getTransmissionsDAO() {
+        return this.transmissionsDAO;
     }
 }

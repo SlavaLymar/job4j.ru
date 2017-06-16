@@ -1,5 +1,6 @@
 package ru.yalymar.mapping.controller.filters;
 
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import ru.yalymar.mapping.model.dao.DAOFactory;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -29,6 +30,10 @@ public class UserFilter implements Filter {
             throws IOException, ServletException {
 
         HttpServletRequest request = (HttpServletRequest) req;
+        if(ServletFileUpload.isMultipartContent(request)){
+            chain.doFilter(req, resp);
+        }
+
         String sLogin = request.getParameter("slogin");
         String sPassword = request.getParameter("spassword");
         HttpSession session = ((HttpServletRequest) req).getSession();

@@ -91,7 +91,7 @@ public class AdDAO extends DAO<Ad> implements Unproxy, Upload {
     @Override
     public Set<Image> getFiles(HttpServletRequest req, HttpServletResponse resp,
                                ServletContext context) throws IOException {
-        Set<Image> result = null;
+        Set<Image> result = new HashSet<>();
 
         boolean isMultipart = ServletFileUpload.isMultipartContent(req);
         if (!isMultipart) {
