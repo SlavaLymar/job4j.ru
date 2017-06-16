@@ -10,15 +10,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 @WebServlet(urlPatterns = "/add")
-@MultipartConfig
+@MultipartConfig(fileSizeThreshold = 1024* 1024* 2,
+                    maxFileSize = 1024*1024,
+                    maxRequestSize = 1024*1024*2)
 public class CreateAdController extends HttpServlet{
 
     private final DAOFactory daoFactory = new DAOFactory();
@@ -58,6 +63,10 @@ public class CreateAdController extends HttpServlet{
         ad.setUser(user);
         ad.setDone(false);
         ad.setPrice(Integer.parseInt(req.getParameter("price")));
+
+
+
+
 
         Set<Image> images = this.daoFactory.getAdDAO().getFiles(req, resp, getServletContext());
         ad.setImages(images);
