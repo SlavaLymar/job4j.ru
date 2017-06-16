@@ -62,6 +62,7 @@ public class CreateAdController extends HttpServlet{
         Set<Image> images = this.daoFactory.getAdDAO().getFiles(req, resp, getServletContext());
         ad.setImages(images);
 //        this.daoFactory.getAdDAO().create(ad);
+        resp.sendRedirect(String.format("%s/ads", req.getContextPath()));
     }
 
 

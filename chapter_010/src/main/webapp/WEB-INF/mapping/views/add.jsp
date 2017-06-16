@@ -76,7 +76,7 @@
 
         Price: <input type="text" name="price" /><br>
 
-            File to upload: <input type="file" name="upfile" multiple><br/>
+            File to upload: <input type="file" name="upfile" multiple="multiple"><br/>
             <br/>
             <input type="submit" value="add">
     </form>

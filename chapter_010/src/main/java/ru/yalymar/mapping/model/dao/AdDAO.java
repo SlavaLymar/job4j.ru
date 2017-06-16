@@ -105,7 +105,7 @@ public class AdDAO extends DAO<Ad> implements Unproxy, Upload {
         ServletFileUpload upload = new ServletFileUpload(factory);
         upload.setSizeMax(1024 * 1024);
         try {
-            List items = upload.parseRequest(req);
+            List<FileItem> items = upload.parseRequest(req);
             Iterator iter = items.iterator();
 
             while (iter.hasNext()) {
