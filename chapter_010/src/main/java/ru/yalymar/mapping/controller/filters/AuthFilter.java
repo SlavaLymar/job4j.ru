@@ -35,9 +35,6 @@ public class AuthFilter implements Filter {
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
             throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) req;
-        if(ServletFileUpload.isMultipartContent(request)){
-            chain.doFilter(req, resp);
-        }
         if (request.getRequestURI().contains("/login") || request.getRequestURI().contains("/ads")) {
             chain.doFilter(req, resp);
         } else {

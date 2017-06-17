@@ -1,6 +1,5 @@
 package ru.yalymar.mapping.controller;
 
-import jdk.internal.util.xml.impl.Input;
 import ru.yalymar.mapping.model.*;
 import ru.yalymar.mapping.model.dao.DAOFactory;
 import javax.servlet.ServletException;
@@ -9,15 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Timestamp;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
 import java.util.Set;
 
 @WebServlet(urlPatterns = "/add")
@@ -64,13 +56,9 @@ public class CreateAdController extends HttpServlet{
         ad.setDone(false);
         ad.setPrice(Integer.parseInt(req.getParameter("price")));
 
-
-
-
-
-        Set<Image> images = this.daoFactory.getAdDAO().getFiles(req, resp, getServletContext());
+        Set<Image> images = this.daoFactory.getAdDAO().getFiles(req, resp);
         ad.setImages(images);
-//        this.daoFactory.getAdDAO().create(ad);
+        this.daoFactory.getAdDAO().create(ad);
         resp.sendRedirect(String.format("%s/ads", req.getContextPath()));
     }
 

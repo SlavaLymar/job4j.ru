@@ -1,23 +1,16 @@
 package ru.yalymar.mapping.model.dao;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.hibernate.query.Query;
 import ru.yalymar.mapping.model.*;
 import ru.yalymar.mapping.model.dao.fileuploader.Upload;
 import ru.yalymar.mapping.model.unproxy.Unproxy;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class AdDAO extends DAO<Ad> implements Unproxy, Upload {
 
@@ -93,8 +86,8 @@ public class AdDAO extends DAO<Ad> implements Unproxy, Upload {
     }
 
     @Override
-    public Set<Image> getFiles(HttpServletRequest req, HttpServletResponse resp,
-                               ServletContext context) throws IOException, ServletException {
+    public Set<Image> getFiles(HttpServletRequest req, HttpServletResponse resp)
+            throws IOException, ServletException {
         Set<Image> result = new HashSet<>();
         String appPath = req.getServletContext().getRealPath("");
         String savePath =  appPath + "uploadfiles";
@@ -107,8 +100,8 @@ public class AdDAO extends DAO<Ad> implements Unproxy, Upload {
         for(Part part : items){
             String fileName = this.extractFileName(part);
             if(fileName != null){
-                part.write(savePath + fileName);
-                result.add(new Image(savePath + fileName));
+                part.write(savePath + File.separator + fileName);
+                result.add(new Image(savePath + File.separator + fileName));
             }
         }
         return result;

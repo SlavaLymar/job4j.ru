@@ -1593,3 +1593,990 @@
 2017-06-16 17:11:13 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
 2017-06-16 17:11:13 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
 2017-06-16 17:11:37 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-06-17 08:51:58 INFO  Version:45 - HHH000412: Hibernate Core {5.2.10.Final}
+2017-06-17 08:51:58 INFO  Environment:213 - HHH000206: hibernate.properties not found
+2017-06-17 08:51:59 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-06-17 08:52:02 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 08:52:02 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 08:52:02 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 08:52:02 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 08:52:02 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 08:52:03 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 08:52:03 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 08:52:03 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@def905
+2017-06-17 08:52:08 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 08:52:08 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 08:52:08 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 08:52:08 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 08:52:08 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 08:52:08 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 08:52:08 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 08:52:08 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@def905
+2017-06-17 08:52:09 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 08:52:09 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 08:52:09 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 08:52:09 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 08:52:09 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 08:52:09 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 08:52:09 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 08:52:09 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@def905
+2017-06-17 08:52:10 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 08:52:10 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 08:52:10 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 08:52:10 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 08:52:10 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 08:52:10 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 08:52:10 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 08:52:10 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@def905
+2017-06-17 08:52:11 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 08:52:11 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 08:52:11 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 08:52:11 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 08:52:11 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 08:52:11 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 08:52:11 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 08:52:11 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@def905
+2017-06-17 08:52:12 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 08:52:12 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 08:52:12 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 08:52:12 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 08:52:12 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 08:52:12 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 08:52:12 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 08:52:12 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@def905
+2017-06-17 08:52:13 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 08:52:13 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 08:52:13 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 08:52:13 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 08:52:13 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 08:52:13 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 08:52:13 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 08:52:13 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@def905
+2017-06-17 08:52:14 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 08:52:14 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 08:52:14 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 08:52:14 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 08:52:14 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 08:52:14 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 08:52:14 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 08:52:14 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@def905
+2017-06-17 08:52:15 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 08:52:15 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 08:52:15 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 08:52:15 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 08:52:15 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 08:52:15 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 08:52:15 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 08:52:15 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@def905
+2017-06-17 08:52:47 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 08:52:47 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 08:52:47 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 08:52:47 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 08:52:47 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 08:52:47 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 08:52:47 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 08:52:47 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@def905
+2017-06-17 08:52:48 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 08:52:48 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 08:52:48 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 08:52:48 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 08:52:48 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 08:52:48 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 08:52:48 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 08:52:48 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@def905
+2017-06-17 08:52:49 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 08:52:49 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 08:52:49 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 08:52:49 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 08:52:49 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 08:52:49 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 08:52:49 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 08:52:49 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@def905
+2017-06-17 08:52:50 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 08:52:50 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 08:52:50 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 08:52:50 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 08:52:50 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 08:52:50 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 08:52:50 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 08:52:50 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@def905
+2017-06-17 08:52:51 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 08:52:51 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 08:52:51 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 08:52:51 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 08:52:51 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 08:52:51 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 08:52:51 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 08:52:51 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@def905
+2017-06-17 08:52:52 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 08:52:52 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 08:52:52 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 08:52:52 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 08:52:52 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 08:52:52 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 08:52:52 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 08:52:52 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@def905
+2017-06-17 08:52:53 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 08:52:53 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 08:52:53 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 08:52:53 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 08:52:53 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 08:52:53 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 08:52:54 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 08:52:54 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@def905
+2017-06-17 08:52:54 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 08:52:54 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 08:52:54 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 08:52:54 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 08:52:54 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 08:52:54 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 08:52:55 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 08:52:55 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@def905
+2017-06-17 08:52:55 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 08:52:55 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 08:52:55 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 08:52:55 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 08:52:55 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 08:52:56 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 08:52:56 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 08:52:56 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@def905
+2017-06-17 08:52:56 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-06-17 08:52:57 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-06-17 08:52:57 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-06-17 08:53:01 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 08:53:01 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 08:53:01 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 08:53:01 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 08:53:01 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 08:53:01 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 08:53:01 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 08:53:01 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@def905
+2017-06-17 08:53:02 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 08:53:02 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 08:53:02 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 08:53:02 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 08:53:02 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 08:53:02 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 08:53:02 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 08:53:02 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@def905
+2017-06-17 08:53:03 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 08:53:03 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 08:53:03 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 08:53:03 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 08:53:03 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 08:53:03 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 08:53:03 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 08:53:03 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@def905
+2017-06-17 08:53:04 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 08:53:04 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 08:53:04 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 08:53:04 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 08:53:04 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 08:53:04 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 08:53:04 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 08:53:04 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@def905
+2017-06-17 08:53:05 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 08:53:05 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 08:53:05 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 08:53:05 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 08:53:05 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 08:53:05 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 08:53:05 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 08:53:05 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@def905
+2017-06-17 08:53:06 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 08:53:06 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 08:53:06 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 08:53:06 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 08:53:06 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 08:53:06 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 08:53:06 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 08:53:06 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@def905
+2017-06-17 08:53:07 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 08:53:07 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 08:53:07 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 08:53:07 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 08:53:07 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 08:53:07 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 08:53:07 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 08:53:07 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@def905
+2017-06-17 08:53:08 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 08:53:08 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 08:53:08 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 08:53:08 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 08:53:08 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 08:53:08 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 08:53:08 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 08:53:08 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@def905
+2017-06-17 08:53:09 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 08:53:09 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 08:53:09 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 08:53:09 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 08:53:09 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 08:53:09 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 08:53:09 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 08:53:09 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@def905
+2017-06-17 08:53:09 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-06-17 08:53:09 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-06-17 08:53:09 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-06-17 08:53:09 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-06-17 08:53:09 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-06-17 08:53:36 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-06-17 09:07:26 INFO  Version:45 - HHH000412: Hibernate Core {5.2.10.Final}
+2017-06-17 09:07:26 INFO  Environment:213 - HHH000206: hibernate.properties not found
+2017-06-17 09:07:26 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-06-17 09:07:28 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:07:28 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:07:28 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:07:28 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:07:28 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:07:28 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:07:29 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:07:29 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@19959
+2017-06-17 09:07:31 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:07:31 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:07:31 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:07:31 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:07:31 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:07:31 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:07:32 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:07:32 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@19959
+2017-06-17 09:07:32 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:07:32 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:07:32 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:07:32 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:07:32 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:07:32 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:07:33 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:07:33 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@19959
+2017-06-17 09:07:34 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:07:34 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:07:34 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:07:34 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:07:34 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:07:34 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:07:34 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:07:34 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@19959
+2017-06-17 09:07:35 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:07:35 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:07:35 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:07:35 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:07:35 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:07:35 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:07:35 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:07:35 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@19959
+2017-06-17 09:07:36 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:07:36 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:07:36 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:07:36 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:07:36 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:07:36 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:07:36 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:07:36 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@19959
+2017-06-17 09:07:37 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:07:37 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:07:37 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:07:37 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:07:37 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:07:37 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:07:37 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:07:37 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@19959
+2017-06-17 09:07:38 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:07:38 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:07:38 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:07:38 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:07:38 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:07:38 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:07:38 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:07:38 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@19959
+2017-06-17 09:07:39 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:07:39 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:07:39 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:07:39 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:07:39 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:07:39 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:07:39 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:07:39 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@19959
+2017-06-17 09:07:52 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:07:52 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:07:52 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:07:52 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:07:52 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:07:52 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:07:52 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:07:52 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@19959
+2017-06-17 09:07:53 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:07:53 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:07:53 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:07:53 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:07:53 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:07:53 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:07:53 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:07:53 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@19959
+2017-06-17 09:07:54 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:07:54 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:07:54 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:07:54 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:07:54 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:07:54 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:07:54 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:07:54 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@19959
+2017-06-17 09:07:55 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:07:55 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:07:55 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:07:55 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:07:55 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:07:55 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:07:55 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:07:55 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@19959
+2017-06-17 09:07:56 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:07:56 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:07:56 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:07:56 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:07:56 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:07:56 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:07:56 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:07:56 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@19959
+2017-06-17 09:07:57 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:07:57 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:07:57 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:07:57 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:07:57 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:07:57 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:07:57 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:07:57 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@19959
+2017-06-17 09:07:58 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:07:58 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:07:58 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:07:58 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:07:58 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:07:58 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:07:59 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:07:59 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@19959
+2017-06-17 09:07:59 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:07:59 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:07:59 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:07:59 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:07:59 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:07:59 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:08:00 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:08:00 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@19959
+2017-06-17 09:08:00 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:08:00 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:08:00 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:08:00 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:08:00 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:08:00 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:08:00 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:08:00 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@19959
+2017-06-17 09:08:01 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-06-17 09:08:01 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-06-17 09:08:01 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-06-17 09:08:05 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:08:05 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:08:05 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:08:05 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:08:05 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:08:05 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:08:05 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:08:05 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@19959
+2017-06-17 09:08:06 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:08:06 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:08:06 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:08:06 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:08:06 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:08:06 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:08:06 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:08:06 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@19959
+2017-06-17 09:08:07 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:08:07 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:08:07 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:08:07 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:08:07 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:08:07 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:08:07 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:08:07 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@19959
+2017-06-17 09:08:08 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:08:08 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:08:08 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:08:08 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:08:08 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:08:08 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:08:08 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:08:08 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@19959
+2017-06-17 09:08:09 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:08:09 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:08:09 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:08:09 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:08:09 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:08:09 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:08:09 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:08:09 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@19959
+2017-06-17 09:08:10 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:08:10 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:08:10 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:08:10 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:08:10 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:08:10 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:08:10 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:08:10 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@19959
+2017-06-17 09:08:11 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:08:11 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:08:11 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:08:11 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:08:11 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:08:11 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:08:11 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:08:11 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@19959
+2017-06-17 09:08:12 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:08:12 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:08:12 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:08:12 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:08:12 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:08:12 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:08:12 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:08:12 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@19959
+2017-06-17 09:08:13 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:08:13 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:08:13 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:08:13 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:08:13 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:08:13 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:08:13 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:08:13 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@19959
+2017-06-17 09:08:13 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-06-17 09:08:13 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-06-17 09:08:13 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-06-17 09:08:13 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-06-17 09:08:13 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-06-17 09:08:31 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-06-17 09:13:36 INFO  Version:45 - HHH000412: Hibernate Core {5.2.10.Final}
+2017-06-17 09:13:36 INFO  Environment:213 - HHH000206: hibernate.properties not found
+2017-06-17 09:13:37 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-06-17 09:13:38 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:13:38 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:13:38 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:13:38 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:13:38 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:13:38 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:13:39 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:13:39 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@74ed62
+2017-06-17 09:13:41 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:13:41 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:13:41 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:13:41 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:13:41 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:13:41 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:13:41 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:13:41 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@74ed62
+2017-06-17 09:13:42 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:13:42 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:13:42 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:13:42 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:13:42 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:13:42 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:13:43 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:13:43 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@74ed62
+2017-06-17 09:13:43 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:13:43 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:13:43 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:13:43 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:13:43 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:13:43 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:13:44 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:13:44 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@74ed62
+2017-06-17 09:13:45 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:13:45 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:13:45 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:13:45 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:13:45 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:13:45 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:13:45 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:13:45 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@74ed62
+2017-06-17 09:13:46 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:13:46 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:13:46 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:13:46 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:13:46 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:13:46 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:13:46 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:13:46 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@74ed62
+2017-06-17 09:13:47 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:13:47 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:13:47 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:13:47 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:13:47 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:13:47 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:13:47 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:13:47 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@74ed62
+2017-06-17 09:13:48 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:13:48 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:13:48 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:13:48 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:13:48 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:13:48 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:13:48 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:13:48 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@74ed62
+2017-06-17 09:13:49 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:13:49 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:13:49 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:13:49 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:13:49 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:13:49 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:13:49 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:13:49 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@74ed62
+2017-06-17 09:14:05 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:14:05 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:14:05 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:14:05 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:14:05 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:14:05 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:14:05 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:14:05 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@74ed62
+2017-06-17 09:14:06 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:14:06 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:14:06 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:14:06 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:14:06 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:14:06 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:14:06 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:14:06 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@74ed62
+2017-06-17 09:14:07 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:14:07 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:14:07 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:14:07 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:14:07 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:14:07 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:14:07 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:14:07 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@74ed62
+2017-06-17 09:14:08 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:14:08 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:14:08 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:14:08 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:14:08 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:14:08 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:14:08 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:14:08 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@74ed62
+2017-06-17 09:14:09 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:14:09 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:14:09 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:14:09 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:14:09 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:14:09 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:14:09 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:14:09 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@74ed62
+2017-06-17 09:14:10 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:14:10 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:14:10 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:14:10 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:14:10 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:14:10 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:14:10 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:14:10 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@74ed62
+2017-06-17 09:14:11 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:14:11 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:14:11 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:14:11 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:14:11 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:14:11 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:14:12 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:14:12 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@74ed62
+2017-06-17 09:14:12 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:14:12 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:14:12 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:14:12 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:14:12 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:14:12 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:14:13 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:14:13 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@74ed62
+2017-06-17 09:14:13 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:14:13 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:14:13 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:14:13 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:14:13 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:14:13 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:14:14 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:14:14 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@74ed62
+2017-06-17 09:14:14 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-06-17 09:14:14 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-06-17 09:14:14 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-06-17 09:14:24 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:14:24 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:14:24 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:14:24 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:14:24 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:14:24 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:14:24 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:14:24 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@74ed62
+2017-06-17 09:14:25 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:14:25 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:14:25 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:14:25 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:14:25 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:14:25 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:14:25 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:14:25 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@74ed62
+2017-06-17 09:14:26 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:14:26 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:14:26 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:14:26 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:14:26 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:14:26 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:14:26 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:14:26 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@74ed62
+2017-06-17 09:14:27 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:14:27 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:14:27 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:14:27 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:14:27 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:14:27 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:14:27 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:14:27 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@74ed62
+2017-06-17 09:14:28 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:14:28 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:14:28 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:14:28 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:14:28 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:14:28 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:14:28 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:14:28 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@74ed62
+2017-06-17 09:14:29 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:14:29 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:14:29 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:14:29 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:14:29 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:14:29 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:14:29 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:14:29 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@74ed62
+2017-06-17 09:14:30 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:14:30 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:14:30 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:14:30 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:14:30 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:14:30 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:14:30 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:14:30 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@74ed62
+2017-06-17 09:14:31 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:14:31 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:14:31 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:14:31 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:14:31 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:14:31 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:14:31 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:14:31 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@74ed62
+2017-06-17 09:14:32 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:14:32 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:14:32 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:14:32 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:14:32 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:14:32 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:14:32 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:14:32 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@74ed62
+2017-06-17 09:14:32 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-06-17 09:14:32 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-06-17 09:14:32 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-06-17 09:14:32 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-06-17 09:14:32 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-06-17 09:14:55 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-06-17 09:19:27 INFO  Version:45 - HHH000412: Hibernate Core {5.2.10.Final}
+2017-06-17 09:19:27 INFO  Environment:213 - HHH000206: hibernate.properties not found
+2017-06-17 09:19:27 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-06-17 09:19:29 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:19:29 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:19:29 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:19:29 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:19:29 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:19:30 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:19:30 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:19:30 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@12829e0
+2017-06-17 09:19:32 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:19:32 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:19:32 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:19:32 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:19:32 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:19:32 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:19:33 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:19:33 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@12829e0
+2017-06-17 09:19:33 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:19:33 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:19:33 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:19:33 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:19:33 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:19:34 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:19:34 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:19:34 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@12829e0
+2017-06-17 09:19:35 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:19:35 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:19:35 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:19:35 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:19:35 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:19:35 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:19:35 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:19:35 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@12829e0
+2017-06-17 09:19:36 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:19:36 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:19:36 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:19:36 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:19:36 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:19:36 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:19:36 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:19:36 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@12829e0
+2017-06-17 09:19:37 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:19:37 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:19:37 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:19:37 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:19:37 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:19:37 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:19:38 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:19:38 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@12829e0
+2017-06-17 09:19:39 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:19:39 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:19:39 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:19:39 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:19:39 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:19:39 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:19:39 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:19:39 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@12829e0
+2017-06-17 09:19:40 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:19:40 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:19:40 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:19:40 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:19:40 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:19:40 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:19:40 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:19:40 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@12829e0
+2017-06-17 09:19:41 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:19:41 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:19:41 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:19:41 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:19:41 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:19:41 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:19:41 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:19:41 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@12829e0
+2017-06-17 09:21:50 INFO  Version:45 - HHH000412: Hibernate Core {5.2.10.Final}
+2017-06-17 09:21:50 INFO  Environment:213 - HHH000206: hibernate.properties not found
+2017-06-17 09:21:50 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-06-17 09:21:52 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:21:52 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:21:52 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:21:52 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:21:52 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:21:53 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:21:53 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:21:53 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@1fc0edf
+2017-06-17 09:21:56 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:21:56 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:21:56 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:21:56 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:21:56 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:21:56 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:21:56 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:21:56 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@1fc0edf
+2017-06-17 09:21:57 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:21:57 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:21:57 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:21:57 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:21:57 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:21:57 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:21:57 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:21:57 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@1fc0edf
+2017-06-17 09:21:58 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:21:58 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:21:58 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:21:58 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:21:58 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:21:58 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:21:58 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:21:58 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@1fc0edf
+2017-06-17 09:21:59 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:21:59 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:21:59 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:21:59 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:21:59 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:21:59 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:21:59 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:21:59 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@1fc0edf
+2017-06-17 09:22:00 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:22:00 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:22:00 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:22:00 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:22:00 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:22:00 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:22:01 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:22:01 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@1fc0edf
+2017-06-17 09:22:02 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:22:02 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:22:02 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:22:02 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:22:02 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:22:02 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:22:02 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:22:02 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@1fc0edf
+2017-06-17 09:22:03 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:22:03 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:22:03 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:22:03 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:22:03 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:22:03 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:22:03 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:22:03 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@1fc0edf
+2017-06-17 09:22:04 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:22:04 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:22:04 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:22:04 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:22:04 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:22:04 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:22:04 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:22:04 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@1fc0edf
+2017-06-17 09:22:18 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:22:18 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:22:18 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:22:18 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:22:18 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:22:18 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:22:18 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:22:18 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@1fc0edf
+2017-06-17 09:22:19 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:22:19 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:22:19 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:22:19 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:22:19 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:22:19 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:22:19 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:22:19 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@1fc0edf
+2017-06-17 09:22:20 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:22:20 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:22:20 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:22:20 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:22:20 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:22:20 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:22:20 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:22:20 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@1fc0edf
+2017-06-17 09:22:21 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:22:21 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:22:21 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:22:21 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:22:21 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:22:21 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:22:21 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:22:21 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@1fc0edf
+2017-06-17 09:22:22 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:22:22 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:22:22 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:22:22 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:22:22 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:22:22 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:22:22 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:22:22 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@1fc0edf
+2017-06-17 09:22:23 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:22:23 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:22:23 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:22:23 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:22:23 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:22:23 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:22:23 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:22:23 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@1fc0edf
+2017-06-17 09:22:24 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:22:24 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:22:24 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:22:24 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:22:24 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:22:24 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:22:25 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:22:25 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@1fc0edf
+2017-06-17 09:22:25 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:22:25 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:22:25 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:22:25 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:22:25 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:22:25 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:22:26 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:22:26 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@1fc0edf
+2017-06-17 09:22:26 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:22:26 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:22:26 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:22:26 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:22:26 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:22:26 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:22:27 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:22:27 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@1fc0edf
+2017-06-17 09:22:27 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-06-17 09:22:27 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-06-17 09:22:27 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-06-17 09:22:31 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:22:31 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:22:31 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:22:31 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:22:31 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:22:31 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:22:31 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:22:31 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@1fc0edf
+2017-06-17 09:22:32 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:22:32 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:22:32 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:22:32 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:22:32 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:22:32 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:22:32 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:22:32 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@1fc0edf
+2017-06-17 09:22:33 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:22:33 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:22:33 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:22:33 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:22:33 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:22:33 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:22:33 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:22:33 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@1fc0edf
+2017-06-17 09:22:34 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:22:34 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:22:34 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:22:34 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:22:34 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:22:34 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:22:34 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:22:34 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@1fc0edf
+2017-06-17 09:22:35 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:22:35 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:22:35 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:22:35 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:22:35 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:22:35 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:22:35 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:22:35 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@1fc0edf
+2017-06-17 09:22:36 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:22:36 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:22:36 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:22:36 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:22:36 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:22:36 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:22:36 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:22:36 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@1fc0edf
+2017-06-17 09:22:37 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:22:37 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:22:37 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:22:37 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:22:37 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:22:37 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:22:37 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:22:37 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@1fc0edf
+2017-06-17 09:22:38 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:22:38 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:22:38 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:22:38 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:22:38 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:22:38 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:22:38 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:22:38 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@1fc0edf
+2017-06-17 09:22:39 WARN  pooling:70 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2017-06-17 09:22:39 INFO  pooling:126 - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/hibertest]
+2017-06-17 09:22:39 INFO  pooling:135 - HHH10001001: Connection properties: {user=postgres, password=****}
+2017-06-17 09:22:39 INFO  pooling:140 - HHH10001003: Autocommit mode: false
+2017-06-17 09:22:39 INFO  DriverManagerConnectionProviderImpl:41 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2017-06-17 09:22:39 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-06-17 09:22:39 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-06-17 09:22:39 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@1fc0edf
+2017-06-17 09:22:40 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-06-17 09:22:40 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-06-17 09:22:40 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-06-17 09:22:40 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-06-17 09:22:40 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-06-17 09:22:59 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
