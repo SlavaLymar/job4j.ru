@@ -12,18 +12,27 @@
         table {
             width: 100%;
         }
+        .active {
+            background-color: #2fffee;
+        }
+
     </style>
 
     <script type="text/javascript">
         function inAd(id) {
-            $.ajax( '/ad', {
-                method: 'get',
-                data: {
-                    id: id
-                }
-            });
+            document.location.href = "${pageContext.servletContext.contextPath}/ad?id=" + id;
             return true;
         }
+
+        $(document).ready(function () {
+            $('#mainrow').hover(
+                function () {
+                $(this).addClass('active');
+            },
+                function () {
+                $(this).removeClass('active');
+            })
+        })
     </script>
 
 </head>
@@ -38,10 +47,14 @@
         <TD>DATE</TD>
         <TD>ACTUAL</TD>
     </TR>
-    <c:forEach items="${ads}" var="ad" varStatus="i">
+    <c:forEach items="${ads}" var="ad">
         <TR id="mainrow" onclick="return inAd(${ad.id});">
 
-            <TD><img src="/../warehouse/myCar.jpg" alt=""></TD>
+            <c:forEach items="${ad.images}" var="image" varStatus="loop">
+                <c:if test="${loop.index == 0}">
+                    <TD><img src="${image.url}" alt=""></TD>
+                </c:if>
+            </c:forEach>
 
             <TD><c:out value="${ad.tittle}"></c:out></TD>
 

@@ -1,6 +1,5 @@
 package ru.yalymar.mapping.model.dao;
 
-import org.hibernate.Session;
 import org.hibernate.query.Query;
 import ru.yalymar.mapping.model.Role;
 import ru.yalymar.mapping.model.User;

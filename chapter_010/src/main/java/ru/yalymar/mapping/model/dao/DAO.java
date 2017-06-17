@@ -14,6 +14,7 @@ public abstract class DAO<E> implements Action<E> {
 
     public DAO() {
         this.sessionFactory = new Configuration().configure().buildSessionFactory();
+
     }
 
     public void closeResources(){

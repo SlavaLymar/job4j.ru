@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset=\"UTF-8\">
-    <title>Ads</title>
+    <title>Ad</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -14,27 +14,23 @@
         }
     </style>
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('#delete').onclick(function () {
-                $.ajax( '/delete', {
-                    method: 'post',
-                    data: {
-                        id: ${user.id}
-                    }
-                });
+        function del(id){
+            $.ajax('/delete', {
+                method: 'post',
+                data: {
+                    id: id
+                },
+                complete: function () {
+                    document.location.href = "${pageContext.servletContext.contextPath}/ads";
+                }
             });
-        });
+            return false;
+        }
 
-        $(document).ready(function () {
-            $('#cancel').onclick(function () {
-                $.ajax( '/ads', {
-                    method: 'get',
-                    data: {
-                        id: ${user.id}
-                    }
-                });
-            });
-        });
+        function cancel() {
+            document.location.href = "${pageContext.servletContext.contextPath}/ads";
+            return false;
+        }
     </script>
 
 </head>
@@ -46,27 +42,27 @@
 
 <table id="desc" border="1">
     <TR><TD>MODEL: <c:out value="${ad.car}"></c:out></TD></TR>
-    <TR><TD>MODEL: <c:out value="${ad.body}"></c:out></TD></TR>
-    <TR><TD>MODEL: <c:out value="${ad.color}"></c:out></TD></TR>
-    <TR><TD>MODEL: <c:out value="${ad.price}"></c:out></TD></TR>
-    <TR><TD>MODEL: <c:out value="${ad.done}"></c:out></TD></TR>
+    <TR><TD>BODY: <c:out value="${ad.car.body.body}"></c:out></TD></TR>
+    <TR><TD>COLOR: <c:out value="${ad.car.color.color}"></c:out></TD></TR>
+    <TR><TD>PRICE: <c:out value="${ad.price}"></c:out></TD></TR>
+    <TR><TD>STATUS: <c:out value="${ad.done}"></c:out></TD></TR>
 </table>
 
     <table>
         <TD>
-            <form action='${pageContext.servletContext.contextPath}/edit' method='get'>
+            <form action='${pageContext.servletContext.contextPath}/editad' method='get'>
                 <input type='submit' value='edit'>
                 <input type="hidden" name="id" value="${ad.id}">
             </form>
         </TD>
         <TD>
-            <input type='button' id="delete" value='delete'>
+            <input type='button' id="delete" value='delete' onclick="del(${ad.id})">
         </TD>
     </table>
 
 <table border="1">
     <div id="cancel">
-        <input type="button" value="cancel"/>
+        <input type="button" value="cancel" onclick="cancel()"/>
     </div>
 </table>
 

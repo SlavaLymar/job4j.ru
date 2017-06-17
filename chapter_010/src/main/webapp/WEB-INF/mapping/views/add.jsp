@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+    <style>
+
+    </style>
+
     <script type="text/javascript">
 
         $(document).ready(function (){
@@ -32,6 +36,11 @@
                 });
             });
 
+        $(document).ready(function(){
+            $('input').focus(function(){
+                $(this).css("outline-color", "#FF0000");
+            });
+        });
     </script>
 </head>
 <body>
@@ -43,6 +52,7 @@
 
         Manufactor:
         <select name="manuf" id="manufac" size="1" >
+            <option selected="selected">Choose manufactor</option>
             <c:forEach items="${manufacturers}" var="manufactor">
                     <option value="${manufactor.id}">${manufactor.manuf}</option>
             </c:forEach>

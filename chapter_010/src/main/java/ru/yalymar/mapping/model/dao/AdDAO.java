@@ -21,7 +21,19 @@ public class AdDAO extends DAO<Ad> implements Unproxy, Upload {
     public Ad read(int id) {
         Ad ad = super.tx(session -> {
             Ad a = session.get(Ad.class, id);
+
             Car car = (Car) this.initializeAndUnproxy(a.getCar());
+            Model model = (Model) this.initializeAndUnproxy(car.getModel());
+            Manufactor manufactor = (Manufactor) this.initializeAndUnproxy(model.getManuf());
+            model.setManuf(manufactor);
+            Transmission transmission = (Transmission) this.initializeAndUnproxy(car.getTransmission());
+            Body body = (Body) this.initializeAndUnproxy(car.getBody());
+            Color color = (Color) this.initializeAndUnproxy(car.getColor());
+            car.setModel(model);
+            car.setTransmission(transmission);
+            car.setBody(body);
+            car.setColor(color);
+
             User user = (User) this.initializeAndUnproxy(a.getUser());
             Set<Image> images = (Set<Image>) this.initializeAndUnproxy(a.getImages());
             a.setCar(car);
