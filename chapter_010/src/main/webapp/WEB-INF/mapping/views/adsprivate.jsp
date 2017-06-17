@@ -52,7 +52,9 @@
 
             <c:forEach items="${ad.images}" var="image" varStatus="loop">
                 <c:if test="${loop.index == 0}">
-                    <TD><img src="${image.url}" alt=""></TD>
+                    <TD>
+                        <img src="${image.url}" alt="1" style="width:304px;height:250px;">
+                    </TD>
                 </c:if>
             </c:forEach>
 

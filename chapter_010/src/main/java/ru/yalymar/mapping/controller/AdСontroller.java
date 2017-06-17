@@ -20,6 +20,8 @@ public class AdСontroller extends HttpServlet {
         int id = Integer.parseInt(req.getParameter("id"));
         Ad ad = this.daoFactory.getAdDAO().read(id);
         req.setAttribute("ad", ad);
+        req.setAttribute("model", ad.getCar().getModel().getModel());
+        req.setAttribute("m", ad.getCar().getModel().getManuf().getManuf());
         req.getRequestDispatcher("/WEB-INF/mapping/views/ad.jsp").forward(req, resp);
     }
 }
