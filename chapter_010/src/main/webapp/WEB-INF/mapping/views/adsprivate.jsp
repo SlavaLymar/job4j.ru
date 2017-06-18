@@ -25,7 +25,7 @@
         }
 
         $(document).ready(function () {
-            $('#mainrow').hover(
+            $('tr').hover(
                 function () {
                 $(this).addClass('active');
             },
@@ -33,6 +33,7 @@
                 $(this).removeClass('active');
             })
         })
+
     </script>
 
 </head>
@@ -53,14 +54,19 @@
             <c:forEach items="${ad.images}" var="image" varStatus="loop">
                 <c:if test="${loop.index == 0}">
                     <TD>
-                        <img src="${image.url}" alt="1" style="width:304px;height:250px;">
+                        <img src="${image.url}" alt="1" style="width:150px;height:150px;">
                     </TD>
                 </c:if>
             </c:forEach>
 
             <TD><c:out value="${ad.tittle}"></c:out></TD>
 
-            <TD><c:out value="${ad.car}"></c:out></TD>
+            <c:forEach items="${desc}" var="d">
+                <c:if test="${d.key == ad.id}">
+                    <TD><c:out value="${d.value.get(0)} ${d.value.get(1)}"></c:out></TD>
+                </c:if>
+            </c:forEach>
+
 
             <TD><c:out value="${ad.price}"></c:out></TD>
             <TD><fmt:formatDate type="both" value="${ad.create}"/></TD>

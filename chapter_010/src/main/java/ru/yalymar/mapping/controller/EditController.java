@@ -25,6 +25,11 @@ public class EditController extends HttpServlet{
             throws ServletException, IOException {
         Ad ad = this.daoFactory.getAdDAO().read(Integer.parseInt(req.getParameter("id")));
         req.setAttribute("ad", ad);
+        req.setAttribute("mode", ad.getCar().getModel().getModel());
+        req.setAttribute("bod", ad.getCar().getBody().getBody());
+        req.setAttribute("colo", ad.getCar().getColor().getColor());
+        req.setAttribute("m", ad.getCar().getModel().getManuf().getManuf());
+        req.setAttribute("transmission", ad.getCar().getTransmission().getName());
         req.setAttribute("manufacturers", this.daoFactory.getManufactorDAO().readAll());
         req.setAttribute("models", this.daoFactory.getModelDAO().readAll());
         req.setAttribute("bodies", this.daoFactory.getBodyDAO().readAll());

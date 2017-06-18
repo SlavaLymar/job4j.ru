@@ -37,13 +37,16 @@
 <body>
     <h1><c:out value="${ad.tittle}"></c:out></h1>
     <table id="imgs" border="1">
-        <%-- IMG --%>
+        <c:forEach items="${ad.images}" var="image">
+            <img src="${image.url}" alt="">
+        </c:forEach>
     </table>
 
 <table id="desc" border="1">
-    <TR><TD>MODEL: <c:out value="${ad.car}"></c:out></TD></TR>
-    <TR><TD>BODY: <c:out value="${ad.car.body.body}"></c:out></TD></TR>
-    <TR><TD>COLOR: <c:out value="${ad.car.color.color}"></c:out></TD></TR>
+    <TR><TD>MODEL: <c:out value="${m} ${model}"></c:out></TD></TR>
+    <TR><TD>TRANSMISSION: <c:out value="${transmission}"></c:out></TD></TR>
+    <TR><TD>BODY: <c:out value="${body}"></c:out></TD></TR>
+    <TR><TD>COLOR: <c:out value="${color}"></c:out></TD></TR>
     <TR><TD>PRICE: <c:out value="${ad.price}"></c:out></TD></TR>
     <TR><TD>STATUS: <c:out value="${ad.done}"></c:out></TD></TR>
 </table>

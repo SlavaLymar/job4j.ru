@@ -68,6 +68,31 @@
                 var modelsList = [];
             });
         });
+
+
+        $('#manufac').ready(function () {
+            var manufId = $('#manufac').val();
+            var modelsList = [];
+            var modelListId = [];
+            <c:forEach items="${models}" var="model">
+                var manuf = ${model.manuf.id};
+                if (manuf == manufId) {
+                    modelsList.push("${model.model}");
+                    modelListId.push(${model.id});
+
+                }
+            </c:forEach>
+
+            var selectField = document.getElementById("model");
+            selectField.length = 0;
+            for (var i = 0; i < modelsList.length; i++) {
+                selectField.options[selectField.length] =
+                    new Option(modelsList[i], modelListId[i]);
+            }
+            var modelsList = [];
+        });
+
+
     </script>
 
 </head>
@@ -75,44 +100,61 @@
 
 <h1>EDIT</h1>
 <form enctype="multipart/form-data"
-      action='${pageContext.servletContext.contextPath}/add' method='post'>
+      action='${pageContext.servletContext.contextPath}/editad' method='post'>
     Title: <input type="text" name="title" value="${ad.tittle}"/><br>
 
     Manufactor:
     <select name="manuf" id="manufac" size="1" >
-        <option selected="selected">${ad.car.model.manuf.manuf}</option>
         <c:forEach items="${manufacturers}" var="manufactor">
+            <c:if test="${m == manufactor.manuf}">
+                <option selected="selected" value="${manufactor.id}">${manufactor.manuf}</option>
+            </c:if>
+            <c:if test="${m != manufactor.manuf}">
             <option value="${manufactor.id}">${manufactor.manuf}</option>
+            </c:if>
         </c:forEach>
     </select><br>
 
     Model:
     <select name="model" id="model" size="1">
-        <option selected="selected">${ad.car.model.model}</option>
         <option value="model">Choose manufactor</option>
     </select><br>
 
     Transmisson:
     <select name="transmission" id="transmission" size="1" >
-        <option selected="selected">${ad.car.transmission.name}</option>
+
         <c:forEach items="${transmissions}" var="transmission">
-            <option value="${transmission.id}">${transmission.name}</option>
+            <c:if test="${transmission == transmission.name}">
+                <option selected="selected" value="${transmission.id}">${transmission.name}</option>
+            </c:if>
+            <c:if test="${transmission != transmission.name}">
+                <option value="${transmission.id}">${transmission.name}</option>
+            </c:if>
         </c:forEach>
     </select><br>
 
     Body:
     <select name="body" id="body" size="1" >
-        <option selected="selected">${ad.car.transmission.name}</option>
+
         <c:forEach items="${bodies}" var="body">
+            <c:if test="${body == bod}">
+                <option selected="selected" value="${body.id}">${body.body}</option>
+            </c:if>
+            <c:if test="${body != bod}">
             <option value="${body.id}">${body.body}</option>
+            </c:if>
         </c:forEach>
     </select><br>
 
     Color:
     <select name="color" id="color" size="1" >
-        <option selected="selected">${ad.car.color.color}</option>
         <c:forEach items="${colours}" var="color">
+            <c:if test="${color == colo}">
+                <option selected="selected" value="${color.id}">${color.color}</option>
+            </c:if>
+            <c:if test="${color != colo}">
             <option value="${color.id}">${color.color}</option>
+            </c:if>
         </c:forEach>
     </select><br>
 
@@ -120,28 +162,25 @@
 
     Current images:
     <table>
-        <c:forEach items="${images}" var="image">
+        <c:forEach items="${ad.images}" var="image">
             <tr>
                 <td><img src="${image.url}"></td>
-                <td><input type="button" value="delete" onclick="deleteImg(${image.id})"></td>
+                <td><input type="button" value="delete IMG" onclick="deleteImg(${image.id})"></td>
             </tr>
         </c:forEach>
     </table>
     File to upload: <input type="file" name="upfiles" multiple="multiple"><br/>
     <br/>
-    <input type="submit" value="add">
+    <input type='submit' value='edit'>
+    <input type="hidden" name="id" value="${ad.id}">
 </form>
 
     <table>
-        <TD>
-            <form action='${pageContext.servletContext.contextPath}/edit' method='get'>
-                <input type='submit' value='edit'>
-                <input type="hidden" name="id" value="${ad.id}">
-            </form>
-        </TD>
-        <TD>
-            <input type='button' id="delete" value='delete' onclick="del(${ad.id})">
-        </TD>
+        <TR>
+            <TD>
+                <input type='button' id="delete" value='delete' onclick="del(${ad.id})">
+            </TD>
+        </TR>
     </table>
 
 <table border="1">
