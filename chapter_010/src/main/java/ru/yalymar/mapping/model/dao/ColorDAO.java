@@ -27,11 +27,8 @@ public class ColorDAO extends DAO<Color>{
         }
         if(i > 0){
             super.tx(session -> {
-                Query query = session.createQuery("update Color set color = :r " +
-                        "where id = :id");
-                query.setParameter("r", color.getColor());
-                query.setParameter("id", id);
-                return query.executeUpdate();
+                session.update(color);
+                return -1;
             });
         }
         return i;

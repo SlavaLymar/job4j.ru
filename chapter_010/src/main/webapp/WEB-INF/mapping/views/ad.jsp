@@ -14,6 +14,13 @@
         }
     </style>
     <script type="text/javascript">
+
+        $(document).ready(function () {
+            if((!${isAdmin}) && (${user.id != ad.user.id})){
+                $('.privatetable').hide();
+            }
+        });
+
         function del(id){
             $.ajax('/delete', {
                 method: 'post',
@@ -51,7 +58,7 @@
     <TR><TD>STATUS: <c:out value="${ad.done}"></c:out></TD></TR>
 </table>
 
-    <table>
+    <table class="privatetable">
         <TD>
             <form action='${pageContext.servletContext.contextPath}/editad' method='get'>
                 <input type='submit' value='edit'>

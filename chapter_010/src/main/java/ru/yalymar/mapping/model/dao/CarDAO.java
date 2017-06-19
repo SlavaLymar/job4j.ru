@@ -66,13 +66,8 @@ public class CarDAO extends DAO<Car> implements Unproxy {
         }
         if(i > 0) {
             super.tx(session -> {
-                Query query = session.createQuery("update Car set transmission = :t, " +
-                        "body = :b, color = :c where id = :id");
-                query.setParameter("t", car.getTransmission());
-                query.setParameter("b", car.getBody());
-                query.setParameter("c", car.getColor());
-                query.setParameter("id", id);
-                return query.executeUpdate();
+                session.update(car);
+                return -1;
             });
         }
         return i;

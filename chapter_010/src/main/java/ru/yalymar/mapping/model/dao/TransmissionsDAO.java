@@ -28,11 +28,8 @@ public class TransmissionsDAO extends DAO<Transmission>{
         }
         if(i > 0){
             super.tx(session -> {
-                Query query = session.createQuery("update Transmission set name = :r " +
-                        "where id = :id");
-                query.setParameter("r", transmission.getName());
-                query.setParameter("id", id);
-                return query.executeUpdate();
+                session.update(transmission);
+                return -1;
             });
         }
         return i;

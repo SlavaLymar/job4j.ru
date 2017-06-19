@@ -28,11 +28,8 @@ public class BodyDAO extends DAO<Body>{
         }
         if(i > 0){
             super.tx(session -> {
-                Query query = session.createQuery("update Body set body = :r " +
-                        "where id = :id");
-                query.setParameter("r", body.getBody());
-                query.setParameter("id", id);
-                return query.executeUpdate();
+                session.update(body);
+                return -1;
             });
         }
         return i;

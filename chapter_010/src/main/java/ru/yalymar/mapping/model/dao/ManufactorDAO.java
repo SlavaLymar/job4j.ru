@@ -27,11 +27,8 @@ public class ManufactorDAO extends DAO<Manufactor> {
         }
         if(i > 0){
             super.tx(session -> {
-                Query query = session.createQuery("update Manufactor set manuf = :manuf " +
-                        "where id = :id");
-                query.setParameter("manuf", manuf.getManuf());
-                query.setParameter("id", id);
-                return query.executeUpdate();
+                session.update(manuf);
+                return -1;
             });
         }
         return i;

@@ -55,14 +55,8 @@ public class UserDAO extends DAO<User> implements Unproxy<Role> {
         }
         if(i > 0){
             super.tx(session -> {
-                Query query = session.createQuery("update User set login = :l, " +
-                        "password = :p, name = :n, role = :r where id = :id");
-                query.setParameter("l", user.getLogin());
-                query.setParameter("p", user.getPassword());
-                query.setParameter("n", user.getName());
-                query.setParameter("r", user.getRole());
-                query.setParameter("id", id);
-                return query.executeUpdate();
+                session.update(user);
+                return -1;
             });
         }
         return i;

@@ -19,6 +19,12 @@ public class AdСontroller extends HttpServlet {
             throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
         Ad ad = this.daoFactory.getAdDAO().read(id);
+        req.setAttribute("isAdmin", this.daoFactory.getUserDAO().
+                isAdmin((String) req.getSession().getAttribute("slogin"),
+                        (String) req.getSession().getAttribute("spassword")));
+        req.setAttribute("user", this.daoFactory.getUserDAO().getByLoginPassword(
+                (String) req.getSession().getAttribute("slogin"),
+                (String) req.getSession().getAttribute("spassword")));
         req.setAttribute("ad", ad);
         req.setAttribute("model", ad.getCar().getModel().getModel());
         req.setAttribute("body", ad.getCar().getBody().getBody());

@@ -25,11 +25,12 @@ public class EditController extends HttpServlet{
             throws ServletException, IOException {
         Ad ad = this.daoFactory.getAdDAO().read(Integer.parseInt(req.getParameter("id")));
         req.setAttribute("ad", ad);
-        req.setAttribute("mode", ad.getCar().getModel().getModel());
-        req.setAttribute("bod", ad.getCar().getBody().getBody());
-        req.setAttribute("colo", ad.getCar().getColor().getColor());
-        req.setAttribute("m", ad.getCar().getModel().getManuf().getManuf());
-        req.setAttribute("transmission", ad.getCar().getTransmission().getName());
+        req.setAttribute("currentmodel", ad.getCar().getModel().getModel());
+        req.setAttribute("currentbody", ad.getCar().getBody().getBody());
+        req.setAttribute("currentcolor", ad.getCar().getColor().getColor());
+        req.setAttribute("currentmanuf", ad.getCar().getModel().getManuf().getManuf());
+        req.setAttribute("currenttransmission", ad.getCar().getTransmission().getName());
+        req.setAttribute("currentdone", ad.isDone());
         req.setAttribute("manufacturers", this.daoFactory.getManufactorDAO().readAll());
         req.setAttribute("models", this.daoFactory.getModelDAO().readAll());
         req.setAttribute("bodies", this.daoFactory.getBodyDAO().readAll());
@@ -50,10 +51,10 @@ public class EditController extends HttpServlet{
         Ad newAd = new Ad();
         newAd.setTittle(req.getParameter("title"));
         newAd.setCar(new Car(
-                new Model(Integer.parseInt(modelID)),
-                new Transmission(Integer.parseInt(transmissionID)),
-                new Body(Integer.parseInt(bodyID)),
-                new Color(Integer.parseInt(colorID))));
+                this.daoFactory.getModelDAO().read(Integer.parseInt(modelID)),
+                this.daoFactory.getTransmissionsDAO().read(Integer.parseInt(transmissionID)),
+                this.daoFactory.getBodyDAO().read(Integer.parseInt(bodyID)),
+                this.daoFactory.getColorDAO().read(Integer.parseInt(colorID))));
         newAd.setCreate(new Timestamp(System.currentTimeMillis()));
 
         User user = this.daoFactory.getUserDAO().
@@ -61,7 +62,7 @@ public class EditController extends HttpServlet{
                         (String) req.getSession().getAttribute("slogin"),
                         (String) req.getSession().getAttribute("spassword"));
         newAd.setUser(user);
-        newAd.setDone(false);
+        newAd.setDone(Boolean.parseBoolean(req.getParameter("done")));
         newAd.setPrice(Integer.parseInt(req.getParameter("price")));
 
         Set<Image> images = this.daoFactory.getAdDAO().getFiles(req, resp);

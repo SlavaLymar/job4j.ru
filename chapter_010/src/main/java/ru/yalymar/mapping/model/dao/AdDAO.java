@@ -1,6 +1,5 @@
 package ru.yalymar.mapping.model.dao;
 
-import org.hibernate.query.Query;
 import ru.yalymar.mapping.model.*;
 import ru.yalymar.mapping.model.dao.fileuploader.Upload;
 import ru.yalymar.mapping.model.unproxy.Unproxy;
@@ -88,13 +87,8 @@ public class AdDAO extends DAO<Ad> implements Unproxy, Upload {
         }
         if(i > 0){
             super.tx(session -> {
-                Query query = session.createQuery("update Ad set tittle = :t, " +
-                        "car = :c, done = :d where id = :id");
-                query.setParameter("t", ad.getTittle());
-                query.setParameter("c", ad.getCar());
-                query.setParameter("d", ad.isDone());
-                query.setParameter("id", id);
-                return query.executeUpdate();
+                session.update(ad);
+                return -1;
             });
         }
         return i;
@@ -122,7 +116,7 @@ public class AdDAO extends DAO<Ad> implements Unproxy, Upload {
         Collection<Part> items = req.getParts();
         for(Part part : items){
             String fileName = this.extractFileName(part);
-            if(fileName != null){
+            if(fileName != null && !fileName.equals("")){
                 part.write(savePath + File.separator + fileName);
                 result.add(new Image(savePath + File.separator + fileName));
             }

@@ -27,11 +27,8 @@ public class RoleDAO extends DAO<Role> {
         }
         if(i > 0){
             super.tx(session -> {
-                Query query = session.createQuery("update Role set role = :r " +
-                        "where id = :id");
-                query.setParameter("r", role.getRole());
-                query.setParameter("id", id);
-                return query.executeUpdate();
+                session.update(role);
+                return -1;
             });
         }
         return i;

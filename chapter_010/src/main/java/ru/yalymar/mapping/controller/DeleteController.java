@@ -18,6 +18,5 @@ public class DeleteController extends HttpServlet {
             throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
         this.daoFactory.getAdDAO().delete(id);
-//        resp.sendRedirect(String.format("%s/ads", req.getContextPath()));
     }
 }

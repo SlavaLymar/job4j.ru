@@ -47,12 +47,8 @@ public class ModelDAO extends DAO<Model> implements Unproxy<Manufactor> {
         }
         if(i > 0){
             super.tx(session -> {
-                Query query = session.createQuery("update Model set model = :m, " +
-                        "manuf = :ma where id = :id");
-                query.setParameter("m", model.getModel());
-                query.setParameter("ma", model.getManuf());
-                query.setParameter("id", id);
-                return query.executeUpdate();
+                session.update(model);
+                return -1;
             });
         }
         return i;

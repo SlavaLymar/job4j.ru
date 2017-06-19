@@ -106,10 +106,10 @@
     Manufactor:
     <select name="manuf" id="manufac" size="1" >
         <c:forEach items="${manufacturers}" var="manufactor">
-            <c:if test="${m == manufactor.manuf}">
+            <c:if test="${currentmanuf == manufactor.manuf}">
                 <option selected="selected" value="${manufactor.id}">${manufactor.manuf}</option>
             </c:if>
-            <c:if test="${m != manufactor.manuf}">
+            <c:if test="${currentmanuf != manufactor.manuf}">
             <option value="${manufactor.id}">${manufactor.manuf}</option>
             </c:if>
         </c:forEach>
@@ -122,12 +122,11 @@
 
     Transmisson:
     <select name="transmission" id="transmission" size="1" >
-
         <c:forEach items="${transmissions}" var="transmission">
-            <c:if test="${transmission == transmission.name}">
+            <c:if test="${currenttransmission == transmission.name}">
                 <option selected="selected" value="${transmission.id}">${transmission.name}</option>
             </c:if>
-            <c:if test="${transmission != transmission.name}">
+            <c:if test="${currenttransmission != transmission.name}">
                 <option value="${transmission.id}">${transmission.name}</option>
             </c:if>
         </c:forEach>
@@ -137,10 +136,10 @@
     <select name="body" id="body" size="1" >
 
         <c:forEach items="${bodies}" var="body">
-            <c:if test="${body == bod}">
+            <c:if test="${body == currentbody}">
                 <option selected="selected" value="${body.id}">${body.body}</option>
             </c:if>
-            <c:if test="${body != bod}">
+            <c:if test="${body != currentbody}">
             <option value="${body.id}">${body.body}</option>
             </c:if>
         </c:forEach>
@@ -149,16 +148,27 @@
     Color:
     <select name="color" id="color" size="1" >
         <c:forEach items="${colours}" var="color">
-            <c:if test="${color == colo}">
+            <c:if test="${color == currentcolor}">
                 <option selected="selected" value="${color.id}">${color.color}</option>
             </c:if>
-            <c:if test="${color != colo}">
+            <c:if test="${color != currentcolor}">
             <option value="${color.id}">${color.color}</option>
             </c:if>
         </c:forEach>
     </select><br>
 
     Price: <input type="text" name="price" value="${ad.price}"/><br>
+
+    Status: <select name="done" size="1">
+        <c:if test="${currentdone == true}">
+            <option selected="selected" value="true">SOLD</option>
+            <option value="false">ON SALE</option>
+        </c:if>
+        <c:if test="${currentdone != true}">
+            <option selected="selected" value="true">ON SALE</option>
+            <option value="false">SOLD</option>
+        </c:if>
+    </select><br>
 
     Current images:
     <table>
