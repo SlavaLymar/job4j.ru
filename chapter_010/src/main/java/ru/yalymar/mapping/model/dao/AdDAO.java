@@ -1,8 +1,9 @@
 package ru.yalymar.mapping.model.dao;
 
-import ru.yalymar.mapping.model.*;
 import ru.yalymar.mapping.model.dao.fileuploader.Upload;
-import ru.yalymar.mapping.model.unproxy.Unproxy;
+import ru.yalymar.mapping.model.dao.unproxy.Unproxy;
+import ru.yalymar.mapping.model.models.*;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +12,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * @author slavalymar
+ * @since 19.06.2017
+ * @version 1
+ */
 public class AdDAO extends DAO<Ad> implements Unproxy, Upload {
 
     public int create(Ad ad) {

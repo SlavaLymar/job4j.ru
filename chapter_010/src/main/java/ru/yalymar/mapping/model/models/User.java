@@ -1,7 +1,12 @@
-package ru.yalymar.mapping.model;
+package ru.yalymar.mapping.model.models;
 
 import java.sql.Timestamp;
 
+/**
+ * @author slavalymar
+ * @since 19.06.2017
+ * @version 1
+ */
 public class User {
 
     private int id;

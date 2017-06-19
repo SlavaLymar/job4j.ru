@@ -2,7 +2,8 @@ package ru.yalymar.mapping.model.dao;
 
 import org.junit.Before;
 import org.junit.Test;
-import ru.yalymar.mapping.model.*;
+import ru.yalymar.mapping.model.models.*;
+
 import java.util.List;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertNotNull;

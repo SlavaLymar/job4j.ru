@@ -1,9 +1,13 @@
-package ru.yalymar.mapping.model;
+package ru.yalymar.mapping.model.models;
 
 import java.sql.Timestamp;
-import java.util.List;
 import java.util.Set;
 
+/**
+ * @author slavalymar
+ * @since 19.06.2017
+ * @version 1
+ */
 public class Ad {
 
     private int id;

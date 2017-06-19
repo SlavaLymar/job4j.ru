@@ -1,10 +1,14 @@
 package ru.yalymar.mapping.model.dao;
 
 import org.hibernate.query.Query;
-import ru.yalymar.mapping.model.Body;
-
+import ru.yalymar.mapping.model.models.Body;
 import java.util.List;
 
+/**
+ * @author slavalymar
+ * @since 19.06.2017
+ * @version 1
+ */
 public class BodyDAO extends DAO<Body>{
 
     public int create(Body body) {

@@ -2,7 +2,7 @@ package ru.yalymar.mapping.model.dao;
 
 import org.junit.Before;
 import org.junit.Test;
-import ru.yalymar.mapping.model.Role;
+import ru.yalymar.mapping.model.models.Role;
 import java.util.List;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;

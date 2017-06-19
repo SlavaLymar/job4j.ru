@@ -1,10 +1,14 @@
 package ru.yalymar.mapping.model.dao;
 
 import org.hibernate.query.Query;
-import ru.yalymar.mapping.model.Transmission;
-
+import ru.yalymar.mapping.model.models.Transmission;
 import java.util.List;
 
+/**
+ * @author slavalymar
+ * @since 19.06.2017
+ * @version 1
+ */
 public class TransmissionsDAO extends DAO<Transmission>{
 
     public int create(Transmission transmission) {

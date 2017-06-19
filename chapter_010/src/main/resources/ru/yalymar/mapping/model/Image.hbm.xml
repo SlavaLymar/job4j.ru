@@ -1,9 +1,9 @@
 <hibernate-mapping>
-    <class name="ru.yalymar.mapping.model.Image" table="images">
+    <class name="ru.yalymar.mapping.model.models.Image" table="images">
         <id name="id" column="id">
             <generator class="identity"/>
         </id>
         <property name="url" column="url"/>
-        <many-to-one name="ad" column="ads_id" class="ru.yalymar.mapping.model.Ad" cascade="all"/>
+        <many-to-one name="ad" column="ads_id" class="ru.yalymar.mapping.model.models.Ad" cascade="all"/>
     </class>
 </hibernate-mapping>

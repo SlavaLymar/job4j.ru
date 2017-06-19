@@ -1,5 +1,5 @@
 <hibernate-mapping>
-    <class name="ru.yalymar.mapping.model.Body" table="bodies">
+    <class name="ru.yalymar.mapping.model.models.Body" table="bodies">
         <id name="id" column="id">
             <generator class="identity"/>
         </id>

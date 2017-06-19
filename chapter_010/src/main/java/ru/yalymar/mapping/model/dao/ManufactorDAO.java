@@ -1,9 +1,14 @@
 package ru.yalymar.mapping.model.dao;
 
 import org.hibernate.query.Query;
-import ru.yalymar.mapping.model.Manufactor;
+import ru.yalymar.mapping.model.models.Manufactor;
 import java.util.List;
 
+/**
+ * @author slavalymar
+ * @since 19.06.2017
+ * @version 1
+ */
 public class ManufactorDAO extends DAO<Manufactor> {
 
     public int create(Manufactor m) {

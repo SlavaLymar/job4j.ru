@@ -2,6 +2,11 @@ package ru.yalymar.mapping.model.dao;
 
 import org.apache.log4j.Logger;
 
+/**
+ * @author slavalymar
+ * @since 19.06.2017
+ * @version 1
+ */
 public class DAOFactory {
 
     public static final Logger logger = Logger.getLogger(DAOFactory.class);

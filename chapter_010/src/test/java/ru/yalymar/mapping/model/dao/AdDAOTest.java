@@ -2,7 +2,8 @@ package ru.yalymar.mapping.model.dao;
 
 import org.junit.Before;
 import org.junit.Test;
-import ru.yalymar.mapping.model.*;
+import ru.yalymar.mapping.model.models.*;
+
 import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.List;

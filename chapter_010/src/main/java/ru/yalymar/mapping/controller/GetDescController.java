@@ -1,21 +1,12 @@
 package ru.yalymar.mapping.controller;
 
-import org.json.simple.JSONObject;
-import ru.yalymar.mapping.model.Ad;
-import ru.yalymar.mapping.model.dao.DAOFactory;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
 
 @WebServlet(urlPatterns = "/getdesc")
 public class GetDescController extends HttpServlet {
 
+    /*
     private final DAOFactory daoFactory = new DAOFactory();
 
     @Override
@@ -36,4 +27,5 @@ public class GetDescController extends HttpServlet {
         JSONObject.writeJSONString(desc, writer);
         writer.flush();
     }
+    */
 }

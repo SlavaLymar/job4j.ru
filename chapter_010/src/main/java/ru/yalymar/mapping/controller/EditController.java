@@ -1,7 +1,11 @@
 package ru.yalymar.mapping.controller;
 
-import ru.yalymar.mapping.model.*;
 import ru.yalymar.mapping.model.dao.DAOFactory;
+import ru.yalymar.mapping.model.models.Ad;
+import ru.yalymar.mapping.model.models.Car;
+import ru.yalymar.mapping.model.models.Image;
+import ru.yalymar.mapping.model.models.User;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +16,11 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Set;
 
+/**
+ * @author slavalymar
+ * @since 19.06.2017
+ * @version 1
+ */
 @WebServlet(urlPatterns = "/editad")
 @MultipartConfig(fileSizeThreshold = 1024* 1024* 2,
         maxFileSize = 1024*1024,
@@ -20,6 +29,12 @@ public class EditController extends HttpServlet{
 
     private final DAOFactory daoFactory = new DAOFactory();
 
+    /**get edit.jsp page
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -39,6 +54,12 @@ public class EditController extends HttpServlet{
         req.getRequestDispatcher("/WEB-INF/mapping/views/edit.jsp").forward(req, resp);
     }
 
+    /**edit ad
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {

@@ -1,7 +1,8 @@
 package ru.yalymar.mapping.controller;
 
-import ru.yalymar.mapping.model.*;
 import ru.yalymar.mapping.model.dao.DAOFactory;
+import ru.yalymar.mapping.model.models.*;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +13,11 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Set;
 
+/**
+ * @author slavalymar
+ * @since 19.06.2017
+ * @version 1
+ */
 @WebServlet(urlPatterns = "/add")
 @MultipartConfig(fileSizeThreshold = 1024* 1024* 2,
                     maxFileSize = 1024*1024,
@@ -20,6 +26,12 @@ public class CreateAdController extends HttpServlet{
 
     private final DAOFactory daoFactory = new DAOFactory();
 
+    /**get add.jsp page
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -31,6 +43,12 @@ public class CreateAdController extends HttpServlet{
         req.getRequestDispatcher("/WEB-INF/mapping/views/add.jsp").forward(req,  resp);
     }
 
+    /**add ad
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {

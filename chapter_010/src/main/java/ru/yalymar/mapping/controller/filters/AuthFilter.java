@@ -1,7 +1,5 @@
 package ru.yalymar.mapping.controller.filters;
 
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -11,8 +9,8 @@ import java.io.IOException;
 
 /**
  * @author slavalymar
+ * @since 19.06.2017
  * @version 1
- * @since 04.06.2017
  */
 @WebFilter(urlPatterns = "/*")
 public class AuthFilter implements Filter {

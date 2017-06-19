@@ -5,9 +5,14 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-import ru.yalymar.mapping.model.crudrepo.*;
+import ru.yalymar.mapping.model.dao.action.*;
 import java.util.function.Function;
 
+/**
+ * @author slavalymar
+ * @since 19.06.2017
+ * @version 1
+ */
 public abstract class DAO<E> implements Action<E> {
 
     protected SessionFactory sessionFactory;

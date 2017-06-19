@@ -1,6 +1,5 @@
 package ru.yalymar.mapping.controller.filters;
 
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import ru.yalymar.mapping.model.dao.DAOFactory;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -8,6 +7,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * @author slavalymar
+ * @since 19.06.2017
+ * @version 1
+ */
 @WebFilter(urlPatterns = "/*")
 public class UserFilter implements Filter {
 

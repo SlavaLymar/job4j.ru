@@ -1,11 +1,16 @@
 package ru.yalymar.mapping.model.dao;
 
 import org.hibernate.query.Query;
-import ru.yalymar.mapping.model.Role;
-import ru.yalymar.mapping.model.User;
-import ru.yalymar.mapping.model.unproxy.Unproxy;
+import ru.yalymar.mapping.model.models.Role;
+import ru.yalymar.mapping.model.models.User;
+import ru.yalymar.mapping.model.dao.unproxy.Unproxy;
 import java.util.List;
 
+/**
+ * @author slavalymar
+ * @since 19.06.2017
+ * @version 1
+ */
 public class UserDAO extends DAO<User> implements Unproxy<Role> {
 
     public int create(User user) {

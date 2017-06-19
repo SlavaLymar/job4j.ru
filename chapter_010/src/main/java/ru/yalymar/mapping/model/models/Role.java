@@ -1,5 +1,10 @@
-package ru.yalymar.mapping.model;
+package ru.yalymar.mapping.model.models;
 
+/**
+ * @author slavalymar
+ * @since 19.06.2017
+ * @version 1
+ */
 public class Role {
 
     private int id;

@@ -1,9 +1,14 @@
 package ru.yalymar.mapping.model.dao;
 
 import org.hibernate.query.Query;
-import ru.yalymar.mapping.model.Role;
+import ru.yalymar.mapping.model.models.Role;
 import java.util.List;
 
+/**
+ * @author slavalymar
+ * @since 19.06.2017
+ * @version 1
+ */
 public class RoleDAO extends DAO<Role> {
 
     public int create(Role role) {

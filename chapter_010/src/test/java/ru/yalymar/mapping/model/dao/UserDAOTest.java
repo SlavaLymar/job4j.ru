@@ -2,8 +2,8 @@ package ru.yalymar.mapping.model.dao;
 
 import org.junit.Before;
 import org.junit.Test;
-import ru.yalymar.mapping.model.Role;
-import ru.yalymar.mapping.model.User;
+import ru.yalymar.mapping.model.models.Role;
+import ru.yalymar.mapping.model.models.User;
 import java.sql.Timestamp;
 import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;

@@ -1,11 +1,16 @@
 package ru.yalymar.mapping.model.dao;
 
 import org.hibernate.query.Query;
-import ru.yalymar.mapping.model.Manufactor;
-import ru.yalymar.mapping.model.Model;
-import ru.yalymar.mapping.model.unproxy.Unproxy;
+import ru.yalymar.mapping.model.models.Manufactor;
+import ru.yalymar.mapping.model.models.Model;
+import ru.yalymar.mapping.model.dao.unproxy.Unproxy;
 import java.util.List;
 
+/**
+ * @author slavalymar
+ * @since 19.06.2017
+ * @version 1
+ */
 public class ModelDAO extends DAO<Model> implements Unproxy<Manufactor> {
 
     public int create(Model model) {
