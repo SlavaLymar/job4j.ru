@@ -146,78 +146,63 @@ public class AdDAO extends DAO<Ad> implements Unproxy, Upload {
         List<Ad> result = this.readAll();
 
         String manuf = filterData.get("manuf");
-        List<Integer> manufDel = new ArrayList<>();
         if(manuf != null && !manuf.equals("")){
             for(int i = 0; i<result.size(); i++){
                 if(!manuf.equals(result.get(i).getCar().getModel().getManuf().getManuf())){
-                    manufDel.add(i);
+                    result.remove(i);
+                    i--;
                 }
             }
         }
-        manufDel.forEach(i ->{
-            result.remove(result.get(i));
-        });
 
         String model = filterData.get("model");
-        List<Integer> modelDel = new ArrayList<>();
         if(model != null && !model.equals("")){
             for(int i = 0; i<result.size(); i++){
                 if(!model.equals(result.get(i).getCar().getModel().getModel())){
-                    modelDel.add(i);
+                    result.remove(i);
+                    i--;
                 }
             }
         }
-        modelDel.forEach(i ->{
-            result.remove(result.get(i));
-        });
 
         String transmission = filterData.get("transmission");
-        List<Integer> tDel = new ArrayList<>();
         if(transmission != null && !transmission.equals("")){
             for(int i = 0; i<result.size(); i++){
                 if(!transmission.equals(result.get(i).getCar().getTransmission().getName())){
-                    tDel.add(i);
+                    result.remove(i);
+                    i--;
                 }
             }
         }
-        tDel.forEach(i ->{
-            result.remove(result.get(i));
-        });
 
         String body = filterData.get("body");
-        List<Integer> bDel = new ArrayList<>();
         if(body != null && !body.equals("")){
             for(int i = 0; i<result.size(); i++){
                 if(!body.equals(result.get(i).getCar().getBody().getBody())){
-                    bDel.add(i);
+                    result.remove(i);
+                    i--;
                 }
             }
         }
-        bDel.forEach(i ->{
-            result.remove(result.get(i));
-        });
 
         String color = filterData.get("color");
-        List<Integer> cDel = new ArrayList<>();
         if(color != null && !color.equals("")){
             for(int i = 0; i<result.size(); i++){
                 if(!color.equals(result.get(i).getCar().getColor().getColor())){
-                    cDel.add(i);
+                    result.remove(i);
+                    i--;
                 }
             }
         }
-        cDel.forEach(i ->{
-            result.remove(result.get(i));
-        });
 
         String from = filterData.get("from");
         String to = filterData.get("to");
-        List<Integer> fromToDel = new ArrayList<>();
         if(!from.equals("") && !to.equals("")){
             for(int i = 0; i<result.size(); i++){
                 int price = result.get(i).getPrice();
                 if(price < Integer.parseInt(from) && price > Integer.parseInt(to)){
-                    fromToDel.add(i);
+                    result.remove(i);
+                    i--;
                 }
             }
         }
@@ -225,7 +210,8 @@ public class AdDAO extends DAO<Ad> implements Unproxy, Upload {
             for(int i = 0; i<result.size(); i++){
                 int price = result.get(i).getPrice();
                 if(price < 0 && price > Integer.parseInt(to)){
-                    fromToDel.add(i);
+                    result.remove(i);
+                    i--;
                 }
             }
         }
@@ -233,14 +219,11 @@ public class AdDAO extends DAO<Ad> implements Unproxy, Upload {
             for(int i = 0; i<result.size(); i++){
                 int price = result.get(i).getPrice();
                 if(price < Integer.parseInt(from)){
-                    fromToDel.add(i);
+                    result.remove(i);
+                    i--;
                 }
             }
         }
-        fromToDel.forEach(i ->{
-            result.remove(result.get(i));
-        });
-
         return result;
     }
 }

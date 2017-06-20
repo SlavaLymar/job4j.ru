@@ -87,7 +87,10 @@
                     },
                     complete: function (data) {
                         var j = JSON.parse(data.responseText);
-
+                        if(j.id.length === 0){
+                            alert("Didn`t find anything! Try again!");
+                            return;
+                        }
                         <c:forEach items="${ads}" var="ad">
                             for(var i = 0; i<j.id.length; i++){
                                 if(j.id[i] === ${ad.id}){
