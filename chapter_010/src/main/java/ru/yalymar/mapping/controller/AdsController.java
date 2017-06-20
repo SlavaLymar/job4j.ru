@@ -46,6 +46,11 @@ public class AdsController extends HttpServlet {
                 }});
             }));
             req.setAttribute("desc", desc);
+            req.setAttribute("manufacturers", this.daoFactory.getManufactorDAO().readAll());
+            req.setAttribute("models", this.daoFactory.getModelDAO().readAll());
+            req.setAttribute("bodies", this.daoFactory.getBodyDAO().readAll());
+            req.setAttribute("colours", this.daoFactory.getColorDAO().readAll());
+            req.setAttribute("transmissions", this.daoFactory.getTransmissionsDAO().readAll());
 
             req.getRequestDispatcher("/WEB-INF/mapping/views/adsprivate.jsp").forward(req, resp);
 

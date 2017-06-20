@@ -8,6 +8,7 @@ package ru.yalymar.mapping.model.models;
 public class Manufactor {
 
     private int id;
+
     private String manuf;
 
     public Manufactor() {

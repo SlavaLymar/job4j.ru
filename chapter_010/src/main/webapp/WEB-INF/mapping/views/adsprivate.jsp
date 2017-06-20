@@ -32,14 +32,140 @@
                 function () {
                 $(this).removeClass('active');
             })
-        })
+        });
+
+        $(document).ready(function (){
+            $('#fmanufac').on('change', function () {
+                var manufId = $('#fmanufac').val();
+                if(manufId == 'Choose manufactor'){
+                    var selectField = document.getElementById("fmodel");
+                    selectField.length = 0;
+                    selectField.options[selectField.length] =
+                        new Option("Choose manufactor", "Choose manufactor");
+                    return;
+                }
+                var modelsList = [];
+                var modelListId = [];
+                <c:forEach items="${models}" var="model">
+                    var manuf = '${model.manuf.manuf}';
+                    if(manuf == manufId){
+                        modelsList.push("${model.model}");
+                        modelListId.push(${model.id});
+                    }
+                </c:forEach>
+
+                var selectField = document.getElementById("fmodel");
+                selectField.length = 0;
+                var el = document.createElement("option");
+                el.textContent = "Choose Manufactor";
+                el.value = "";
+                el.selected = true;
+                selectField.appendChild(el);
+
+                for (var i = 0; i < modelsList.length; i++) {
+                    selectField.options[selectField.length] =
+                        new Option(modelsList[i], modelListId[i]);
+                }
+
+                var modelsList = [];
+            });
+        });
+
+
+        $(document).ready(function () {
+            $('select').on('change', function () {
+                $.ajax('/adfilter', {
+                    method: 'post',
+                    data: {
+                        fmanuf: $('#fmanufac').val(),
+                        fmodel: $('#fmodel').val(),
+                        ftransmission: $('#ftransmission').val(),
+                        fbody: $('#fbody').val(),
+                        fcolor: $('#fcolor').val(),
+                        from: $('#from').val(),
+                        to: $('#to').val()
+                    }
+//                    complete:
+                })
+            });
+        });
+
+//        $(document).ready(function () {
+//            $('#fmanufac').on('change', function () {
+//                var chosenManuf = $('#fmanufac').val();
+//                if (chosenManuf == 'Choose manufactor') {
+                    <%--<c:forEach items="${ads}" var="ad">--%>
+                        <%--$('#mainrow${ad.id}').show('fast');--%>
+                    <%--</c:forEach>--%>
+//                    return;
+//                }
+                <%--<c:forEach items="${ads}" var="ad">--%>
+                    <%--<c:forEach items="${desc}" var="d">--%>
+                        <%--<c:if test="${d.key == ad.id}">--%>
+                            <%--if('${d.value.get(0)}' != chosenManuf){--%>
+                                <%--$('#mainrow${ad.id}').hide();--%>
+//                            }
+//                            else {
+                                <%--$('#mainrow${ad.id}').show('fast');--%>
+//                            }
+                        <%--</c:if>--%>
+                    <%--</c:forEach>--%>
+                <%--</c:forEach>--%>
+//            });
+//        });
+
 
     </script>
 
 </head>
 <body>
+<h2 align="center">Ads</h2>
+
+<h3>Filters</h3>
+
+    Manufactor:
+    <select name="fmanuf" id="fmanufac" size="1" >
+        <option selected="selected" value="">Choose manufactor</option>
+        <c:forEach items="${manufacturers}" var="manufactor">
+            <option value="${manufactor.manuf}">${manufactor.manuf}</option>
+        </c:forEach>
+    </select><br>
+
+    Model:
+    <select name="fmodel" id="fmodel" size="1">
+        <option value="model">Choose manufactor</option>
+    </select><br>
+
+    Transmisson:
+    <select name="ftransmission" id="ftransmission" size="1" >
+        <option value="" selected="selected">Choose transmission</option>
+        <c:forEach items="${transmissions}" var="transmission">
+            <option value="${transmission.id}">${transmission.name}</option>
+        </c:forEach>
+    </select><br>
+
+    Body:
+    <select name="fbody" id="fbody" size="1" >
+        <option value="" selected="selected">Choose Body</option>
+        <c:forEach items="${bodies}" var="body">
+            <option value="${body.id}">${body.body}</option>
+        </c:forEach>
+    </select><br>
+
+    Color:
+    <select name="fcolor" id="fcolor" size="1" >
+        <option value="" selected="selected">Choose Color</option>
+        <c:forEach items="${colours}" var="color">
+            <option value="${color.id}">${color.color}</option>
+        </c:forEach>
+    </select><br>
+
+    Price: from <input type="text" id="from" name="from" value=""/> - to
+                    <input type="text" id="to" name="to" value=""/><br>
+    <br/>
+
+
 <table border="1">
-    <h2 align="center">Ads</h2>
     <TR style="background-color: gray">
         <TD>IMAGE</TD>
         <TD>TITLE</TD>
@@ -48,8 +174,9 @@
         <TD>DATE</TD>
         <TD>ACTUAL</TD>
     </TR>
+    <div id="rows">
     <c:forEach items="${ads}" var="ad">
-        <TR id="mainrow" onclick="return inAd(${ad.id});">
+        <TR id="mainrow${ad.id}" onclick="return inAd(${ad.id});">
 
             <c:forEach items="${ad.images}" var="image" varStatus="loop">
                 <c:if test="${loop.index == 0}">
@@ -74,6 +201,7 @@
 
         </TR>
     </c:forEach>
+    </div>
 </table>
 
 

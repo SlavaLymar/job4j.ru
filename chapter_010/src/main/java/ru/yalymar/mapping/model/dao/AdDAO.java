@@ -1,5 +1,7 @@
 package ru.yalymar.mapping.model.dao;
 
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 import ru.yalymar.mapping.model.dao.fileuploader.Upload;
 import ru.yalymar.mapping.model.dao.unproxy.Unproxy;
 import ru.yalymar.mapping.model.models.*;
@@ -143,4 +145,17 @@ public class AdDAO extends DAO<Ad> implements Unproxy, Upload {
         return result;
     }
 
+    public List<Ad> getAdByFilters(Map<String, String> filterData) {
+        List<Ad> result = new ArrayList<>();
+        List<Ad> ads = this.readAll();
+
+        Session session = sessionFactory.openSession();
+        for(Map.Entry<String, String> entry : filterData.entrySet()){
+            if(!entry.getValue().equals("")) {
+
+            }
+        }
+
+        return result;
+    }
 }

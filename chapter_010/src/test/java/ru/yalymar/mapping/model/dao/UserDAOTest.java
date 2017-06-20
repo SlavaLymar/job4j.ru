@@ -85,9 +85,9 @@ public class UserDAOTest {
     @Test
     public void whenGetUserByLoginPasswordShoildGetIt(){
         User user = new User();
-        user.setLogin("test1");
-        user.setPassword("test1");
-        user.setName("test1");
+        user.setLogin("test2");
+        user.setPassword("test2");
+        user.setName("test2");
         user.setCreate(new Timestamp(System.currentTimeMillis()));
         user.setRole(new Role(2));
         int id = this.mf.getUserDAO().create(user);
