@@ -1,11 +1,8 @@
 package ru.yalymar.mapping.model.dao;
 
-import org.hibernate.Session;
-import org.hibernate.query.Query;
 import ru.yalymar.mapping.model.dao.fileuploader.Upload;
 import ru.yalymar.mapping.model.dao.unproxy.Unproxy;
 import ru.yalymar.mapping.model.models.*;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -146,15 +143,103 @@ public class AdDAO extends DAO<Ad> implements Unproxy, Upload {
     }
 
     public List<Ad> getAdByFilters(Map<String, String> filterData) {
-        List<Ad> result = new ArrayList<>();
-        List<Ad> ads = this.readAll();
+        List<Ad> result = this.readAll();
 
-        Session session = sessionFactory.openSession();
-        for(Map.Entry<String, String> entry : filterData.entrySet()){
-            if(!entry.getValue().equals("")) {
-
+        String manuf = filterData.get("manuf");
+        List<Integer> manufDel = new ArrayList<>();
+        if(manuf != null && !manuf.equals("")){
+            for(int i = 0; i<result.size(); i++){
+                if(!manuf.equals(result.get(i).getCar().getModel().getManuf().getManuf())){
+                    manufDel.add(i);
+                }
             }
         }
+        manufDel.forEach(i ->{
+            result.remove(result.get(i));
+        });
+
+        String model = filterData.get("model");
+        List<Integer> modelDel = new ArrayList<>();
+        if(model != null && !model.equals("")){
+            for(int i = 0; i<result.size(); i++){
+                if(!model.equals(result.get(i).getCar().getModel().getModel())){
+                    modelDel.add(i);
+                }
+            }
+        }
+        modelDel.forEach(i ->{
+            result.remove(result.get(i));
+        });
+
+        String transmission = filterData.get("transmission");
+        List<Integer> tDel = new ArrayList<>();
+        if(transmission != null && !transmission.equals("")){
+            for(int i = 0; i<result.size(); i++){
+                if(!transmission.equals(result.get(i).getCar().getTransmission().getName())){
+                    tDel.add(i);
+                }
+            }
+        }
+        tDel.forEach(i ->{
+            result.remove(result.get(i));
+        });
+
+        String body = filterData.get("body");
+        List<Integer> bDel = new ArrayList<>();
+        if(body != null && !body.equals("")){
+            for(int i = 0; i<result.size(); i++){
+                if(!body.equals(result.get(i).getCar().getBody().getBody())){
+                    bDel.add(i);
+                }
+            }
+        }
+        bDel.forEach(i ->{
+            result.remove(result.get(i));
+        });
+
+        String color = filterData.get("color");
+        List<Integer> cDel = new ArrayList<>();
+        if(color != null && !color.equals("")){
+            for(int i = 0; i<result.size(); i++){
+                if(!color.equals(result.get(i).getCar().getColor().getColor())){
+                    cDel.add(i);
+                }
+            }
+        }
+        cDel.forEach(i ->{
+            result.remove(result.get(i));
+        });
+
+        String from = filterData.get("from");
+        String to = filterData.get("to");
+        List<Integer> fromToDel = new ArrayList<>();
+        if(!from.equals("") && !to.equals("")){
+            for(int i = 0; i<result.size(); i++){
+                int price = result.get(i).getPrice();
+                if(price < Integer.parseInt(from) && price > Integer.parseInt(to)){
+                    fromToDel.add(i);
+                }
+            }
+        }
+        else if(from.equals("") && !to.equals("")){
+            for(int i = 0; i<result.size(); i++){
+                int price = result.get(i).getPrice();
+                if(price < 0 && price > Integer.parseInt(to)){
+                    fromToDel.add(i);
+                }
+            }
+        }
+        else if(!from.equals("") && to.equals("")){
+            for(int i = 0; i<result.size(); i++){
+                int price = result.get(i).getPrice();
+                if(price < Integer.parseInt(from)){
+                    fromToDel.add(i);
+                }
+            }
+        }
+        fromToDel.forEach(i ->{
+            result.remove(result.get(i));
+        });
 
         return result;
     }

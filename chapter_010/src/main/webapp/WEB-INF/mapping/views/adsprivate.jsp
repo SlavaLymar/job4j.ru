@@ -50,7 +50,7 @@
                     var manuf = '${model.manuf.manuf}';
                     if(manuf == manufId){
                         modelsList.push("${model.model}");
-                        modelListId.push(${model.id});
+                        modelListId.push(${model.model});
                     }
                 </c:forEach>
 
@@ -84,8 +84,22 @@
                         fcolor: $('#fcolor').val(),
                         from: $('#from').val(),
                         to: $('#to').val()
+                    },
+                    complete: function (data) {
+                        var j = JSON.parse(data.responseText);
+
+                        <c:forEach items="${ads}" var="ad">
+                            for(var i = 0; i<j.id.length; i++){
+                                if(j.id[i] === ${ad.id}){
+                                    $('#mainrow${ad.id}').show('fast');
+                                    break;
+                                }
+                                else {
+                                    $('#mainrow${ad.id}').hide();
+                                }
+                            }
+                        </c:forEach>
                     }
-//                    complete:
                 })
             });
         });
@@ -133,14 +147,14 @@
 
     Model:
     <select name="fmodel" id="fmodel" size="1">
-        <option value="model">Choose manufactor</option>
+        <option value="">Choose manufactor</option>
     </select><br>
 
     Transmisson:
     <select name="ftransmission" id="ftransmission" size="1" >
         <option value="" selected="selected">Choose transmission</option>
         <c:forEach items="${transmissions}" var="transmission">
-            <option value="${transmission.id}">${transmission.name}</option>
+            <option value="${transmission.name}">${transmission.name}</option>
         </c:forEach>
     </select><br>
 
@@ -148,7 +162,7 @@
     <select name="fbody" id="fbody" size="1" >
         <option value="" selected="selected">Choose Body</option>
         <c:forEach items="${bodies}" var="body">
-            <option value="${body.id}">${body.body}</option>
+            <option value="${body.body}">${body.body}</option>
         </c:forEach>
     </select><br>
 
@@ -156,7 +170,7 @@
     <select name="fcolor" id="fcolor" size="1" >
         <option value="" selected="selected">Choose Color</option>
         <c:forEach items="${colours}" var="color">
-            <option value="${color.id}">${color.color}</option>
+            <option value="${color.color}">${color.color}</option>
         </c:forEach>
     </select><br>
 

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,13 +46,15 @@ public class GetAdByFilterController extends HttpServlet {
         List<Ad> ads = this.daoFactory.getAdDAO().getAdByFilters(filterData);
 
         //create json
-        Map<Integer, List<String>> fads = new HashMap<>();
+        Map<String, List<Integer>> jAdsId = new HashMap<>();
+        List<Integer> adsID = new ArrayList<>();
         ads.forEach(ad -> {
-
+            adsID.add(ad.getId());
         });
+        jAdsId.put("id", adsID);
 
-        JSONObject.toJSONString(fads);
-        JSONObject.writeJSONString(fads, writer);
+        JSONObject.toJSONString(jAdsId);
+        JSONObject.writeJSONString(jAdsId, writer);
         writer.flush();
     }
 }
