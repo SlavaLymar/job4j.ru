@@ -18,6 +18,11 @@ public class Image {
         this.url = url;
     }
 
+    public Image(String url, Ad ad) {
+        this.url = url;
+        this.ad = ad;
+    }
+
     public Ad getAd() {
         return ad;
     }

@@ -8,7 +8,6 @@ package ru.yalymar.mapping.model.models;
 public class Manufactor {
 
     private int id;
-
     private String manuf;
 
     public Manufactor() {
@@ -16,6 +15,10 @@ public class Manufactor {
 
     public Manufactor(int id) {
         this.id = id;
+    }
+
+    public Manufactor(String manuf) {
+        this.manuf = manuf;
     }
 
     public int getId() {

@@ -17,6 +17,10 @@ public class Body {
         this.id = id;
     }
 
+    public Body(String body) {
+        this.body = body;
+    }
+
     public int getId() {
         return id;
     }

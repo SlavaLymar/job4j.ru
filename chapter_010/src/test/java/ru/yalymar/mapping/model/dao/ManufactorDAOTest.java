@@ -20,6 +20,7 @@ public class ManufactorDAOTest {
 
     @Test
     public void whenCreateManufShouldGetId(){
+        //add
         Manufactor manuf = new Manufactor();
         manuf.setManuf("toyota");
         int id = this.mf.getManufactorDAO().create(manuf);
@@ -30,6 +31,7 @@ public class ManufactorDAOTest {
 
     @Test
     public void whenDeleteManufShouldGetInt(){
+        //add
         Manufactor manuf = new Manufactor();
         manuf.setManuf("toyota");
         int id = this.mf.getManufactorDAO().create(manuf);
@@ -57,12 +59,22 @@ public class ManufactorDAOTest {
 
     @Test
     public void whenReadManufShouldGetIt(){
-        Manufactor m = this.mf.getManufactorDAO().read(3);
+        //add
+        Manufactor manuf = new Manufactor();
+        manuf.setManuf("toyota");
+        int id = this.mf.getManufactorDAO().create(manuf);
+
+        Manufactor m = this.mf.getManufactorDAO().read(id);
         assertNotNull(m);
     }
 
     @Test
     public void whenReadAllManufShouldGetThem(){
+        //add
+        Manufactor manuf = new Manufactor();
+        manuf.setManuf("toyota");
+        int id = this.mf.getManufactorDAO().create(manuf);
+
         List<Manufactor> ms = this.mf.getManufactorDAO().readAll();
         assertTrue(ms.size() > 0);
     }

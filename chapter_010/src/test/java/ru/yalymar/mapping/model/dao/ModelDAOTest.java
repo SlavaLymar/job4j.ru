@@ -13,29 +13,24 @@ import static org.junit.Assert.assertTrue;
 public class ModelDAOTest {
 
     private DAOFactory mf;
+    private int mid;
 
     @Before
     public void init(){
         this.mf = new DAOFactory();
-    }
-
-    @Test
-    public void whenReadModelShouldGetIt(){
-        Model model = this.mf.getModelDAO().read(1);
-        assertNotNull(model);
-    }
-
-    @Test
-    public void whenReadAllModelsShouldGetThem(){
-        List<Model> models = this.mf.getModelDAO().readAll();
-        assertTrue(models.size() > 0);
+        //create manufactor
+        Manufactor manuf = new Manufactor();
+        manuf.setManuf("toyota");
+        this.mid = this.mf.getManufactorDAO().create(manuf);
     }
 
     @Test
     public void whenCreateModelShouldGetId(){
+        //create model
         Model model = new Model();
         model.setModel("test1");
-        model.setManuf(new Manufactor(3));
+        model.setModel("test1");
+        model.setManuf(new Manufactor(this.mid));
         int id = this.mf.getModelDAO().create(model);
         assertTrue(id > 0);
 
@@ -43,10 +38,38 @@ public class ModelDAOTest {
     }
 
     @Test
-    public void whenDeleteModelShouldGetInt(){
+    public void whenReadModelShouldGetIt(){
+        //create model
         Model model = new Model();
         model.setModel("test1");
-        model.setManuf(new Manufactor(3));
+        model.setModel("test1");
+        model.setManuf(new Manufactor(this.mid));
+        int id = this.mf.getModelDAO().create(model);
+
+        Model result = this.mf.getModelDAO().read(1);
+        assertNotNull(result);
+    }
+
+    @Test
+    public void whenReadAllModelsShouldGetThem(){
+        //create model
+        Model model = new Model();
+        model.setModel("test1");
+        model.setModel("test1");
+        model.setManuf(new Manufactor(this.mid));
+        int id = this.mf.getModelDAO().create(model);
+
+        List<Model> models = this.mf.getModelDAO().readAll();
+        assertTrue(models.size() > 0);
+    }
+
+    @Test
+    public void whenDeleteModelShouldGetInt(){
+        //create model
+        Model model = new Model();
+        model.setModel("test1");
+        model.setModel("test1");
+        model.setManuf(new Manufactor(this.mid));
         int id = this.mf.getModelDAO().create(model);
 
         int i = this.mf.getModelDAO().delete(id);
@@ -55,10 +78,11 @@ public class ModelDAOTest {
 
     @Test
     public void whenUpdateModelShouldGetInt(){
+        //create model
         Model model = new Model();
         model.setModel("test1");
-        model.setManuf(new Manufactor(3));
-        //add
+        model.setModel("test1");
+        model.setManuf(new Manufactor(this.mid));
         int id = this.mf.getModelDAO().create(model);
 
         //update

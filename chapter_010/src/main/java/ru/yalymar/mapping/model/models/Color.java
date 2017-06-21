@@ -17,6 +17,10 @@ public class Color {
         this.id = id;
     }
 
+    public Color(String color) {
+        this.color = color;
+    }
+
     public int getId() {
         return id;
     }

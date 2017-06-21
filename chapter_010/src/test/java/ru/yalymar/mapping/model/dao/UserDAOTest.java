@@ -14,16 +14,40 @@ import static org.junit.Assert.assertTrue;
 public class UserDAOTest {
 
     private DAOFactory mf;
+    private User user;
+
+    public int createUser(){
+        this.mf = new DAOFactory();
+        //create role
+        Role role = new Role();
+        role.setRole("test1");
+        int roleId = this.mf.getRoleDAO().create(role);
+
+        //create user
+        User user = new User();
+        user.setLogin("test1");
+        user.setPassword("test1");
+        user.setName("test1");
+        user.setCreate(new Timestamp(System.currentTimeMillis()));
+        user.setRole(new Role(roleId));
+        this.user = user;
+        return this.mf.getUserDAO().create(user);
+    }
 
     @Before
     public void init(){
-        this.mf = new DAOFactory();
+        this.createUser();
+    }
+
+    @Test
+    public void whenCreateUserShouldGetId(){
+        assertTrue(this.user.getId() > 0);
     }
 
     @Test
     public void whenReadUserShouldGetNotNull(){
-        User user = this.mf.getUserDAO().read(1);
-        assertNotNull(user);
+        User result = this.mf.getUserDAO().read(this.user.getId());
+        assertNotNull(result);
     }
 
     @Test
@@ -33,69 +57,24 @@ public class UserDAOTest {
     }
 
     @Test
-    public void whenCreateUserShouldGetId(){
-        User user = new User();
-        user.setLogin("test1");
-        user.setPassword("test1");
-        user.setName("test1");
-        user.setCreate(new Timestamp(System.currentTimeMillis()));
-        user.setRole(new Role(2));
-        int id = this.mf.getUserDAO().create(user);
-        assertTrue(id > 0);
-
-        this.mf.getUserDAO().delete(id);
-    }
-
-    @Test
     public void whenDeleteUserShouldGetInt(){
-        User user = new User();
-        user.setLogin("test1");
-        user.setPassword("test1");
-        user.setName("test1");
-        user.setCreate(new Timestamp(System.currentTimeMillis()));
-        user.setRole(new Role(2));
-        int id = this.mf.getUserDAO().create(user);
-
-        int i = this.mf.getUserDAO().delete(id);
+        int i = this.mf.getUserDAO().delete(this.user.getId());
         assertThat(i, is(1));
     }
 
     @Test
     public void whenUpdateUserShouldGetNewUser(){
-        User user = new User();
-        user.setLogin("test1");
-        user.setPassword("test1");
-        user.setName("test1");
-        user.setCreate(new Timestamp(System.currentTimeMillis()));
-        user.setRole(new Role(2));
-
-        //add
-        int id = this.mf.getUserDAO().create(user);
-
         //daoUpdate
         User newUser = new User();
         newUser.setName("test2");
-        int i = this.mf.getUserDAO().update(id, newUser);
+        int i = this.mf.getUserDAO().update(this.user.getId(), newUser);
         assertThat(i, is(1));
-
-        //daoDelete
-        this.mf.getUserDAO().delete(id);
     }
 
     @Test
     public void whenGetUserByLoginPasswordShoildGetIt(){
-        User user = new User();
-        user.setLogin("test2");
-        user.setPassword("test2");
-        user.setName("test2");
-        user.setCreate(new Timestamp(System.currentTimeMillis()));
-        user.setRole(new Role(2));
-        int id = this.mf.getUserDAO().create(user);
-
         User userLP = this.mf.getUserDAO().getByLoginPassword("test1", "test1");
         assertNotNull(userLP);
-
-        this.mf.getUserDAO().delete(id);
     }
 
 }

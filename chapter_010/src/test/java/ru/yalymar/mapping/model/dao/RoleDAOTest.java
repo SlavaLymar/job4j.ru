@@ -17,18 +17,6 @@ public class RoleDAOTest {
     }
 
     @Test
-    public void whenReadRoleShouldGetNotNull(){
-        Role role = this.mf.getRoleDAO().read(1);
-        assertNotNull(role);
-    }
-
-    @Test
-    public void whenReadAllRolesShouldGetThem(){
-        List<Role> roles = this.mf.getRoleDAO().readAll();
-        assertTrue(roles.size() > 0);
-    }
-
-    @Test
     public void whenCreateRoleShouldGetId(){
         Role role = new Role();
         role.setRole("test1");
@@ -39,7 +27,30 @@ public class RoleDAOTest {
     }
 
     @Test
+    public void whenReadRoleShouldGetNotNull(){
+        //add
+        Role role = new Role();
+        role.setRole("test1");
+        int id = this.mf.getRoleDAO().create(role);
+
+        Role result = this.mf.getRoleDAO().read(1);
+        assertNotNull(result);
+    }
+
+    @Test
+    public void whenReadAllRolesShouldGetThem(){
+        //add
+        Role role = new Role();
+        role.setRole("test1");
+        int id = this.mf.getRoleDAO().create(role);
+
+        List<Role> roles = this.mf.getRoleDAO().readAll();
+        assertTrue(roles.size() > 0);
+    }
+
+    @Test
     public void whenDeleteRoleShouldGetInt(){
+        //add
         Role role = new Role();
         role.setRole("test1");
         int id = this.mf.getRoleDAO().create(role);

@@ -57,6 +57,7 @@ public class AddControllerTest {
         RequestDispatcher rd = mock(RequestDispatcher.class);
         when(req.getRequestDispatcher(("/WEB-INF/views/filter/mvcusers.jsp"))).thenReturn(rd);
 
+
         // find user
         List<User> users = us.getUserManager().getAll();
         boolean[] findUser = new boolean[1];

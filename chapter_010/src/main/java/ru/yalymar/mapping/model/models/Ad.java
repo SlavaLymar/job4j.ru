@@ -22,6 +22,10 @@ public class Ad {
     public Ad() {
     }
 
+    public Ad(int id) {
+        this.id = id;
+    }
+
     public int getPrice() {
         return price;
     }
