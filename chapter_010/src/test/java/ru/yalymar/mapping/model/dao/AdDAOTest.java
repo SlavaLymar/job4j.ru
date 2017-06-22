@@ -17,94 +17,104 @@ public class AdDAOTest {
 
     private DAOFactory mf;
     private Ad ad;
-    private int modelId;
-    private int manufId;
-    private int bodyId;
-    private int transmissionId;
-    private int colorId;
+    private Model model;
+    private Manufactor manuf;
+    private Body body;
+    private Transmission transmission;
+    private Color color;
 
     public int createAd(){
-        this.mf = new DAOFactory();
+
 
         //create car
-        this.manufId = this.getManufId();
-        this.modelId = this.getModelId();
-        this.transmissionId = this.getTransmissionId();
-        this.bodyId = this.getBodyId();
-        this.colorId = this.getColorId();
-
         Car car = new Car();
-        car.setModel(new Model(this.modelId));
-        car.setTransmission(new Transmission(this.transmissionId));
-        car.setBody(new Body(this.bodyId));
-        car.setColor(new Color(this.colorId));
-        int carId = this.mf.getCarDAO().create(car);
+        car.setModel(this.model);
+        car.setTransmission(this.transmission);
+        car.setBody(this.body);
+        car.setColor(this.color);
+        car.setId(this.mf.getCarDAO().create(car));
 
         //create user
         Role role = new Role();
         role.setRole("test1");
-        int roleId = this.mf.getRoleDAO().create(role);
+        role.setId(this.mf.getRoleDAO().create(role));
 
         User user = new User();
         user.setLogin("test1");
         user.setPassword("test1");
         user.setName("test1");
         user.setCreate(new Timestamp(System.currentTimeMillis()));
-        user.setRole(new Role(roleId));
-        int userId = this.mf.getUserDAO().create(user);
+        user.setRole(role);
+        user.setId(this.mf.getUserDAO().create(user));
 
         //create ad
         Ad ad = new Ad();
         ad.setTittle("test2");
         ad.setDone(false);
-        ad.setCar(new Car(carId));
-        ad.setUser(new User(userId));
+        ad.setCar(car);
+        ad.setUser(user);
         ad.setCreate(new Timestamp(System.currentTimeMillis()));
         ad.setPrice(10);
 
-        this.ad = ad;
         int id = this.mf.getAdDAO().create(ad);
+        ad.setId(id);
         ad.setImages(new HashSet<Image>(){{
-            add(new Image("urltest21", new Ad(id)));
-            add(new Image("urltest22", new Ad(id)));
+            add(new Image("urltest21", ad));
+            add(new Image("urltest22", ad));
         }});
+        this.ad = ad;
         return id;
     }
 
-    private int getColorId() {
+    private Color getColor() {
         Color color = new Color();
         color.setColor("red");
-        return this.mf.getColorDAO().create(color);
+        int id =  this.mf.getColorDAO().create(color);
+        color.setId(id);
+        return color;
     }
 
-    private int getBodyId() {
+    private Body getBody() {
         Body body = new Body();
         body.setBody("sedan");
-        return this.mf.getBodyDAO().create(body);
+        int id = this.mf.getBodyDAO().create(body);
+        body.setId(id);
+        return body;
     }
 
-    private int getTransmissionId() {
+    private Transmission getTransmission() {
         Transmission transmission = new Transmission();
         transmission.setName("manual");
-        return this.mf.getTransmissionsDAO().create(transmission);
+        int id = this.mf.getTransmissionsDAO().create(transmission);
+        transmission.setId(id);
+        return transmission;
     }
 
-    private int getModelId() {
+    private Model getModel() {
         Model model = new Model();
         model.setModel("test1");
-        model.setModel("test1");
-        model.setManuf(new Manufactor(this.manufId));
-        return this.mf.getModelDAO().create(model);
+        model.setManuf(this.manuf);
+        int id = this.mf.getModelDAO().create(model);
+        model.setId(id);
+        return model;
     }
 
-    private int getManufId() {
+    private Manufactor getManuf() {
         Manufactor manuf = new Manufactor();
         manuf.setManuf("toyota");
-        return this.mf.getManufactorDAO().create(manuf);
+        int id = this.mf.getManufactorDAO().create(manuf);
+        manuf.setId(id);
+        return manuf;
     }
 
     @Before
     public void init(){
+        this.mf = new DAOFactory();
+        this.manuf = this.getManuf();
+        this.model = this.getModel();
+        this.body = this.getBody();
+        this.color = this.getColor();
+        this.transmission = this.getTransmission();
         this.createAd();
     }
 
@@ -143,7 +153,7 @@ public class AdDAOTest {
     @Test
     public void whenGetAdByManufShouldGetIt(){
         Map<String, String> m = new HashMap<>();
-        m.put("manuf", "vaz");
+        m.put("manuf", "toyota");
         m.put("from", "");
         m.put("to", "");
         List<Ad> ads = this.mf.getAdDAO().getAdByFilters(m);
