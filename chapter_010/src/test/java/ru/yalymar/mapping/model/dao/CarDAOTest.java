@@ -1,6 +1,5 @@
 package ru.yalymar.mapping.model.dao;
 
-import org.junit.Before;
 import org.junit.Test;
 import ru.yalymar.mapping.model.models.*;
 import java.util.List;
@@ -11,99 +10,97 @@ import static org.junit.Assert.assertTrue;
 
 public class CarDAOTest {
 
-    private DAOFactory mf;
-    private int modelId;
-    private int manufId;
-    private int bodyId;
-    private int transmissionId;
-    private int colorId;
-    private Car car;
-
-    public int createCar(){
-        this.mf = new DAOFactory();
-        this.manufId = this.getManufId();
-        this.modelId = this.getModelId();
-        this.transmissionId = this.getTransmissionId();
-        this.bodyId = this.getBodyId();
-        this.colorId = this.getColorId();
+    public Car createCar(DAOFactory daoFactory){
 
         //create
         Car car = new Car();
-        car.setModel(new Model(this.modelId));
-        car.setTransmission(new Transmission(this.transmissionId));
-        car.setBody(new Body(this.bodyId));
-        car.setColor(new Color(this.colorId));
-        this.car = car;
-        return this.mf.getCarDAO().create(car);
+        car.setModel(this.getModel(daoFactory));
+        car.setTransmission(this.getTransmission(daoFactory));
+        car.setBody(this.getBody(daoFactory));
+        car.setColor(this.getColor(daoFactory));
+        int id = daoFactory.getCarDAO().create(car);
+        System.out.println();
+        return car;
     }
 
-    @Before
-    public void init(){
-        this.createCar();
-    }
-
-    private int getColorId() {
+    private Color getColor(DAOFactory daoFactory) {
         Color color = new Color();
         color.setColor("red");
-        return this.mf.getColorDAO().create(color);
+        int id = daoFactory.getColorDAO().create(color);
+        return color;
     }
 
-    private int getBodyId() {
+    private Body getBody(DAOFactory daoFactory) {
         Body body = new Body();
         body.setBody("sedan");
-        return this.mf.getBodyDAO().create(body);
+        int id = daoFactory.getBodyDAO().create(body);
+        return body;
     }
 
-    private int getTransmissionId() {
+    private Transmission getTransmission(DAOFactory daoFactory) {
         Transmission transmission = new Transmission();
         transmission.setName("manual");
-        return this.mf.getTransmissionsDAO().create(transmission);
+        int id = daoFactory.getTransmissionsDAO().create(transmission);
+        return transmission;
     }
 
-    private int getModelId() {
+    private Model getModel(DAOFactory daoFactory) {
         Model model = new Model();
         model.setModel("test1");
         model.setModel("test1");
-        model.setManuf(new Manufactor(this.manufId));
-        return this.mf.getModelDAO().create(model);
+        model.setManuf(this.getManuf(daoFactory));
+        int id = daoFactory.getModelDAO().create(model);
+        return model;
     }
 
-    private int getManufId() {
+    private Manufactor getManuf(DAOFactory daoFactory) {
         Manufactor manuf = new Manufactor();
         manuf.setManuf("toyota");
-        return this.mf.getManufactorDAO().create(manuf);
+        int id = daoFactory.getManufactorDAO().create(manuf);
+        return manuf;
     }
 
 
     @Test
     public void whenCreateCarShouldGetId(){
-        assertTrue(this.car.getId() > 0);
+        DAOFactory daoFactory = new DAOFactory();
+        Car car = this.createCar(daoFactory);
+        assertTrue(car.getId() > 0);
     }
 
     @Test
     public void whenReadCarShouldGetIt(){
-        Car c = this.mf.getCarDAO().read(this.car.getId());
+        DAOFactory daoFactory = new DAOFactory();
+        Car car = this.createCar(daoFactory);
+        Car c = daoFactory.getCarDAO().read(car.getId());
         assertNotNull(c);
     }
 
     @Test
     public void whenReadAllCarsShouldGetThem() {
-        List<Car> cs = this.mf.getCarDAO().readAll();
+        DAOFactory daoFactory = new DAOFactory();
+        this.createCar(daoFactory);
+        List<Car> cs = daoFactory.getCarDAO().readAll();
         assertTrue(cs.size() > 0);
     }
 
     @Test
     public void whenDeleteCarShouldGetInt(){
-        int i = this.mf.getCarDAO().delete(this.car.getId());
+        DAOFactory daoFactory = new DAOFactory();
+        Car car = this.createCar(daoFactory);
+        int i = daoFactory.getCarDAO().delete(car.getId());
         assertThat(i, is(1));
     }
 
     @Test
     public void whenUpdateCarShouldGetInt(){
+        DAOFactory daoFactory = new DAOFactory();
+        Car car = this.createCar(daoFactory);
+
         //update
         Car newCar = new Car();
         newCar.setBody(new Body(1));
-        int i = this.mf.getCarDAO().update(this.car.getId(), newCar);
+        int i = daoFactory.getCarDAO().update(car.getId(), newCar);
         assertThat(i, is(1));
     }
 }

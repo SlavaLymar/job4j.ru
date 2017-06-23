@@ -1,6 +1,5 @@
 package ru.yalymar.mapping.model.dao;
 
-import org.junit.Before;
 import org.junit.Test;
 import ru.yalymar.mapping.model.models.*;
 import java.sql.Timestamp;
@@ -15,29 +14,20 @@ import static org.junit.Assert.assertTrue;
 
 public class AdDAOTest {
 
-    private DAOFactory mf;
-    private Ad ad;
-    private Model model;
-    private Manufactor manuf;
-    private Body body;
-    private Transmission transmission;
-    private Color color;
-
-    public int createAd(){
-
+    public Ad createAd(DAOFactory daoFactory){
 
         //create car
         Car car = new Car();
-        car.setModel(this.model);
-        car.setTransmission(this.transmission);
-        car.setBody(this.body);
-        car.setColor(this.color);
-        car.setId(this.mf.getCarDAO().create(car));
+        car.setModel(this.getModel(daoFactory));
+        car.setTransmission(this.getTransmission(daoFactory));
+        car.setBody(this.getBody(daoFactory));
+        car.setColor(this.getColor(daoFactory));
+        daoFactory.getCarDAO().create(car);
 
         //create user
         Role role = new Role();
         role.setRole("test1");
-        role.setId(this.mf.getRoleDAO().create(role));
+        daoFactory.getRoleDAO().create(role);
 
         User user = new User();
         user.setLogin("test1");
@@ -45,7 +35,7 @@ public class AdDAOTest {
         user.setName("test1");
         user.setCreate(new Timestamp(System.currentTimeMillis()));
         user.setRole(role);
-        user.setId(this.mf.getUserDAO().create(user));
+        daoFactory.getUserDAO().create(user);
 
         //create ad
         Ad ad = new Ad();
@@ -56,107 +46,103 @@ public class AdDAOTest {
         ad.setCreate(new Timestamp(System.currentTimeMillis()));
         ad.setPrice(10);
 
-        int id = this.mf.getAdDAO().create(ad);
-        ad.setId(id);
+        int id = daoFactory.getAdDAO().create(ad);
         ad.setImages(new HashSet<Image>(){{
             add(new Image("urltest21", ad));
             add(new Image("urltest22", ad));
         }});
-        this.ad = ad;
-        return id;
+        return ad;
     }
 
-    private Color getColor() {
+    private Color getColor(DAOFactory daoFactory) {
         Color color = new Color();
         color.setColor("red");
-        int id =  this.mf.getColorDAO().create(color);
-        color.setId(id);
+        int id =  daoFactory.getColorDAO().create(color);
         return color;
     }
 
-    private Body getBody() {
+    private Body getBody(DAOFactory daoFactory) {
         Body body = new Body();
         body.setBody("sedan");
-        int id = this.mf.getBodyDAO().create(body);
-        body.setId(id);
+        int id = daoFactory.getBodyDAO().create(body);
         return body;
     }
 
-    private Transmission getTransmission() {
+    private Transmission getTransmission(DAOFactory daoFactory) {
         Transmission transmission = new Transmission();
         transmission.setName("manual");
-        int id = this.mf.getTransmissionsDAO().create(transmission);
-        transmission.setId(id);
+        int id = daoFactory.getTransmissionsDAO().create(transmission);
         return transmission;
     }
 
-    private Model getModel() {
+    private Model getModel(DAOFactory daoFactory) {
         Model model = new Model();
         model.setModel("test1");
-        model.setManuf(this.manuf);
-        int id = this.mf.getModelDAO().create(model);
-        model.setId(id);
+        model.setManuf(this.getManuf(daoFactory));
+        int id = daoFactory.getModelDAO().create(model);
         return model;
     }
 
-    private Manufactor getManuf() {
+    private Manufactor getManuf(DAOFactory daoFactory) {
         Manufactor manuf = new Manufactor();
         manuf.setManuf("toyota");
-        int id = this.mf.getManufactorDAO().create(manuf);
-        manuf.setId(id);
+        int id = daoFactory.getManufactorDAO().create(manuf);
         return manuf;
-    }
-
-    @Before
-    public void init(){
-        this.mf = new DAOFactory();
-        this.manuf = this.getManuf();
-        this.model = this.getModel();
-        this.body = this.getBody();
-        this.color = this.getColor();
-        this.transmission = this.getTransmission();
-        this.createAd();
     }
 
     @Test
     public void whenReadAdShouldGetIt(){
-        Ad ad1 = this.mf.getAdDAO().read(this.ad.getId());
+        DAOFactory daoFactory = new DAOFactory();
+        Ad ad = this.createAd(daoFactory);
+        Ad ad1 = daoFactory.getAdDAO().read(ad.getId());
         assertNotNull(ad1);
     }
 
     @Test
     public void whenReadAllAdsShouldGetThem(){
-        List<Ad> ads = this.mf.getAdDAO().readAll();
+        DAOFactory daoFactory = new DAOFactory();
+        this.createAd(daoFactory);
+        List<Ad> ads = daoFactory.getAdDAO().readAll();
         assertTrue(ads.size() > 0);
     }
 
     @Test
     public void whenCreateAdsShouldGetId(){
-        assertTrue(this.ad.getId() > 0);
+        DAOFactory daoFactory = new DAOFactory();
+        Ad ad = this.createAd(daoFactory);
+        assertTrue(ad.getId() > 0);
     }
 
     @Test
     public void whenDeleteAdsShouldGetInt(){
-        int i = this.mf.getAdDAO().delete(this.ad.getId());
+        DAOFactory daoFactory = new DAOFactory();
+        Ad ad = this.createAd(daoFactory);
+        int i = daoFactory.getAdDAO().delete(ad.getId());
         assertThat(i, is(1));
     }
 
     @Test
     public void whenUpdateAdsShouldGetInt(){
+        DAOFactory daoFactory = new DAOFactory();
+        Ad ad = this.createAd(daoFactory);
+
         //update
         Ad newAd = new Ad();
         newAd.setTittle("tittle");
-        int i = this.mf.getAdDAO().update(this.ad.getId(), newAd);
+        int i = daoFactory.getAdDAO().update(ad.getId(), newAd);
         assertThat(i, is(1));
     }
 
     @Test
     public void whenGetAdByManufShouldGetIt(){
+        DAOFactory daoFactory = new DAOFactory();
+        this.createAd(daoFactory);
+
         Map<String, String> m = new HashMap<>();
         m.put("manuf", "toyota");
         m.put("from", "");
         m.put("to", "");
-        List<Ad> ads = this.mf.getAdDAO().getAdByFilters(m);
+        List<Ad> ads = daoFactory.getAdDAO().getAdByFilters(m);
         assertTrue(ads.size() > 0);
     }
 }
