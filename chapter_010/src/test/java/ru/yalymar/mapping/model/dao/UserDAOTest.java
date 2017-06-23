@@ -1,6 +1,5 @@
 package ru.yalymar.mapping.model.dao;
 
-import org.junit.Before;
 import org.junit.Test;
 import ru.yalymar.mapping.model.models.Role;
 import ru.yalymar.mapping.model.models.User;
@@ -13,15 +12,12 @@ import static org.junit.Assert.assertTrue;
 
 public class UserDAOTest {
 
-    private DAOFactory mf;
-    private User user;
+    public User createUser(DAOFactory daoFactory){
 
-    public int createUser(){
-        this.mf = new DAOFactory();
         //create role
         Role role = new Role();
         role.setRole("test1");
-        int roleId = this.mf.getRoleDAO().create(role);
+        int roleId = daoFactory.getRoleDAO().create(role);
 
         //create user
         User user = new User();
@@ -30,50 +26,58 @@ public class UserDAOTest {
         user.setName("test1");
         user.setCreate(new Timestamp(System.currentTimeMillis()));
         user.setRole(new Role(roleId));
-        this.user = user;
-        return this.mf.getUserDAO().create(user);
-    }
-
-    @Before
-    public void init(){
-        this.createUser();
+        daoFactory.getUserDAO().create(user);
+        return user;
     }
 
     @Test
     public void whenCreateUserShouldGetId(){
-        assertTrue(this.user.getId() > 0);
+        DAOFactory daoFactory = new DAOFactory();
+        User user = this.createUser(daoFactory);
+        assertTrue(user.getId() > 0);
     }
 
     @Test
     public void whenReadUserShouldGetNotNull(){
-        User result = this.mf.getUserDAO().read(this.user.getId());
+        DAOFactory daoFactory = new DAOFactory();
+        User user = this.createUser(daoFactory);
+        User result = daoFactory.getUserDAO().read(user.getId());
         assertNotNull(result);
     }
 
     @Test
     public void whenReadAllUsersShouldGetThem(){
-        List<User> users = this.mf.getUserDAO().readAll();
+        DAOFactory daoFactory = new DAOFactory();
+        this.createUser(daoFactory);
+        List<User> users = daoFactory.getUserDAO().readAll();
         assertTrue(users.size() > 0);
     }
 
     @Test
     public void whenDeleteUserShouldGetInt(){
-        int i = this.mf.getUserDAO().delete(this.user.getId());
+        DAOFactory daoFactory = new DAOFactory();
+        User user = this.createUser(daoFactory);
+        int i = daoFactory.getUserDAO().delete(user.getId());
         assertThat(i, is(1));
     }
 
     @Test
     public void whenUpdateUserShouldGetNewUser(){
+        DAOFactory daoFactory = new DAOFactory();
+        User user = this.createUser(daoFactory);
+
         //daoUpdate
         User newUser = new User();
         newUser.setName("test2");
-        int i = this.mf.getUserDAO().update(this.user.getId(), newUser);
+        int i = daoFactory.getUserDAO().update(user.getId(), newUser);
         assertThat(i, is(1));
     }
 
     @Test
     public void whenGetUserByLoginPasswordShoildGetIt(){
-        User userLP = this.mf.getUserDAO().getByLoginPassword("test1", "test1");
+        DAOFactory daoFactory = new DAOFactory();
+        this.createUser(daoFactory);
+        User userLP = daoFactory.getUserDAO().getByLoginPassword("test1", "test1");
         assertNotNull(userLP);
     }
 

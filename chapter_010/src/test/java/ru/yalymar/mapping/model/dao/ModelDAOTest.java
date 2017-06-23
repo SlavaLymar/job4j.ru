@@ -1,6 +1,5 @@
 package ru.yalymar.mapping.model.dao;
 
-import org.junit.Before;
 import org.junit.Test;
 import ru.yalymar.mapping.model.models.Manufactor;
 import ru.yalymar.mapping.model.models.Model;
@@ -12,87 +11,93 @@ import static org.junit.Assert.assertTrue;
 
 public class ModelDAOTest {
 
-    private DAOFactory mf;
-    private int mid;
-
-    @Before
-    public void init(){
-        this.mf = new DAOFactory();
+    public Manufactor getManuf(DAOFactory daoFactory){
         //create manufactor
         Manufactor manuf = new Manufactor();
         manuf.setManuf("toyota");
-        this.mid = this.mf.getManufactorDAO().create(manuf);
+        daoFactory.getManufactorDAO().create(manuf);
+        return manuf;
     }
 
     @Test
     public void whenCreateModelShouldGetId(){
+        DAOFactory daoFactory = new DAOFactory();
+        Manufactor manuf = this.getManuf(daoFactory);
+
         //create model
         Model model = new Model();
         model.setModel("test1");
-        model.setModel("test1");
-        model.setManuf(new Manufactor(this.mid));
-        int id = this.mf.getModelDAO().create(model);
+        model.setManuf(manuf);
+        int id = daoFactory.getModelDAO().create(model);
         assertTrue(id > 0);
 
-        this.mf.getModelDAO().delete(id);
+        daoFactory.getModelDAO().delete(id);
     }
 
     @Test
     public void whenReadModelShouldGetIt(){
+        DAOFactory daoFactory = new DAOFactory();
+        Manufactor manuf = this.getManuf(daoFactory);
+
         //create model
         Model model = new Model();
         model.setModel("test1");
-        model.setModel("test1");
-        model.setManuf(new Manufactor(this.mid));
-        int id = this.mf.getModelDAO().create(model);
+        model.setManuf(manuf);
+        int id = daoFactory.getModelDAO().create(model);
 
-        Model result = this.mf.getModelDAO().read(1);
+        Model result = daoFactory.getModelDAO().read(1);
         assertNotNull(result);
     }
 
     @Test
     public void whenReadAllModelsShouldGetThem(){
+        DAOFactory daoFactory = new DAOFactory();
+        Manufactor manuf = this.getManuf(daoFactory);
+
         //create model
         Model model = new Model();
         model.setModel("test1");
-        model.setModel("test1");
-        model.setManuf(new Manufactor(this.mid));
-        int id = this.mf.getModelDAO().create(model);
+        model.setManuf(manuf);
+        int id = daoFactory.getModelDAO().create(model);
 
-        List<Model> models = this.mf.getModelDAO().readAll();
+        List<Model> models = daoFactory.getModelDAO().readAll();
         assertTrue(models.size() > 0);
     }
 
     @Test
     public void whenDeleteModelShouldGetInt(){
+        DAOFactory daoFactory = new DAOFactory();
+        Manufactor manuf = this.getManuf(daoFactory);
+
         //create model
         Model model = new Model();
         model.setModel("test1");
-        model.setModel("test1");
-        model.setManuf(new Manufactor(this.mid));
-        int id = this.mf.getModelDAO().create(model);
+        model.setManuf(manuf);
+        int id = daoFactory.getModelDAO().create(model);
 
-        int i = this.mf.getModelDAO().delete(id);
+        int i = daoFactory.getModelDAO().delete(id);
         assertThat(i, is(1));
     }
 
     @Test
     public void whenUpdateModelShouldGetInt(){
+        DAOFactory daoFactory = new DAOFactory();
+        Manufactor manuf = this.getManuf(daoFactory);
+
         //create model
         Model model = new Model();
         model.setModel("test1");
-        model.setModel("test1");
-        model.setManuf(new Manufactor(this.mid));
-        int id = this.mf.getModelDAO().create(model);
+        model.setManuf(manuf);
+        int id = daoFactory.getModelDAO().create(model);
 
         //update
         Model newModel = new Model();
         newModel.setModel("test2");
-        int i = this.mf.getModelDAO().update(id, newModel);
+        int i = daoFactory.getModelDAO().update(id, newModel);
         assertThat(i, is(1));
 
         //delete
-        this.mf.getModelDAO().delete(id);
+        daoFactory.getModelDAO().delete(id);
     }
 
 
