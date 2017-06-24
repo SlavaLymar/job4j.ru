@@ -4,6 +4,7 @@
             <generator class="identity"/>
         </id>
         <property name="manuf" column="manuf"/>
+
     </class>
 
 </hibernate-mapping>

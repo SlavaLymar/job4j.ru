@@ -14,11 +14,11 @@ import static org.junit.Assert.assertTrue;
 
 public class AdDAOTest {
 
-    public Ad createAd(DAOFactory daoFactory){
+    public Ad createAd(DAOFactory daoFactory, String manuf){
 
         //create car
         Car car = new Car();
-        car.setModel(this.getModel(daoFactory));
+        car.setModel(this.getModel(daoFactory, manuf));
         car.setTransmission(this.getTransmission(daoFactory));
         car.setBody(this.getBody(daoFactory));
         car.setColor(this.getColor(daoFactory));
@@ -75,17 +75,17 @@ public class AdDAOTest {
         return transmission;
     }
 
-    private Model getModel(DAOFactory daoFactory) {
+    private Model getModel(DAOFactory daoFactory, String manuf) {
         Model model = new Model();
         model.setModel("test1");
-        model.setManuf(this.getManuf(daoFactory));
+        model.setManuf(this.getManuf(daoFactory, manuf));
         int id = daoFactory.getModelDAO().create(model);
         return model;
     }
 
-    private Manufactor getManuf(DAOFactory daoFactory) {
+    private Manufactor getManuf(DAOFactory daoFactory, String m) {
         Manufactor manuf = new Manufactor();
-        manuf.setManuf("toyota");
+        manuf.setManuf(m);
         int id = daoFactory.getManufactorDAO().create(manuf);
         return manuf;
     }
@@ -93,7 +93,7 @@ public class AdDAOTest {
     @Test
     public void whenReadAdShouldGetIt(){
         DAOFactory daoFactory = new DAOFactory();
-        Ad ad = this.createAd(daoFactory);
+        Ad ad = this.createAd(daoFactory, "toyota");
         Ad ad1 = daoFactory.getAdDAO().read(ad.getId());
         assertNotNull(ad1);
     }
@@ -101,7 +101,7 @@ public class AdDAOTest {
     @Test
     public void whenReadAllAdsShouldGetThem(){
         DAOFactory daoFactory = new DAOFactory();
-        this.createAd(daoFactory);
+        this.createAd(daoFactory, "toyota");
         List<Ad> ads = daoFactory.getAdDAO().readAll();
         assertTrue(ads.size() > 0);
     }
@@ -109,14 +109,14 @@ public class AdDAOTest {
     @Test
     public void whenCreateAdsShouldGetId(){
         DAOFactory daoFactory = new DAOFactory();
-        Ad ad = this.createAd(daoFactory);
+        Ad ad = this.createAd(daoFactory, "toyota");
         assertTrue(ad.getId() > 0);
     }
 
     @Test
     public void whenDeleteAdsShouldGetInt(){
         DAOFactory daoFactory = new DAOFactory();
-        Ad ad = this.createAd(daoFactory);
+        Ad ad = this.createAd(daoFactory, "toyota");
         int i = daoFactory.getAdDAO().delete(ad.getId());
         assertThat(i, is(1));
     }
@@ -124,7 +124,7 @@ public class AdDAOTest {
     @Test
     public void whenUpdateAdsShouldGetInt(){
         DAOFactory daoFactory = new DAOFactory();
-        Ad ad = this.createAd(daoFactory);
+        Ad ad = this.createAd(daoFactory, "toyota");
 
         //update
         Ad newAd = new Ad();
@@ -136,7 +136,7 @@ public class AdDAOTest {
     @Test
     public void whenGetAdByManufShouldGetIt(){
         DAOFactory daoFactory = new DAOFactory();
-        this.createAd(daoFactory);
+        this.createAd(daoFactory, "toyota");
 
         Map<String, String> m = new HashMap<>();
         m.put("manuf", "toyota");
@@ -145,4 +145,5 @@ public class AdDAOTest {
         List<Ad> ads = daoFactory.getAdDAO().getAdByFilters(m);
         assertTrue(ads.size() > 0);
     }
+
 }

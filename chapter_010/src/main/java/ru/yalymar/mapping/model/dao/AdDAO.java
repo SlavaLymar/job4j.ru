@@ -1,5 +1,9 @@
 package ru.yalymar.mapping.model.dao;
 
+import org.hibernate.Criteria;
+import org.hibernate.Filter;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 import ru.yalymar.mapping.model.dao.fileuploader.Upload;
 import ru.yalymar.mapping.model.dao.unproxy.Unproxy;
 import ru.yalymar.mapping.model.models.*;
@@ -226,4 +230,5 @@ public class AdDAO extends DAO<Ad> implements Unproxy, Upload {
         }
         return result;
     }
+
 }

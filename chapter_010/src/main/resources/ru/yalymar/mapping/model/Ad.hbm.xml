@@ -19,5 +19,7 @@
             <one-to-many class="ru.yalymar.mapping.model.models.Image"/>
         </set>
         <property name="price" column="price"/>
+
     </class>
+
 </hibernate-mapping>
