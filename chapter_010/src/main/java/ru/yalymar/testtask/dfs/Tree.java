@@ -2,6 +2,11 @@ package ru.yalymar.testtask.dfs;
 
 import java.util.List;
 
+/**
+ * @author slavalymar
+ * @since 02.07.2017
+ * @version 1
+ */
 public class Tree {
 
     private Node root;
@@ -14,6 +19,9 @@ public class Tree {
         return this.root;
     }
 
+    /** add node into tree
+     * @param node
+     */
     public void add(int node){
         if(this.root == null){
             this.root = new Node(node, null);
@@ -23,6 +31,10 @@ public class Tree {
         }
     }
 
+    /** search place to insert a node
+     * @param value
+     * @param node
+     */
     private void searchInsertPlace(int value, Node node) {
         if(value <= node.getValue()){
             if(node.getChildMin() == null){
@@ -42,8 +54,11 @@ public class Tree {
         }
     }
 
+    /** implementation of depth-first search (DFS)
+     * for mirroring of the tree
+     * @param start
+     */
     public void setMirrorTree(Node start){
-        start = this.root;
         if(!start.isFlag()){
             start.setFlag(true);
             List<Node> nodes = start.getChildren();
@@ -53,11 +68,12 @@ public class Tree {
                     this.setMirrorTree(nodes.get(i));
                 }
                 if(i + 1 == nodes.size()){
-                    Node tmp = nodes.get(i - 1);
-                    nodes.set(i - 1, nodes.get(i));
-                    nodes.set(i, tmp);
+                    Node tmp = start.getChildMin();
+                    start.setChildMin(start.getChildMax());
+                    start.setChildMax(tmp);
                 }
             }
+            this.root = start;
         }
     }
 

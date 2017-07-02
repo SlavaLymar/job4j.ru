@@ -3,6 +3,11 @@ package ru.yalymar.testtask.dfs;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author slavalymar
+ * @since 02.07.2017
+ * @version 1
+ */
 public class Node {
 
     private int value;
@@ -59,6 +64,9 @@ public class Node {
         this.parent = parent;
     }
 
+    /** get node`s children
+     * @return List
+     */
     public List<Node> getChildren(){
         return new ArrayList<Node>(){{
             if(childMin != null){

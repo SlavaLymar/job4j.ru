@@ -3,6 +3,11 @@ package ru.yalymar.testtask.dfs;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author slavalymar
+ * @since 02.07.2017
+ * @version 1
+ */
 public class PrintTree {
 
     private Tree tree;
@@ -13,9 +18,20 @@ public class PrintTree {
         this.nodes = new ArrayList<>();
     }
 
+    public List<PrintNode> getNodes() {
+        return this.nodes;
+    }
+
+    /**
+     * wrapper for printing
+     */
     public class PrintNode{
 
         public Node node;
+
+        /**
+         * value that describe level of depth
+         */
         public int level;
 
         public PrintNode(Node node, int level){
@@ -28,7 +44,10 @@ public class PrintTree {
             return String.valueOf(node.getValue());
         }
     }
-    
+
+    /**
+     * print tree
+     */
     public void print(){
         int width = ((this.nodes.get(this.nodes.size()-1).level + 1) * 2) + 1;
         int length = this.nodes.get(this.nodes.size()-1).level + 1;
@@ -52,6 +71,10 @@ public class PrintTree {
         }
     }
 
+    /** method that determine level of node
+     * @param start
+     * @param level
+     */
     public void initNodes(Node start, int level){
         if(level == 0) {
             this.nodes.add(new PrintNode(start, level++));
