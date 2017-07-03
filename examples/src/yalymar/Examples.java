@@ -34,7 +34,7 @@ public class Examples {
     }
 
     public static void main(String[] args) throws FileNotFoundException{
-        try(InputStream in = new FileInputStream("C:/Java/junior/chapter_003/resources/Example.txt");
+        try(InputStream in = new FileInputStream("C:/Java/junior/chapter_003/resources/HeapSort.txt");
             InputStream in1 = new URL("https://www.yandex.ru/").openStream();
             BufferedReader inConsole = new BufferedReader(new InputStreamReader(System.in))){
 
