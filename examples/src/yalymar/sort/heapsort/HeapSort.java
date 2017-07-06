@@ -7,16 +7,21 @@ public class HeapSort {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        System.out.print("Введите длину массива: ");
+        System.out.print("\n");
         int n = scanner.nextInt();
-        int[] array = new int[n];               //В качестве примера берем обычный
-        for (int i = 0; i < n; i++) {           //целочисленный массив, но тут может
-            array[i] = scanner.nextInt();        //быть массив(или коллекция) из
-        }                                       // других типов данных, для которых
-                                                // задан свой компоратор
-
-        HeapUtils.sort(array);                //Вызов соритровки
+        int[] array = new int[n];                           //В качестве примера берем обычный
+        for (int i = 0; i < n; i++) {                       //целочисленный массив генерируемый случайно
+                                                            // в диапазоне (-100; 100), но тут может
+            array[i] = (int) (Math.random() * 200) - 100;   //быть массив(или коллекция) из
+        }                                                   // других типов данных, для которых
+                                                            // задан свой компоратор
+        System.out.println("Массив до сортировки");
         System.out.println(Arrays.toString(array));
 
+        HeapUtils.sort(array);                              //Вызов сортировки
+        System.out.println("Массив после сортировки");
+        System.out.println(Arrays.toString(array));
     }
 
     static class HeapUtils {
