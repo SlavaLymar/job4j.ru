@@ -77,4 +77,13 @@ public class Node {
             }
         }};
     }
+
+    /** reflect nodes into vertex
+     * @param node
+     */
+    public void reflectNodes(Node node){
+        Node tmp = node.childMin;
+        node.childMin = node.childMax;
+        node.childMax = tmp;
+    }
 }

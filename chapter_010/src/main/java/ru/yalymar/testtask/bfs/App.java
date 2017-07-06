@@ -5,7 +5,7 @@ package ru.yalymar.testtask.bfs;
  * @since 02.07.2017
  * @version 1
  */
-public class Main {
+public class App {
 
     /** add values into tree
      * @param tree
@@ -21,9 +21,9 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Main main = new Main();
+        App app = new App();
         Tree tree = new Tree();
-        main.initTree(tree);
+        app.initTree(tree);
         PrintTree printTree = new PrintTree(tree);
 
         //print source tree
@@ -32,10 +32,12 @@ public class Main {
         printTree.print();
 
         //print mirror tree
-//        System.out.println("Mirror tree");
+        System.out.println("Mirror tree");
+        BFS bfs = new BFS();
+        bfs.bfs(tree.getRoot());
 //        tree.setMirrorTree(tree.getRoot());
-//        printTree.getNodes().clear();
-//        printTree.initNodes(tree.getRoot(), 0);
-//        printTree.print();
+        printTree.getNodes().clear();
+        printTree.initNodes(tree.getRoot(), 0);
+        printTree.print();
     }
 }

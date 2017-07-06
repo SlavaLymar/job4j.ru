@@ -54,13 +54,5 @@ public class Tree {
         }
     }
 
-    /** implementation of breadth-first search (Main)
-     * for mirroring of the tree
-     * @param start
-     */
-    public void setMirrorTree(Node start){
-
-    }
-
 
 }

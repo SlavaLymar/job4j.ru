@@ -1,15 +1,23 @@
 package ru.yalymar.testtask.bfs;
 
+import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * @author slavalymar
+ * @since 02.07.2017
+ * @version 1
+ */
 public class BFS {
 
-    private Queue<Node> queue;
+    /**
+     * queue that save vertex in breadth order
+     */
+    private Queue<Node> queue = new LinkedList<>();
 
-    public Queue<Node> getQueue() {
-        return this.queue;
-    }
-
+    /** traversing the tree in breadth
+     * @param start
+     */
     public void bfs(Node start){
         if(start.isVisited()){
             return;
@@ -19,10 +27,13 @@ public class BFS {
         while (!this.queue.isEmpty()){
             Node n = this.queue.poll();
             for (Node node : n.getChildren()) {
-                if(n.isVisited()) continue;
+                if(node.isVisited()) {
+                    continue;
+                }
                 this.queue.add(node);
                 node.setVisited(true);
             }
+            n.reflectNodes(n);
         }
     }
 
