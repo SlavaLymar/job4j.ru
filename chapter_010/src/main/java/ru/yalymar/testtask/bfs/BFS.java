@@ -19,21 +19,13 @@ public class BFS {
      * @param start
      */
     public void bfs(Node start){
-        if(start.isVisited()){
-            return;
-        }
         this.queue.add(start);
-        start.setVisited(true);
         while (!this.queue.isEmpty()){
             Node n = this.queue.poll();
             for (Node node : n.getChildren()) {
-                if(node.isVisited()) {
-                    continue;
-                }
                 this.queue.add(node);
-                node.setVisited(true);
             }
-            n.reflectNodes(n);
+            n.reflectNodes();
         }
     }
 

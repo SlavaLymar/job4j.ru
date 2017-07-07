@@ -11,14 +11,12 @@ import java.util.List;
 public class Node {
 
     private int value;
-    private boolean visited;
     private Node childMin;
     private Node childMax;
     private Node parent;
 
     public Node(int value, Node parent) {
         this.value = value;
-        this.visited = false;
         this.childMin = null;
         this.childMax = null;
         this.parent = parent;
@@ -38,14 +36,6 @@ public class Node {
 
     public void setChildMin(Node childMin) {
         this.childMin = childMin;
-    }
-
-    public boolean isVisited() {
-        return visited;
-    }
-
-    public void setVisited(boolean visited) {
-        this.visited = visited;
     }
 
     public Node getChildMax() {
@@ -78,12 +68,12 @@ public class Node {
         }};
     }
 
-    /** reflect nodes into vertex
-     * @param node
+    /**
+     * reflect nodes into vertex
      */
-    public void reflectNodes(Node node){
-        Node tmp = node.childMin;
-        node.childMin = node.childMax;
-        node.childMax = tmp;
+    public void reflectNodes(){
+        Node tmp = this.childMin;
+        this.childMin = this.childMax;
+        this.childMax = tmp;
     }
 }
