@@ -1,8 +1,8 @@
-package ru.yalymar.ioc.storages;
+package ru.yalymar.ioc.storages.storages;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.yalymar.ioc.models.User;
+import ru.yalymar.ioc.storages.models.User;
 
 @Component
 public class UserStorage {

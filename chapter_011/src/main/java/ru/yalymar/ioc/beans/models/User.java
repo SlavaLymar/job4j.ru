@@ -1,4 +1,4 @@
-package ru.yalymar.ioc.models;
+package ru.yalymar.ioc.beans.models;
 
 public class User {
 

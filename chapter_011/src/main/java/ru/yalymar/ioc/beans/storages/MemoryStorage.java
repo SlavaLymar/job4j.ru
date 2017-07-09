@@ -1,11 +1,11 @@
-package ru.yalymar.ioc.storages;
+package ru.yalymar.ioc.beans.storages;
 
-import org.springframework.stereotype.Component;
-import ru.yalymar.ioc.models.User;
+import ru.yalymar.ioc.beans.models.User;
+import ru.yalymar.ioc.beans.storages.interfaces.Storage;
+
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
 public class MemoryStorage implements Storage {
 
     private List<User> list = new ArrayList<>();
@@ -18,8 +18,8 @@ public class MemoryStorage implements Storage {
     @Override
     public User get(User user) {
         User result = null;
-        for (User u: this.list) {
-            if(u.getId().equals(user.getId())){
+        for (User u : this.list){
+            if(u.equals(user)){
                 result = u;
                 break;
             }
@@ -29,21 +29,11 @@ public class MemoryStorage implements Storage {
 
     @Override
     public boolean update(User user, User newUser) {
-        boolean result = false;
-        for(User u: this.list){
-            if(u.getId().equals(user.getId())){
-                u = newUser;
-                result = true;
-                break;
-            }
-        }
-        return result;
+        return false;
     }
 
     @Override
     public boolean delete(User user) {
-        return this.list.remove(user);
+        return false;
     }
-
-
 }

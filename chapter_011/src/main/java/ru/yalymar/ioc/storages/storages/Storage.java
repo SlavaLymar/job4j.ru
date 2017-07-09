@@ -1,6 +1,6 @@
-package ru.yalymar.ioc.storages;
+package ru.yalymar.ioc.storages.storages;
 
-import ru.yalymar.ioc.models.User;
+import ru.yalymar.ioc.storages.models.User;
 
 public interface Storage {
 
