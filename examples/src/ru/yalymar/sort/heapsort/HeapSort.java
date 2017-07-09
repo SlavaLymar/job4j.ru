@@ -1,4 +1,4 @@
-package yalymar.sort.heapsort;
+package ru.yalymar.sort.heapsort;
 
 import java.util.Arrays;
 import java.util.Scanner;

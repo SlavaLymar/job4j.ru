@@ -13,6 +13,6 @@
     </bean>
 
 
-    <!--<context:component-scan base-package="ru.yalymar.ioc.beans"/>-->
+    <!--<context:component-scan base-package=ru.yalymarymar.ioc.beans"/>-->
 
 </beans>

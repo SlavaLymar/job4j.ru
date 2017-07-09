@@ -5,12 +5,11 @@ public class Role {
     private String id;
     private String role;
 
-    public Role(String role) {
-        this.role = role;
+    public Role() {
     }
 
-    public String getId() {
-        return id;
+    public Role(String role) {
+        this.role = role;
     }
 
     @Override
@@ -26,10 +25,6 @@ public class Role {
     @Override
     public int hashCode() {
         return id.hashCode();
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getRole() {

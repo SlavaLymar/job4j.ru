@@ -55,7 +55,7 @@ public class ControlQualityTest {
         ControlQuality cq = new ControlQuality(3);
         cq.fillStore();
 
-        // add food to stores
+        // add food to storages
         cq.selectStrategy(apple);
         cq.selectStrategy(carrot);
         cq.selectStrategy(bread);

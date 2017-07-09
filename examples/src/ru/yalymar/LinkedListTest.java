@@ -1,6 +1,4 @@
-package yalymar;
-
-import java.util.Iterator;
+package ru.yalymar;
 
 public class LinkedListTest {
 

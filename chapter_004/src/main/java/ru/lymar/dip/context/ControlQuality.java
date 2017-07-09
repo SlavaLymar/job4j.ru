@@ -14,7 +14,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class ControlQuality implements ResortFood{
 
     /**
-     * list of stores
+     * list of storages
      */
     protected List<Store> store;
 
@@ -43,7 +43,7 @@ public class ControlQuality implements ResortFood{
     }
 
     /**
-     * fill list of stores
+     * fill list of storages
      */
     public void fillStore(){
         this.store = new ArrayList<>();

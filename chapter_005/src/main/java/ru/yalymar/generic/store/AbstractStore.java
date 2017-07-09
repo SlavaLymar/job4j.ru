@@ -9,7 +9,7 @@ package ru.yalymar.generic.store;
 public abstract class AbstractStore <T> implements Store{
 
     /**
-     * class that contains stores
+     * class that contains storages
      */
     protected SimpleArray<T> values;
 

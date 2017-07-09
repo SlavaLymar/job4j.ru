@@ -38,7 +38,7 @@ public class ExtendedControlQualityTest {
         ExtendedControlQuality ecq = new ExtendedControlQuality(3);
         ecq.fillStore();
 
-        // add food to stores
+        // add food to storages
         ecq.selectStrategy(apple);
         ecq.selectStrategy(apple1);
         ecq.selectStrategy(milk);

@@ -3,7 +3,7 @@ package ru.yalymar.ioc.storages.storages;
 import ru.yalymar.ioc.storages.models.User;
 import ru.yalymar.ioc.storages.storages.interfaces.Storage;
 
-public class JdbcStorage implements Storage {
+public class HibernateStorage implements Storage {
 
     @Override
     public int add(User user) {

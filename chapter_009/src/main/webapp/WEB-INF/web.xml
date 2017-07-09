@@ -2,7 +2,7 @@
     <!-- /webstructure-->
     <servlet>
         <servlet-name>EchoServlet</servlet-name>
-        <servlet-class>ru.yalymar.webstructure.EchoServlet</servlet-class>
+        <servlet-class>ru.ru.yalymar.webstructure.EchoServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>EchoServlet</servlet-name>
@@ -12,7 +12,7 @@
     <!-- /crudservlet-->
     <servlet>
         <servlet-name>UserServlet</servlet-name>
-        <servlet-class>ru.yalymar.crudservlet.controller.UserServlet</servlet-class>
+        <servlet-class>ru.ru.yalymar.crudservlet.controller.UserServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UserServlet</servlet-name>
@@ -22,19 +22,19 @@
     <!-- /servlet-->
     <servlet>
         <servlet-name>UsersServlet</servlet-name>
-        <servlet-class>ru.yalymar.servlet.controller.UsersServlet</servlet-class>
+        <servlet-class>ru.ru.yalymar.servlet.controller.UsersServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddUserServlet</servlet-name>
-        <servlet-class>ru.yalymar.servlet.controller.AddUserServlet</servlet-class>
+        <servlet-class>ru.ru.yalymar.servlet.controller.AddUserServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>EditUserServlet</servlet-name>
-        <servlet-class>ru.yalymar.servlet.controller.EditUserServlet</servlet-class>
+        <servlet-class>ru.ru.yalymar.servlet.controller.EditUserServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DeleteUserServlet</servlet-name>
-        <servlet-class>ru.yalymar.servlet.controller.DeleteUserServlet</servlet-class>
+        <servlet-class>ru.ru.yalymar.servlet.controller.DeleteUserServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UsersServlet</servlet-name>
@@ -56,19 +56,19 @@
     <!-- /mvc-->
     <servlet>
         <servlet-name>StartController</servlet-name>
-        <servlet-class>ru.yalymar.mvc.controller.StartController</servlet-class>
+        <servlet-class>ru.ru.yalymar.mvc.controller.StartController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddController</servlet-name>
-        <servlet-class>ru.yalymar.mvc.controller.AddController</servlet-class>
+        <servlet-class>ru.ru.yalymar.mvc.controller.AddController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DeleteController</servlet-name>
-        <servlet-class>ru.yalymar.mvc.controller.DeleteController</servlet-class>
+        <servlet-class>ru.ru.yalymar.mvc.controller.DeleteController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>EditController</servlet-name>
-        <servlet-class>ru.yalymar.mvc.controller.EditController</servlet-class>
+        <servlet-class>ru.ru.yalymar.mvc.controller.EditController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>StartController</servlet-name>
@@ -90,43 +90,43 @@
     <!-- filter-->
     <!--<filter>-->
         <!--<filter-name>AuthFilter</filter-name>-->
-        <!--<filter-class>ru.yalymar.filter.controller.AuthFilter</filter-class>-->
+        <!--<filter-classru.yalymarymar.filter.controller.AuthFilter</filter-class>-->
     <!--</filter>-->
     <!--<filter>-->
         <!--<filter-name>UserFilter</filter-name>-->
-        <!--<filter-class>ru.yalymar.filter.controller.UserFilter</filter-class>-->
+        <!--<filter-classru.yalymarymar.filter.controller.UserFilter</filter-class>-->
     <!--</filter>-->
     <servlet>
         <servlet-name>ExitController</servlet-name>
-        <servlet-class>ru.yalymar.filter.controller.ExitController</servlet-class>
+        <servlet-class>ru.ru.yalymar.filter.controller.ExitController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UController</servlet-name>
-        <servlet-class>ru.yalymar.filter.controller.UController</servlet-class>
+        <servlet-class>ru.ru.yalymar.filter.controller.UController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UserEditController</servlet-name>
-        <servlet-class>ru.yalymar.filter.controller.UserEditController</servlet-class>
+        <servlet-class>ru.ru.yalymar.filter.controller.UserEditController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddController</servlet-name>
-        <servlet-class>ru.yalymar.filter.controller.AddController</servlet-class>
+        <servlet-class>ru.ru.yalymar.filter.controller.AddController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SigninController</servlet-name>
-        <servlet-class>ru.yalymar.filter.controller.SigninController</servlet-class>
+        <servlet-class>ru.ru.yalymar.filter.controller.SigninController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>EditController</servlet-name>
-        <servlet-class>ru.yalymar.filter.controller.EditController</servlet-class>
+        <servlet-class>ru.ru.yalymar.filter.controller.EditController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DeleteController</servlet-name>
-        <servlet-class>ru.yalymar.filter.controller.DeleteController</servlet-class>
+        <servlet-class>ru.ru.yalymar.filter.controller.DeleteController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>JSONController</servlet-name>
-        <servlet-class>ru.yalymar.filter.controller.JsonController</servlet-class>
+        <servlet-class>ru.ru.yalymar.filter.controller.JsonController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ExitController</servlet-name>

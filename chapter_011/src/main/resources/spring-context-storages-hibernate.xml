@@ -7,18 +7,11 @@
                            http://www.springframework.org/schema/context
                            http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <bean id="memory" class="ru.yalymar.ioc.beans.storages.MemoryStorage"/>
+    <bean id="hibernateStorage" class="ru.yalymar.ioc.storages.storages.HibernateStorage"/>
 
-    <bean id="storage" class="ru.yalymar.ioc.beans.storages.UserStorage">
-        <constructor-arg name="storage" ref="memory"/>
+    <bean id="storage" class="ru.yalymar.ioc.storages.storages.UserStorage">
+        <constructor-arg name="storage" ref="hibernateStorage"/>
     </bean>
 
-    <!--<bean id="jdbc" claru.yalymar.ioc.beans.storagesages.JdbcStorage"/>-->
-
-    <!--<bean id="storage" claru.yalymar.ioc.beans.storagesages.UserStorage">-->
-        <!--<constructor-arg name="storage" ref="jdbc"/>-->
-    <!--</bean>-->
-
-    <!--<context:component-scan base-package="ru.yalymar"/>-->
 
 </beans>

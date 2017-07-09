@@ -7,6 +7,16 @@ public class User {
     private String password;
     private Role role;
 
+    public User() {
+    }
+
+    public User(String login, String password, Role role) {
+        this.login = login;
+        this.password = password;
+        this.role = role;
+
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -20,13 +30,6 @@ public class User {
     @Override
     public int hashCode() {
         return id.hashCode();
-    }
-
-    public User(String login, String password, Role role) {
-        this.login = login;
-        this.password = password;
-        this.role = role;
-
     }
 
     public Role getRole() {
@@ -53,11 +56,4 @@ public class User {
         this.password = password;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 }

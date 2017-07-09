@@ -1,4 +1,4 @@
-package yalymar;
+package ru.yalymar;
 
 import java.io.*;
 import java.net.Socket;

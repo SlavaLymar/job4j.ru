@@ -1,5 +1,5 @@
-<%@ page import="ru.yalymar.jsp.model.UserManager" %>
-<%@ page import="ru.yalymar.jsp.model.User" %>
+<%@ page import="ru.ru.yalymar.jsp.model.UserManager" %>
+<%@ page import="ru.ru.yalymar.jsp.model.User" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
