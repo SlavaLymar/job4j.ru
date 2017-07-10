@@ -2,7 +2,7 @@ package ru.yalymar.ioc.storages.models;
 
 public class Role {
 
-    private String id;
+    private int id;
     private String role;
 
     public Role() {
@@ -12,19 +12,8 @@ public class Role {
         this.role = role;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Role role = (Role) o;
-
-        return id.equals(role.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return id.hashCode();
+    public Role(int id) {
+        this.id = id;
     }
 
     public String getRole() {
@@ -33,5 +22,13 @@ public class Role {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

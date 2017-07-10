@@ -1,27 +1,49 @@
 package ru.yalymar.ioc.storages.storages;
 
+import org.springframework.orm.hibernate5.HibernateTemplate;
 import ru.yalymar.ioc.storages.models.User;
 import ru.yalymar.ioc.storages.storages.interfaces.Storage;
 
+import java.util.List;
+
 public class HibernateStorage implements Storage {
 
-    @Override
-    public int add(User user) {
-        return 0;
+    private final HibernateTemplate hibernateTemplate;
+
+    public HibernateStorage(HibernateTemplate hibernateTemplate) {
+        this.hibernateTemplate = hibernateTemplate;
     }
 
     @Override
-    public User get(User user) {
-        return null;
+    public int add(User user) {
+        this.hibernateTemplate.save(user);
+        return user.getId();
+    }
+
+    @Override
+    public User get(int id) {
+        return this.hibernateTemplate.get(User.class, id);
     }
 
     @Override
     public boolean update(User user, User newUser) {
-        return false;
+        boolean result = false;
+        if(!newUser.getLogin().equals(user.getLogin())){
+            user.setLogin(newUser.getLogin());
+        }
+        if(!newUser.getPassword().equals(user.getPassword())){
+            user.setPassword(newUser.getPassword());
+        }
+        if(!newUser.getRole().equals(user.getRole())){
+            user.setRole(newUser.getRole());
+        }
+        this.hibernateTemplate.update(user);
+        return result;
     }
 
     @Override
     public boolean delete(User user) {
-        return false;
+        this.hibernateTemplate.delete(user);
+        return true;
     }
 }

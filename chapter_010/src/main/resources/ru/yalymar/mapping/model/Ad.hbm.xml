@@ -1,5 +1,5 @@
 <hibernate-mapping>
-    <class name="ru.ru.yalymar.mapping.model.models.Ad" table="ads">
+    <class name="ru.yalymar.mapping.model.models.Ad" table="ads">
         <id name="id" column="id">
             <generator class="identity"/>
         </id>
@@ -8,15 +8,15 @@
         <!-- create_ads -->
         <property name="create" column="create_ads"/>
         <!-- car_id -->
-        <many-to-one name="car" column="car_id" class="ru.ru.yalymar.mapping.model.models.Car" cascade="all"/>
+        <many-to-one name="car" column="car_id" class="ru.yalymar.mapping.model.models.Car" cascade="all"/>
         <!-- user_id -->
-        <many-to-one name="user" column="user_id" class="ru.ru.yalymar.mapping.model.models.User"/>
+        <many-to-one name="user" column="user_id" class="ru.yalymar.mapping.model.models.User"/>
         <!-- done -->
         <property name="done" column="done"/>
         <!-- images -->
         <set name="images" table="images" cascade="all">
             <key column="ads_id"/>
-            <one-to-many class="ru.ru.yalymar.mapping.model.models.Image"/>
+            <one-to-many class="ru.yalymar.mapping.model.models.Image"/>
         </set>
         <property name="price" column="price"/>
 
