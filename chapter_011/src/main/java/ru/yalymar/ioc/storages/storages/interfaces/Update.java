@@ -4,5 +4,5 @@ import ru.yalymar.ioc.storages.models.User;
 
 public interface Update {
 
-    boolean update(User user, User newUser);
+    boolean update(int id, User newUser);
 }

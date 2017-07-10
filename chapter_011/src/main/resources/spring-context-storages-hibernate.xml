@@ -29,7 +29,7 @@
             <props>
                 <prop key="hibernate.dialect">${jdbc.postgreSQL.dialect}</prop>
                 <prop key="hbm2ddl.auto">${jdbc.postgreSQL.hbm2ddl.auto}</prop>
-                <prop key="show_sql">${jdbc.postgreSQL.show_sql}</prop>
+                <prop key="hibernate.show_sql">${jdbc.postgreSQL.show_sql}</prop>
             </props>
         </property>
     </bean>

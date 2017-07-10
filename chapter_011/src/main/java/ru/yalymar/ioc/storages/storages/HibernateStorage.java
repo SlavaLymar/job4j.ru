@@ -1,10 +1,9 @@
 package ru.yalymar.ioc.storages.storages;
 
 import org.springframework.orm.hibernate5.HibernateTemplate;
+import ru.yalymar.ioc.storages.models.Role;
 import ru.yalymar.ioc.storages.models.User;
 import ru.yalymar.ioc.storages.storages.interfaces.Storage;
-
-import java.util.List;
 
 public class HibernateStorage implements Storage {
 
@@ -26,16 +25,20 @@ public class HibernateStorage implements Storage {
     }
 
     @Override
-    public boolean update(User user, User newUser) {
+    public boolean update(int id, User newUser) {
         boolean result = false;
+        User user = this.get(id);
         if(!newUser.getLogin().equals(user.getLogin())){
             user.setLogin(newUser.getLogin());
+            result = true;
         }
         if(!newUser.getPassword().equals(user.getPassword())){
             user.setPassword(newUser.getPassword());
+            result = true;
         }
         if(!newUser.getRole().equals(user.getRole())){
             user.setRole(newUser.getRole());
+            result = true;
         }
         this.hibernateTemplate.update(user);
         return result;

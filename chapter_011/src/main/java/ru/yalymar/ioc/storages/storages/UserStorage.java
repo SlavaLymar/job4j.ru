@@ -19,8 +19,8 @@ public class UserStorage {
         return (User) this.storage.get(id);
     }
 
-    public boolean update(User user, User newUser) {
-        return this.storage.update(user, newUser);
+    public boolean update(int id, User newUser) {
+        return this.storage.update(id, newUser);
     }
 
     public void delete(int id) {

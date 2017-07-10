@@ -27,10 +27,10 @@ public class MemoryStorage implements Storage {
     }
 
     @Override
-    public boolean update(User user, User newUser) {
+    public boolean update(int id, User newUser) {
         boolean result = false;
         for(User u: this.list){
-            if(u.getId() == user.getId()){
+            if(u.getId() == id){
                 u = newUser;
                 result = true;
                 break;
