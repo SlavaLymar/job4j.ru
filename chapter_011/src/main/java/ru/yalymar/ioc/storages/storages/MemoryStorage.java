@@ -40,8 +40,8 @@ public class MemoryStorage implements Storage {
     }
 
     @Override
-    public boolean delete(User user) {
-        return this.list.remove(user);
+    public void delete(int id) {
+        this.list.remove(id);
     }
 
 

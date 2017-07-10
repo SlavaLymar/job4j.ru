@@ -23,7 +23,7 @@ public class UserStorage {
         return this.storage.update(user, newUser);
     }
 
-    public boolean delete(User user) {
-        return this.storage.delete(user);
+    public void delete(int id) {
+       this.storage.delete(id);
     }
 }

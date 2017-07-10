@@ -42,8 +42,8 @@ public class HibernateStorage implements Storage {
     }
 
     @Override
-    public boolean delete(User user) {
+    public void delete(int id) {
+        User user = this.get(id);
         this.hibernateTemplate.delete(user);
-        return true;
     }
 }

@@ -5,6 +5,6 @@
         </id>
         <property name="login" column="login"/>
         <property name="password" column="password"/>
-        <many-to-one name="role" column="role_id" class="ru.yalymar.ioc.storages.models.Role"/>
+        <many-to-one name="role" column="role_id" class="ru.yalymar.ioc.storages.models.Role" lazy="false"/>
     </class>
 </hibernate-mapping>
