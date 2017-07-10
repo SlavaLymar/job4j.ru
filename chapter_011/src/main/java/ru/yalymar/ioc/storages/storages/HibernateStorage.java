@@ -1,7 +1,6 @@
 package ru.yalymar.ioc.storages.storages;
 
 import org.springframework.orm.hibernate5.HibernateTemplate;
-import ru.yalymar.ioc.storages.models.Role;
 import ru.yalymar.ioc.storages.models.User;
 import ru.yalymar.ioc.storages.storages.interfaces.Storage;
 

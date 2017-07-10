@@ -2,10 +2,11 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tool"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                            http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://www.springframework.org/schema/context
-                           http://www.springframework.org/schema/context/spring-context.xsd">
+                           http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tool http://www.springframework.org/schema/tool/spring-tool.xsd">
 
     <context:property-placeholder location="classpath:hibernate.properties"/>
 
@@ -36,7 +37,7 @@
 
     <bean id="hibernateTemplate" class="org.springframework.orm.hibernate5.HibernateTemplate">
         <constructor-arg name="sessionFactory" ref="sessionFactory"/>
-        <property name="checkWriteOperations" value="false"/>
+        <property name="checkWriteOperations" value="false"/>                   <!-- Спорная строчка-->
     </bean>
 
     <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
