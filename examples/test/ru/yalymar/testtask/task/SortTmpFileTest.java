@@ -4,7 +4,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import ru.yalymar.testtask.sort.Sort;
-
 import java.io.*;
 import java.util.Properties;
 import java.util.Random;
@@ -66,18 +65,13 @@ public class SortTmpFileTest {
             c.seek(0);
             countOfLines = sort.countLines(c);
             sort.sortTmp(countOfLines, c, d);
+            d.seek(0);
 
-
+            Assert.assertThat(sort.countLines(d), is(countOfLines));
         }
-        this.deleteFile(distancePath);
-        this.deleteFile(copySrc);
+        sort.deleteTmp(new File(distancePath));
+        sort.deleteTmp(new File(copySrc));
     }
 
-    private void deleteFile(String path){
-        boolean b1 = false;
-        do {
-            b1 = new File(path).delete();
-        }
-        while (!b1);
-    }
+
 }

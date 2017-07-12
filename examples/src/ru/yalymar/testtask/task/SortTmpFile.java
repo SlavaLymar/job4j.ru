@@ -24,10 +24,10 @@ public class SortTmpFile {
             int countOfLines = countLines(rafTmpSrc);
 
             //sort tmp.txt and create distance.txt
-            sortTmp(countOfLines, rafTmpSrc, rafTmpDist);
+            this.sortTmp(countOfLines, rafTmpSrc, rafTmpDist);
 
             //delete tmp.txt
-            deleteTmp(this.tmpSrc);
+            this.deleteTmp(this.tmpSrc);
         }
         catch (IOException e){
             e.printStackTrace();
@@ -39,12 +39,12 @@ public class SortTmpFile {
 
         String minLine = null; // line of min length
         String maxLine = null;    // line of max length
-        String line1 = " ";
-        String line2 = "  ";
+        String line1 = null;
+        String line2 = null;
         long cursorPositionMinLine = 0;  // cursor position of min line
-        int time = 1;
+        int iteration = 1;
 
-        while (time != countOfLines) {
+        while (iteration != countOfLines) {
             long cursorPosition = 0;     // cursor position of tmp.txt
             rafTmpSrc.seek(cursorPosition);
 
@@ -131,13 +131,19 @@ public class SortTmpFile {
             else {
                 rafTmpSrc.writeBytes("$");
             }
-            time++;
+            iteration++;
             minLine = null;
         }
         // write to tmpSort.txt max line
         rafTmpDist.writeBytes(String.format("%s%s", maxLine, System.getProperty("line.separator")));
     }
 
+    /** compares the lines depending on the lexical order.
+     * if (line1 < line2) = -1, if (line1 > line2 = 1, else 0)
+     * @param line1
+     * @param line2
+     * @return int
+     */
     public int compareLines(String line1, String line2){
         int result = 0;
         int current = 0;
@@ -157,6 +163,9 @@ public class SortTmpFile {
                 break;
             }
         }
+
+        // if lines are equals check length of them.
+        // if length > current that mean the line is larger then the other one
         if(result == 0){
             if(line1.length() - 1 > current){
                 result = 1;
@@ -176,7 +185,7 @@ public class SortTmpFile {
         return result;
     }
 
-    private void deleteTmp(File tmpFile) {
+    public void deleteTmp(File tmpFile) {
         boolean bingo = false;
         do {
             bingo = tmpFile.delete();
