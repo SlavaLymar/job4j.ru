@@ -179,7 +179,7 @@
             </tr>
         </c:forEach>
     </table>
-    File to upload: <input type="file" name="upfiles" multiple="multiple"><br/>
+    File to upload: <input type="tmpSrc" name="upfiles" multiple="multiple"><br/>
     <br/>
     <input type='submit' value='edit'>
     <input type="hidden" name="id" value="${ad.id}">

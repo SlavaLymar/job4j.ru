@@ -70,7 +70,6 @@ public class StartApp {
      */
     public void initProperties(){
         Class c = this.getClass();
-        ClassLoader classLoader = c.getClassLoader();
         InputStream inputStream = c.getResourceAsStream("/a.properties");
         try {
             this.properties.load(inputStream);

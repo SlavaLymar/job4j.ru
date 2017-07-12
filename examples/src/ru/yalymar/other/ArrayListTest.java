@@ -1,4 +1,4 @@
-package ru.yalymar;
+package ru.yalymar.other;
 
 import java.util.Arrays;
 

@@ -159,3 +159,23 @@
 2017-07-10 15:19:35 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
 2017-07-10 15:19:35 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@12ddbab
 2017-07-10 15:19:36 INFO  HibernateTransactionManager:357 - Using DataSource [org.springframework.jdbc.datasource.DriverManagerDataSource@3790cf] of Hibernate SessionFactory for HibernateTransactionManager
+2017-07-10 15:25:33 INFO  ClassPathXmlApplicationContext:583 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@818063: startup date [Mon Jul 10 15:25:33 MSK 2017]; root of context hierarchy
+2017-07-10 15:25:34 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring-context-storages-hibernate.xml]
+2017-07-10 15:25:34 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: org.postgresql.Driver
+2017-07-10 15:25:35 INFO  Version:45 - HHH000412: Hibernate Core {5.2.10.Final}
+2017-07-10 15:25:35 INFO  Environment:198 - HHH000205: Loaded properties from resource hibernate.properties: {jdbc.postgreSQL.show_sql=true, jdbc.postgreSQL.driverClass=org.postgresql.Driver, jdbc.postgreSQL.username=postgres, jdbc.postgreSQL.url=jdbc:postgresql://localhost:5432/springtest, hibernate.bytecode.use_reflection_optimizer=false, jdbc.postgreSQL.dialect=org.hibernate.dialect.PostgreSQL94Dialect, jdbc.postgreSQL.password=lymar123, jdbc.postgreSQL.hbm2ddl.auto=update}
+2017-07-10 15:25:36 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-07-10 15:25:36 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-07-10 15:25:36 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-07-10 15:25:37 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@12ddbab
+2017-07-10 15:25:37 INFO  HibernateTransactionManager:357 - Using DataSource [org.springframework.jdbc.datasource.DriverManagerDataSource@3790cf] of Hibernate SessionFactory for HibernateTransactionManager
+2017-07-10 15:25:58 INFO  ClassPathXmlApplicationContext:583 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@818063: startup date [Mon Jul 10 15:25:58 MSK 2017]; root of context hierarchy
+2017-07-10 15:25:58 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring-context-storages-hibernate.xml]
+2017-07-10 15:25:58 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: org.postgresql.Driver
+2017-07-10 15:25:59 INFO  Version:45 - HHH000412: Hibernate Core {5.2.10.Final}
+2017-07-10 15:25:59 INFO  Environment:198 - HHH000205: Loaded properties from resource hibernate.properties: {jdbc.postgreSQL.show_sql=true, jdbc.postgreSQL.driverClass=org.postgresql.Driver, jdbc.postgreSQL.username=postgres, jdbc.postgreSQL.url=jdbc:postgresql://localhost:5432/springtest, hibernate.bytecode.use_reflection_optimizer=false, jdbc.postgreSQL.dialect=org.hibernate.dialect.PostgreSQL94Dialect, jdbc.postgreSQL.password=lymar123, jdbc.postgreSQL.hbm2ddl.auto=update}
+2017-07-10 15:26:00 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-07-10 15:26:01 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-07-10 15:26:01 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-07-10 15:26:01 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@12ddbab
+2017-07-10 15:26:02 INFO  HibernateTransactionManager:357 - Using DataSource [org.springframework.jdbc.datasource.DriverManagerDataSource@3790cf] of Hibernate SessionFactory for HibernateTransactionManager
