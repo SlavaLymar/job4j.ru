@@ -16,9 +16,9 @@ public class SortTmpFile {
     }
 
     public void doTask() {
-        File tmpDist = new File(String.format("%s%stmpSort%s",
+        File tmpDist = new File(String.format("%s%stmpSort%s.txt",
                 this.tmpSrc.getParent(), File.separator, this.random.nextInt()*1000));
-        try(RandomAccessFile rafTmpSrc = new RandomAccessFile(this.tmpSrc, "r");
+        try(RandomAccessFile rafTmpSrc = new RandomAccessFile(this.tmpSrc, "rw");
             RandomAccessFile rafTmpDist = new RandomAccessFile(tmpDist, "rw")){
 
             int countOfLines = countLines(rafTmpSrc);
@@ -34,8 +34,8 @@ public class SortTmpFile {
         }
     }
 
-    private void sortTmp(int countOfLines, RandomAccessFile rafTmpSrc,
-                         RandomAccessFile rafTmpDist) throws IOException {
+    public void sortTmp(int countOfLines, RandomAccessFile rafTmpSrc,
+                        RandomAccessFile rafTmpDist) throws IOException {
 
         String minLine = "    "; // line of min length
         String maxLine = " ";    // line of max length
@@ -75,34 +75,33 @@ public class SortTmpFile {
                 cursorPosition += line2.length() + 2;
 
                 // looking for min and max length of line
-                if (line1.length()<line2.length()) {
-                    if (line1.length() < minLine.length()) {
+                if (this.compareLines(line1, line2) < 0) {
+                    if (this.compareLines(line1, minLine) < 0) {
                         minLine = line1;
                         cursorPositionMinLine = cursorPosition-line2.length()-line1.length()-4;
                     }
-                    if(line2.length()>maxLine.length()){
+                    if(this.compareLines(line2, maxLine) > 0){
                         maxLine = line2;
                     }
                 }
-                else if (line1.length()>line2.length()) {
-                    if (line2.length() < minLine.length()) {
+                else if (this.compareLines(line1, line2) > 0) {
+                    if (this.compareLines(line2, minLine) < 0) {
                         minLine = line2;
                         cursorPositionMinLine = cursorPosition-line2.length()-2;
                     }
-                    if(line1.length()>maxLine.length()){
+                    if(this.compareLines(line1, maxLine) > 0){
                         maxLine = line1;
                     }
                 }
-
             }
 
-            // write to distance.txt current min line
+            // write to tmpSort.txt current min line
             rafTmpDist.writeBytes(String.format("%s%s", minLine, System.getProperty("line.separator")));
             rafTmpSrc.seek(cursorPositionMinLine);
             rafTmpSrc.writeBytes("$");     // mark lines that was used before
             time++;
         }
-        // write to distance.txt max line
+        // write to tmpSort.txt max line
         rafTmpDist.writeBytes(String.format("%s%s", maxLine, System.getProperty("line.separator")));
     }
 
@@ -132,7 +131,6 @@ public class SortTmpFile {
             else if(line2.length() - 1 > current){
                 result = -1;
             }
-
         }
         return result;
     }
@@ -146,7 +144,11 @@ public class SortTmpFile {
     }
 
     private void deleteTmp(File tmpFile) {
-        tmpFile.delete();
+        boolean bingo = false;
+        do {
+            bingo = tmpFile.delete();
+        }
+        while (!bingo);
     }
 
 }
