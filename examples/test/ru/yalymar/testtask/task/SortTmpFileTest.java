@@ -4,10 +4,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import ru.yalymar.testtask.sort.Sort;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.RandomAccessFile;
+
+import java.io.*;
 import java.util.Properties;
 import java.util.Random;
 import static org.hamcrest.core.Is.is;
@@ -50,7 +48,36 @@ public class SortTmpFileTest {
     }
 
     @Test
-    public void whenSortShouldGetInt(){
-        
+    public void whenSortShouldGetInt() throws IOException {
+        SortTmpFile sort = new SortTmpFile(new File(""), new Random());
+        int countOfLines = 0;
+        String sourcePath = this.properties.getProperty("SOURCEPATH");
+        String distancePath = String.format("%s%stestTmp.txt", this.properties.getProperty("TEMPAREA"), File.separator);
+        String copySrc = String.format("%s%stestScrTmp.txt", this.properties.getProperty("TEMPAREA"), File.separator);
+        File file = new File(distancePath);
+        try(RandomAccessFile s = new RandomAccessFile(sourcePath, "r");
+            RandomAccessFile d = new RandomAccessFile(distancePath, "rw");
+            RandomAccessFile c = new RandomAccessFile(copySrc, "rw")){
+
+            while (s.read() != -1){
+                s.seek(s.getFilePointer() -1);
+                c.writeBytes(String.format("%s%s", s.readLine(), System.getProperty("line.separator")));
+            }
+            c.seek(0);
+            countOfLines = sort.countLines(c);
+            sort.sortTmp(countOfLines, c, d);
+
+
+        }
+        this.deleteFile(distancePath);
+        this.deleteFile(copySrc);
+    }
+
+    private void deleteFile(String path){
+        boolean b1 = false;
+        do {
+            b1 = new File(path).delete();
+        }
+        while (!b1);
     }
 }

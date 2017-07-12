@@ -37,8 +37,8 @@ public class SortTmpFile {
     public void sortTmp(int countOfLines, RandomAccessFile rafTmpSrc,
                         RandomAccessFile rafTmpDist) throws IOException {
 
-        String minLine = "    "; // line of min length
-        String maxLine = " ";    // line of max length
+        String minLine = null; // line of min length
+        String maxLine = null;    // line of max length
         String line1 = " ";
         String line2 = "  ";
         long cursorPositionMinLine = 0;  // cursor position of min line
@@ -47,59 +47,92 @@ public class SortTmpFile {
         while (time != countOfLines) {
             long cursorPosition = 0;     // cursor position of tmp.txt
             rafTmpSrc.seek(cursorPosition);
-            minLine = String.format("%100s", " ");
 
             for (int i = 1; i < countOfLines; i++) {
-
+                rafTmpSrc.seek(cursorPosition);
                 if(rafTmpSrc.read()!= -1) {
                     rafTmpSrc.seek(cursorPosition);
                     do {
                         line1 = rafTmpSrc.readLine();
+                        if(line1 == null) break;
                         if(line1.contains("$"))cursorPosition += line1.length() + 2;
                     }
                     while(line1.contains("$"));
                 }
 
-                cursorPosition += line1.length() + 2; // distance between lines for read
-                rafTmpSrc.seek(cursorPosition);
+                if(line1 != null){
+                    cursorPosition += line1.length() + 2; // distance between lines for read
+                    rafTmpSrc.seek(cursorPosition);
+                }
 
                 if(rafTmpSrc.read()!= -1) {
                     rafTmpSrc.seek(cursorPosition);
                     do {
                         line2 = rafTmpSrc.readLine();
+                        if(line2 == null) break;
                         if(line2.contains("$")) cursorPosition += line2.length() + 2;
                     }
                     while(line2.contains("$"));
                 }
 
-                cursorPosition += line2.length() + 2;
+                if(line2 != null) cursorPosition += line2.length() + 2;
 
                 // looking for min and max length of line
-                if (this.compareLines(line1, line2) < 0) {
-                    if (this.compareLines(line1, minLine) < 0) {
-                        minLine = line1;
-                        cursorPositionMinLine = cursorPosition-line2.length()-line1.length()-4;
-                    }
-                    if(this.compareLines(line2, maxLine) > 0){
-                        maxLine = line2;
+                if(line1 != null && line2 != null) {
+                    if (this.compareLines(line1, line2) < 0) {
+                        if (minLine != null) {
+                            if (this.compareLines(line1, minLine) < 0) {
+                                minLine = line1;
+                                cursorPositionMinLine = cursorPosition - line2.length() - line1.length() - 4;
+                            }
+                        } else {
+                            minLine = line1;
+                            cursorPositionMinLine = cursorPosition - line2.length() - line1.length() - 4;
+                        }
+                        if (maxLine != null) {
+                            if (this.compareLines(line2, maxLine) > 0) {
+                                maxLine = line2;
+                            }
+                        } else {
+                            maxLine = line2;
+                        }
+                    } else if (this.compareLines(line1, line2) > 0) {
+                        if (minLine != null) {
+                            if (this.compareLines(line2, minLine) < 0) {
+                                minLine = line2;
+                                cursorPositionMinLine = cursorPosition - line2.length() - 2;
+                            }
+                        } else {
+                            minLine = line2;
+                            cursorPositionMinLine = cursorPosition - line2.length() - 2;
+                        }
+                        if (maxLine != null) {
+                            if (this.compareLines(line1, maxLine) > 0) {
+                                maxLine = line1;
+                            }
+                        } else {
+                            maxLine = line1;
+                        }
                     }
                 }
-                else if (this.compareLines(line1, line2) > 0) {
-                    if (this.compareLines(line2, minLine) < 0) {
-                        minLine = line2;
-                        cursorPositionMinLine = cursorPosition-line2.length()-2;
-                    }
-                    if(this.compareLines(line1, maxLine) > 0){
-                        maxLine = line1;
-                    }
+                else {
+                    cursorPosition = 0;
                 }
             }
 
             // write to tmpSort.txt current min line
             rafTmpDist.writeBytes(String.format("%s%s", minLine, System.getProperty("line.separator")));
             rafTmpSrc.seek(cursorPositionMinLine);
-            rafTmpSrc.writeBytes("$");     // mark lines that was used before
+
+            // mark lines that was used before
+            if("".equals(minLine)){
+                rafTmpSrc.writeBytes(String.format("$%s", System.getProperty("line.separator")));
+            }
+            else {
+                rafTmpSrc.writeBytes("$");
+            }
             time++;
+            minLine = null;
         }
         // write to tmpSort.txt max line
         rafTmpDist.writeBytes(String.format("%s%s", maxLine, System.getProperty("line.separator")));
@@ -137,7 +170,7 @@ public class SortTmpFile {
 
     public int countLines(RandomAccessFile source) throws IOException{
         int result = 0;
-        while(source.readLine()!= null){
+        while(source.readLine() != null){
             result++;
         }
         return result;
