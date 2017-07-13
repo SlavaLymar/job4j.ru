@@ -53,13 +53,16 @@ public class Manager implements CreateNewFile{
                 catch (IOException e) {
                     Sort.logger.error(e.getMessage(), e);
                 }
+
+                //sort tmp.txt
                 this.threadPool.execute(() -> {
                     new SortTmpFile(file, this.random).doTask();
                 });
-
-
-
-
+            }
+            
+            while (){
+                //merge sort of files
+                //TODO scanDir
             }
         }
         catch (IOException e){
