@@ -1,13 +1,23 @@
 package ru.yalymar.testtask.task;
 
+import ru.yalymar.testtask.sort.Sort;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Random;
 
+/**
+ * @author slavalymar
+ * @since 13.07.2017
+ * @version 1
+ */
 public class SortTmpFile {
 
+    /**
+     * instance of temporary file
+     */
     private final File tmpSrc;
+
     private final Random random;
 
     public SortTmpFile(File tmpSrc, Random random) {
@@ -15,22 +25,28 @@ public class SortTmpFile {
         this.random = random;
     }
 
+    /**
+     * manager of class
+     */
     public void doTask() {
-        try (RandomAccessFile rafTmpSrc = new RandomAccessFile(this.tmpSrc, "rw")) {
+        try (RandomAccessFile rafTmpSrc = new RandomAccessFile(this.tmpSrc, "rw")){
 
+            // count of lines
             int countOfLines = countLines(rafTmpSrc);
 
-            //sort tmp.txt and
+            //sort tmp.txt
             this.sortTmp(countOfLines, rafTmpSrc);
         }
         catch (IOException e) {
-            e.printStackTrace();
+            Sort.logger.error(e.getMessage(), e);
         }
-
-        //delete tmp.txt
-//        this.deleteTmp(this.tmpSrc);
     }
 
+    /** external sorting by a bubble method
+     * @param countOfLines
+     * @param rafTmpSrc
+     * @throws IOException
+     */
     public void sortTmp(int countOfLines, RandomAccessFile rafTmpSrc) throws IOException {
         for (int i = countOfLines - 1; i > 0; i--) {
             long cursorPosition = 0;
@@ -49,13 +65,12 @@ public class SortTmpFile {
                     rafTmpSrc.writeBytes(String.format("%s%s", line2, System.getProperty("line.separator")));
                     rafTmpSrc.writeBytes(String.format("%s%s", line1, System.getProperty("line.separator")));
                     cursorPosition = cursorPosition - line1.length() - 2;
-                }
-                else {
+                } else {
                     cursorPosition = cursorPosition - line2.length() - 2;
                 }
                 rafTmpSrc.seek(cursorPosition);
-           }
-       }
+            }
+        }
     }
 
     /**
@@ -96,6 +111,11 @@ public class SortTmpFile {
         return result;
     }
 
+    /** return numerous of lines in the file
+     * @param source
+     * @return int
+     * @throws IOException
+     */
     public int countLines(RandomAccessFile source) throws IOException {
         int result = 0;
         while (source.readLine() != null) {
@@ -104,7 +124,7 @@ public class SortTmpFile {
         return result;
     }
 
-    public void deleteTmp(File tmpFile) {
+    public void deleteFile(File tmpFile) {
         boolean bingo = false;
         do {
             bingo = tmpFile.delete();

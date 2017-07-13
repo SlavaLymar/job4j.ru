@@ -4,7 +4,6 @@ import org.apache.log4j.Logger;
 import ru.yalymar.testtask.manager.Manager;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.RandomAccessFile;
 import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

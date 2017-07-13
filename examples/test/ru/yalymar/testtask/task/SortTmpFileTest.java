@@ -68,7 +68,7 @@ public class SortTmpFileTest {
 
             Assert.assertThat(sort.countLines(c), is(countOfLines));
         }
-        sort.deleteTmp(new File(copySrc));
+        sort.deleteFile(new File(copySrc));
     }
 
     @Test
@@ -93,7 +93,7 @@ public class SortTmpFileTest {
 
             Assert.assertThat(sort.countLines(c), is(countOfLines));
         }
-        sort.deleteTmp(new File(copySrc));
+        sort.deleteFile(new File(copySrc));
     }
 
 }

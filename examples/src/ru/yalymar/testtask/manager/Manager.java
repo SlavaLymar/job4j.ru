@@ -32,7 +32,7 @@ public class Manager {
         try(RandomAccessFile rafSrc = new RandomAccessFile(sourcePath, "r");
             RandomAccessFile rafDisc = new RandomAccessFile(distancePath, "rw")){
 
-            while (rafSrc.read() != -1){ // TODO
+            while (rafSrc.read() != -1){
                 rafSrc.seek(rafSrc.getFilePointer() - 1);
                 File file = this.createTmpFile();
 
@@ -53,6 +53,7 @@ public class Manager {
                 }
                 this.threadPool.execute(() -> {
                     new SortTmpFile(file, this.random).doTask();
+                    file.renameTo(new File(file.getAbsolutePath().replace("tmp", "sort")));
                 });
 
 
