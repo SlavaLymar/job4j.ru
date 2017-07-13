@@ -1,5 +1,6 @@
 package ru.yalymar.testtask.manager;
 
+import ru.yalymar.testtask.service.CreateNewFile;
 import ru.yalymar.testtask.sort.Sort;
 import ru.yalymar.testtask.task.SortTmpFile;
 import java.io.File;
@@ -9,7 +10,7 @@ import java.util.Properties;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 
-public class Manager {
+public class Manager implements CreateNewFile{
 
     private final Properties properties;
     private final ExecutorService threadPool;
@@ -34,7 +35,8 @@ public class Manager {
 
             while (rafSrc.read() != -1){
                 rafSrc.seek(rafSrc.getFilePointer() - 1);
-                File file = this.createTmpFile();
+                File file = this.createNewFile(this.properties.getProperty("TEMPAREA"),
+                        "tmp", this.random);
 
                 try (RandomAccessFile tmp = new RandomAccessFile(file, "rw")) {
                     int count = 0;
@@ -53,7 +55,6 @@ public class Manager {
                 }
                 this.threadPool.execute(() -> {
                     new SortTmpFile(file, this.random).doTask();
-                    file.renameTo(new File(file.getAbsolutePath().replace("tmp", "sort")));
                 });
 
 
@@ -67,15 +68,7 @@ public class Manager {
 
     }
 
-    private File createTmpFile() {
-        File file;
-        do {
-            file = new File(this.properties.getProperty("TEMPAREA"),
-                    String.format("%stmp%s.txt", File.separator, this.random.nextInt() * 1000));
-        }
-        while (file.exists());
-        return file;
-    }
+
 
 
 }
