@@ -1,6 +1,7 @@
 package ru.yalymar.testtask.task;
 
 import ru.yalymar.testtask.service.CompareLines;
+import ru.yalymar.testtask.service.CountOfLines;
 import ru.yalymar.testtask.service.CreateNewFile;
 import ru.yalymar.testtask.service.DeleteFile;
 import ru.yalymar.testtask.sort.Sort;
@@ -9,7 +10,7 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Random;
 
-public class MergeSortTask implements CompareLines, DeleteFile, CreateNewFile{
+public class MergeSortTask implements CompareLines, DeleteFile, CreateNewFile, CountOfLines{
 
     private final String TEMPAREA;
     private final Random RANDOM;
@@ -56,17 +57,21 @@ public class MergeSortTask implements CompareLines, DeleteFile, CreateNewFile{
                 break;
             }
             else if (line1 == null && line2 != null) {
+                rafDistSort.writeBytes(line2);
                 while (rafFile2.read() != -1){
                     rafFile2.seek(rafFile2.getFilePointer() - 1);
-                    rafDistSort.writeBytes(rafFile2.readLine());
+                    rafDistSort.writeBytes(String.format("%s%s",
+                            rafFile2.readLine(), System.getProperty("line.separator")));
                 }
                 done = true;
                 break;
             }
             else if(line1 != null && line2 == null){
+                rafDistSort.writeBytes(line1);
                 while (rafFile1.read() != -1){
                     rafFile1.seek(rafFile1.getFilePointer() - 1);
-                    rafDistSort.writeBytes(rafFile1.readLine());
+                    rafDistSort.writeBytes(String.format("%s%s",
+                            rafFile1.readLine(), System.getProperty("line.separator")));
                 }
                 done = true;
                 break;
@@ -76,11 +81,13 @@ public class MergeSortTask implements CompareLines, DeleteFile, CreateNewFile{
             cursorLine2 += line2.length() + 2;
 
             if(this.compareLines(line1, line2) < 0){
-                rafDistSort.writeBytes(line1);
+                rafDistSort.writeBytes(String.format("%s%s",
+                        line1, System.getProperty("line.separator")));
                 cursorLine2 = cursorLine2 - line2.length() - 2;
             }
             else if(this.compareLines(line1, line2) >= 0){
-                rafDistSort.writeBytes(line2);
+                rafDistSort.writeBytes(String.format("%s%s",
+                        line2, System.getProperty("line.separator")));
                 cursorLine1 = cursorLine1 - line1.length() - 2;
             }
         }

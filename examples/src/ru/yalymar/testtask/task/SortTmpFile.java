@@ -1,6 +1,7 @@
 package ru.yalymar.testtask.task;
 
 import ru.yalymar.testtask.service.CompareLines;
+import ru.yalymar.testtask.service.CountOfLines;
 import ru.yalymar.testtask.service.DeleteFile;
 import ru.yalymar.testtask.sort.Sort;
 import java.io.File;
@@ -13,7 +14,7 @@ import java.util.Random;
  * @since 13.07.2017
  * @version 1
  */
-public class SortTmpFile implements CompareLines, DeleteFile{
+public class SortTmpFile implements CompareLines, DeleteFile, CountOfLines{
 
     /**
      * instance of temporary file
@@ -80,17 +81,6 @@ public class SortTmpFile implements CompareLines, DeleteFile{
         }
     }
 
-    /** return numerous of lines in the file
-     * @param source
-     * @return int
-     * @throws IOException
-     */
-    public int countLines(RandomAccessFile source) throws IOException {
-        int result = 0;
-        while (source.readLine() != null) {
-            result++;
-        }
-        return result;
-    }
+
 
 }
