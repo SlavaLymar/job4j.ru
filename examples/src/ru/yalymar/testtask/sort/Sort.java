@@ -35,4 +35,8 @@ public class Sort {
         Manager manager = new Manager(properties, threadPool);
         manager.readFile();
     }
+
+    public ExecutorService getThreadPool() {
+        return this.threadPool;
+    }
 }

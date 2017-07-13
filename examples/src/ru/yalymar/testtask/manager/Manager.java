@@ -32,18 +32,20 @@ public class Manager {
         try(RandomAccessFile rafSrc = new RandomAccessFile(sourcePath, "r");
             RandomAccessFile rafDisc = new RandomAccessFile(distancePath, "rw")){
 
-            while (rafSrc.read() != -1){
+            while (rafSrc.read() != -1){ // TODO
                 rafSrc.seek(rafSrc.getFilePointer() - 1);
-                File file = new File(this.properties.getProperty("TEMPAREA"),
-                        String.format("%stmp%s.txt", File.separator, this.random.nextInt() * 1000));
+                File file = this.createTmpFile();
+
                 try (RandomAccessFile tmp = new RandomAccessFile(file, "rw")) {
                     int count = 0;
                     while (COUNTOFLINES != count && rafSrc.read() != -1){
                         rafSrc.seek(rafSrc.getFilePointer() - 1);
                         String line = rafSrc.readLine();
                         count++;
-                        tmp.writeBytes(String.format("%s%s",
-                                line, System.getProperty("line.separator")));
+                        if(line != null) {
+                            tmp.writeBytes(String.format("%s%s",
+                                    line, System.getProperty("line.separator")));
+                        }
                     }
                 }
                 catch (IOException e) {
@@ -53,12 +55,25 @@ public class Manager {
                     new SortTmpFile(file, this.random).doTask();
                 });
 
+
+
+
             }
         }
         catch (IOException e){
             Sort.logger.error(e.getMessage(), e);
         }
 
+    }
+
+    private File createTmpFile() {
+        File file;
+        do {
+            file = new File(this.properties.getProperty("TEMPAREA"),
+                    String.format("%stmp%s.txt", File.separator, this.random.nextInt() * 1000));
+        }
+        while (file.exists());
+        return file;
     }
 
 

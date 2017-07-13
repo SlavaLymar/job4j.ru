@@ -47,15 +47,14 @@ public class SortTmpFileTest {
     }
 
     @Test
-    public void whenSortShouldGetInt() throws IOException {
+    public void whenSortEvenShouldGetInt() throws IOException {
         SortTmpFile sort = new SortTmpFile(new File(""), new Random());
         int countOfLines = 0;
-        String sourcePath = this.properties.getProperty("SOURCEPATH");
-        String distancePath = String.format("%s%stestTmp.txt", this.properties.getProperty("TEMPAREA"), File.separator);
+        String sourcePath = String.format("%s%stest%stestEven.txt",
+                this.properties.getProperty("TEMPAREA"),
+                File.separator, File.separator);
         String copySrc = String.format("%s%stestScrTmp.txt", this.properties.getProperty("TEMPAREA"), File.separator);
-        File file = new File(distancePath);
         try(RandomAccessFile s = new RandomAccessFile(sourcePath, "r");
-            RandomAccessFile d = new RandomAccessFile(distancePath, "rw");
             RandomAccessFile c = new RandomAccessFile(copySrc, "rw")){
 
             while (s.read() != -1){
@@ -64,14 +63,37 @@ public class SortTmpFileTest {
             }
             c.seek(0);
             countOfLines = sort.countLines(c);
-            sort.sortTmp(countOfLines, c, d);
-            d.seek(0);
+            sort.sortTmp(countOfLines, c);
+            c.seek(0);
 
-            Assert.assertThat(sort.countLines(d), is(countOfLines));
+            Assert.assertThat(sort.countLines(c), is(countOfLines));
         }
-        sort.deleteTmp(new File(distancePath));
         sort.deleteTmp(new File(copySrc));
     }
 
+    @Test
+    public void whenSortOddShouldGetInt() throws IOException {
+        SortTmpFile sort = new SortTmpFile(new File(""), new Random());
+        int countOfLines = 0;
+        String sourcePath = String.format("%s%stest%stestOdd.txt",
+                this.properties.getProperty("TEMPAREA"),
+                File.separator, File.separator);
+        String copySrc = String.format("%s%stestScrTmp.txt", this.properties.getProperty("TEMPAREA"), File.separator);
+        try(RandomAccessFile s = new RandomAccessFile(sourcePath, "r");
+            RandomAccessFile c = new RandomAccessFile(copySrc, "rw")){
+
+            while (s.read() != -1){
+                s.seek(s.getFilePointer() - 1);
+                c.writeBytes(String.format("%s%s", s.readLine(), System.getProperty("line.separator")));
+            }
+            c.seek(0);
+            countOfLines = sort.countLines(c);
+            sort.sortTmp(countOfLines, c);
+            c.seek(0);
+
+            Assert.assertThat(sort.countLines(c), is(countOfLines));
+        }
+        sort.deleteTmp(new File(copySrc));
+    }
 
 }
