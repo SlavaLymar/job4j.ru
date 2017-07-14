@@ -1,7 +1,9 @@
 package ru.yalymar.testtask.manager;
 
+import ru.yalymar.testtask.service.CopyTextFile;
 import ru.yalymar.testtask.service.CreateNewFile;
 import ru.yalymar.testtask.service.DeleteFile;
+import ru.yalymar.testtask.service.SortBySize;
 import ru.yalymar.testtask.sort.Sort;
 import ru.yalymar.testtask.task.ScanDirectory;
 import ru.yalymar.testtask.task.SortTmpFile;
@@ -12,13 +14,14 @@ import java.util.Properties;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 
-public class Manager implements CreateNewFile, DeleteFile{
+public class Manager implements CreateNewFile, DeleteFile, CopyTextFile, SortBySize {
 
     private final Properties properties;
     private final ExecutorService threadPool;
     private final Random RANDOM = new Random();
     private final int COUNTOFLINES;
     private final String TEMPAREA;
+    private final String COPYBUFFER;
 
     public Manager(final Properties properties,
                    final ExecutorService threadPool) {
@@ -26,7 +29,7 @@ public class Manager implements CreateNewFile, DeleteFile{
         this.threadPool = threadPool;
         this.COUNTOFLINES = Integer.parseInt(this.properties.getProperty("COUNFOFLINES"));
         this.TEMPAREA = this.properties.getProperty("TEMPAREA");
-
+        this.COPYBUFFER = this.properties.getProperty("COPYBUFFER");
     }
 
     public void readFile(){
@@ -35,8 +38,7 @@ public class Manager implements CreateNewFile, DeleteFile{
 
         File distance = new File(distancePath);
 
-        try(RandomAccessFile rafSrc = new RandomAccessFile(sourcePath, "r");
-            RandomAccessFile rafDist = new RandomAccessFile(distancePath, "rw")){
+        try(RandomAccessFile rafSrc = new RandomAccessFile(sourcePath, "r")){
 
             while (rafSrc.read() != -1){
                 rafSrc.seek(rafSrc.getFilePointer() - 1);
@@ -65,30 +67,24 @@ public class Manager implements CreateNewFile, DeleteFile{
                 });
             }
 
-            boolean complete = false;
-            while (!complete){
-                //merge sort of files
-                complete = new ScanDirectory(this.threadPool, TEMPAREA, RANDOM).scanDir();
+            boolean complete = new ScanDirectory(this.threadPool, TEMPAREA, RANDOM).scanDir();
+
+            if(complete) {
+                this.copyTmpToDistance(distance);
             }
-            this.copyTmpToDistance(distance);
         }
         catch (IOException e){
             Sort.logger.error(e.getMessage(), e);
         }
-
     }
 
     private void copyTmpToDistance(File distance) {
         File[] files = new File(TEMPAREA).listFiles();
         for(int i = 0; i < files.length; i++){
             if(!files[i].isDirectory()){
-                try (){
-
-                }
-                catch (IOException e){
-                    Sort.logger.error(e.getMessage(), e);
-                }
+                this.copy(files[i], distance, COPYBUFFER);
                 this.deleteFile(files[i]);
+                break;
             }
         }
     }

@@ -8,6 +8,8 @@ import ru.yalymar.testtask.sort.Sort;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.nio.channels.FileLock;
+import java.nio.channels.OverlappingFileLockException;
 import java.util.Random;
 
 public class MergeSortTask implements CompareLines, DeleteFile, CreateNewFile, CountOfLines{
@@ -22,20 +24,26 @@ public class MergeSortTask implements CompareLines, DeleteFile, CreateNewFile, C
 
     public void doTask(File file1, File file2) {
         File dist = this.createNewFile(TEMPAREA, "sort", RANDOM);
-        try (RandomAccessFile rafFile1 = new RandomAccessFile(file1, "r");
-             RandomAccessFile rafFile2 = new RandomAccessFile(file2, "r");
+        try (RandomAccessFile rafFile1 = new RandomAccessFile(file1, "rw");
+             RandomAccessFile rafFile2 = new RandomAccessFile(file2, "rw");
              RandomAccessFile rafDistSortI = new RandomAccessFile(dist, "rw")) {
 
-            boolean success = this.mergeSort(rafFile1, rafFile2, rafDistSortI);
+            FileLock lock1 = rafFile1.getChannel().tryLock();
+            FileLock lock2 = rafFile2.getChannel().tryLock();
+            System.out.println(Thread.currentThread().getName());
 
-            if(success) {
-                this.deleteFile(file1);
-                this.deleteFile(file2);
+            if(lock1 != null && lock2 != null) {
+                boolean success = this.mergeSort(rafFile1, rafFile2, rafDistSortI);
+                if (success) {
+                    rafFile1.close();
+                    this.deleteFile(file1);
+                    rafFile2.close();
+                    this.deleteFile(file2);
+                }
             }
-        } catch (IOException e) {
+        } catch (IOException | OverlappingFileLockException e) {
             Sort.logger.error(e.getMessage(), e);
         }
-
     }
 
     public boolean mergeSort(RandomAccessFile rafFile1, RandomAccessFile rafFile2,

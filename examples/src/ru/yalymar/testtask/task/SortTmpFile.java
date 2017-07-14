@@ -41,9 +41,9 @@ public class SortTmpFile implements CompareLines, DeleteFile, CountOfLines{
             this.sortTmp(countOfLines, rafTmpSrc);
 
             //rename tmp.txt to sort1.txt
-            this.tmpSrc.renameTo
-                    (new File(this.tmpSrc.getAbsolutePath().replace(
-                    "tmp", "sort")));
+            File file = this.tmpSrc.getAbsoluteFile();
+            rafTmpSrc.close();
+            file.renameTo(new File(file.getAbsolutePath().replace("tmp", "sort")));
         }
         catch (IOException e) {
             Sort.logger.error(e.getMessage(), e);

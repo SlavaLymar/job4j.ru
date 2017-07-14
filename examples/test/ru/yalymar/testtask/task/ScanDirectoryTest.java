@@ -4,11 +4,11 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import ru.yalymar.testtask.sort.Sort;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import java.util.Random;
 import java.util.concurrent.Executors;
 import static org.hamcrest.core.Is.is;
 
@@ -34,8 +34,13 @@ public class ScanDirectoryTest {
                 this.properties.getProperty("TEMPAREA"),
                 File.separator, File.separator);
         ScanDirectory scanDirectory = new ScanDirectory(Executors.newFixedThreadPool(1),
-                path);
-        String[] s = scanDirectory.sortBySize(path);
-        Assert.assertThat(s[0], is("a.txt"));
+                path, new Random());
+        File[] s = scanDirectory.sortBySize(path);
+        Assert.assertThat(s[0].getName(), is("dd.txt"));
+    }
+
+    @Test
+    public void when(){
+
     }
 }
