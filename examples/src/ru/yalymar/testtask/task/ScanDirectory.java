@@ -1,7 +1,6 @@
 package ru.yalymar.testtask.task;
 
 import ru.yalymar.testtask.service.SortBySize;
-
 import java.io.File;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
@@ -22,14 +21,46 @@ public class ScanDirectory implements SortBySize{
     public boolean scanDir(){
         boolean done = false;
         while(!done){
-            String[] files = this.sortBySize(TEMPAREA);
+            File[] files = this.sortBySize(TEMPAREA);
 
-            if(files.length > 1){
+            if(files != null){
                 this.threadPool.execute(() -> {
-                    File file1 = new File(TEMPAREA, files[0]);
-                    File file2 = new File(TEMPAREA, files[1]);
-                    new MergeSortTask(TEMPAREA, RANDOM).doTask(file1, file2);
+
+                    if(files.length > 0) {
+                        int i1 = 0;
+                        File file1 = null;
+                        for (int i = 0; i < files.length; i++) {
+                            if (!files[i].isDirectory()) {
+                                file1 = files[i];
+                                i1 = i;
+                                break;
+                            }
+                        }
+                        File file2 = null;
+                        for (int i = 0; i < files.length; i++) {
+                            if (i == i1) continue;
+                            if (!files[i].isDirectory()) {
+                                file2 = files[i];
+                                break;
+                            }
+                        }
+                        if(file1 != null && file2 != null) {
+                            new MergeSortTask(TEMPAREA, RANDOM).doTask(file1, file2);
+                        }
+                    }
                 });
+
+                File[] checkFiles = this.sortBySize(TEMPAREA);
+                int counter = 0;
+                for(int i = 0; i < checkFiles.length; i++){
+                    if(checkFiles[i].isDirectory()){
+                        counter++;
+                    }
+                    if(counter == 2) {
+                        break;
+                    }
+                }
+                if(counter == 1) done = true;
             }
             else {
                 done = true;
@@ -37,5 +68,6 @@ public class ScanDirectory implements SortBySize{
         }
         return done;
     }
-    
+
+
 }
