@@ -1,13 +1,12 @@
 package ru.yalymar.testtask.task;
 
 import ru.yalymar.testtask.service.SortBySize;
-import ru.yalymar.testtask.sort.Sort;
+
 import java.io.File;
-import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.nio.channels.FileLock;
-import java.nio.channels.OverlappingFileLockException;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 
 public class ScanDirectory implements SortBySize {
@@ -15,80 +14,55 @@ public class ScanDirectory implements SortBySize {
     private final ExecutorService threadPool;
     private final String TEMPAREA;
     private final Random RANDOM;
+    private final Map<File, Boolean> map;
 
     public ScanDirectory(final ExecutorService threadPool, final String TEMPAREA,
                          final Random RANDOM) {
         this.threadPool = threadPool;
         this.TEMPAREA = TEMPAREA;
         this.RANDOM = RANDOM;
+        this.map = new ConcurrentHashMap<>();
+        this.createMap();
     }
 
     public boolean scanDir() {
         boolean done = false;
+
         while (!done) {
-            File[] files = this.sortBySize(TEMPAREA);
-
-            if (files != null) {
-
-                if (files.length > 0) {
-                    int i1 = 0;
-                    File file1 = null;
-                    for (int i = 0; i < files.length; i++) {
-                        if (this.isLockFile(files[i])) {
-                            file1 = files[i];
-                            i1 = i;
-                            break;
-                        }
-                    }
-                    File file2 = null;
-                    for (int i = 0; i < files.length; i++) {
-                        if (i == i1) continue;
-                        if (this.isLockFile(files[i])) {
-                            file2 = files[i];
-                            break;
-                        }
-                    }
-                    if (file1 != null && file2 != null) {
-                        File finalFile1 = file1;
-                        File finalFile2 = file2;
-                        this.threadPool.execute(() -> {
-                            new MergeSortTask(TEMPAREA, RANDOM).doTask(finalFile1, finalFile2);
-                        });
-                    }
+            File[] files = new File[2];
+            int i = 0;
+            for (Map.Entry<File, Boolean> file : this.map.entrySet()) {
+                if (i == 2) break;
+                if (file.getValue()) {
+                    continue;
                 }
+                files[i] = file.getKey();
+                i++;
+            }
+            if (files[0] != null && files[1] != null) {
+                this.map.replace(files[0], Boolean.TRUE);
+                this.map.replace(files[1], Boolean.TRUE);
 
-                File[] checkFiles = this.sortBySize(TEMPAREA);
-                int counter = 0;
-                for (int i = 0; i < checkFiles.length; i++) {
-                    if (!checkFiles[i].isDirectory()) {
-                        counter++;
-                    }
-                    if (counter == 2) {
-                        break;
-                    }
-                }
-                if (counter == 1) done = true;
-            } else {
+                File finalFile1 = files[0];
+                File finalFile2 = files[1];
+                this.threadPool.execute(() -> {
+                    System.out.println(Thread.currentThread().getName());
+                    File newTmp = new MergeSortTask(TEMPAREA, RANDOM).doTask(finalFile1, finalFile2);
+                    this.map.put(newTmp, Boolean.FALSE);
+                });
+            }
+            if (files[1] == null) {
                 done = true;
             }
         }
         return done;
     }
 
-    private synchronized boolean isLockFile(File file) {
-        boolean result = false;
-        try (RandomAccessFile rafFile = new RandomAccessFile(file, "rw")) {
 
-            FileLock lock = rafFile.getChannel().tryLock();
-            if (lock != null) {
-                result = true;
-            }
-        } catch (IOException | OverlappingFileLockException e) {
-            Sort.logger.error(e.getMessage(), e);
-            return false;
+    private void createMap() {
+        File[] files = this.sortBySize(TEMPAREA);
+        for (File file : files) {
+            this.map.put(file, Boolean.FALSE);
         }
-        return result;
     }
-
-
 }

@@ -22,17 +22,12 @@ public class MergeSortTask implements CompareLines, DeleteFile, CreateNewFile, C
         this.RANDOM = random;
     }
 
-    public void doTask(File file1, File file2) {
+    public File doTask(File file1, File file2) {
         File dist = this.createNewFile(TEMPAREA, "sort", RANDOM);
         try (RandomAccessFile rafFile1 = new RandomAccessFile(file1, "rw");
              RandomAccessFile rafFile2 = new RandomAccessFile(file2, "rw");
              RandomAccessFile rafDistSortI = new RandomAccessFile(dist, "rw")) {
 
-            FileLock lock1 = rafFile1.getChannel().tryLock();
-            FileLock lock2 = rafFile2.getChannel().tryLock();
-            System.out.println(Thread.currentThread().getName());
-
-            if(lock1 != null && lock2 != null) {
                 boolean success = this.mergeSort(rafFile1, rafFile2, rafDistSortI);
                 if (success) {
                     rafFile1.close();
@@ -40,10 +35,10 @@ public class MergeSortTask implements CompareLines, DeleteFile, CreateNewFile, C
                     rafFile2.close();
                     this.deleteFile(file2);
                 }
-            }
-        } catch (IOException | OverlappingFileLockException e) {
+        } catch (IOException e) {
             Sort.logger.error(e.getMessage(), e);
         }
+        return dist;
     }
 
     public boolean mergeSort(RandomAccessFile rafFile1, RandomAccessFile rafFile2,
