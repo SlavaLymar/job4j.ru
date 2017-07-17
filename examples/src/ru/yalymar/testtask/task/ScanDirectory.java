@@ -1,15 +1,14 @@
 package ru.yalymar.testtask.task;
 
+import ru.yalymar.testtask.service.CreateNewFile;
 import ru.yalymar.testtask.service.SortBySize;
-
 import java.io.File;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 
-public class ScanDirectory implements SortBySize {
+public class ScanDirectory implements SortBySize, CreateNewFile {
 
     private final ExecutorService threadPool;
     private final String TEMPAREA;
@@ -25,7 +24,7 @@ public class ScanDirectory implements SortBySize {
         this.createMap();
     }
 
-    public boolean scanDir() {
+    public void scanDir() {
         boolean done = false;
 
         while (!done) {
@@ -40,22 +39,25 @@ public class ScanDirectory implements SortBySize {
                 i++;
             }
             if (files[0] != null && files[1] != null) {
-                this.map.replace(files[0], Boolean.TRUE);
-                this.map.replace(files[1], Boolean.TRUE);
 
                 File finalFile1 = files[0];
                 File finalFile2 = files[1];
+                File dist = this.createNewFile(TEMPAREA, "sort", RANDOM);
+                this.map.put(dist, Boolean.FALSE);
+
                 this.threadPool.execute(() -> {
-                    System.out.println(Thread.currentThread().getName());
-                    File newTmp = new MergeSortTask(TEMPAREA, RANDOM).doTask(finalFile1, finalFile2);
+                    File newTmp = new MergeSortTask(TEMPAREA, RANDOM).doTask(finalFile1, finalFile2, dist);
                     this.map.put(newTmp, Boolean.FALSE);
                 });
+                this.map.remove(files[0]);
+                this.map.remove(files[1]);
             }
-            if (files[1] == null) {
+
+            if (this.map.size() == 1) {
                 done = true;
             }
         }
-        return done;
+
     }
 
 

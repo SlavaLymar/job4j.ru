@@ -2,17 +2,14 @@ package ru.yalymar.testtask.task;
 
 import ru.yalymar.testtask.service.CompareLines;
 import ru.yalymar.testtask.service.CountOfLines;
-import ru.yalymar.testtask.service.CreateNewFile;
 import ru.yalymar.testtask.service.DeleteFile;
 import ru.yalymar.testtask.sort.Sort;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.nio.channels.FileLock;
-import java.nio.channels.OverlappingFileLockException;
 import java.util.Random;
 
-public class MergeSortTask implements CompareLines, DeleteFile, CreateNewFile, CountOfLines{
+public class MergeSortTask implements CompareLines, DeleteFile, CountOfLines{
 
     private final String TEMPAREA;
     private final Random RANDOM;
@@ -22,8 +19,8 @@ public class MergeSortTask implements CompareLines, DeleteFile, CreateNewFile, C
         this.RANDOM = random;
     }
 
-    public File doTask(File file1, File file2) {
-        File dist = this.createNewFile(TEMPAREA, "sort", RANDOM);
+    public File doTask(File file1, File file2, File dist) {
+
         try (RandomAccessFile rafFile1 = new RandomAccessFile(file1, "rw");
              RandomAccessFile rafFile2 = new RandomAccessFile(file2, "rw");
              RandomAccessFile rafDistSortI = new RandomAccessFile(dist, "rw")) {

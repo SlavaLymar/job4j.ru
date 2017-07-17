@@ -13,6 +13,7 @@ import java.io.RandomAccessFile;
 import java.util.Properties;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ThreadPoolExecutor;
 
 public class Manager implements CreateNewFile, DeleteFile, CopyTextFile, SortBySize {
 
@@ -67,27 +68,43 @@ public class Manager implements CreateNewFile, DeleteFile, CopyTextFile, SortByS
                 });
             }
 
-            boolean complete = new ScanDirectory(this.threadPool, TEMPAREA, RANDOM).scanDir();
-
-            if(complete) {
-                this.copyTmpToDistance(distance);
+            ThreadPoolExecutor tp = (ThreadPoolExecutor) this.threadPool;
+            do{
+                Thread.sleep(100);
             }
+            while (tp.getActiveCount() > 0);
+
+            new ScanDirectory(this.threadPool, TEMPAREA, RANDOM).scanDir();
+
+            do{
+                Thread.sleep(100);
+            }
+            while (tp.getActiveCount() > 0);
+
+            boolean copyComplete;
+            do{
+                copyComplete = this.copyTmpToDistance(distance);
+            }
+            while (!copyComplete);
         }
         catch (IOException e){
             Sort.logger.error(e.getMessage(), e);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
-    private void copyTmpToDistance(File distance) {
-        File[] files = new File(TEMPAREA).listFiles();
-        for(int i = 0; i < files.length; i++){
-            if(!files[i].isDirectory()){
-                this.copy(files[i], distance, COPYBUFFER);
-                this.deleteFile(files[i]);
-                break;
-            }
+    private boolean copyTmpToDistance(File distance) {
+        File[] files = this.sortBySize(TEMPAREA);
+        if(files.length == 1){
+            this.copy(files[0], distance, COPYBUFFER);
+            this.deleteFile(files[0]);
+            return true;
         }
+        return false;
     }
+
+
 
 
 }
