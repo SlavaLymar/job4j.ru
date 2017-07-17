@@ -8,10 +8,26 @@ import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * @author slavalymar
+ * @since 17.07.2017
+ * @version 1
+ */
 public class Sort {
 
+    /**
+     * logger
+     */
     public static final Logger logger = Logger.getLogger(Sort.class);
+
+    /**
+     * instance of thread pool
+     */
     private final ExecutorService threadPool;
+
+    /**
+     * properties of "resources/settings.properties"
+     */
     private Properties properties = new Properties();
 
     public Sort() {
@@ -20,6 +36,9 @@ public class Sort {
                 Integer.parseInt(this.properties.getProperty("COUNTOFTHREADS")));
     }
 
+    /**
+     * initialized of properties
+     */
     private void initProperties(){
         Class c = this.getClass();
         InputStream inputStream = c.getResourceAsStream("/settings.properties");
@@ -30,9 +49,12 @@ public class Sort {
         }
     }
 
+    /**
+     * start sorting
+     */
     public void sort() {
         Manager manager = new Manager(properties, threadPool);
-        manager.readFile();
+        manager.managerOfApp();
     }
 
     public ExecutorService getThreadPool() {

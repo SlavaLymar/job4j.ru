@@ -8,14 +8,32 @@ import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 
-public class ScanDirectory implements SortBySize, CreateNewFile {
+/**
+ * @author slavalymar
+ * @since 17.07.2017
+ * @version 1
+ */
+public class ScanDirectory implements SortBySize,
+                                      CreateNewFile {
 
-    private final ExecutorService threadPool;
+    /**
+     * properties of "resources/settings.properties"
+     */
     private final String TEMPAREA;
     private final Random RANDOM;
+
+    /**
+     * instance of thread pool
+     */
+    private final ExecutorService threadPool;
+
+    /**
+     * collection of tmp files
+     */
     private final Map<File, Boolean> map;
 
-    public ScanDirectory(final ExecutorService threadPool, final String TEMPAREA,
+    public ScanDirectory(final ExecutorService threadPool,
+                         final String TEMPAREA,
                          final Random RANDOM) {
         this.threadPool = threadPool;
         this.TEMPAREA = TEMPAREA;
@@ -24,6 +42,10 @@ public class ScanDirectory implements SortBySize, CreateNewFile {
         this.createMap();
     }
 
+    /**
+     * scanning #TEMPAREA directory for merge sorting.
+     * files must be ready to merge (map.getValue() == true)
+     */
     public void scanDir() {
         boolean done = false;
 
@@ -32,7 +54,7 @@ public class ScanDirectory implements SortBySize, CreateNewFile {
             int i = 0;
             for (Map.Entry<File, Boolean> file : this.map.entrySet()) {
                 if (i == 2) break;
-                if (file.getValue()) {
+                if (!file.getValue()) {
                     continue;
                 }
                 files[i] = file.getKey();
@@ -46,8 +68,8 @@ public class ScanDirectory implements SortBySize, CreateNewFile {
                 this.map.put(dist, Boolean.FALSE);
 
                 this.threadPool.execute(() -> {
-                    File newTmp = new MergeSortTask(TEMPAREA, RANDOM).doTask(finalFile1, finalFile2, dist);
-                    this.map.put(newTmp, Boolean.FALSE);
+                    new MergeSortTask(TEMPAREA, RANDOM).doTask(finalFile1, finalFile2, dist);
+                    this.map.replace(dist, Boolean.TRUE);
                 });
                 this.map.remove(files[0]);
                 this.map.remove(files[1]);
@@ -60,11 +82,13 @@ public class ScanDirectory implements SortBySize, CreateNewFile {
 
     }
 
-
+    /**
+     * create collection of tmp files
+     */
     private void createMap() {
         File[] files = this.sortBySize(TEMPAREA);
         for (File file : files) {
-            this.map.put(file, Boolean.FALSE);
+            this.map.put(file, Boolean.TRUE);
         }
     }
 }

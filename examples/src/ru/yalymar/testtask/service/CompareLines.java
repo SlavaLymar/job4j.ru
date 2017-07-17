@@ -1,5 +1,11 @@
 package ru.yalymar.testtask.service;
 
+
+/**
+ * @author slavalymar
+ * @since 17.07.2017
+ * @version 1
+ */
 public interface CompareLines {
 
     /**

@@ -5,8 +5,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * @author slavalymar
+ * @since 17.07.2017
+ * @version 1
+ */
 public interface SortBySize {
 
+    /** count sorted temporary files in directory #path.
+     * Tmp files must be named like "sort...."
+     * @param path
+     * @return File[]
+     */
     default File[] sortBySize(String path){
         File[] files = new File(path).listFiles();
         List<File> list = new ArrayList<>();

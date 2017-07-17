@@ -9,8 +9,18 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Random;
 
-public class MergeSortTask implements CompareLines, DeleteFile, CountOfLines{
+/**
+ * @author slavalymar
+ * @since 17.07.2017
+ * @version 1
+ */
+public class MergeSortTask implements CompareLines,
+                                      DeleteFile,
+                                      CountOfLines{
 
+    /**
+     * properties of "resources/settings.properties"
+     */
     private final String TEMPAREA;
     private final Random RANDOM;
 
@@ -19,7 +29,12 @@ public class MergeSortTask implements CompareLines, DeleteFile, CountOfLines{
         this.RANDOM = random;
     }
 
-    public File doTask(File file1, File file2, File dist) {
+    /** method operates phase 2
+     * @param file1
+     * @param file2
+     * @param dist
+     */
+    public void doTask(File file1, File file2, File dist) {
 
         try (RandomAccessFile rafFile1 = new RandomAccessFile(file1, "rw");
              RandomAccessFile rafFile2 = new RandomAccessFile(file2, "rw");
@@ -35,9 +50,15 @@ public class MergeSortTask implements CompareLines, DeleteFile, CountOfLines{
         } catch (IOException e) {
             Sort.logger.error(e.getMessage(), e);
         }
-        return dist;
     }
 
+    /** merge sorting.
+     * @param rafFile1 - sorting tmp file
+     * @param rafFile2 - sorting tmp file
+     * @param rafDistSort - distance tmp file
+     * @return boolean
+     * @throws IOException
+     */
     public boolean mergeSort(RandomAccessFile rafFile1, RandomAccessFile rafFile2,
                           RandomAccessFile rafDistSort) throws IOException {
         boolean done = false;

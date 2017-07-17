@@ -6,8 +6,18 @@ import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.Charset;
 
+/**
+ * @author slavalymar
+ * @since 17.07.2017
+ * @version 1
+ */
 public interface CopyTextFile {
 
+    /** copy text file #from path to #to path using buffer equals #copybuffer
+     * @param from
+     * @param to
+     * @param copyBuffer
+     */
     default void copy(File from, File to, String copyBuffer){
         try (BufferedInputStream in = new BufferedInputStream(new FileInputStream(from));
              PrintWriter out = new PrintWriter(to)) {

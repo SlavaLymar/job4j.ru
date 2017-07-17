@@ -37,10 +37,10 @@ public class SortTmpFile implements CompareLines, DeleteFile, CountOfLines{
             // count of lines
             int countOfLines = countLines(rafTmpSrc);
 
-            //sort tmp.txt
+            //sorting #tmpSrc file
             this.sortTmp(countOfLines, rafTmpSrc);
 
-            //rename tmp.txt to sort1.txt
+            //rename tmp.txt to sort.txt
             File file = this.tmpSrc.getAbsoluteFile();
             rafTmpSrc.close();
             file.renameTo(new File(file.getAbsolutePath().replace("tmp", "sort")));

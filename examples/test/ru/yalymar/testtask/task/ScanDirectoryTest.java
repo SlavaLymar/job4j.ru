@@ -36,11 +36,7 @@ public class ScanDirectoryTest {
         ScanDirectory scanDirectory = new ScanDirectory(Executors.newFixedThreadPool(1),
                 path, new Random());
         File[] s = scanDirectory.sortBySize(path);
-        Assert.assertThat(s[0].getName(), is("dd.txt"));
+        Assert.assertThat(s[0].getName(), is("sortdd.txt"));
     }
 
-    @Test
-    public void when(){
-
-    }
 }

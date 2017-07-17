@@ -3,6 +3,11 @@ package ru.yalymar.testtask.service;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
+/**
+ * @author slavalymar
+ * @since 17.07.2017
+ * @version 1
+ */
 public interface CountOfLines {
 
     /** return numerous of lines in the file

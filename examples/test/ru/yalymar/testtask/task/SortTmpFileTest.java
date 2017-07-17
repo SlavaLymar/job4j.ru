@@ -43,7 +43,7 @@ public class SortTmpFileTest {
         try(RandomAccessFile r = new RandomAccessFile(sourcePath, "r")){
             countOfLines = sort.countLines(r);
         }
-        Assert.assertThat(countOfLines, is(11));
+        Assert.assertThat(countOfLines, is(6));
     }
 
     @Test
