@@ -308,3 +308,13 @@
 2017-07-20 10:47:02 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring-context-beans-memory.xml]
 2017-07-20 10:47:48 INFO  ClassPathXmlApplicationContext:583 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@1a1cd57: startup date [Thu Jul 20 10:47:48 MSK 2017]; root of context hierarchy
 2017-07-20 10:47:48 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring-context-beans-memory.xml]
+2017-07-20 11:08:12 INFO  ClassPathXmlApplicationContext:583 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@10ee7cb: startup date [Thu Jul 20 11:08:12 MSK 2017]; root of context hierarchy
+2017-07-20 11:08:13 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring-context-beans-memory.xml]
+2017-07-20 11:10:11 INFO  ClassPathXmlApplicationContext:583 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@10ee7cb: startup date [Thu Jul 20 11:10:11 MSK 2017]; root of context hierarchy
+2017-07-20 11:10:11 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring-context-beans-memory.xml]
+2017-07-20 11:14:21 INFO  ClassPathXmlApplicationContext:583 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@1f9eccc: startup date [Thu Jul 20 11:14:21 MSK 2017]; root of context hierarchy
+2017-07-20 11:14:21 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring-context-beans-memory.xml]
+2017-07-20 11:15:24 INFO  ClassPathXmlApplicationContext:583 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@1f9eccc: startup date [Thu Jul 20 11:15:24 MSK 2017]; root of context hierarchy
+2017-07-20 11:15:24 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring-context-beans-memory.xml]
+2017-07-20 11:21:03 INFO  ClassPathXmlApplicationContext:583 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@10ee7cb: startup date [Thu Jul 20 11:21:03 MSK 2017]; root of context hierarchy
+2017-07-20 11:21:03 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring-context-beans-memory.xml]

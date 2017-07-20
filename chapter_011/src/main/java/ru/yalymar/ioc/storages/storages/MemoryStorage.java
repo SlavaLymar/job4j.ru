@@ -16,7 +16,7 @@ public class MemoryStorage implements Storage {
 
     @Override
     public int add(User user) {
-        return this.list.add(user) ? 1 : -1;
+        return this.list.add(user) ? this.list.indexOf(user) : -1;
     }
 
     @Override
@@ -34,12 +34,18 @@ public class MemoryStorage implements Storage {
     @Override
     public boolean update(int id, User newUser) {
         boolean result = false;
-        for(User u: this.list){
-            if(u.getId() == id){
-                u = newUser;
-                result = true;
-                break;
-            }
+        User user = this.list.get(id);
+        if(!newUser.getLogin().equals(user.getLogin())){
+            this.list.get(id).setLogin(newUser.getLogin());
+            result = true;
+        }
+        if(!newUser.getPassword().equals(user.getPassword())){
+            this.list.get(id).setPassword(newUser.getPassword());
+            result = true;
+        }
+        if(!newUser.getRole().equals(user.getRole())){
+            this.list.get(id).setRole(newUser.getRole());
+            result = true;
         }
         return result;
     }
