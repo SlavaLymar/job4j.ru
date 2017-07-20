@@ -6,6 +6,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.yalymar.ioc.storages.models.Role;
 import ru.yalymar.ioc.storages.models.User;
+
+import java.util.List;
+
 import static org.hamcrest.core.Is.is;
 
 public class MemoryStorageTest {
@@ -46,5 +49,19 @@ public class MemoryStorageTest {
 
         //delete
         storage.delete(index);
+    }
+
+    @Test
+    public void whenLoadAllUsersShouldGetSize(){
+        ApplicationContext context =
+                new ClassPathXmlApplicationContext("spring-context-beans-memory.xml");
+        UserStorage storage = context.getBean(UserStorage.class);
+
+        //add
+        User user = new User("test", "test", new Role(2));
+        int index = storage.add(user);
+
+        List<User> result = storage.getAll();
+        Assert.assertTrue(result.size() > 0);
     }
 }

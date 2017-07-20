@@ -5,6 +5,8 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.yalymar.ioc.storages.models.User;
 import ru.yalymar.ioc.storages.storages.interfaces.Storage;
 
+import java.util.List;
+
 /**
  * @author slavalymar
  * @since 20.07.2017
@@ -54,5 +56,11 @@ public class HibernateStorage implements Storage {
     public void delete(int id) {
         User user = this.get(id);
         this.hibernateTemplate.delete(user);
+    }
+
+    @Override
+    public List<User> getAll() {
+        List<User> result = this.hibernateTemplate.loadAll(User.class);
+        return result;
     }
 }

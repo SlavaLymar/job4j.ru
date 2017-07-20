@@ -3,6 +3,8 @@ package ru.yalymar.ioc.storages.storages;
 import ru.yalymar.ioc.storages.models.User;
 import ru.yalymar.ioc.storages.storages.interfaces.Storage;
 
+import java.util.List;
+
 /**
  * @author slavalymar
  * @since 20.07.2017
@@ -30,5 +32,9 @@ public class UserStorage {
 
     public void delete(int id) {
        this.storage.delete(id);
+    }
+
+    public List<User> getAll(){
+        return this.storage.getAll();
     }
 }

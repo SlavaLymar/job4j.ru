@@ -6,6 +6,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.yalymar.ioc.storages.models.Role;
 import ru.yalymar.ioc.storages.models.User;
+
+import java.util.List;
+
 import static org.hamcrest.core.Is.is;
 
 public class HibernateStorageTest {
@@ -46,5 +49,14 @@ public class HibernateStorageTest {
 
         //delete
         storage.delete(id);
+    }
+
+    @Test
+    public void whenLoadAllUsersShouldGetSize(){
+        ApplicationContext context =
+                new ClassPathXmlApplicationContext("spring-context-storages-hibernate.xml");
+        UserStorage storage = context.getBean(UserStorage.class);
+        List<User> result = storage.getAll();
+        Assert.assertTrue(result.size() > 0);
     }
 }

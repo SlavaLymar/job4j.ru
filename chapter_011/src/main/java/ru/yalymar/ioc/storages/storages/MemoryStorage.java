@@ -55,5 +55,8 @@ public class MemoryStorage implements Storage {
         this.list.remove(id);
     }
 
-
+    @Override
+    public List<User> getAll() {
+        return this.list;
+    }
 }
