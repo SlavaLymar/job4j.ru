@@ -9,12 +9,12 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Random;
 
-/**
+/** external bubble sorting
  * @author slavalymar
  * @since 13.07.2017
  * @version 1
  */
-public class SortTmpFile implements CompareLines, DeleteFile, CountOfLines{
+public class SortTmpFileB implements CompareLines, DeleteFile, CountOfLines{
 
     /**
      * instance of temporary file
@@ -23,7 +23,7 @@ public class SortTmpFile implements CompareLines, DeleteFile, CountOfLines{
 
     private final Random random;
 
-    public SortTmpFile(File tmpSrc, Random random) {
+    public SortTmpFileB(File tmpSrc, Random random) {
         this.tmpSrc = tmpSrc;
         this.random = random;
     }

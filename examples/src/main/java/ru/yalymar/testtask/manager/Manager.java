@@ -6,7 +6,7 @@ import ru.yalymar.testtask.service.DeleteFile;
 import ru.yalymar.testtask.service.SortBySize;
 import ru.yalymar.testtask.sort.Sort;
 import ru.yalymar.testtask.task.ScanDirectory;
-import ru.yalymar.testtask.task.SortTmpFile;
+import ru.yalymar.testtask.task.SortTmpFileB;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -88,7 +88,7 @@ public class Manager implements CreateNewFile,
 
                 // phase 1: sorting parts of source file
                 this.threadPool.execute(() -> {
-                    new SortTmpFile(file, RANDOM).doTask();
+                    new SortTmpFileB(file, RANDOM).doTask();
                 });
             }
 
