@@ -179,3 +179,132 @@
 2017-07-10 15:26:01 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
 2017-07-10 15:26:01 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@12ddbab
 2017-07-10 15:26:02 INFO  HibernateTransactionManager:357 - Using DataSource [org.springframework.jdbc.datasource.DriverManagerDataSource@3790cf] of Hibernate SessionFactory for HibernateTransactionManager
+2017-07-20 09:27:47 INFO  ClassPathXmlApplicationContext:583 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@10ee7cb: startup date [Thu Jul 20 09:27:47 MSK 2017]; root of context hierarchy
+2017-07-20 09:27:47 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring-context-storages-hibernate.xml]
+2017-07-20 09:27:47 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: org.postgresql.Driver
+2017-07-20 09:27:49 INFO  Version:45 - HHH000412: Hibernate Core {5.2.10.Final}
+2017-07-20 09:27:49 INFO  Environment:198 - HHH000205: Loaded properties from resource hibernate.properties: {jdbc.postgreSQL.show_sql=true, jdbc.postgreSQL.driverClass=org.postgresql.Driver, jdbc.postgreSQL.username=postgres, jdbc.postgreSQL.url=jdbc:postgresql://localhost:5432/springtest, hibernate.bytecode.use_reflection_optimizer=false, jdbc.postgreSQL.dialect=org.hibernate.dialect.PostgreSQL94Dialect, jdbc.postgreSQL.password=lymar123, jdbc.postgreSQL.hbm2ddl.auto=update}
+2017-07-20 09:27:50 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-07-20 09:27:51 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-07-20 09:27:52 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-07-20 09:27:52 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@29d61
+2017-07-20 09:27:54 INFO  HibernateTransactionManager:357 - Using DataSource [org.springframework.jdbc.datasource.DriverManagerDataSource@75d65] of Hibernate SessionFactory for HibernateTransactionManager
+2017-07-20 09:28:39 INFO  ClassPathXmlApplicationContext:583 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@10ee7cb: startup date [Thu Jul 20 09:28:39 MSK 2017]; root of context hierarchy
+2017-07-20 09:28:39 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring-context-storages-hibernate.xml]
+2017-07-20 09:28:39 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: org.postgresql.Driver
+2017-07-20 09:28:40 INFO  Version:45 - HHH000412: Hibernate Core {5.2.10.Final}
+2017-07-20 09:28:40 INFO  Environment:198 - HHH000205: Loaded properties from resource hibernate.properties: {jdbc.postgreSQL.show_sql=true, jdbc.postgreSQL.driverClass=org.postgresql.Driver, jdbc.postgreSQL.username=postgres, jdbc.postgreSQL.url=jdbc:postgresql://localhost:5432/springtest, hibernate.bytecode.use_reflection_optimizer=false, jdbc.postgreSQL.dialect=org.hibernate.dialect.PostgreSQL94Dialect, jdbc.postgreSQL.password=lymar123, jdbc.postgreSQL.hbm2ddl.auto=update}
+2017-07-20 09:28:42 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-07-20 09:28:42 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-07-20 09:28:42 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-07-20 09:28:42 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@17ea53a
+2017-07-20 09:28:44 INFO  HibernateTransactionManager:357 - Using DataSource [org.springframework.jdbc.datasource.DriverManagerDataSource@971ed9] of Hibernate SessionFactory for HibernateTransactionManager
+2017-07-20 09:32:45 INFO  ClassPathXmlApplicationContext:583 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@10ee7cb: startup date [Thu Jul 20 09:32:45 MSK 2017]; root of context hierarchy
+2017-07-20 09:32:45 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring-context-storages-hibernate.xml]
+2017-07-20 09:32:46 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: org.postgresql.Driver
+2017-07-20 09:32:46 INFO  Version:45 - HHH000412: Hibernate Core {5.2.10.Final}
+2017-07-20 09:32:46 INFO  Environment:198 - HHH000205: Loaded properties from resource hibernate.properties: {jdbc.postgreSQL.show_sql=true, jdbc.postgreSQL.driverClass=org.postgresql.Driver, jdbc.postgreSQL.username=postgres, jdbc.postgreSQL.url=jdbc:postgresql://localhost:5432/springtest, hibernate.bytecode.use_reflection_optimizer=false, jdbc.postgreSQL.dialect=org.hibernate.dialect.PostgreSQL94Dialect, jdbc.postgreSQL.password=lymar123, jdbc.postgreSQL.hbm2ddl.auto=update}
+2017-07-20 09:32:48 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-07-20 09:32:49 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-07-20 09:32:49 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-07-20 09:32:49 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@29d61
+2017-07-20 09:45:52 INFO  ClassPathXmlApplicationContext:583 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@10ee7cb: startup date [Thu Jul 20 09:45:52 MSK 2017]; root of context hierarchy
+2017-07-20 09:45:52 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring-context-storages-hibernate.xml]
+2017-07-20 09:45:52 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: org.postgresql.Driver
+2017-07-20 09:45:53 INFO  Version:45 - HHH000412: Hibernate Core {5.2.10.Final}
+2017-07-20 09:45:53 INFO  Environment:198 - HHH000205: Loaded properties from resource hibernate.properties: {jdbc.postgreSQL.show_sql=true, jdbc.postgreSQL.driverClass=org.postgresql.Driver, jdbc.postgreSQL.username=postgres, jdbc.postgreSQL.url=jdbc:postgresql://localhost:5432/springtest, hibernate.bytecode.use_reflection_optimizer=false, jdbc.postgreSQL.dialect=org.hibernate.dialect.PostgreSQL94Dialect, jdbc.postgreSQL.password=lymar123, jdbc.postgreSQL.hbm2ddl.auto=update}
+2017-07-20 09:45:55 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-07-20 09:45:55 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-07-20 09:45:55 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-07-20 09:45:55 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@17ea53a
+2017-07-20 09:45:57 INFO  HibernateTransactionManager:357 - Using DataSource [org.springframework.jdbc.datasource.DriverManagerDataSource@971ed9] of Hibernate SessionFactory for HibernateTransactionManager
+2017-07-20 10:08:52 INFO  ClassPathXmlApplicationContext:583 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@10ee7cb: startup date [Thu Jul 20 10:08:52 MSK 2017]; root of context hierarchy
+2017-07-20 10:08:54 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring-context-storages-hibernate.xml]
+2017-07-20 10:08:56 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: org.postgresql.Driver
+2017-07-20 10:08:57 INFO  Version:45 - HHH000412: Hibernate Core {5.2.10.Final}
+2017-07-20 10:08:57 INFO  Environment:198 - HHH000205: Loaded properties from resource hibernate.properties: {jdbc.postgreSQL.show_sql=true, jdbc.postgreSQL.driverClass=org.postgresql.Driver, jdbc.postgreSQL.username=postgres, jdbc.postgreSQL.url=jdbc:postgresql://localhost:5432/springtest, hibernate.bytecode.use_reflection_optimizer=false, jdbc.postgreSQL.dialect=org.hibernate.dialect.PostgreSQL94Dialect, jdbc.postgreSQL.password=lymar123, jdbc.postgreSQL.hbm2ddl.auto=update}
+2017-07-20 10:09:00 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-07-20 10:09:01 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-07-20 10:09:02 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-07-20 10:09:02 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@17ea53a
+2017-07-20 10:09:04 INFO  HibernateTransactionManager:357 - Using DataSource [org.springframework.jdbc.datasource.DriverManagerDataSource@971ed9] of Hibernate SessionFactory for HibernateTransactionManager
+2017-07-20 10:09:53 INFO  ClassPathXmlApplicationContext:583 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@10ee7cb: startup date [Thu Jul 20 10:09:53 MSK 2017]; root of context hierarchy
+2017-07-20 10:09:53 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring-context-storages-hibernate.xml]
+2017-07-20 10:09:54 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: org.postgresql.Driver
+2017-07-20 10:09:54 INFO  Version:45 - HHH000412: Hibernate Core {5.2.10.Final}
+2017-07-20 10:09:55 INFO  Environment:198 - HHH000205: Loaded properties from resource hibernate.properties: {jdbc.postgreSQL.show_sql=true, jdbc.postgreSQL.driverClass=org.postgresql.Driver, jdbc.postgreSQL.username=postgres, jdbc.postgreSQL.url=jdbc:postgresql://localhost:5432/springtest, hibernate.bytecode.use_reflection_optimizer=false, jdbc.postgreSQL.dialect=org.hibernate.dialect.PostgreSQL94Dialect, jdbc.postgreSQL.password=lymar123, jdbc.postgreSQL.hbm2ddl.auto=update}
+2017-07-20 10:09:56 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-07-20 10:09:57 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-07-20 10:09:57 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-07-20 10:09:57 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@29d61
+2017-07-20 10:09:58 INFO  HibernateTransactionManager:357 - Using DataSource [org.springframework.jdbc.datasource.DriverManagerDataSource@75d65] of Hibernate SessionFactory for HibernateTransactionManager
+2017-07-20 10:18:05 INFO  ClassPathXmlApplicationContext:583 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@10ee7cb: startup date [Thu Jul 20 10:18:05 MSK 2017]; root of context hierarchy
+2017-07-20 10:18:05 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring-context-storages-hibernate.xml]
+2017-07-20 10:18:05 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: org.postgresql.Driver
+2017-07-20 10:18:06 INFO  Version:45 - HHH000412: Hibernate Core {5.2.10.Final}
+2017-07-20 10:18:06 INFO  Environment:198 - HHH000205: Loaded properties from resource hibernate.properties: {jdbc.postgreSQL.show_sql=true, jdbc.postgreSQL.driverClass=org.postgresql.Driver, jdbc.postgreSQL.username=postgres, jdbc.postgreSQL.url=jdbc:postgresql://localhost:5432/springtest, hibernate.bytecode.use_reflection_optimizer=false, jdbc.postgreSQL.dialect=org.hibernate.dialect.PostgreSQL94Dialect, jdbc.postgreSQL.password=lymar123, jdbc.postgreSQL.hbm2ddl.auto=update}
+2017-07-20 10:18:07 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-07-20 10:18:08 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-07-20 10:18:08 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-07-20 10:18:08 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@1d62371
+2017-07-20 10:18:09 INFO  HibernateTransactionManager:357 - Using DataSource [org.springframework.jdbc.datasource.DriverManagerDataSource@1f13be1] of Hibernate SessionFactory for HibernateTransactionManager
+2017-07-20 10:20:37 INFO  ClassPathXmlApplicationContext:583 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@1f9eccc: startup date [Thu Jul 20 10:20:37 MSK 2017]; root of context hierarchy
+2017-07-20 10:20:38 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring-context-storages-hibernate.xml]
+2017-07-20 10:20:38 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: org.postgresql.Driver
+2017-07-20 10:20:38 INFO  Version:45 - HHH000412: Hibernate Core {5.2.10.Final}
+2017-07-20 10:20:38 INFO  Environment:198 - HHH000205: Loaded properties from resource hibernate.properties: {jdbc.postgreSQL.show_sql=true, jdbc.postgreSQL.driverClass=org.postgresql.Driver, jdbc.postgreSQL.username=postgres, jdbc.postgreSQL.url=jdbc:postgresql://localhost:5432/springtest, hibernate.bytecode.use_reflection_optimizer=false, jdbc.postgreSQL.dialect=org.hibernate.dialect.PostgreSQL94Dialect, jdbc.postgreSQL.password=lymar123, jdbc.postgreSQL.hbm2ddl.auto=update}
+2017-07-20 10:20:40 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-07-20 10:20:40 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-07-20 10:20:41 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-07-20 10:20:41 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@127b211
+2017-07-20 10:20:42 INFO  HibernateTransactionManager:357 - Using DataSource [org.springframework.jdbc.datasource.DriverManagerDataSource@34e986] of Hibernate SessionFactory for HibernateTransactionManager
+2017-07-20 10:21:38 INFO  ClassPathXmlApplicationContext:583 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@1f9eccc: startup date [Thu Jul 20 10:21:38 MSK 2017]; root of context hierarchy
+2017-07-20 10:21:39 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring-context-storages-hibernate.xml]
+2017-07-20 10:21:39 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: org.postgresql.Driver
+2017-07-20 10:21:40 INFO  Version:45 - HHH000412: Hibernate Core {5.2.10.Final}
+2017-07-20 10:21:40 INFO  Environment:198 - HHH000205: Loaded properties from resource hibernate.properties: {jdbc.postgreSQL.show_sql=true, jdbc.postgreSQL.driverClass=org.postgresql.Driver, jdbc.postgreSQL.username=postgres, jdbc.postgreSQL.url=jdbc:postgresql://localhost:5432/springtest, hibernate.bytecode.use_reflection_optimizer=false, jdbc.postgreSQL.dialect=org.hibernate.dialect.PostgreSQL94Dialect, jdbc.postgreSQL.password=lymar123, jdbc.postgreSQL.hbm2ddl.auto=update}
+2017-07-20 10:21:41 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-07-20 10:21:42 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-07-20 10:21:42 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-07-20 10:21:42 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@127b211
+2017-07-20 10:21:43 INFO  HibernateTransactionManager:357 - Using DataSource [org.springframework.jdbc.datasource.DriverManagerDataSource@34e986] of Hibernate SessionFactory for HibernateTransactionManager
+2017-07-20 10:23:51 INFO  ClassPathXmlApplicationContext:583 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@1f9eccc: startup date [Thu Jul 20 10:23:51 MSK 2017]; root of context hierarchy
+2017-07-20 10:23:51 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring-context-storages-hibernate.xml]
+2017-07-20 10:23:52 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: org.postgresql.Driver
+2017-07-20 10:23:53 INFO  Version:45 - HHH000412: Hibernate Core {5.2.10.Final}
+2017-07-20 10:23:53 INFO  Environment:198 - HHH000205: Loaded properties from resource hibernate.properties: {jdbc.postgreSQL.show_sql=true, jdbc.postgreSQL.driverClass=org.postgresql.Driver, jdbc.postgreSQL.username=postgres, jdbc.postgreSQL.url=jdbc:postgresql://localhost:5432/springtest, hibernate.bytecode.use_reflection_optimizer=false, jdbc.postgreSQL.dialect=org.hibernate.dialect.PostgreSQL94Dialect, jdbc.postgreSQL.password=lymar123, jdbc.postgreSQL.hbm2ddl.auto=update}
+2017-07-20 10:23:54 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-07-20 10:23:54 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-07-20 10:23:55 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-07-20 10:23:55 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@127b211
+2017-07-20 10:23:56 INFO  HibernateTransactionManager:357 - Using DataSource [org.springframework.jdbc.datasource.DriverManagerDataSource@34e986] of Hibernate SessionFactory for HibernateTransactionManager
+2017-07-20 10:27:54 INFO  ClassPathXmlApplicationContext:583 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@10ee7cb: startup date [Thu Jul 20 10:27:54 MSK 2017]; root of context hierarchy
+2017-07-20 10:27:54 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring-context-storages-hibernate.xml]
+2017-07-20 10:27:54 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: org.postgresql.Driver
+2017-07-20 10:27:55 INFO  Version:45 - HHH000412: Hibernate Core {5.2.10.Final}
+2017-07-20 10:27:55 INFO  Environment:198 - HHH000205: Loaded properties from resource hibernate.properties: {jdbc.postgreSQL.show_sql=true, jdbc.postgreSQL.driverClass=org.postgresql.Driver, jdbc.postgreSQL.username=postgres, jdbc.postgreSQL.url=jdbc:postgresql://localhost:5432/springtest, hibernate.bytecode.use_reflection_optimizer=false, jdbc.postgreSQL.dialect=org.hibernate.dialect.PostgreSQL94Dialect, jdbc.postgreSQL.password=lymar123, jdbc.postgreSQL.hbm2ddl.auto=update}
+2017-07-20 10:27:56 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-07-20 10:27:57 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-07-20 10:27:57 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-07-20 10:27:57 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@1d62371
+2017-07-20 10:27:58 INFO  HibernateTransactionManager:357 - Using DataSource [org.springframework.jdbc.datasource.DriverManagerDataSource@1f13be1] of Hibernate SessionFactory for HibernateTransactionManager
+2017-07-20 10:28:32 INFO  ClassPathXmlApplicationContext:583 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@1f9eccc: startup date [Thu Jul 20 10:28:32 MSK 2017]; root of context hierarchy
+2017-07-20 10:28:32 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring-context-storages-hibernate.xml]
+2017-07-20 10:28:33 INFO  DriverManagerDataSource:133 - Loaded JDBC driver: org.postgresql.Driver
+2017-07-20 10:28:34 INFO  Version:45 - HHH000412: Hibernate Core {5.2.10.Final}
+2017-07-20 10:28:34 INFO  Environment:198 - HHH000205: Loaded properties from resource hibernate.properties: {jdbc.postgreSQL.show_sql=true, jdbc.postgreSQL.driverClass=org.postgresql.Driver, jdbc.postgreSQL.username=postgres, jdbc.postgreSQL.url=jdbc:postgresql://localhost:5432/springtest, hibernate.bytecode.use_reflection_optimizer=false, jdbc.postgreSQL.dialect=org.hibernate.dialect.PostgreSQL94Dialect, jdbc.postgreSQL.password=lymar123, jdbc.postgreSQL.hbm2ddl.auto=update}
+2017-07-20 10:28:35 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-07-20 10:28:35 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-07-20 10:28:36 INFO  LobCreatorBuilderImpl:124 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-07-20 10:28:36 INFO  BasicTypeRegistry:148 - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@127b211
+2017-07-20 10:28:37 INFO  HibernateTransactionManager:357 - Using DataSource [org.springframework.jdbc.datasource.DriverManagerDataSource@34e986] of Hibernate SessionFactory for HibernateTransactionManager
+2017-07-20 10:44:30 INFO  ClassPathXmlApplicationContext:583 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@1a1cd57: startup date [Thu Jul 20 10:44:30 MSK 2017]; root of context hierarchy
+2017-07-20 10:44:30 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring-context-beans-memory.xml]
+2017-07-20 10:45:52 INFO  ClassPathXmlApplicationContext:583 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@729b1e: startup date [Thu Jul 20 10:45:52 MSK 2017]; root of context hierarchy
+2017-07-20 10:45:52 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring-context-beans-memory.xml]
+2017-07-20 10:46:42 INFO  ClassPathXmlApplicationContext:583 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@1a1cd57: startup date [Thu Jul 20 10:46:42 MSK 2017]; root of context hierarchy
+2017-07-20 10:46:43 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring-context-beans-memory.xml]
+2017-07-20 10:47:02 INFO  ClassPathXmlApplicationContext:583 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@1a1cd57: startup date [Thu Jul 20 10:47:02 MSK 2017]; root of context hierarchy
+2017-07-20 10:47:02 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring-context-beans-memory.xml]
+2017-07-20 10:47:48 INFO  ClassPathXmlApplicationContext:583 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@1a1cd57: startup date [Thu Jul 20 10:47:48 MSK 2017]; root of context hierarchy
+2017-07-20 10:47:48 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [spring-context-beans-memory.xml]

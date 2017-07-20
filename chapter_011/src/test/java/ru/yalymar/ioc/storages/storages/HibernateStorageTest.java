@@ -23,10 +23,10 @@ public class HibernateStorageTest {
         ApplicationContext context =
                 new ClassPathXmlApplicationContext("spring-context-storages-hibernate.xml");
         UserStorage storage = context.getBean(UserStorage.class);
-//        User user = new User("slava", "lymar", new Role(1));
-//        int id = storage.add(user);
-//        Assert.assertThat(storage.get(id), is(user));
-        storage.delete(3);
+        User user = new User("test", "test", new Role(2));
+        int id = storage.add(user);
+        Assert.assertThat(storage.get(id), is(user));
+        storage.delete(id);
     }
 
     @Test
@@ -34,6 +34,17 @@ public class HibernateStorageTest {
         ApplicationContext context =
                 new ClassPathXmlApplicationContext("spring-context-storages-hibernate.xml");
         UserStorage storage = context.getBean(UserStorage.class);
-        storage.update(3, new User("test", "test", new Role(2)));
+
+        //add
+        User user = new User("test", "test", new Role(2));
+        int id = storage.add(user);
+
+        //update
+        storage.update(id, new User("test1", "test1", new Role(2)));
+        User result = storage.get(id);
+        Assert.assertThat(result.getLogin(), is("test1"));
+
+        //delete
+        storage.delete(id);
     }
 }

@@ -1,9 +1,16 @@
 package ru.yalymar.ioc.storages.storages;
 
 import org.springframework.orm.hibernate5.HibernateTemplate;
+import org.springframework.transaction.annotation.Transactional;
 import ru.yalymar.ioc.storages.models.User;
 import ru.yalymar.ioc.storages.storages.interfaces.Storage;
 
+/**
+ * @author slavalymar
+ * @since 20.07.2017
+ * @version 1
+ */
+@Transactional
 public class HibernateStorage implements Storage {
 
     private final HibernateTemplate hibernateTemplate;

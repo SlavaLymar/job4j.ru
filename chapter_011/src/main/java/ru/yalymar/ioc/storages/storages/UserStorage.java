@@ -3,6 +3,11 @@ package ru.yalymar.ioc.storages.storages;
 import ru.yalymar.ioc.storages.models.User;
 import ru.yalymar.ioc.storages.storages.interfaces.Storage;
 
+/**
+ * @author slavalymar
+ * @since 20.07.2017
+ * @version 1
+ */
 public class UserStorage {
 
     private final Storage storage;
