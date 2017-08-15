@@ -1,0 +1,34 @@
+package ru.yalymar.mvc.controller;
+
+import ru.yalymar.mvc.model.dao.DAOFactory;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+/**
+ * @author slavalymar
+ * @since 19.06.2017
+ * @version 1
+ */
+@WebServlet(urlPatterns = "/imgdel")
+public class DeleteImgController extends HttpServlet {
+
+    private final DAOFactory daoFactory = new DAOFactory();
+
+    /**delete img
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        int id = Integer.parseInt(req.getParameter("id"));
+        this.daoFactory.getImageDAO().delete(id);
+    }
+}
