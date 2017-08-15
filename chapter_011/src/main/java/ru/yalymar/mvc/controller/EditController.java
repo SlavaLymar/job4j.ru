@@ -1,5 +1,11 @@
 package ru.yalymar.mvc.controller;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import ru.yalymar.mvc.model.dao.DAOFactory;
 import ru.yalymar.mvc.model.models.Ad;
 import ru.yalymar.mvc.model.models.Car;
@@ -8,88 +14,81 @@ import ru.yalymar.mvc.model.models.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Set;
 
-/**
- * @author slavalymar
- * @since 19.06.2017
- * @version 1
- */
-@WebServlet(urlPatterns = "/editad")
-@MultipartConfig(fileSizeThreshold = 1024* 1024* 2,
-        maxFileSize = 1024*1024,
-        maxRequestSize = 1024*1024*2)
-public class EditController extends HttpServlet{
+@Controller
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2,
+        maxFileSize = 1024 * 1024,
+        maxRequestSize = 1024 * 1024 * 2)
+public class EditController {
 
     private final DAOFactory daoFactory = new DAOFactory();
 
-    /**get edit.jsp page
-     * @param req
-     * @param resp
-     * @throws ServletException
-     * @throws IOException
-     */
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        Ad ad = this.daoFactory.getAdDAO().read(Integer.parseInt(req.getParameter("id")));
-        req.setAttribute("ad", ad);
-        req.setAttribute("currentmodel", ad.getCar().getModel().getModel());
-        req.setAttribute("currentbody", ad.getCar().getBody().getBody());
-        req.setAttribute("currentcolor", ad.getCar().getColor().getColor());
-        req.setAttribute("currentmanuf", ad.getCar().getModel().getManuf().getManuf());
-        req.setAttribute("currenttransmission", ad.getCar().getTransmission().getName());
-        req.setAttribute("currentdone", ad.isDone());
-        req.setAttribute("manufacturers", this.daoFactory.getManufactorDAO().readAll());
-        req.setAttribute("models", this.daoFactory.getModelDAO().readAll());
-        req.setAttribute("bodies", this.daoFactory.getBodyDAO().readAll());
-        req.setAttribute("colours", this.daoFactory.getColorDAO().readAll());
-        req.setAttribute("transmissions", this.daoFactory.getTransmissionsDAO().readAll());
-        req.getRequestDispatcher("/WEB-INF/mapping/views/edit.jsp").forward(req, resp);
+    @RequestMapping(value = "/editad", method = RequestMethod.GET)
+    public ModelAndView getEditForm(@RequestParam String id,
+                                    ModelAndView mAV,
+                                    ModelMap modelMap) {
+        mAV.setViewName("edit");
+        Ad ad = this.daoFactory.getAdDAO().read(Integer.parseInt(id));
+
+        modelMap.addAttribute("ad", ad);
+        modelMap.addAttribute("currentmodel", ad.getCar().getModel().getModel());
+        modelMap.addAttribute("currentbody", ad.getCar().getBody().getBody());
+        modelMap.addAttribute("currentcolor", ad.getCar().getColor().getColor());
+        modelMap.addAttribute("currentmanuf", ad.getCar().getModel().getManuf().getManuf());
+        modelMap.addAttribute("currenttransmission", ad.getCar().getTransmission().getName());
+        modelMap.addAttribute("currentdone", ad.isDone());
+        modelMap.addAttribute("manufacturers", this.daoFactory.getManufactorDAO().readAll());
+        modelMap.addAttribute("models", this.daoFactory.getModelDAO().readAll());
+        modelMap.addAttribute("bodies", this.daoFactory.getBodyDAO().readAll());
+        modelMap.addAttribute("colours", this.daoFactory.getColorDAO().readAll());
+        modelMap.addAttribute("transmissions", this.daoFactory.getTransmissionsDAO().readAll());
+        mAV.addAllObjects(modelMap);
+
+        return mAV;
     }
 
-    /**edit ad
-     * @param req
-     * @param resp
-     * @throws ServletException
-     * @throws IOException
-     */
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        int adID = Integer.parseInt(req.getParameter("id"));
-        String modelID = req.getParameter("model");
-        String transmissionID = req.getParameter("transmission");
-        String bodyID = req.getParameter("body");
-        String colorID = req.getParameter("color");
+    @RequestMapping(value = "/editad", method = RequestMethod.POST)
+    public String editAd(HttpServletRequest req,
+                         @RequestParam String id,
+                         @RequestParam String model,
+                         @RequestParam String transmission,
+                         @RequestParam String body,
+                         @RequestParam String color,
+                         @RequestParam String title,
+                         @RequestParam String done,
+                         @RequestParam String price,
+                         @RequestParam String slogin,
+                         @RequestParam String spassword) {
 
         Ad newAd = new Ad();
-        newAd.setTittle(req.getParameter("title"));
+        newAd.setTittle(title);
         newAd.setCar(new Car(
-                this.daoFactory.getModelDAO().read(Integer.parseInt(modelID)),
-                this.daoFactory.getTransmissionsDAO().read(Integer.parseInt(transmissionID)),
-                this.daoFactory.getBodyDAO().read(Integer.parseInt(bodyID)),
-                this.daoFactory.getColorDAO().read(Integer.parseInt(colorID))));
+                this.daoFactory.getModelDAO().read(Integer.parseInt(model)),
+                this.daoFactory.getTransmissionsDAO().read(Integer.parseInt(transmission)),
+                this.daoFactory.getBodyDAO().read(Integer.parseInt(body)),
+                this.daoFactory.getColorDAO().read(Integer.parseInt(color))));
         newAd.setCreate(new Timestamp(System.currentTimeMillis()));
 
-        User user = this.daoFactory.getUserDAO().
-                getByLoginPassword(
-                        (String) req.getSession().getAttribute("slogin"),
-                        (String) req.getSession().getAttribute("spassword"));
+        User user = this.daoFactory.getUserDAO().getByLoginPassword(slogin, spassword);
         newAd.setUser(user);
-        newAd.setDone(Boolean.parseBoolean(req.getParameter("done")));
-        newAd.setPrice(Integer.parseInt(req.getParameter("price")));
+        newAd.setDone(Boolean.parseBoolean(done));
+        newAd.setPrice(Integer.parseInt(price));
 
-        Set<Image> images = this.daoFactory.getAdDAO().getFiles(req, resp);
+        Set<Image> images = null;
+        try {
+            images = this.daoFactory.getAdDAO().getFiles(req);
+        } catch (IOException | ServletException e) {
+            DAOFactory.logger.error(e.getMessage(), e);
+        }
         newAd.setImages(images);
 
-        this.daoFactory.getAdDAO().update(adID, newAd);
-        resp.sendRedirect(String.format("%s/ads", req.getContextPath()));
+        this.daoFactory.getAdDAO().update(Integer.parseInt(id), newAd);
+
+        return "redirect:/ads";
     }
+
 }

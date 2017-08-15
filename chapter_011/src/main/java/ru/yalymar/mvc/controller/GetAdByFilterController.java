@@ -1,13 +1,14 @@
 package ru.yalymar.mvc.controller;
 
 import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.yalymar.mvc.model.dao.DAOFactory;
 import ru.yalymar.mvc.model.models.Ad;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,45 +17,48 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet(urlPatterns = "/adfilter")
-public class GetAdByFilterController extends HttpServlet {
+@Controller
+@RequestMapping(value = "/adfilter", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+public class GetAdByFilterController {
 
-    private final DAOFactory daoFactory = new DAOFactory();
+    @Autowired
+    private DAOFactory daoFactory;
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        resp.setContentType("text/json");
-        PrintWriter writer = resp.getWriter();
+    public void getAdsByFilter(HttpServletResponse resp,
+                               @RequestParam String fmanuf,
+                               @RequestParam String fmodel,
+                               @RequestParam String ftransmission,
+                               @RequestParam String fbody,
+                               @RequestParam String fcolor,
+                               @RequestParam String from,
+                               @RequestParam String to
+                                ) {
+        PrintWriter writer = null;
+        try {
+            writer = resp.getWriter();
+            Map<String, String> filterData = new HashMap<>();
+            filterData.put("manuf", fmanuf);
+            filterData.put("model", fmodel);
+            filterData.put("transmission", ftransmission);
+            filterData.put("body", fbody);
+            filterData.put("color", fcolor);
+            filterData.put("from", from);
+            filterData.put("to", to);
+            List<Ad> ads = this.daoFactory.getAdDAO().getAdByFilters(filterData);
 
-        String manuf = req.getParameter("fmanuf");
-        String model = req.getParameter("fmodel");
-        String transmission = req.getParameter("ftransmission");
-        String body = req.getParameter("fbody");
-        String color = req.getParameter("fcolor");
-        String from = req.getParameter("from");
-        String to = req.getParameter("to");
+            //create json
+            Map<String, List<Integer>> jAdsId = new HashMap<>();
+            List<Integer> adsID = new ArrayList<>();
+            ads.forEach(ad -> {
+                adsID.add(ad.getId());
+            });
+            jAdsId.put("id", adsID);
 
-        Map<String, String> filterData = new HashMap<>();
-        filterData.put("manuf", manuf);
-        filterData.put("model", model);
-        filterData.put("transmission", transmission);
-        filterData.put("body", body);
-        filterData.put("color", color);
-        filterData.put("from", from);
-        filterData.put("to", to);
-        List<Ad> ads = this.daoFactory.getAdDAO().getAdByFilters(filterData);
-
-        //create json
-        Map<String, List<Integer>> jAdsId = new HashMap<>();
-        List<Integer> adsID = new ArrayList<>();
-        ads.forEach(ad -> {
-            adsID.add(ad.getId());
-        });
-        jAdsId.put("id", adsID);
-
-        JSONObject.toJSONString(jAdsId);
-        JSONObject.writeJSONString(jAdsId, writer);
-        writer.flush();
+            JSONObject.toJSONString(jAdsId);
+            JSONObject.writeJSONString(jAdsId, writer);
+            writer.flush();
+        } catch (IOException e) {
+            DAOFactory.logger.error(e.getMessage(), e);
+        }
     }
 }

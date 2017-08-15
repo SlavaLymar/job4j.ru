@@ -1,27 +1,17 @@
 package ru.yalymar.mvc.controller;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-/**
- * @author slavalymar
- * @since 19.06.2017
- * @version 1
- */
-public class ExitController extends HttpServlet {
+import javax.servlet.http.HttpSession;
 
-    /** exit user
-     * @param req
-     * @param resp
-     * @throws ServletException
-     * @throws IOException
-     */
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getSession().invalidate();
-        req.getRequestDispatcher("/WEB-INF/views/testtask/testsignin.jsp").forward(req, resp);
+@Controller
+public class ExitController {
+
+    @RequestMapping(value = "/exit")
+    public String exit(HttpSession session) {
+        session.invalidate();
+        return "redirect:/testsignin";
     }
+
 }

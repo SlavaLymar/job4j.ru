@@ -15,6 +15,5 @@ import java.util.Set;
  */
 public interface Upload {
 
-    Set<Image> getFiles(HttpServletRequest req,
-                        HttpServletResponse resp) throws IOException, ServletException;
+    Set<Image> getFiles(HttpServletRequest req) throws IOException, ServletException;
 }

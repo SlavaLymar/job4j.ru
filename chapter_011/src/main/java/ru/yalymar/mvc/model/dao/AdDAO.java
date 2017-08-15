@@ -109,7 +109,7 @@ public class AdDAO extends DAO<Ad> implements Unproxy, Upload {
     }
 
     @Override
-    public Set<Image> getFiles(HttpServletRequest req, HttpServletResponse resp)
+    public Set<Image> getFiles(HttpServletRequest req)
             throws IOException, ServletException {
         Set<Image> result = new HashSet<>();
         String appPath = req.getServletContext().getRealPath("");

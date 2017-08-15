@@ -10,7 +10,10 @@ import org.springframework.web.servlet.ModelAndView;
 import ru.yalymar.mvc.model.dao.DAOFactory;
 import ru.yalymar.mvc.model.models.*;
 
+import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Set;
 
@@ -39,37 +42,37 @@ public class CreateAdController{
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String createAd(@RequestParam String model,
+    public String createAd(HttpServletRequest req,
+                           @RequestParam String model,
                            @RequestParam String transmission,
                            @RequestParam String body,
                            @RequestParam String color,
                            @RequestParam String title,
+                           @RequestParam String price,
                            @RequestParam String slogin,
                            @RequestParam String spassword){
 
         Ad ad = new Ad();
-        String modelID = req.getParameter("model");
-        String transmissionID = req.getParameter("transmission");
-        String bodyID = req.getParameter("body");
-        String colorID = req.getParameter("color");
-
-        ad.setTittle(req.getParameter("title"));
+        ad.setTittle(title);
         ad.setCar(new Car(
-                new Model(Integer.parseInt(modelID)),
-                new Transmission(Integer.parseInt(transmissionID)),
-                new Body(Integer.parseInt(bodyID)),
-                new Color(Integer.parseInt(colorID))));
+                new Model(Integer.parseInt(model)),
+                new Transmission(Integer.parseInt(transmission)),
+                new Body(Integer.parseInt(body)),
+                new Color(Integer.parseInt(color))));
         ad.setCreate(new Timestamp(System.currentTimeMillis()));
 
         User user = this.daoFactory.getUserDAO().
-                getByLoginPassword(
-                        (String) req.getSession().getAttribute("slogin"),
-                        (String) req.getSession().getAttribute("spassword"));
+                getByLoginPassword(slogin, spassword);
         ad.setUser(user);
         ad.setDone(false);
-        ad.setPrice(Integer.parseInt(req.getParameter("price")));
+        ad.setPrice(Integer.parseInt(price));
 
-        Set<Image> images = this.daoFactory.getAdDAO().getFiles(req, resp);
+        Set<Image> images = null;
+        try {
+            images = this.daoFactory.getAdDAO().getFiles(req);
+        } catch (IOException | ServletException e) {
+            DAOFactory.logger.error(e.getMessage(), e);
+        }
         ad.setImages(images);
         this.daoFactory.getAdDAO().create(ad);
 

@@ -1,34 +1,20 @@
 package ru.yalymar.mvc.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.yalymar.mvc.model.dao.DAOFactory;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+@Controller
+@RequestMapping(value = "/imgdel")
+public class DeleteImgController {
 
-/**
- * @author slavalymar
- * @since 19.06.2017
- * @version 1
- */
-@WebServlet(urlPatterns = "/imgdel")
-public class DeleteImgController extends HttpServlet {
+    @Autowired
+    private DAOFactory daoFactory;
 
-    private final DAOFactory daoFactory = new DAOFactory();
-
-    /**delete img
-     * @param req
-     * @param resp
-     * @throws ServletException
-     * @throws IOException
-     */
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        int id = Integer.parseInt(req.getParameter("id"));
-        this.daoFactory.getImageDAO().delete(id);
+    public void deleteImg(@RequestParam String id){
+        this.daoFactory.getImageDAO().delete(Integer.parseInt(id));
     }
+
 }
