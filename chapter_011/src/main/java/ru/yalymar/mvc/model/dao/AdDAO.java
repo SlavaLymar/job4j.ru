@@ -1,12 +1,10 @@
 package ru.yalymar.mvc.model.dao;
 
 import ru.yalymar.mvc.model.dao.fileuploader.Upload;
-import ru.yalymar.mvc.model.dao.unproxy.Unproxy;
 import ru.yalymar.mvc.model.models.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
@@ -17,7 +15,7 @@ import java.util.*;
  * @since 19.06.2017
  * @version 1
  */
-public class AdDAO extends DAO<Ad> implements Unproxy, Upload {
+public class AdDAO extends DAO<Ad> implements Upload {
 
     public int create(Ad ad) {
         return super.tx(session -> (int) session.save(ad));
@@ -26,24 +24,6 @@ public class AdDAO extends DAO<Ad> implements Unproxy, Upload {
     public Ad read(int id) {
         Ad ad = super.tx(session -> {
             Ad a = session.get(Ad.class, id);
-
-            Car car = (Car) this.initializeAndUnproxy(a.getCar());
-            Model model = (Model) this.initializeAndUnproxy(car.getModel());
-            Manufactor manufactor = (Manufactor) this.initializeAndUnproxy(model.getManuf());
-            model.setManuf(manufactor);
-            Transmission transmission = (Transmission) this.initializeAndUnproxy(car.getTransmission());
-            Body body = (Body) this.initializeAndUnproxy(car.getBody());
-            Color color = (Color) this.initializeAndUnproxy(car.getColor());
-            car.setModel(model);
-            car.setTransmission(transmission);
-            car.setBody(body);
-            car.setColor(color);
-
-            User user = (User) this.initializeAndUnproxy(a.getUser());
-            Set<Image> images = (Set<Image>) this.initializeAndUnproxy(a.getImages());
-            a.setCar(car);
-            a.setUser(user);
-            a.setImages(images);
             return a;
         });
         return ad;
@@ -52,25 +32,6 @@ public class AdDAO extends DAO<Ad> implements Unproxy, Upload {
     public List<Ad> readAll() {
         List<Ad> ads = super.tx(session -> {
             List<Ad> as = session.createQuery("from Ad").list();
-            for (Ad ad : as) {
-                Car car = (Car) this.initializeAndUnproxy(ad.getCar());
-                Model model = (Model) this.initializeAndUnproxy(car.getModel());
-                Manufactor manufactor = (Manufactor) this.initializeAndUnproxy(model.getManuf());
-                model.setManuf(manufactor);
-                Transmission transmission = (Transmission) this.initializeAndUnproxy(car.getTransmission());
-                Body body = (Body) this.initializeAndUnproxy(car.getBody());
-                Color color = (Color) this.initializeAndUnproxy(car.getColor());
-                car.setModel(model);
-                car.setTransmission(transmission);
-                car.setBody(body);
-                car.setColor(color);
-
-                User user = (User) this.initializeAndUnproxy(ad.getUser());
-                Set<Image> images = (Set<Image>) this.initializeAndUnproxy(ad.getImages());
-                ad.setCar(car);
-                ad.setUser(user);
-                ad.setImages(images);
-            }
             return as;
         });
         return ads;

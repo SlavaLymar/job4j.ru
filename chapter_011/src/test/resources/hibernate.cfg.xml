@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.url">jdbc:hsqldb:mem:hibertest;sql.enforce_size=false</property>
+        <property name="connection.driver_class">org.hsqldb.jdbcDriver</property>
+        <property name="connection.username">sa</property>
+        <property name="connection.password"></property>
+        <property name="dialect">org.hibernate.dialect.HSQLDialect</property>
+        <property name="show_sql">true</property>
+        <property name="hbm2ddl.auto">create</property>
+
+        <!-- task 2 -->
+        <mapping resource="ru/yalymar/mvc/model/models/User.hbm.xml"/>
+        <mapping resource="ru/yalymar/mvc/model/models/Car.hbm.xml"/>
+        <mapping resource="ru/yalymar/mvc/model/models/Model.hbm.xml"/>
+        <mapping resource="ru/yalymar/mvc/model/models/Image.hbm.xml"/>
+        <mapping resource="ru/yalymar/mvc/model/models/Role.hbm.xml"/>
+        <mapping resource="ru/yalymar/mvc/model/models/Manufactor.hbm.xml"/>
+        <mapping resource="ru/yalymar/mvc/model/models/Transmission.hbm.xml"/>
+        <mapping resource="ru/yalymar/mvc/model/models/Body.hbm.xml"/>
+        <mapping resource="ru/yalymar/mvc/model/models/Color.hbm.xml"/>
+        <mapping resource="ru/yalymar/mvc/model/models/Ad.hbm.xml"/>
+    </session-factory>
+</hibernate-configuration>

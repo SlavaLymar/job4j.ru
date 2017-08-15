@@ -1,8 +1,6 @@
 package ru.yalymar.mvc.model.dao;
 
 import org.hibernate.query.Query;
-import ru.yalymar.mvc.model.dao.unproxy.Unproxy;
-import ru.yalymar.mvc.model.models.Role;
 import ru.yalymar.mvc.model.models.User;
 
 import java.util.List;
@@ -12,7 +10,7 @@ import java.util.List;
  * @since 19.06.2017
  * @version 1
  */
-public class UserDAO extends DAO<User> implements Unproxy<Role> {
+public class UserDAO extends DAO<User>{
 
     public int create(User user) {
         return super.tx(session -> (int) session.save(user));
@@ -21,8 +19,6 @@ public class UserDAO extends DAO<User> implements Unproxy<Role> {
     public User read(int id) {
         User user = super.tx(session -> {
             User u = session.get(User.class, id);
-            Role role = this.initializeAndUnproxy(u.getRole());
-            u.setRole(role);
             return u;
         });
         return user;
@@ -31,10 +27,6 @@ public class UserDAO extends DAO<User> implements Unproxy<Role> {
     public List<User> readAll() {
         List<User> users = super.tx(session -> {
             List<User> us = session.createQuery("from User").list();
-            for (User user : us) {
-                Role role = this.initializeAndUnproxy(user.getRole());
-                user.setRole(role);
-            }
             return us;
         });
         return users;
@@ -96,8 +88,6 @@ public class UserDAO extends DAO<User> implements Unproxy<Role> {
             query.setParameter("l", login);
             query.setParameter("p", password);
             List<User> users = query.list();
-            Role role = this.initializeAndUnproxy(users.get(0).getRole());
-            users.get(0).setRole(role);
             return users.size() == 1 ? users.get(0) : null;
         });
         return user;
