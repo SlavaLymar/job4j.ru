@@ -1,57 +1,52 @@
 package ru.yalymar.mvc.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import ru.yalymar.mvc.model.dao.DAOFactory;
 import ru.yalymar.mvc.model.models.*;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Set;
 
-/**
- * @author slavalymar
- * @since 19.06.2017
- * @version 1
- */
-@WebServlet(urlPatterns = "/add")
+@Controller
 @MultipartConfig(fileSizeThreshold = 1024* 1024* 2,
                     maxFileSize = 1024*1024,
                     maxRequestSize = 1024*1024*2)
-public class CreateAdController extends HttpServlet{
+public class CreateAdController{
 
-    private final DAOFactory daoFactory = new DAOFactory();
+    @Autowired
+    private DAOFactory daoFactory;
 
-    /**get add.jsp page
-     * @param req
-     * @param resp
-     * @throws ServletException
-     * @throws IOException
-     */
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        req.setAttribute("manufacturers", this.daoFactory.getManufactorDAO().readAll());
-        req.setAttribute("models", this.daoFactory.getModelDAO().readAll());
-        req.setAttribute("bodies", this.daoFactory.getBodyDAO().readAll());
-        req.setAttribute("colours", this.daoFactory.getColorDAO().readAll());
-        req.setAttribute("transmissions", this.daoFactory.getTransmissionsDAO().readAll());
-        req.getRequestDispatcher("/WEB-INF/mapping/views/add.jsp").forward(req,  resp);
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public ModelAndView getAddAdForm(ModelAndView mAV){
+        mAV.setViewName("add");
+
+        ModelMap modelMap = new ModelMap();
+        modelMap.addAttribute("manufacturers", this.daoFactory.getManufactorDAO().readAll());
+        modelMap.addAttribute("models", this.daoFactory.getModelDAO().readAll());
+        modelMap.addAttribute("bodies", this.daoFactory.getBodyDAO().readAll());
+        modelMap.addAttribute("colours", this.daoFactory.getColorDAO().readAll());
+        modelMap.addAttribute("transmissions", this.daoFactory.getTransmissionsDAO().readAll());
+        mAV.addAllObjects(modelMap);
+
+        return mAV;
     }
 
-    /**add ad
-     * @param req
-     * @param resp
-     * @throws ServletException
-     * @throws IOException
-     */
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public String createAd(@RequestParam String model,
+                           @RequestParam String transmission,
+                           @RequestParam String body,
+                           @RequestParam String color,
+                           @RequestParam String title,
+                           @RequestParam String slogin,
+                           @RequestParam String spassword){
+
         Ad ad = new Ad();
         String modelID = req.getParameter("model");
         String transmissionID = req.getParameter("transmission");
@@ -77,7 +72,8 @@ public class CreateAdController extends HttpServlet{
         Set<Image> images = this.daoFactory.getAdDAO().getFiles(req, resp);
         ad.setImages(images);
         this.daoFactory.getAdDAO().create(ad);
-        resp.sendRedirect(String.format("%s/ads", req.getContextPath()));
+
+        return "redirect:/ads";
     }
 
 

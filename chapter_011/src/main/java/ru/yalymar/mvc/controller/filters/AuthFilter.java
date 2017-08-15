@@ -7,11 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-/**
- * @author slavalymar
- * @since 19.06.2017
- * @version 1
- */
 @WebFilter(urlPatterns = "/*")
 public class AuthFilter implements Filter {
 
@@ -20,15 +15,6 @@ public class AuthFilter implements Filter {
 
     }
 
-    /**
-     * determine that user has already exist
-     *
-     * @param req
-     * @param resp
-     * @param chain
-     * @throws IOException
-     * @throws ServletException
-     */
     @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
             throws IOException, ServletException {

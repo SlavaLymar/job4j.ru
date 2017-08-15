@@ -1,63 +1,44 @@
 package ru.yalymar.mvc.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 import ru.yalymar.mvc.model.dao.DAOFactory;
 import ru.yalymar.mvc.model.models.Ad;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-/**
- * @author slavalymar
- * @since 19.06.2017
- * @version 1
- */
-@WebServlet(urlPatterns = "/ads")
-public class AdsController extends HttpServlet {
+@Controller
+@RequestMapping(value = "/ads")
+public class AdsController{
 
-    private final DAOFactory daoFactory = new DAOFactory();
+    @Autowired
+    private DAOFactory daoFactory;
 
-    /** get ads
-     * @param req
-     * @param resp
-     * @throws ServletException
-     * @throws IOException
-     */
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        String login = (String) req.getSession().getAttribute("slogin");
-        String password = (String) req.getSession().getAttribute("spassword");
-        if (this.daoFactory.getUserDAO().isValid(login, password)) {
-            List<Ad> ads = this.daoFactory.getAdDAO().readAll();
-            req.setAttribute("ads", ads);
+    public ModelAndView getAllAds(ModelAndView mAV, ModelMap modelMap){
+        mAV.setViewName("adsprivate");
+        List<Ad> ads = this.daoFactory.getAdDAO().readAll();
 
-            Map<Integer, List<String>> desc = new HashMap<>();
-            ads.forEach((ad -> {
-                desc.put(ad.getId(), new ArrayList<String>() {{
-                    add(ad.getCar().getModel().getManuf().getManuf());
-                    add(ad.getCar().getModel().getModel());
-                }});
-            }));
-            req.setAttribute("desc", desc);
-            req.setAttribute("manufacturers", this.daoFactory.getManufactorDAO().readAll());
-            req.setAttribute("models", this.daoFactory.getModelDAO().readAll());
-            req.setAttribute("bodies", this.daoFactory.getBodyDAO().readAll());
-            req.setAttribute("colours", this.daoFactory.getColorDAO().readAll());
-            req.setAttribute("transmissions", this.daoFactory.getTransmissionsDAO().readAll());
+        Map<Integer, List<String>> desc = new HashMap<>();
+        ads.forEach((ad -> {
+            desc.put(ad.getId(), new ArrayList<String>() {{
+                add(ad.getCar().getModel().getManuf().getManuf());
+                add(ad.getCar().getModel().getModel());
+            }});
+        }));
 
-            req.getRequestDispatcher("/WEB-INF/mapping/views/adsprivate.jsp").forward(req, resp);
+        modelMap.addAttribute("ads", ads);
+        modelMap.addAttribute("desc", desc);
+        modelMap.addAttribute("manufacturers", this.daoFactory.getManufactorDAO().readAll());
+        modelMap.addAttribute("models", this.daoFactory.getModelDAO().readAll());
+        modelMap.addAttribute("bodies", this.daoFactory.getBodyDAO().readAll());
+        modelMap.addAttribute("colours", this.daoFactory.getColorDAO().readAll());
+        modelMap.addAttribute("transmissions", this.daoFactory.getTransmissionsDAO().readAll());
+        mAV.addAllObjects(modelMap);
 
-        } else {
-            req.setAttribute("error", "User has not exist!");
-            this.doGet(req, resp);
-        }
+        return mAV;
     }
+
 }

@@ -1,30 +1,14 @@
 package ru.yalymar.mvc.controller.auth;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-/**
- * @author slavalymar
- * @since 19.06.2017
- * @version 1
- */
-@WebServlet(urlPatterns = "/login")
-public class SigninController extends HttpServlet{
+@Controller
+@RequestMapping(value = "/signin")
+public class SigninController {
 
-    /** get login.jsp page
-     * @param req
-     * @param resp
-     * @throws ServletException
-     * @throws IOException
-     */
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/mapping/views/login.jsp").forward(req, resp);
+    public String showLoginForm() {
+        return "login";
     }
 
 
