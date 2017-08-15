@@ -30,14 +30,14 @@ public class SortTmpFileTest {
         String line2 = "abcde";
         String line1 = "ab";
 
-        SortTmpFile sort = new SortTmpFile(new File(""), new Random());
+        SortTmpFileB sort = new SortTmpFileB(new File(""), new Random());
         int result = sort.compareLines(line1, line2);
         Assert.assertThat(result, is(-1));
     }
 
     @Test
     public void whenCountOfLinesShouldGetInt() throws IOException {
-        SortTmpFile sort = new SortTmpFile(new File(""), new Random());
+        SortTmpFileB sort = new SortTmpFileB(new File(""), new Random());
         int countOfLines = 0;
         String sourcePath = this.properties.getProperty("SOURCEPATH");
         try(RandomAccessFile r = new RandomAccessFile(sourcePath, "r")){
@@ -48,7 +48,7 @@ public class SortTmpFileTest {
 
     @Test
     public void whenSortEvenShouldGetInt() throws IOException {
-        SortTmpFile sort = new SortTmpFile(new File(""), new Random());
+        SortTmpFileB sort = new SortTmpFileB(new File(""), new Random());
         int countOfLines = 0;
         String sourcePath = String.format("%s%stest%stestEven.txt",
                 this.properties.getProperty("TEMPAREA"),
@@ -73,7 +73,7 @@ public class SortTmpFileTest {
 
     @Test
     public void whenSortOddShouldGetInt() throws IOException {
-        SortTmpFile sort = new SortTmpFile(new File(""), new Random());
+        SortTmpFileB sort = new SortTmpFileB(new File(""), new Random());
         int countOfLines = 0;
         String sourcePath = String.format("%s%stest%stestOdd.txt",
                 this.properties.getProperty("TEMPAREA"),
