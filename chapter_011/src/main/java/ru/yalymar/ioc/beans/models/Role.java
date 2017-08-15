@@ -3,6 +3,7 @@ package ru.yalymar.ioc.beans.models;
 public class Role {
 
     private String id;
+
     private String role;
 
     public Role(String role) {
