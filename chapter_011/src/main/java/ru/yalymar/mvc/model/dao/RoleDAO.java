@@ -1,26 +1,20 @@
 package ru.yalymar.mvc.model.dao;
 
-import org.hibernate.query.Query;
 import ru.yalymar.mvc.model.models.Role;
 import java.util.List;
 
-/**
- * @author slavalymar
- * @since 19.06.2017
- * @version 1
- */
 public class RoleDAO extends DAO<Role> {
 
     public int create(Role role) {
-        return super.tx(session -> (int) session.save(role));
+        return super.action(hibernateTemplate -> (int) hibernateTemplate.save(role));
     }
 
     public Role read(int id) {
-        return super.tx(session -> session.get(Role.class, id));
+        return super.action(hibernateTemplate -> hibernateTemplate.get(Role.class, id));
     }
 
     public List<Role> readAll() {
-        return super.tx(session -> session.createQuery("from Role").list());
+        return super.action(hibernateTemplate -> hibernateTemplate.loadAll(Role.class));
     }
 
     public int update(int id, Role newRole) {
@@ -31,8 +25,8 @@ public class RoleDAO extends DAO<Role> {
             i++;
         }
         if(i > 0){
-            super.tx(session -> {
-                session.update(role);
+            super.action(hibernateTemplate -> {
+                hibernateTemplate.update(role);
                 return -1;
             });
         }
@@ -40,10 +34,10 @@ public class RoleDAO extends DAO<Role> {
     }
 
     public int delete(int id) {
-        return super.tx(session -> {
-            Query query = session.createQuery("delete Role where id = :id");
-            query.setParameter("id", id);
-            return query.executeUpdate();
+        Role role = this.read(id);
+        return super.action(hibernateTemplate -> {
+            hibernateTemplate.delete(role);
+            return 1;
         });
     }
 }

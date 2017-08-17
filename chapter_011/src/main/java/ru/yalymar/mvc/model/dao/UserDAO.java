@@ -1,35 +1,27 @@
 package ru.yalymar.mvc.model.dao;
 
+import org.hibernate.Session;
 import org.hibernate.query.Query;
 import ru.yalymar.mvc.model.models.User;
 
 import java.util.List;
 
-/**
- * @author slavalymar
- * @since 19.06.2017
- * @version 1
- */
 public class UserDAO extends DAO<User>{
 
     public int create(User user) {
-        return super.tx(session -> (int) session.save(user));
+        return super.action(hibernateTemplate -> (int) hibernateTemplate.save(user));
     }
 
     public User read(int id) {
-        User user = super.tx(session -> {
-            User u = session.get(User.class, id);
+        User user = super.action(hibernateTemplate -> {
+            User u = hibernateTemplate.get(User.class, id);
             return u;
         });
         return user;
     }
 
     public List<User> readAll() {
-        List<User> users = super.tx(session -> {
-            List<User> us = session.createQuery("from User").list();
-            return us;
-        });
-        return users;
+        return super.action(hibernateTemplate -> hibernateTemplate.loadAll(User.class));
     }
 
     public int update(int id, User newUser) {
@@ -52,8 +44,8 @@ public class UserDAO extends DAO<User>{
             i++;
         }
         if(i > 0){
-            super.tx(session -> {
-                session.update(user);
+            super.action(hibernateTemplate -> {
+                hibernateTemplate.update(user);
                 return -1;
             });
         }
@@ -61,10 +53,10 @@ public class UserDAO extends DAO<User>{
     }
 
     public int delete(int id) {
-        return super.tx(session -> {
-            Query query = session.createQuery("delete User where id = :id");
-            query.setParameter("id", id);
-            return query.executeUpdate();
+        User user = this.read(id);
+        return super.action(hibernateTemplate -> {
+            hibernateTemplate.delete(user);
+            return 1;
         });
     }
 
@@ -83,8 +75,9 @@ public class UserDAO extends DAO<User>{
     }
 
     public User getByLoginPassword(String login, String password){
-        User user = super.tx(session -> {
-            Query<User> query = session.createQuery("from User where login = :l and password = :p");
+        User user = super.action(hibernateTemplate -> {
+            Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
+            Query<User> query = session.createQuery("from User where login = :l and password = :p", User.class);
             query.setParameter("l", login);
             query.setParameter("p", password);
             List<User> users = query.list();

@@ -1,6 +1,6 @@
 package ru.yalymar.mvc.model.dao.action;
 
-import org.hibernate.Session;
+import org.springframework.orm.hibernate5.HibernateTemplate;
 
 import java.util.function.Function;
 
@@ -11,5 +11,5 @@ import java.util.function.Function;
  */
 public interface Action<V> {
 
-    <V, K> V tx(Function<Session, V> function);
+    <V, K> V action(Function<HibernateTemplate, V> function);
 }

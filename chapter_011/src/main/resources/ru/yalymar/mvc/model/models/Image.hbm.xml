@@ -4,6 +4,6 @@
             <generator class="identity"/>
         </id>
         <property name="url" column="url"/>
-        <many-to-one name="ad" column="ads_id" class="ru.yalymar.mvc.model.models.Ad" cascade="all"/>
+        <many-to-one name="ad" column="ads_id" class="ru.yalymar.mvc.model.models.Ad" cascade="all" lazy="false"/>
     </class>
 </hibernate-mapping>

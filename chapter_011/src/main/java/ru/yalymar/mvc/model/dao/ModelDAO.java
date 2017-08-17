@@ -1,35 +1,21 @@
 package ru.yalymar.mvc.model.dao;
 
-import org.hibernate.query.Query;
 import ru.yalymar.mvc.model.models.Model;
 
 import java.util.List;
 
-/**
- * @author slavalymar
- * @since 19.06.2017
- * @version 1
- */
 public class ModelDAO extends DAO<Model>{
 
     public int create(Model model) {
-        return super.tx(session -> (int) session.save(model));
+        return super.action(hibernateTemplate -> (int) hibernateTemplate.save(model));
     }
 
     public Model read(int id) {
-        Model model = super.tx(session -> {
-            Model m = session.get(Model.class, id);
-            return m;
-        });
-        return model;
+        return super.action(hibernateTemplate -> hibernateTemplate.get(Model.class, id));
     }
 
     public List<Model> readAll() {
-        List<Model> ms = super.tx(session -> {
-            List<Model> models = session.createQuery("from Model").list();
-            return models;
-        });
-        return ms;
+        return super.action(hibernateTemplate -> hibernateTemplate.loadAll(Model.class));
     }
 
     public int update(int id, Model newModel) {
@@ -44,8 +30,8 @@ public class ModelDAO extends DAO<Model>{
             i++;
         }
         if(i > 0){
-            super.tx(session -> {
-                session.update(model);
+            super.action(hibernateTemplate -> {
+                hibernateTemplate.update(model);
                 return -1;
             });
         }
@@ -53,10 +39,10 @@ public class ModelDAO extends DAO<Model>{
     }
 
     public int delete(int id) {
-        return super.tx(session -> {
-            Query query = session.createQuery("delete Model where id = :id");
-            query.setParameter("id", id);
-            return query.executeUpdate();
+        Model model = this.read(id);
+        return super.action(hibernateTemplate -> {
+            hibernateTemplate.delete(model);
+            return 1;
         });
     }
 }

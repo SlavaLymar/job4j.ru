@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <import resource="spring-mvc.xml"/>
+
+    <tx:annotation-driven />
+    <context:component-scan base-package="ru.yalymar.mvc"/>
+
+    <bean class="ru.yalymar.mvc.model.dao.AdDAO"/>
+    <bean class="ru.yalymar.mvc.model.dao.BodyDAO"/>
+    <bean class="ru.yalymar.mvc.model.dao.CarDAO"/>
+    <bean class="ru.yalymar.mvc.model.dao.ColorDAO"/>
+    <bean class="ru.yalymar.mvc.model.dao.ImageDAO"/>
+    <bean class="ru.yalymar.mvc.model.dao.ManufactorDAO"/>
+    <bean class="ru.yalymar.mvc.model.dao.ModelDAO"/>
+    <bean class="ru.yalymar.mvc.model.dao.RoleDAO"/>
+    <bean class="ru.yalymar.mvc.model.dao.TransmissionsDAO"/>
+    <bean class="ru.yalymar.mvc.model.dao.UserDAO"/>
+
+    <bean class="ru.yalymar.mvc.model.dao.DAOFactory"/>
+
+
+
+
+</beans>

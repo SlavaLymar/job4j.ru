@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 
 public class ManufactorDAOTest {
 //TODO testing DAO
-    
+
     @Test
     public void whenCreateManufShouldGetId(){
         DAOFactory mf = new DAOFactory();

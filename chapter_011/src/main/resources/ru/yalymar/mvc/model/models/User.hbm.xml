@@ -8,6 +8,6 @@
         <property name="name" column="name"/>
         <property name="create" column="create_user"/>
 
-        <many-to-one name="role" column="role_id" class="ru.yalymar.mvc.model.models.Role"/>
+        <many-to-one name="role" column="role_id" class="ru.yalymar.mvc.model.models.Role" lazy="false"/>
     </class>
 </hibernate-mapping>

@@ -1,34 +1,28 @@
 package ru.yalymar.mvc.model.dao;
 
-import org.hibernate.query.Query;
 import ru.yalymar.mvc.model.models.Image;
 
 import java.util.List;
 
-/**
- * @author slavalymar
- * @since 19.06.2017
- * @version 1
- */
 public class ImageDAO extends DAO<Image> {
 
     public int create(Image image) {
-        return super.tx(session -> (int) session.save(image));
+        return super.action(hibernateTemplate -> (int) hibernateTemplate.save(image));
     }
 
     public Image read(int id) {
-        return super.tx(session -> session.get(Image.class, id));
+        return super.action(hibernateTemplate -> hibernateTemplate.get(Image.class, id));
     }
 
     public List<Image> readAll() {
-        return super.tx(session -> session.createQuery("from Image").list());
+        return super.action(hibernateTemplate -> hibernateTemplate.loadAll(Image.class));
     }
 
     public int delete(int id) {
-        return super.tx(session -> {
-            Query query = session.createQuery("delete Image where id = :id");
-            query.setParameter("id", id);
-            return query.executeUpdate();
+        Image img = this.read(id);
+        return super.action(hibernateTemplate -> {
+            hibernateTemplate.delete(img);
+            return 1;
         });
     }
 }

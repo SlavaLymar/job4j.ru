@@ -1,27 +1,21 @@
 package ru.yalymar.mvc.model.dao;
 
-import org.hibernate.query.Query;
 import ru.yalymar.mvc.model.models.Manufactor;
 
 import java.util.List;
 
-/**
- * @author slavalymar
- * @since 19.06.2017
- * @version 1
- */
 public class ManufactorDAO extends DAO<Manufactor> {
 
     public int create(Manufactor m) {
-        return super.tx(session -> (int) session.save(m));
+        return super.action(hibernateTemplate -> (int) hibernateTemplate.save(m));
     }
 
     public Manufactor read(int id) {
-        return super.tx(session -> session.get(Manufactor.class, id));
+        return super.action(hibernateTemplate -> hibernateTemplate.get(Manufactor.class, id));
     }
 
     public List<Manufactor> readAll() {
-        return super.tx(session -> session.createQuery("from Manufactor").list());
+        return super.action(hibernateTemplate -> hibernateTemplate.loadAll(Manufactor.class));
     }
 
     public int update(int id, Manufactor newM) {
@@ -32,8 +26,8 @@ public class ManufactorDAO extends DAO<Manufactor> {
             i++;
         }
         if(i > 0){
-            super.tx(session -> {
-                session.update(manuf);
+            super.action(hibernateTemplate -> {
+                hibernateTemplate.update(manuf);
                 return -1;
             });
         }
@@ -41,10 +35,10 @@ public class ManufactorDAO extends DAO<Manufactor> {
     }
 
     public int delete(int id) {
-        return super.tx(session -> {
-            Query query = session.createQuery("delete Manufactor where id = :id");
-            query.setParameter("id", id);
-            return query.executeUpdate();
+        Manufactor manuf = this.read(id);
+        return super.action(hibernateTemplate -> {
+            hibernateTemplate.delete(manuf);
+            return 1;
         });
     }
 }

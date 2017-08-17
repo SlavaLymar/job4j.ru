@@ -1,6 +1,5 @@
 package ru.yalymar.mvc.model.dao;
 
-import org.hibernate.query.Query;
 import ru.yalymar.mvc.model.models.Body;
 
 import java.util.List;
@@ -13,15 +12,15 @@ import java.util.List;
 public class BodyDAO extends DAO<Body>{
 
     public int create(Body body) {
-        return super.tx(session -> (int) session.save(body));
+        return super.action(hibernateTemplate -> (int) hibernateTemplate.save(body));
     }
 
     public Body read(int id) {
-        return super.tx(session -> session.get(Body.class, id));
+        return super.action(hibernateTemplate -> hibernateTemplate.get(Body.class, id));
     }
 
     public List<Body> readAll() {
-        return super.tx(session -> session.createQuery("from Body").list());
+        return super.action(hibernateTemplate -> hibernateTemplate.loadAll(Body.class));
     }
 
     public int update(int id, Body newBody) {
@@ -32,8 +31,8 @@ public class BodyDAO extends DAO<Body>{
             i++;
         }
         if(i > 0){
-            super.tx(session -> {
-                session.update(body);
+            super.action(hibernateTemplate -> {
+                hibernateTemplate.update(body);
                 return -1;
             });
         }
@@ -41,10 +40,10 @@ public class BodyDAO extends DAO<Body>{
     }
 
     public int delete(int id) {
-        return super.tx(session -> {
-            Query query = session.createQuery("delete Body where id = :id");
-            query.setParameter("id", id);
-            return query.executeUpdate();
+        Body body = this.read(id);
+        return super.action(hibernateTemplate -> {
+            hibernateTemplate.delete(body);
+            return 1;
         });
     }
 }

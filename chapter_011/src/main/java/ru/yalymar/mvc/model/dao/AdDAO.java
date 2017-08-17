@@ -10,31 +10,18 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-/**
- * @author slavalymar
- * @since 19.06.2017
- * @version 1
- */
 public class AdDAO extends DAO<Ad> implements Upload {
 
     public int create(Ad ad) {
-        return super.tx(session -> (int) session.save(ad));
+        return super.action(hibernateTemplate -> (int) hibernateTemplate.save(ad));
     }
 
     public Ad read(int id) {
-        Ad ad = super.tx(session -> {
-            Ad a = session.get(Ad.class, id);
-            return a;
-        });
-        return ad;
+        return super.action(hibernateTemplate -> hibernateTemplate.get(Ad.class, id));
     }
 
     public List<Ad> readAll() {
-        List<Ad> ads = super.tx(session -> {
-            List<Ad> as = session.createQuery("from Ad").list();
-            return as;
-        });
-        return ads;
+        return super.action(hibernateTemplate -> hibernateTemplate.loadAll(Ad.class));
     }
 
     public int update(int id, Ad newAd) {
@@ -53,8 +40,8 @@ public class AdDAO extends DAO<Ad> implements Upload {
             i++;
         }
         if(i > 0){
-            super.tx(session -> {
-                session.update(ad);
+            super.action(hibernateTemplate -> {
+                hibernateTemplate.update(ad);
                 return -1;
             });
         }
@@ -63,8 +50,8 @@ public class AdDAO extends DAO<Ad> implements Upload {
 
     public int delete(int id) {
         Ad ad = this.read(id);
-        return super.tx(session -> {
-            session.delete(ad);
+        return super.action(hibernateTemplate -> {
+            hibernateTemplate.delete(ad);
             return 1;
         });
     }

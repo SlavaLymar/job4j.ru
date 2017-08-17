@@ -1,35 +1,25 @@
 package ru.yalymar.mvc.model.dao;
 
-import org.hibernate.query.Query;
 import ru.yalymar.mvc.model.models.*;
 
 import java.util.List;
 
-/**
- * @author slavalymar
- * @since 19.06.2017
- * @version 1
- */
 public class CarDAO extends DAO<Car>{
 
     public int create(Car car) {
-        return super.tx(session -> (int) session.save(car));
+        return super.action(hibernateTemplate -> (int) hibernateTemplate.save(car));
     }
 
     public Car read(int id) {
-        Car car = super.tx(session -> {
-            Car c = session.get(Car.class, id);
+        Car car = super.action(hibernateTemplate -> {
+            Car c = hibernateTemplate.get(Car.class, id);
             return c;
         });
         return car;
     }
 
     public List<Car> readAll() {
-        List<Car> cs = super.tx(session -> {
-            List<Car> cars = session.createQuery("from Car").list();
-            return cars;
-        });
-        return cs;
+        return super.action(hibernateTemplate -> hibernateTemplate.loadAll(Car.class));
     }
 
     public int update(int id, Car newCar) {
@@ -52,8 +42,8 @@ public class CarDAO extends DAO<Car>{
             i++;
         }
         if(i > 0) {
-            super.tx(session -> {
-                session.update(car);
+            super.action(hibernateTemplate -> {
+                hibernateTemplate.update(car);
                 return -1;
             });
         }
@@ -61,10 +51,10 @@ public class CarDAO extends DAO<Car>{
     }
 
     public int delete(int id) {
-        return super.tx(session -> {
-            Query query = session.createQuery("delete Car where id = :id");
-            query.setParameter("id", id);
-            return query.executeUpdate();
+        Car car = this.read(id);
+        return super.action(hibernateTemplate -> {
+            hibernateTemplate.delete(car);
+            return 1;
         });
     }
 

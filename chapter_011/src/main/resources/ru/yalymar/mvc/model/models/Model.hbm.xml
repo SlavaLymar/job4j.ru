@@ -6,6 +6,6 @@
         <!-- model -->
         <property name="model" column="model"/>
         <!-- manuf -->
-        <many-to-one name="manuf" column="manuf_id" class="ru.yalymar.mvc.model.models.Manufactor"/>
+        <many-to-one name="manuf" column="manuf_id" class="ru.yalymar.mvc.model.models.Manufactor" lazy="false"/>
     </class>
 </hibernate-mapping>

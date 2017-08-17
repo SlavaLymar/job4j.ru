@@ -8,9 +8,9 @@
         <!-- create_ads -->
         <property name="create" column="create_ads"/>
         <!-- car_id -->
-        <many-to-one name="car" column="car_id" class="ru.yalymar.mvc.model.models.Car" cascade="all"/>
+        <many-to-one name="car" column="car_id" class="ru.yalymar.mvc.model.models.Car" cascade="all" lazy="false"/>
         <!-- user_id -->
-        <many-to-one name="user" column="user_id" class="ru.yalymar.mvc.model.models.User"/>
+        <many-to-one name="user" column="user_id" class="ru.yalymar.mvc.model.models.User" lazy="false"/>
         <!-- done -->
         <property name="done" column="done"/>
         <!-- images -->

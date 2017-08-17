@@ -1,64 +1,41 @@
 package ru.yalymar.mvc.model.dao;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * @author slavalymar
- * @since 19.06.2017
- * @version 1
- */
 public class DAOFactory {
 
     public static final Logger logger = Logger.getLogger(DAOFactory.class);
 
-    private final UserDAO userDAO = new UserDAO();
-    private final RoleDAO roleDAO = new RoleDAO();
-    private final CarDAO carDAO = new CarDAO();
-    private final ManufactorDAO manufactorDAO = new ManufactorDAO();
-    private final ModelDAO modelDAO = new ModelDAO();
-    private final AdDAO adDAO = new AdDAO();
-    private final BodyDAO bodyDAO = new BodyDAO();
-    private final ColorDAO colorDAO = new ColorDAO();
-    private final TransmissionsDAO transmissionsDAO = new TransmissionsDAO();
-    private final ImageDAO imageDAO = new ImageDAO();
+    @Autowired
+    private UserDAO userDAO;
 
-    public UserDAO getUserDAO() {
-        return this.userDAO;
-    }
+    @Autowired
+    private RoleDAO roleDAO;
 
-    public RoleDAO getRoleDAO() {
-        return this.roleDAO;
-    }
+    @Autowired
+    private CarDAO carDAO;
 
-    public CarDAO getCarDAO() {
-        return this.carDAO;
-    }
+    @Autowired
+    private ManufactorDAO manufactorDAO;
 
-    public ManufactorDAO getManufactorDAO() {
-        return this.manufactorDAO;
-    }
+    @Autowired
+    private ModelDAO modelDAO;
 
-    public ModelDAO getModelDAO() {
-        return this.modelDAO;
-    }
+    @Autowired
+    private AdDAO adDAO;
 
-    public AdDAO getAdDAO() {
-        return this.adDAO;
-    }
+    @Autowired
+    private BodyDAO bodyDAO;
 
-    public BodyDAO getBodyDAO() {
-        return this.bodyDAO;
-    }
+    @Autowired
+    private ColorDAO colorDAO;
 
-    public ColorDAO getColorDAO() {
-        return this.colorDAO;
-    }
+    @Autowired
+    private TransmissionsDAO transmissionsDAO;
 
-    public TransmissionsDAO getTransmissionsDAO() {
-        return this.transmissionsDAO;
-    }
+    @Autowired
+    private ImageDAO imageDAO;
 
-    public ImageDAO getImageDAO() {
-        return this.imageDAO;
-    }
+
 }

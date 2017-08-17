@@ -1,27 +1,21 @@
 package ru.yalymar.mvc.model.dao;
 
-import org.hibernate.query.Query;
 import ru.yalymar.mvc.model.models.Transmission;
 
 import java.util.List;
 
-/**
- * @author slavalymar
- * @since 19.06.2017
- * @version 1
- */
 public class TransmissionsDAO extends DAO<Transmission>{
 
     public int create(Transmission transmission) {
-        return super.tx(session -> (int) session.save(transmission));
+        return super.action(hibernateTemplate -> (int) hibernateTemplate.save(transmission));
     }
 
     public Transmission read(int id) {
-        return super.tx(session -> session.get(Transmission.class, id));
+        return super.action(hibernateTemplate -> hibernateTemplate.get(Transmission.class, id));
     }
 
     public List<Transmission> readAll() {
-        return super.tx(session -> session.createQuery("from Transmission").list());
+        return super.action(hibernateTemplate -> hibernateTemplate.loadAll(Transmission.class));
     }
 
     public int update(int id, Transmission newTransmisson) {
@@ -32,8 +26,8 @@ public class TransmissionsDAO extends DAO<Transmission>{
             i++;
         }
         if(i > 0){
-            super.tx(session -> {
-                session.update(transmission);
+            super.action(hibernateTemplate -> {
+                hibernateTemplate.update(transmission);
                 return -1;
             });
         }
@@ -41,10 +35,10 @@ public class TransmissionsDAO extends DAO<Transmission>{
     }
 
     public int delete(int id) {
-        return super.tx(session -> {
-            Query query = session.createQuery("delete Transmission where id = :id");
-            query.setParameter("id", id);
-            return query.executeUpdate();
+        Transmission transmission = this.read(id);
+        return super.action(hibernateTemplate -> {
+            hibernateTemplate.delete(transmission);
+            return 1;
         });
     }
 }

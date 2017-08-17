@@ -1,27 +1,21 @@
 package ru.yalymar.mvc.model.dao;
 
-import org.hibernate.query.Query;
 import ru.yalymar.mvc.model.models.Color;
 
 import java.util.List;
 
-/**
- * @author slavalymar
- * @since 19.06.2017
- * @version 1
- */
 public class ColorDAO extends DAO<Color>{
 
     public int create(Color color) {
-        return super.tx(session -> (int) session.save(color));
+        return super.action(hibernateTemplate -> (int) hibernateTemplate.save(color));
     }
 
     public Color read(int id) {
-        return super.tx(session -> session.get(Color.class, id));
+        return super.action(hibernateTemplate -> hibernateTemplate.get(Color.class, id));
     }
 
     public List<Color> readAll() {
-        return super.tx(session -> session.createQuery("from Color").list());
+        return super.action(hibernateTemplate -> hibernateTemplate.loadAll(Color.class));
     }
 
     public int update(int id, Color newColor) {
@@ -32,8 +26,8 @@ public class ColorDAO extends DAO<Color>{
             i++;
         }
         if(i > 0){
-            super.tx(session -> {
-                session.update(color);
+            super.action(hibernateTemplate -> {
+                hibernateTemplate.update(color);
                 return -1;
             });
         }
@@ -41,10 +35,10 @@ public class ColorDAO extends DAO<Color>{
     }
 
     public int delete(int id) {
-        return super.tx(session -> {
-            Query query = session.createQuery("delete Color where id = :id");
-            query.setParameter("id", id);
-            return query.executeUpdate();
+        Color color = this.read(id);
+        return super.action(hibernateTemplate -> {
+            hibernateTemplate.delete(color);
+            return 1;
         });
     }
 }
