@@ -1,9 +1,11 @@
 package ru.yalymar.mvc.model.dao;
 
+import org.springframework.stereotype.Service;
 import ru.yalymar.mvc.model.models.Color;
 
 import java.util.List;
 
+@Service
 public class ColorDAO extends DAO<Color>{
 
     public int create(Color color) {

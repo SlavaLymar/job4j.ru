@@ -1,9 +1,11 @@
 package ru.yalymar.mvc.model.dao;
 
+import org.springframework.stereotype.Service;
 import ru.yalymar.mvc.model.models.Image;
 
 import java.util.List;
 
+@Service
 public class ImageDAO extends DAO<Image> {
 
     public int create(Image image) {

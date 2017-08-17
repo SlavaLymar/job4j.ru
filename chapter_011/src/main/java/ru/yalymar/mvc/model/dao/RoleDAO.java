@@ -1,8 +1,10 @@
 package ru.yalymar.mvc.model.dao;
 
+import org.springframework.stereotype.Service;
 import ru.yalymar.mvc.model.models.Role;
 import java.util.List;
 
+@Service
 public class RoleDAO extends DAO<Role> {
 
     public int create(Role role) {

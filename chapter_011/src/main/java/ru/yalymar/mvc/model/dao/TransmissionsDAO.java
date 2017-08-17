@@ -1,9 +1,11 @@
 package ru.yalymar.mvc.model.dao;
 
+import org.springframework.stereotype.Service;
 import ru.yalymar.mvc.model.models.Transmission;
 
 import java.util.List;
 
+@Service
 public class TransmissionsDAO extends DAO<Transmission>{
 
     public int create(Transmission transmission) {

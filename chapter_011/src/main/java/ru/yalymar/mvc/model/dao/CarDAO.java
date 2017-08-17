@@ -1,9 +1,11 @@
 package ru.yalymar.mvc.model.dao;
 
+import org.springframework.stereotype.Service;
 import ru.yalymar.mvc.model.models.*;
 
 import java.util.List;
 
+@Service
 public class CarDAO extends DAO<Car>{
 
     public int create(Car car) {

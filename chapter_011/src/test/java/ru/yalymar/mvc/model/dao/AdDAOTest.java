@@ -1,6 +1,10 @@
 package ru.yalymar.mvc.model.dao;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ru.yalymar.mvc.model.models.*;
 
 import java.sql.Timestamp;
@@ -14,9 +18,14 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "classpath:spring-mvc-context-test.xml")
 public class AdDAOTest {
 
-    public Ad createAd(DAOFactory daoFactory, String manuf){
+    @Autowired
+    private DAOFactory daoFactory;
+
+    public Ad createAd(String manuf){
 
         //create car
         Car car = new Car();
@@ -94,39 +103,34 @@ public class AdDAOTest {
 
     @Test
     public void whenReadAdShouldGetIt(){
-        DAOFactory daoFactory = new DAOFactory();
-        Ad ad = this.createAd(daoFactory, "toyota");
+        Ad ad = this.createAd("toyota");
         Ad ad1 = daoFactory.getAdDAO().read(ad.getId());
         assertNotNull(ad1);
     }
 
     @Test
     public void whenReadAllAdsShouldGetThem(){
-        DAOFactory daoFactory = new DAOFactory();
-        this.createAd(daoFactory, "toyota");
+        this.createAd("toyota");
         List<Ad> ads = daoFactory.getAdDAO().readAll();
         assertTrue(ads.size() > 0);
     }
 
     @Test
     public void whenCreateAdsShouldGetId(){
-        DAOFactory daoFactory = new DAOFactory();
-        Ad ad = this.createAd(daoFactory, "toyota");
+        Ad ad = this.createAd("toyota");
         assertTrue(ad.getId() > 0);
     }
 
     @Test
     public void whenDeleteAdsShouldGetInt(){
-        DAOFactory daoFactory = new DAOFactory();
-        Ad ad = this.createAd(daoFactory, "toyota");
+        Ad ad = this.createAd("toyota");
         int i = daoFactory.getAdDAO().delete(ad.getId());
         assertThat(i, is(1));
     }
 
     @Test
     public void whenUpdateAdsShouldGetInt(){
-        DAOFactory daoFactory = new DAOFactory();
-        Ad ad = this.createAd(daoFactory, "toyota");
+        Ad ad = this.createAd("toyota");
 
         //update
         Ad newAd = new Ad();
@@ -137,8 +141,7 @@ public class AdDAOTest {
 
     @Test
     public void whenGetAdByManufShouldGetIt(){
-        DAOFactory daoFactory = new DAOFactory();
-        this.createAd(daoFactory, "toyota");
+        this.createAd("toyota");
 
         Map<String, String> m = new HashMap<>();
         m.put("manuf", "toyota");

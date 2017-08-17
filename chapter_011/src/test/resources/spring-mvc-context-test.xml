@@ -10,7 +10,7 @@
                            http://www.springframework.org/schema/tx
                            http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <import resource="spring-mvc.xml"/>
+    <import resource="spring-mvc-test.xml"/>
 
     <tx:annotation-driven />
     <context:component-scan base-package="ru.yalymar.mvc"/>

@@ -1,9 +1,11 @@
 package ru.yalymar.mvc.model.dao;
 
+import org.springframework.stereotype.Service;
 import ru.yalymar.mvc.model.models.Model;
 
 import java.util.List;
 
+@Service
 public class ModelDAO extends DAO<Model>{
 
     public int create(Model model) {

@@ -2,10 +2,12 @@ package ru.yalymar.mvc.model.dao;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Service;
 import ru.yalymar.mvc.model.models.User;
 
 import java.util.List;
 
+@Service
 public class UserDAO extends DAO<User>{
 
     public int create(User user) {

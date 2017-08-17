@@ -1,5 +1,6 @@
 package ru.yalymar.mvc.model.dao;
 
+import org.springframework.stereotype.Service;
 import ru.yalymar.mvc.model.dao.fileuploader.Upload;
 import ru.yalymar.mvc.model.models.*;
 
@@ -10,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
+@Service
 public class AdDAO extends DAO<Ad> implements Upload {
 
     public int create(Ad ad) {

@@ -1,14 +1,11 @@
 package ru.yalymar.mvc.model.dao;
 
+import org.springframework.stereotype.Service;
 import ru.yalymar.mvc.model.models.Body;
 
 import java.util.List;
 
-/**
- * @author slavalymar
- * @since 19.06.2017
- * @version 1
- */
+@Service
 public class BodyDAO extends DAO<Body>{
 
     public int create(Body body) {

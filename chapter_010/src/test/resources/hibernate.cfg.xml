@@ -10,15 +10,15 @@
         <property name="hbm2ddl.auto">create</property>
 
         <!-- task 2 -->
-        <mapping resource="ru/ru.yalymar/mapping/model/User.hbm.xml"/>
-        <mapping resource="ru/ru.yalymar/mapping/model/Car.hbm.xml"/>
-        <mapping resource="ru/ru.yalymar/mapping/model/Model.hbm.xml"/>
-        <mapping resource="ru/ru.yalymar/mapping/model/Image.hbm.xml"/>
-        <mapping resource="ru/ru.yalymar/mapping/model/Role.hbm.xml"/>
-        <mapping resource="ru/ru.yalymar/mapping/model/Manufactor.hbm.xml"/>
-        <mapping resource="ru/ru.yalymar/mapping/model/Transmission.hbm.xml"/>
-        <mapping resource="ru/ru.yalymar/mapping/model/Body.hbm.xml"/>
-        <mapping resource="ru/ru.yalymar/mapping/model/Color.hbm.xml"/>
-        <mapping resource="ru/ru.yalymar/mapping/model/Ad.hbm.xml"/>
+        <mapping resource="ru/yalymar/mapping/model/User.hbm.xml"/>
+        <mapping resource="ru/yalymar/mapping/model/Car.hbm.xml"/>
+        <mapping resource="ru/yalymar/mapping/model/Model.hbm.xml"/>
+        <mapping resource="ru/yalymar/mapping/model/Image.hbm.xml"/>
+        <mapping resource="ru/yalymar/mapping/model/Role.hbm.xml"/>
+        <mapping resource="ru/yalymar/mapping/model/Manufactor.hbm.xml"/>
+        <mapping resource="ru/yalymar/mapping/model/Transmission.hbm.xml"/>
+        <mapping resource="ru/yalymar/mapping/model/Body.hbm.xml"/>
+        <mapping resource="ru/yalymar/mapping/model/Color.hbm.xml"/>
+        <mapping resource="ru/yalymar/mapping/model/Ad.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>
