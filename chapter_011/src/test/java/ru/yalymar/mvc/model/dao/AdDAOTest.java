@@ -102,7 +102,7 @@ public class AdDAOTest {
     }
 
     @Test
-    public void whenReadAdShouldGetIt(){
+    public void whenReadAdShouldGetIt(){ // TODO hsqldb isn`t create db
         Ad ad = this.createAd("toyota");
         Ad ad1 = daoFactory.getAdDAO().read(ad.getId());
         assertNotNull(ad1);
