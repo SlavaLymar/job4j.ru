@@ -1,0 +1,8 @@
+<hibernate-mapping>
+    <class name="ru.yalymar.mvc.model.models.Color" table="colours">
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+        <property name="color" column="color"/>
+    </class>
+</hibernate-mapping>

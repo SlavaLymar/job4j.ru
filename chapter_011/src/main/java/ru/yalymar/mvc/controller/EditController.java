@@ -1,5 +1,6 @@
 package ru.yalymar.mvc.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +26,12 @@ import java.util.Set;
         maxRequestSize = 1024 * 1024 * 2)
 public class EditController {
 
-    private final DAOFactory daoFactory = new DAOFactory();
+    private DAOFactory daoFactory;
+
+    @Autowired
+    public void setDaoFactory(DAOFactory daoFactory) {
+        this.daoFactory = daoFactory;
+    }
 
     @RequestMapping(value = "/editad", method = RequestMethod.GET)
     public ModelAndView getEditForm(@RequestParam String id,
@@ -88,7 +94,7 @@ public class EditController {
 
         this.daoFactory.getAdDAO().update(Integer.parseInt(id), newAd);
 
-        return "redirect:/ads";
+        return "redirect:ads.do";
     }
 
 }

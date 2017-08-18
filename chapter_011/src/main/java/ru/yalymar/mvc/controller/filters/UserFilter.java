@@ -10,8 +10,8 @@ import java.io.IOException;
 
 /**
  * @author slavalymar
- * @since 19.06.2017
  * @version 1
+ * @since 19.06.2017
  */
 @WebFilter(urlPatterns = "/*")
 public class UserFilter implements Filter {
@@ -23,7 +23,9 @@ public class UserFilter implements Filter {
 
     }
 
-    /** determine user or admin
+    /**
+     * determine user or admin
+     *
      * @param req
      * @param resp
      * @param chain
@@ -42,16 +44,16 @@ public class UserFilter implements Filter {
         String l = (String) session.getAttribute("slogin");
         String p = (String) session.getAttribute("spassword");
 
-            if (sLogin != null && sPassword != null) {
-                if (l == null && p == null) {
-                    session.setAttribute("slogin", sLogin);
-                    session.setAttribute("spassword", sPassword);
-                    session.setAttribute("role", this.daoFactory.getUserDAO().
-                            getByLoginPassword(sLogin, sPassword).getRole().getRole());
-                    chain.doFilter(req, resp);
-                    return;
-                }
+        if (sLogin != null && sPassword != null) {
+            if (l == null && p == null) {
+                session.setAttribute("slogin", sLogin);
+                session.setAttribute("spassword", sPassword);
+                session.setAttribute("role", this.daoFactory.getUserDAO().
+                        getByLoginPassword(sLogin, sPassword).getRole().getRole());
+                chain.doFilter(req, resp);
+                return;
             }
+        }
         if (sLogin != null && sPassword != null) {
             if (l != null && p != null) {
                 if (!sLogin.equals(l) && !sPassword.equals(p)) {

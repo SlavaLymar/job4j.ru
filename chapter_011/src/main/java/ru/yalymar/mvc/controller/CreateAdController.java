@@ -23,8 +23,12 @@ import java.util.Set;
                     maxRequestSize = 1024*1024*2)
 public class CreateAdController{
 
-    @Autowired
     private DAOFactory daoFactory;
+
+    @Autowired
+    public void setDaoFactory(DAOFactory daoFactory) {
+        this.daoFactory = daoFactory;
+    }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView getAddAdForm(ModelAndView mAV){
@@ -76,7 +80,7 @@ public class CreateAdController{
         ad.setImages(images);
         this.daoFactory.getAdDAO().create(ad);
 
-        return "redirect:/ads";
+        return "redirect:ads.do";
     }
 
 

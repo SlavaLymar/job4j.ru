@@ -4,18 +4,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ru.yalymar.mvc.model.dao.DAOFactory;
 import ru.yalymar.mvc.model.models.Ad;
 
 @Controller
-@RequestMapping(value = "/ad")
 public class AdСontroller {
 
-    @Autowired
     private DAOFactory daoFactory;
 
+    @Autowired
+    public void setDaoFactory(DAOFactory daoFactory) {
+        this.daoFactory = daoFactory;
+    }
+
+    @RequestMapping(value = "/ad", method = RequestMethod.GET)
     public ModelAndView getAd(@RequestParam String id,
                               @RequestParam String slogin,
                               @RequestParam String spassword,

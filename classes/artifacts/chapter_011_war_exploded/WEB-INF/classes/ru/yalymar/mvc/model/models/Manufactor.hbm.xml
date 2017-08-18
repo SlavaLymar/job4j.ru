@@ -1,0 +1,10 @@
+<hibernate-mapping>
+    <class name="ru.yalymar.mvc.model.models.Manufactor" table="manufacturers">
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+        <property name="manuf" column="manuf"/>
+
+    </class>
+
+</hibernate-mapping>
