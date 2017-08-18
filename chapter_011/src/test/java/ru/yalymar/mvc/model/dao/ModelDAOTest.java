@@ -1,6 +1,12 @@
 package ru.yalymar.mvc.model.dao;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ru.yalymar.mvc.model.models.Manufactor;
 import ru.yalymar.mvc.model.models.Model;
 
@@ -9,9 +15,14 @@ import java.util.List;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "classpath:spring-mvc-context-test.xml")
 public class ModelDAOTest {
 
-    public Manufactor getManuf(DAOFactory daoFactory){
+    @Autowired
+    private DAOFactory daoFactory;
+
+    public Manufactor getManuf(){
         //create manufactor
         Manufactor manuf = new Manufactor();
         manuf.setManuf("toyota");
@@ -21,8 +32,7 @@ public class ModelDAOTest {
 
     @Test
     public void whenCreateModelShouldGetId(){
-        DAOFactory daoFactory = new DAOFactory();
-        Manufactor manuf = this.getManuf(daoFactory);
+        Manufactor manuf = this.getManuf();
 
         //create model
         Model model = new Model();
@@ -36,8 +46,7 @@ public class ModelDAOTest {
 
     @Test
     public void whenReadModelShouldGetIt(){
-        DAOFactory daoFactory = new DAOFactory();
-        Manufactor manuf = this.getManuf(daoFactory);
+        Manufactor manuf = this.getManuf();
 
         //create model
         Model model = new Model();
@@ -45,14 +54,13 @@ public class ModelDAOTest {
         model.setManuf(manuf);
         int id = daoFactory.getModelDAO().create(model);
 
-        Model result = daoFactory.getModelDAO().read(1);
+        Model result = daoFactory.getModelDAO().read(id);
         assertNotNull(result);
     }
 
     @Test
     public void whenReadAllModelsShouldGetThem(){
-        DAOFactory daoFactory = new DAOFactory();
-        Manufactor manuf = this.getManuf(daoFactory);
+        Manufactor manuf = this.getManuf();
 
         //create model
         Model model = new Model();
@@ -66,8 +74,7 @@ public class ModelDAOTest {
 
     @Test
     public void whenDeleteModelShouldGetInt(){
-        DAOFactory daoFactory = new DAOFactory();
-        Manufactor manuf = this.getManuf(daoFactory);
+        Manufactor manuf = this.getManuf();
 
         //create model
         Model model = new Model();
@@ -81,8 +88,7 @@ public class ModelDAOTest {
 
     @Test
     public void whenUpdateModelShouldGetInt(){
-        DAOFactory daoFactory = new DAOFactory();
-        Manufactor manuf = this.getManuf(daoFactory);
+        Manufactor manuf = this.getManuf();
 
         //create model
         Model model = new Model();

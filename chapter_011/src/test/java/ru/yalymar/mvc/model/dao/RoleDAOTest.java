@@ -1,6 +1,10 @@
 package ru.yalymar.mvc.model.dao;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ru.yalymar.mvc.model.models.Role;
 
 import java.util.List;
@@ -8,11 +12,15 @@ import java.util.List;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "classpath:spring-mvc-context-test.xml")
 public class RoleDAOTest {
+
+    @Autowired
+    private DAOFactory mf;
 
     @Test
     public void whenCreateRoleShouldGetId(){
-        DAOFactory mf = new DAOFactory();
         Role role = new Role();
         role.setRole("test1");
         int id = mf.getRoleDAO().create(role);
@@ -23,20 +31,18 @@ public class RoleDAOTest {
 
     @Test
     public void whenReadRoleShouldGetNotNull(){
-        DAOFactory mf = new DAOFactory();
 
         //add
         Role role = new Role();
         role.setRole("test1");
         int id = mf.getRoleDAO().create(role);
 
-        Role result = mf.getRoleDAO().read(1);
+        Role result = mf.getRoleDAO().read(id);
         assertNotNull(result);
     }
 
     @Test
     public void whenReadAllRolesShouldGetThem(){
-        DAOFactory mf = new DAOFactory();
 
         //add
         Role role = new Role();
@@ -49,7 +55,6 @@ public class RoleDAOTest {
 
     @Test
     public void whenDeleteRoleShouldGetInt(){
-        DAOFactory mf = new DAOFactory();
 
         //add
         Role role = new Role();
@@ -62,7 +67,6 @@ public class RoleDAOTest {
 
     @Test
     public void whenUpdateRoleShouldGetInt(){
-        DAOFactory mf = new DAOFactory();
 
         Role role = new Role();
         role.setRole("test1");

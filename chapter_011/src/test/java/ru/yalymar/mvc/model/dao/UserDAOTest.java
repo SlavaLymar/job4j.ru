@@ -1,6 +1,10 @@
 package ru.yalymar.mvc.model.dao;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ru.yalymar.mvc.model.models.Role;
 import ru.yalymar.mvc.model.models.User;
 
@@ -12,9 +16,14 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "classpath:spring-mvc-context-test.xml")
 public class UserDAOTest {
 
-    public User createUser(DAOFactory daoFactory){
+    @Autowired
+    private DAOFactory daoFactory;
+
+    public User createUser(){
 
         //create role
         Role role = new Role();
@@ -34,39 +43,34 @@ public class UserDAOTest {
 
     @Test
     public void whenCreateUserShouldGetId(){
-        DAOFactory daoFactory = new DAOFactory();
-        User user = this.createUser(daoFactory);
+        User user = this.createUser();
         assertTrue(user.getId() > 0);
     }
 
     @Test
     public void whenReadUserShouldGetNotNull(){
-        DAOFactory daoFactory = new DAOFactory();
-        User user = this.createUser(daoFactory);
+        User user = this.createUser();
         User result = daoFactory.getUserDAO().read(user.getId());
         assertNotNull(result);
     }
 
     @Test
     public void whenReadAllUsersShouldGetThem(){
-        DAOFactory daoFactory = new DAOFactory();
-        this.createUser(daoFactory);
+        this.createUser();
         List<User> users = daoFactory.getUserDAO().readAll();
         assertTrue(users.size() > 0);
     }
 
     @Test
     public void whenDeleteUserShouldGetInt(){
-        DAOFactory daoFactory = new DAOFactory();
-        User user = this.createUser(daoFactory);
+        User user = this.createUser();
         int i = daoFactory.getUserDAO().delete(user.getId());
         assertThat(i, is(1));
     }
 
     @Test
     public void whenUpdateUserShouldGetNewUser(){
-        DAOFactory daoFactory = new DAOFactory();
-        User user = this.createUser(daoFactory);
+        User user = this.createUser();
 
         //daoUpdate
         User newUser = new User();
@@ -77,8 +81,7 @@ public class UserDAOTest {
 
     @Test
     public void whenGetUserByLoginPasswordShoildGetIt(){
-        DAOFactory daoFactory = new DAOFactory();
-        this.createUser(daoFactory);
+        User user = this.createUser();
         User userLP = daoFactory.getUserDAO().getByLoginPassword("test1", "test1");
         assertNotNull(userLP);
     }

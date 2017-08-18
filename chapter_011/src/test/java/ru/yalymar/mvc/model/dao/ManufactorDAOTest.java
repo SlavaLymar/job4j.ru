@@ -1,6 +1,10 @@
 package ru.yalymar.mvc.model.dao;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ru.yalymar.mvc.model.models.Manufactor;
 
 import java.util.List;
@@ -8,11 +12,15 @@ import java.util.List;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "classpath:spring-mvc-context-test.xml")
 public class ManufactorDAOTest {
+
+    @Autowired
+    private DAOFactory mf;
 
     @Test
     public void whenCreateManufShouldGetId(){
-        DAOFactory mf = new DAOFactory();
         //add
         Manufactor manuf = new Manufactor();
         manuf.setManuf("toyota");
@@ -24,7 +32,6 @@ public class ManufactorDAOTest {
 
     @Test
     public void whenDeleteManufShouldGetInt(){
-        DAOFactory mf = new DAOFactory();
 
         //add
         Manufactor manuf = new Manufactor();
@@ -37,7 +44,6 @@ public class ManufactorDAOTest {
 
     @Test
     public void whenUpdateManufShouldGetInt(){
-        DAOFactory mf = new DAOFactory();
         Manufactor manuf = new Manufactor();
         manuf.setManuf("toyota");
         //add
@@ -55,7 +61,6 @@ public class ManufactorDAOTest {
 
     @Test
     public void whenReadManufShouldGetIt(){
-        DAOFactory mf = new DAOFactory();
 
         //add
         Manufactor manuf = new Manufactor();
@@ -68,7 +73,6 @@ public class ManufactorDAOTest {
 
     @Test
     public void whenReadAllManufShouldGetThem(){
-        DAOFactory mf = new DAOFactory();
 
         //add
         Manufactor manuf = new Manufactor();

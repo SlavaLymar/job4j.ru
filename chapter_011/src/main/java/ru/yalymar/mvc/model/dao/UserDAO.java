@@ -83,7 +83,7 @@ public class UserDAO extends DAO<User>{
             query.setParameter("l", login);
             query.setParameter("p", password);
             List<User> users = query.list();
-            return users.size() == 1 ? users.get(0) : null;
+            return users.size() >= 1 ? users.get(0) : null;
         });
         return user;
     }

@@ -29,10 +29,10 @@ public class AdDAOTest {
 
         //create car
         Car car = new Car();
-        car.setModel(this.getModel(daoFactory, manuf));
-        car.setTransmission(this.getTransmission(daoFactory));
-        car.setBody(this.getBody(daoFactory));
-        car.setColor(this.getColor(daoFactory));
+        car.setModel(this.getModel(manuf));
+        car.setTransmission(this.getTransmission());
+        car.setBody(this.getBody());
+        car.setColor(this.getColor());
         daoFactory.getCarDAO().create(car);
 
         //create user
@@ -65,36 +65,36 @@ public class AdDAOTest {
         return ad;
     }
 
-    private Color getColor(DAOFactory daoFactory) {
+    private Color getColor() {
         Color color = new Color();
         color.setColor("red");
         int id =  daoFactory.getColorDAO().create(color);
         return color;
     }
 
-    private Body getBody(DAOFactory daoFactory) {
+    private Body getBody() {
         Body body = new Body();
         body.setBody("sedan");
         int id = daoFactory.getBodyDAO().create(body);
         return body;
     }
 
-    private Transmission getTransmission(DAOFactory daoFactory) {
+    private Transmission getTransmission() {
         Transmission transmission = new Transmission();
         transmission.setName("manual");
         int id = daoFactory.getTransmissionsDAO().create(transmission);
         return transmission;
     }
 
-    private Model getModel(DAOFactory daoFactory, String manuf) {
+    private Model getModel(String manuf) {
         Model model = new Model();
         model.setModel("test1");
-        model.setManuf(this.getManuf(daoFactory, manuf));
+        model.setManuf(this.getManuf(manuf));
         int id = daoFactory.getModelDAO().create(model);
         return model;
     }
 
-    private Manufactor getManuf(DAOFactory daoFactory, String m) {
+    private Manufactor getManuf(String m) {
         Manufactor manuf = new Manufactor();
         manuf.setManuf(m);
         int id = daoFactory.getManufactorDAO().create(manuf);
@@ -102,7 +102,7 @@ public class AdDAOTest {
     }
 
     @Test
-    public void whenReadAdShouldGetIt(){ // TODO hsqldb isn`t create db
+    public void whenReadAdShouldGetIt(){
         Ad ad = this.createAd("toyota");
         Ad ad1 = daoFactory.getAdDAO().read(ad.getId());
         assertNotNull(ad1);
