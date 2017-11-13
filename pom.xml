@@ -25,7 +25,6 @@
         <module>chapter_009</module>
         <module>chapter_010</module>
         <module>chapter_011</module>
-	    <module>examples</module>
     </modules>
 
     <build>
@@ -91,6 +90,12 @@
     </build>
 
     <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.18</version>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-all</artifactId>

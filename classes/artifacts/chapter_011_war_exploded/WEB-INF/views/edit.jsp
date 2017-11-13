@@ -23,7 +23,7 @@
     </style>
     <script type="text/javascript">
         function cancel() {
-            document.location.href = "${pageContext.servletContext.contextPath}/ads";
+            document.location.href = "${pageContext.servletContext.contextPath}/ads.do";
             return false;
         }
 
@@ -34,7 +34,7 @@
                     id: id
                 },
                 complete: function () {
-                    document.location.href = "${pageContext.servletContext.contextPath}/ads";
+                    document.location.href = "${pageContext.servletContext.contextPath}/ads.do";
                 }
             });
             return false;
@@ -100,7 +100,7 @@
 
 <h1>EDIT</h1>
 <form enctype="multipart/form-data"
-      action='${pageContext.servletContext.contextPath}/editad' method='post'>
+      action='${pageContext.servletContext.contextPath}/editad.do' method='post'>
     Title: <input type="text" name="title" value="${ad.tittle}"/><br>
 
     Manufactor:
@@ -179,7 +179,7 @@
             </tr>
         </c:forEach>
     </table>
-    File to upload: <input type="tmpSrc" name="upfiles" multiple="multiple"><br/>
+    File to upload: <input type="file" name="upfiles" multiple="multiple"><br/>
     <br/>
     <input type='submit' value='edit'>
     <input type="hidden" name="id" value="${ad.id}">

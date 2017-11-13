@@ -28,14 +28,14 @@
                     id: id
                 },
                 complete: function () {
-                    document.location.href = "${pageContext.servletContext.contextPath}/ads";
+                    document.location.href = "${pageContext.servletContext.contextPath}/ads.do";
                 }
             });
             return false;
         }
 
         function cancel() {
-            document.location.href = "${pageContext.servletContext.contextPath}/ads";
+            document.location.href = "${pageContext.servletContext.contextPath}/ads.do";
             return false;
         }
     </script>
@@ -60,7 +60,7 @@
 
     <table class="privatetable">
         <TD>
-            <form action='${pageContext.servletContext.contextPath}/editad' method='get'>
+            <form action='${pageContext.servletContext.contextPath}/editad.do' method='get'>
                 <input type='submit' value='edit'>
                 <input type="hidden" name="id" value="${ad.id}">
             </form>

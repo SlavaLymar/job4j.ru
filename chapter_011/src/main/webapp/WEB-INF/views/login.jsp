@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -48,7 +49,7 @@
         <c:out value="${error}"></c:out>
     </div>
 </c:if>
-<form id="ln" action='${pageContext.servletContext.contextPath}/ads' method='get' onsubmit="return validate()">
+<form id="ln" action='${pageContext.servletContext.contextPath}/ads.do' method='get' onsubmit="return validate()">
 
     Login: <input type='text' name='slogin' id="login"/><br>
     Password: <input type='password' name='spassword' id="password"/><br>

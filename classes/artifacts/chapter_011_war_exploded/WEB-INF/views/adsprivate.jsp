@@ -20,7 +20,7 @@
 
     <script type="text/javascript">
         function inAd(id) {
-            document.location.href = "${pageContext.servletContext.contextPath}/ad?id=" + id;
+            document.location.href = "${pageContext.servletContext.contextPath}/ad.do?id=" + id;
             return true;
         }
 
@@ -57,7 +57,7 @@
                 var selectField = document.getElementById("fmodel");
                 selectField.length = 0;
                 var el = document.createElement("option");
-                el.textContent = "Choose Manufactor";
+                el.textContent = "Choose manufactor";
                 el.value = "";
                 el.selected = true;
                 selectField.appendChild(el);
@@ -106,32 +106,6 @@
                 })
             });
         });
-
-//        $(document).ready(function () {
-//            $('#fmanufac').on('change', function () {
-//                var chosenManuf = $('#fmanufac').val();
-//                if (chosenManuf == 'Choose manufactor') {
-                    <%--<c:forEach items="${ads}" var="ad">--%>
-                        <%--$('#mainrow${ad.id}').show('fast');--%>
-                    <%--</c:forEach>--%>
-//                    return;
-//                }
-                <%--<c:forEach items="${ads}" var="ad">--%>
-                    <%--<c:forEach items="${desc}" var="d">--%>
-                        <%--<c:if test="${d.key == ad.id}">--%>
-                            <%--if('${d.value.get(0)}' != chosenManuf){--%>
-                                <%--$('#mainrow${ad.id}').hide();--%>
-//                            }
-//                            else {
-                                <%--$('#mainrow${ad.id}').show('fast');--%>
-//                            }
-                        <%--</c:if>--%>
-                    <%--</c:forEach>--%>
-                <%--</c:forEach>--%>
-//            });
-//        });
-
-
     </script>
 
 </head>
@@ -224,14 +198,14 @@
 
 <table border="1">
     <TD>
-        <form action='${pageContext.servletContext.contextPath}/add' method='get'>
+        <form action='${pageContext.servletContext.contextPath}/add.do' method='get'>
             <input type='submit' value='ADD'>
         </form>
     </TD>
 </table>
 <table border="1">
     <TD>
-        <form action='${pageContext.servletContext.contextPath}/exit' method='post'>
+        <form action='${pageContext.servletContext.contextPath}/exit.do' method='post'>
             <input type='submit' value='EXIT'>
         </form>
     </TD>

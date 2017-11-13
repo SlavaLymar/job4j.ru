@@ -1,5 +1,8 @@
 package ru.yalymar.mvc.controller.filters;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 import ru.yalymar.mvc.model.dao.DAOFactory;
 
 import javax.servlet.*;
@@ -16,11 +19,13 @@ import java.io.IOException;
 @WebFilter(urlPatterns = "/*")
 public class UserFilter implements Filter {
 
-    private final DAOFactory daoFactory = new DAOFactory();
+    private DAOFactory daoFactory;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-
+        WebApplicationContext springContext =
+                WebApplicationContextUtils.getWebApplicationContext(filterConfig.getServletContext());
+        daoFactory = springContext.getBean(DAOFactory.class);
     }
 
     /**
