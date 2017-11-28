@@ -5,7 +5,9 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.junit.Test;
 import ru.yalymar.testtask0.engine.Analyzer;
+
 import java.util.Calendar;
+
 import static junit.framework.TestCase.assertTrue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -43,7 +45,9 @@ public class AnalyzerTest {
         assertThat(result2, is(calendar2));
 
         Calendar calendar3 = Calendar.getInstance();
-        calendar3.set(2017, 4, 29, 15, 57);
+        calendar3.set(2017, 3, 29, 15, 57);
+        result3.set(Calendar.SECOND, 0);
+        calendar3.set(Calendar.SECOND, 0);
         result3.set(Calendar.MILLISECOND, 0);
         calendar3.set(Calendar.MILLISECOND, 0);
         assertThat(result3, is(calendar3));

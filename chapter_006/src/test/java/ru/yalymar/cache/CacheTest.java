@@ -1,6 +1,7 @@
 package ru.yalymar.cache;
 
 import org.junit.Test;
+
 import java.io.File;
 
 import static org.junit.Assert.assertNotNull;
@@ -11,7 +12,7 @@ public class CacheTest {
     @Test
     public void whenAddIntoCacheShouldGetNull(){
         Cache cache = new Cache();
-        File file = new File("C:/Java/job4j.ru/chapter_006/src/main/java/ru/yalymar/cache/lala.txt");
+        File file = new File("D:/dstr/job4j.ru/chapter_006/src/main/resources/lala.txt");
         String result = cache.getObject(file);
         assertNull(result);
     }
@@ -19,7 +20,7 @@ public class CacheTest {
     @Test
     public void whenAddIntoCacheShouldGetString(){
         Cache cache = new Cache();
-        File file = new File("C:/Java/job4j.ru/chapter_006/src/main/java/ru/yalymar/cache/lala.txt");
+        File file = new File("D:/dstr/job4j.ru/chapter_006/src/main/resources/lala.txt");
         cache.getObject(file);
         String result = cache.getObject(file);
 

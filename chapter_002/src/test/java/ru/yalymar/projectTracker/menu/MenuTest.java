@@ -20,7 +20,7 @@ public class MenuTest {
         UserAction[] arr = new UserAction[6];
         menu.fillMenu();
         int[] result = menu.getIntArr();
-        int[] expected = new int[]{0, 1, 2, 3, 4, 5};
+        int[] expected = new int[]{0, 1, 2, 3, 4, 5, 6};
         assertThat(result, is(expected));
     }
 

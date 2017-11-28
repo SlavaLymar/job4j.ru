@@ -1,6 +1,7 @@
 package ru.yalymar.testtask0.db;
 
 import org.apache.log4j.Logger;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -118,7 +119,7 @@ public class DBManager {
      */
     public Connection connectDB(){
         try(FileInputStream in = new FileInputStream(
-                "C:/Java/job4j.ru/chapter_008/resources/a.properties")) {
+                "D:/dstr/job4j.ru/chapter_008/src/main/resources/a.properties")) {
 
             this.properties.load(in);
         }

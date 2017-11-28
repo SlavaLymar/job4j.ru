@@ -6,6 +6,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import ru.yalymar.testtask0.db.DBManager;
 import ru.yalymar.testtask0.models.Month;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -287,7 +288,7 @@ public class Analyzer {
 
             result.set(result.get(Calendar.YEAR), result.get(Calendar.MONTH),
                     result.get(Calendar.DAY_OF_MONTH), arr[0], arr[1]);
-            result.add(Calendar.DAY_OF_MONTH, -2);
+            result.add(Calendar.DAY_OF_MONTH, -1);
             return this.dateOfCreate = result;
         }
         else {
@@ -295,7 +296,12 @@ public class Analyzer {
             while (todayYesterdayMatcher.find()){
                 arr[i++] = Integer.parseInt(todayYesterdayMatcher.group(0));
             }
-            result.set(arr[1] + 2000, this.getMonth(text), arr[0], arr[2], arr[3]);
+            result = new Calendar.Builder()
+            .set(Calendar.YEAR, arr[1] + 2000)
+            .set(Calendar.MONTH, this.getMonth(text))
+            .set(Calendar.DAY_OF_MONTH, arr[0])
+            .set(Calendar.HOUR_OF_DAY, arr[2])
+            .set(Calendar.MINUTE, arr[3]).build();
             return this.dateOfCreate = result;
         }
     }

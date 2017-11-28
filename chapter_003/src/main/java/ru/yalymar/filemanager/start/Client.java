@@ -104,7 +104,7 @@ public class Client {
         String [] strings = s.split("/");
         String fileName = strings[strings.length-1];
         int fileLength = in.read();
-        File file = new File("C:/Java/junior/examples/resources", fileName);
+        File file = new File("D:/dstr/job4j.ru/chapter_003/src/main/resources", fileName);
         try(FileOutputStream fos = new FileOutputStream(file)){
 
             int count;

@@ -6,10 +6,12 @@ import ru.yalymar.filemanager.filemanager.FileManager;
 import ru.yalymar.filemanager.input.ClientInput;
 import ru.yalymar.filemanager.output.ClientOutput;
 import ru.yalymar.filemanager.start.Server;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.mock;
@@ -34,7 +36,7 @@ public class HelpTest {
         when(socket.getInputStream()).thenReturn(in);
         when(socket.getOutputStream()).thenReturn(out);
         this.help = new Help(new ClientInput(socket), new ClientOutput(socket),
-                fileManager, "C:/Java/junior/examples/");
+                fileManager, "D:/dstr/job4j.ru/chapter_003/src/main/");
         help.fillHelp();
     }
 
@@ -42,7 +44,7 @@ public class HelpTest {
     public void backDirTest() throws DontExistException, IOException{
         startHelpTest();
         help.select("cd..");
-        assertThat(out.toString(), is(String.format("%s%s", "C:/Java/junior/",
+        assertThat(out.toString(), is(String.format("%s%s", "D:/dstr/job4j.ru/chapter_003/src/",
                 System.getProperty("line.separator"))));
     }
 
@@ -50,7 +52,7 @@ public class HelpTest {
     public void changeDirTest() throws DontExistException, IOException{
         startHelpTest();
         help.select("cd resources");
-        assertThat(out.toString(), is(String.format("%s%s", "C:/Java/junior/examples/resources/",
+        assertThat(out.toString(), is(String.format("%s%s", "D:/dstr/job4j.ru/chapter_003/src/main/resources/",
                 System.getProperty("line.separator"))));
     }
 }

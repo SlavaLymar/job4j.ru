@@ -1,7 +1,9 @@
 package ru.yalymar.filemanager.start;
 
 import org.junit.Test;
+
 import java.net.Socket;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.mock;
@@ -14,7 +16,7 @@ public class ClientTest {
         Client client = new Client(socket);
         String result = client.getPath();
         assertThat(result, is
-                ("C:\\Java\\junior\\chapter_003\\src\\main\\java\\ru\\yalymar\\filemanager\\resources"));
+                ("D:\\dstr\\job4j.ru\\chapter_003\\src\\main\\resources"));
     }
 
 }

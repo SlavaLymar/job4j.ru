@@ -1,6 +1,7 @@
 package ru.yalymar.map.usermodel;
 
 import org.junit.Test;
+
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -89,7 +90,7 @@ public class MapTest {
         System.out.println(user2.hashCode());
         System.out.println(user1.equals(user2));
 
-        assertThat(map.size(), is(2));
+        assertThat(map.size(), is(1));
     }
 
     @Test

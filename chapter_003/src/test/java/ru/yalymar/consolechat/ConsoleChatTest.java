@@ -1,7 +1,11 @@
 package ru.yalymar.consolechat;
 
 import org.junit.Test;
-import java.io.*;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertNotNull;
@@ -10,7 +14,7 @@ public class ConsoleChatTest {
 
     @Test
     public void fillListOfAnswersTest() {
-        String pathAnswers = "C:\\Java\\junior\\chapter_003\\resources\\Task5\\Task5.txt";
+        String pathAnswers = "D:\\dstr\\job4j.ru\\chapter_003\\src\\main\\resources\\Task5\\Task5.txt";
         String result = null;
 
         try (BufferedReader brAnswers = new BufferedReader(new FileReader(pathAnswers))){
@@ -26,7 +30,7 @@ public class ConsoleChatTest {
 
     @Test
     public void getAnswerTest() {
-        String pathAnswers = "C:\\Java\\junior\\chapter_003\\resources\\Task5\\Task5.txt";
+        String pathAnswers = "D:\\dstr\\job4j.ru\\chapter_003\\src\\main\\resources\\Task5\\Task5.txt";
         String result = null;
 
         try (BufferedReader brAnswers = new BufferedReader(new FileReader(pathAnswers))){

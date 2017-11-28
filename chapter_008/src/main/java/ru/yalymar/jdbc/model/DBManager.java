@@ -2,6 +2,7 @@ package ru.yalymar.jdbc.model;
 
 import org.apache.log4j.Logger;
 import ru.yalymar.jdbc.tracker.Tracker;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -184,7 +185,7 @@ public class DBManager {
      */
     public Connection connectDB(){
         try(FileInputStream in = new FileInputStream(
-                "C:/Java/job4j.ru/chapter_008/resources/resources.properties")) {
+                "D:/dstr/job4j.ru/chapter_008/src/main/resources/resources.properties")) {
 
             this.properties.load(in);
         }
@@ -229,6 +230,14 @@ public class DBManager {
      */
     public boolean createCommentsTable(){
         return this.goCreate.goCreate(this.properties.getProperty("CREATE_COMMENTS_TABLE"));
+    }
+
+    public boolean dropItemsTable() {
+        return this.goCreate.goCreate(this.properties.getProperty("DELETE_ITEMS_TABLE"));
+    }
+
+    public boolean dropCommentsTable() {
+        return this.goCreate.goCreate(this.properties.getProperty("DELETE_COMMENTS_TABLE"));
     }
 
 }

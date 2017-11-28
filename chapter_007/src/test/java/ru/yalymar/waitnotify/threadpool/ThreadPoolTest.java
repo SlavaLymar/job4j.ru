@@ -1,6 +1,7 @@
 package ru.yalymar.waitnotify.threadpool;
 
 import org.junit.Test;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -20,7 +21,7 @@ public class ThreadPoolTest {
 
         Thread.sleep(1000);
 
-        assertThat(Thread.activeCount(), is(6)); // 1- main, 2 - io, 3-6 - MyThread (4 cpu)
+        assertThat(Thread.activeCount(), is(1 + Runtime.getRuntime().availableProcessors()));
 
         threadPool.stop();
     }

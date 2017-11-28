@@ -7,7 +7,9 @@ import ru.yalymar.filemanager.input.ClientInput;
 import ru.yalymar.filemanager.input.Input;
 import ru.yalymar.filemanager.output.ClientOutput;
 import ru.yalymar.filemanager.output.Output;
-import java.io.*;
+
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Properties;
@@ -38,7 +40,7 @@ public class Server {
     private static void getProperties() {
         Properties properties = new Properties();
         try(FileInputStream fileInputStream = new FileInputStream
-                ("C:/Java/junior/chapter_003/src/main/resources/app.property")){
+                ("D:/dstr/job4j.ru/chapter_003/src/main/resources/app.property")){
 
             properties.load(fileInputStream);
             host = properties.getProperty("ip");

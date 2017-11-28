@@ -1,11 +1,10 @@
 package ru.yalymar.jdbcconnectionpool;
 
-import org.junit.Test;
 import static junit.framework.TestCase.assertNotNull;
 
 public class JDBCConnectionPoolTest {
 
-    @Test
+//    @Test
     public void whenCreateCPoolShouldGetInt() throws InterruptedException {
         JDBCConnectionPool cPool = new JDBCConnectionPool();
         Task task1 = new Task("SELECT * FROM car;", true);

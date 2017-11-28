@@ -1,9 +1,11 @@
 package ru.yalymar.checkbyte;
 
 import org.junit.Test;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -18,7 +20,8 @@ public class CheckByteTest {
     public void isNumber() {
         InputStream in = null;
         try {
-            in = new FileInputStream("C:\\Java\\junior\\chapter_003\\resources\\Task1.txt");
+            in = new FileInputStream("D:\\dstr\\job4j.ru\\chapter_003" +
+                    "\\src\\main\\resources\\Task1.txt");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

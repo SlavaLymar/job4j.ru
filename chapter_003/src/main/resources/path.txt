@@ -1,1 +1,1 @@
-C:\Java\junior\chapter_003\src\app\java\ru\ru.yalymar\filemanager\resources
+D:\dstr\job4j.ru\chapter_003\src\main\resources
