@@ -2,11 +2,9 @@ package ru.yalymar.crudservlet.model.db;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.log4j.Logger;
-import java.io.IOException;
-import java.io.InputStream;
+
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Properties;
 
 /**
  * @author slavalymar
@@ -101,7 +99,7 @@ public class DBManager {
         source.setDriverClassName("org.postgresql.Driver");
         source.setUsername("postgres");
         source.setPassword("lymar123");
-        source.setUrl("jdbc:postgresql://localhost:5432/crudservlet");
+        source.setUrl("jdbc:postgresql://localhost:5432/postgres");
 
         try {
             return this.c = source.getConnection();
@@ -122,6 +120,21 @@ public class DBManager {
                 logger.error(e.getMessage(), e);
             }
         }
+    }
+
+    public void createUsersTable() throws SQLException {
+        this.go.go(this.c.prepareStatement(
+                "CREATE TABLE Users (" +
+                        "id serial not null primary key, " +
+                        "name char(20), " +
+                        "login char(100), " +
+                        "email char(100), " +
+                        "dateCreate timestamp)"
+        ));
+    }
+
+    public void dropUsersTable() throws SQLException {
+        this.go.go(this.c.prepareStatement("DROP TABLE Users"));
     }
 
 }

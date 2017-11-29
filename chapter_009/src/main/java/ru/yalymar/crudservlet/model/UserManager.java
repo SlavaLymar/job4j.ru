@@ -1,6 +1,7 @@
 package ru.yalymar.crudservlet.model;
 
 import ru.yalymar.crudservlet.model.db.DBManager;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,6 +19,10 @@ public class UserManager {
      * instance of db dao
      */
     private final DBManager dbManager = new DBManager();
+
+    public DBManager getDbManager() {
+        return dbManager;
+    }
 
     /** add user to db
      * @param user
