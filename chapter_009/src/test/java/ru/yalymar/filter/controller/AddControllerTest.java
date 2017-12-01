@@ -1,5 +1,7 @@
 package ru.yalymar.filter.controller;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import ru.yalymar.filter.model.User;
 
@@ -18,33 +20,39 @@ import static org.mockito.Mockito.when;
 
 public class AddControllerTest {
 
+    private AddController us;
+
+    @Before
+    public void before() throws SQLException {
+        us = new AddController();
+        us.getUserManager().getDbManager().createUsersTable();
+    }
+
+    @After
+    public void after() throws SQLException {
+        us.getUserManager().getDbManager().dropUsersTable();
+    }
+
     @Test
     public void whenAddUserShouldGetResultSetFILTER() throws ServletException, IOException, SQLException {
         HttpServletRequest req = mock(HttpServletRequest.class);
         HttpServletResponse resp = mock(HttpServletResponse.class);
-        AddController us = new AddController();
 
         when(req.getParameter("login")).thenReturn("slava");
         when(req.getParameter("password")).thenReturn("slava123");
         when(req.getParameter("email")).thenReturn("slava123@gmail.nz");
+        when(req.getParameter("country")).thenReturn("rus");
+        when(req.getParameter("city")).thenReturn("omsk");
         RequestDispatcher rd = mock(RequestDispatcher.class);
         when(req.getRequestDispatcher(("/WEB-INF/views/filter/mvcusers.jsp"))).thenReturn(rd);
 
         // add user
         us.doPost(req, resp);
         List<User> users = us.getUserManager().getAll();
-        boolean[] findUser = new boolean[1];
-        String[] id = new String[1];
-        users.forEach((user)->{
-            if("slava".equals(user.getLogin()) &&
-                    "slava123".equals(user.getPassword()) &&
-                    "slava123@gmail.nz".equals(user.getEmail())){
-                findUser[0] = true;
-                id[0] = user.getId();
-                return;
-            }
-        });
-        assertTrue(findUser[0]);
+        boolean findUser = users.stream().anyMatch((user)-> "slava".equals(user.getLogin()) &&
+                "slava123".equals(user.getPassword()) &&
+                "slava123@gmail.nz".equals(user.getEmail()));
+        assertTrue(findUser);
     }
 
     @Test
@@ -56,22 +64,25 @@ public class AddControllerTest {
         when(req.getParameter("login")).thenReturn("slava");
         when(req.getParameter("password")).thenReturn("slava123");
         when(req.getParameter("email")).thenReturn("slava123@gmail.nz");
+        when(req.getParameter("country")).thenReturn("rus");
+        when(req.getParameter("city")).thenReturn("omsk");
         RequestDispatcher rd = mock(RequestDispatcher.class);
         when(req.getRequestDispatcher(("/WEB-INF/views/filter/mvcusers.jsp"))).thenReturn(rd);
 
+        // add user
+        us.doPost(req, resp);
 
         // find user
         List<User> users = us.getUserManager().getAll();
-        boolean[] findUser = new boolean[1];
         String[] id = new String[1];
-        users.forEach((user)->{
+        boolean findUser = users.stream().anyMatch((user)->{
             if("slava".equals(user.getLogin()) &&
                     "slava123".equals(user.getPassword()) &&
                     "slava123@gmail.nz".equals(user.getEmail())){
-                findUser[0] = true;
                 id[0] = user.getId();
-                return;
+                return true;
             }
+            return false;
         });
 
         //delete user
@@ -79,15 +90,9 @@ public class AddControllerTest {
         DeleteController ds = new DeleteController();
         ds.doPost(req, resp);
         List<User> usersD = ds.getUserManager().getAll();
-        boolean[] findUserD = new boolean[1];
-        usersD.forEach((user)->{
-            if("slava".equals(user.getLogin()) &&
-                    "slava123".equals(user.getPassword()) &&
-                    "slava123@gmail.nz".equals(user.getEmail())){
-                findUserD[0] = true;
-                return;
-            }
-        });
-        assertFalse(findUserD[0]);
+        boolean findUserD = usersD.stream().anyMatch((user)-> "slava".equals(user.getLogin()) &&
+                "slava123".equals(user.getPassword()) &&
+                "slava123@gmail.nz".equals(user.getEmail()));
+        assertFalse(findUserD);
     }
 }

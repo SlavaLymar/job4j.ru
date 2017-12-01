@@ -2,6 +2,7 @@ package ru.yalymar.filter.controller;
 
 import org.junit.Test;
 import ru.yalymar.filter.model.User;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -30,16 +32,14 @@ public class EditControllerTest {
         // add user
         us.doPost(req, resp);
         List<User> users = us.getUserManager().getAll();
-        boolean[] findUser = new boolean[1];
         String[] id = new String[1];
-        users.forEach((user)->{
+        users.stream().anyMatch((user)->{
             if("slava".equals(user.getLogin()) &&
                     "slava123".equals(user.getPassword()) &&
                     "slava123@gmail.nz".equals(user.getEmail())){
-                findUser[0] = true;
                 id[0] = user.getId();
-                return;
             }
+            return true;
         });
 
         //edit user

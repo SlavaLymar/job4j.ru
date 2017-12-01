@@ -1,6 +1,7 @@
 package ru.yalymar.filter.model;
 
 import ru.yalymar.filter.model.db.DBManager;
+
 import javax.servlet.http.HttpServletRequest;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,6 +23,10 @@ public class UserManager {
      */
     private final DBManager dbManager = new DBManager();
 
+    public DBManager getDbManager() {
+        return dbManager;
+    }
+
     /** add user to db
      * @param user
      * @return int
@@ -30,7 +35,7 @@ public class UserManager {
         PreparedStatement st;
         try {
             st = dbManager.getC().prepareStatement(
-                    "INSERT INTO users1 (login, password, email, dateCreate, country, city) " +
+                    "INSERT INTO users (login, password, email, dateCreate, country, city) " +
                             "VALUES (?, ?, ?, ?, ?, ?)");
             st.setString(1, user.getLogin());
             st.setString(2, user.getPassword());
@@ -54,7 +59,7 @@ public class UserManager {
         ResultSet rs = null;
         try {
             st = dbManager.getC().prepareStatement(
-                    "SELECT * FROM users1 WHERE id = ?;");
+                    "SELECT * FROM users WHERE id = ?;");
             st.setInt(1, Integer.parseInt(id));
             rs = dbManager.getGo().go(st);
             rs.next();
@@ -89,7 +94,7 @@ public class UserManager {
         ResultSet rs = null;
         try {
             st = dbManager.getC().prepareStatement(
-                    "SELECT * FROM users1 WHERE login = ? AND password = ?");
+                    "SELECT * FROM users WHERE login = ? AND password = ?");
             st.setString(1, login);
             st.setString(2, password);
             rs = dbManager.getGo().go(st);
@@ -125,18 +130,18 @@ public class UserManager {
         List<User> users = new ArrayList<>();
         try {
             st = dbManager.getC().prepareStatement(
-                    "SELECT * FROM users1");
+                    "SELECT * FROM users");
             rs = dbManager.getGo().go(st);
             while(rs.next()){
                 Calendar c = Calendar.getInstance();
                 c.setTimeInMillis(rs.getTimestamp("datecreate").getTime());
                 users.add(new User(String.valueOf(rs.getInt("id")),
-                        rs.getString("login"),
-                        rs.getString("password"),
-                        rs.getString("email"),
-                        c, rs.getString("role"),
-                        rs.getString("country"),
-                        rs.getString("city")));
+                        rs.getString("login").trim(),
+                        rs.getString("password").trim(),
+                        rs.getString("email").trim(),
+                        c, rs.getString("role").trim(),
+                        rs.getString("country").trim(),
+                        rs.getString("city").trim()));
             }
             return users;
         } catch (SQLException e) {
@@ -206,7 +211,7 @@ public class UserManager {
         PreparedStatement st;
         try {
             st = dbManager.getC().prepareStatement(
-                    "UPDATE users1 SET city = ? WHERE id = ?");
+                    "UPDATE users SET city = ? WHERE id = ?");
             st.setString(1, value);
             st.setInt(2, Integer.parseInt(id));
             return dbManager.getGoUpdate().goUpdate(st);
@@ -221,7 +226,7 @@ public class UserManager {
         PreparedStatement st;
         try {
             st = dbManager.getC().prepareStatement(
-                    "UPDATE users1 SET country = ? WHERE id = ?");
+                    "UPDATE users SET country = ? WHERE id = ?");
             st.setString(1, value);
             st.setInt(2, Integer.parseInt(id));
             return dbManager.getGoUpdate().goUpdate(st);
@@ -236,7 +241,7 @@ public class UserManager {
         PreparedStatement st;
         try {
             st = dbManager.getC().prepareStatement(
-                    "UPDATE users1 SET role = ? WHERE id = ?");
+                    "UPDATE users SET role = ? WHERE id = ?");
             st.setString(1, value);
             st.setInt(2, Integer.parseInt(id));
             return dbManager.getGoUpdate().goUpdate(st);
@@ -251,7 +256,7 @@ public class UserManager {
         PreparedStatement st;
         try {
             st = dbManager.getC().prepareStatement(
-                    "SELECT * FROM users1 WHERE id = ?");
+                    "SELECT * FROM users WHERE id = ?");
             st.setInt(1, Integer.parseInt(id));
             return dbManager.getGo().go(st);
 
@@ -270,7 +275,7 @@ public class UserManager {
         PreparedStatement st;
         try {
             st = dbManager.getC().prepareStatement(
-                    "UPDATE users1 SET email = ? WHERE id = ?");
+                    "UPDATE users SET email = ? WHERE id = ?");
             st.setString(1, value);
             st.setInt(2, Integer.parseInt(id));
             return dbManager.getGoUpdate().goUpdate(st);
@@ -290,7 +295,7 @@ public class UserManager {
         PreparedStatement st;
         try {
             st = dbManager.getC().prepareStatement(
-                    "UPDATE users1 SET login = ? WHERE id = ?");
+                    "UPDATE users SET login = ? WHERE id = ?");
             st.setString(1, value);
             st.setInt(2, Integer.parseInt(id));
             return dbManager.getGoUpdate().goUpdate(st);
@@ -310,7 +315,7 @@ public class UserManager {
         PreparedStatement st;
         try {
             st = dbManager.getC().prepareStatement(
-                    "UPDATE users1 SET password = ? WHERE id = ?");
+                    "UPDATE users SET password = ? WHERE id = ?");
             st.setString(1, value);
             st.setInt(2, Integer.parseInt(id));
             return dbManager.getGoUpdate().goUpdate(st);
@@ -329,7 +334,7 @@ public class UserManager {
         PreparedStatement st;
         try {
             st = dbManager.getC().prepareStatement(
-                    "DELETE FROM users1 WHERE id = ?");
+                    "DELETE FROM users WHERE id = ?");
             st.setInt(1, Integer.parseInt(id));
             return dbManager.getGoUpdate().goUpdate(st);
 

@@ -2,6 +2,7 @@ package ru.yalymar.filter.model.db;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -91,6 +92,7 @@ public class DBManager {
 
     /**
      * get connection to database
+     *
      * @return Connection
      */
     public Connection connectDB() {
@@ -98,7 +100,7 @@ public class DBManager {
         source.setDriverClassName("org.postgresql.Driver");
         source.setUsername("postgres");
         source.setPassword("lymar123");
-        source.setUrl("jdbc:postgresql://localhost:5432/crudservlet");
+        source.setUrl("jdbc:postgresql://localhost:5432/postgres");
 
         try {
             return this.c = source.getConnection();
@@ -119,6 +121,24 @@ public class DBManager {
                 logger.error(e.getMessage(), e);
             }
         }
+    }
+
+    public void createUsersTable() throws SQLException {
+        this.go.go(this.c.prepareStatement(
+                "CREATE TABLE Users (" +
+                        "id SERIAL NOT NULL PRIMARY KEY, " +
+                        "login CHAR(100), " +
+                        "password CHAR(100), " +
+                        "email CHAR(100), " +
+                        "dateCreate TIMESTAMP," +
+                        "country CHAR(100), " +
+                        "city CHAR(100)," +
+                        "role CHAR(10) DEFAULT 'admin')"
+        ));
+    }
+
+    public void dropUsersTable() throws SQLException {
+        this.go.go(this.c.prepareStatement("DROP TABLE Users"));
     }
 
 }
