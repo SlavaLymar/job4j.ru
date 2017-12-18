@@ -1,5 +1,7 @@
 package ru.yalymar.filter.controller;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import ru.yalymar.filter.model.User;
 
@@ -17,15 +19,30 @@ import static org.mockito.Mockito.when;
 
 public class EditControllerTest {
 
+    private AddController us;
+
+    @Before
+    public void before() throws SQLException {
+        us = new AddController();
+        us.getUserManager().getDbManager().createUsersTable();
+    }
+
+    @After
+    public void after() throws SQLException {
+        us.getUserManager().getDbManager().dropUsersTable();
+    }
+
     @Test
     public void whenEditUserShouldGetResultSetFILTER() throws ServletException, IOException, SQLException {
         HttpServletRequest req = mock(HttpServletRequest.class);
         HttpServletResponse resp = mock(HttpServletResponse.class);
-        AddController us = new AddController();
 
         when(req.getParameter("login")).thenReturn("slava");
         when(req.getParameter("password")).thenReturn("slava123");
         when(req.getParameter("email")).thenReturn("slava123@gmail.nz");
+        when(req.getParameter("country")).thenReturn("USA");
+        when(req.getParameter("city")).thenReturn("Los Angeles");
+
         RequestDispatcher rd = mock(RequestDispatcher.class);
         when(req.getRequestDispatcher(("/WEB-INF/views/filter/mvcusers.jsp"))).thenReturn(rd);
 

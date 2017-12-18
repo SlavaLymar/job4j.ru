@@ -1,6 +1,7 @@
 package ru.yalymar.filter.controller;
 
 import ru.yalymar.filter.model.UserManager;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -40,7 +41,7 @@ public class SigninController extends HttpServlet{
         String login = req.getParameter("slogin");
         String password = req.getParameter("spassword");
         if(this.userManager.isValid(login, password)){
-            resp.sendRedirect(String.format("%s/u", req.getContextPath()));
+            resp.sendRedirect(String.format("%s/mvcusers", req.getContextPath()));
         }
         else {
             req.setAttribute("error", "User has not exist!");

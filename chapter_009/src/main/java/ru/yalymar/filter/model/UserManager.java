@@ -102,13 +102,13 @@ public class UserManager {
             Calendar c = Calendar.getInstance();
             c.setTimeInMillis(rs.getTimestamp("datecreate").getTime());
             return new User(
-                    rs.getString("id"),
-                    rs.getString("login"),
-                    rs.getString("password"),
-                    rs.getString("email"),
-                    c, rs.getString("role"),
-                    rs.getString("country"),
-                    rs.getString("city"));
+                    rs.getString("id").trim(),
+                    rs.getString("login").trim(),
+                    rs.getString("password").trim(),
+                    rs.getString("email").trim(),
+                    c, rs.getString("role").trim(),
+                    rs.getString("country").trim(),
+                    rs.getString("city").trim());
         } catch (SQLException e) {
             DBManager.logger.error(e.getMessage(), e);
         } finally {

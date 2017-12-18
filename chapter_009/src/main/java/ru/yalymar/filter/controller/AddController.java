@@ -2,6 +2,7 @@ package ru.yalymar.filter.controller;
 
 import ru.yalymar.filter.model.User;
 import ru.yalymar.filter.model.UserManager;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -43,7 +44,7 @@ public class AddController extends HttpServlet{
      * @throws IOException
      */
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+    public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         User user = new User(req.getParameter("login"), req.getParameter("password"),
                 req.getParameter("email"), Calendar.getInstance(), "user", req.getParameter("country"),
